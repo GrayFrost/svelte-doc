@@ -4,7 +4,6 @@
 
 UI框架最突出的能力便是数据驱动视图，毫无疑问，数据是最为关键的存在。本篇我们将介绍最为基础的数据存储。
 
-
 ## React
 
 ```javascript
@@ -18,6 +17,16 @@ export default function Page() {
   );
 }
 ```
+
+在16.8^的版本，推荐使用function component以及hooks。在function component中，使用useState来进行变量声明和更新
+
+```
+const [value, setValue] = useState(null)
+```
+
+useState接收一个参数作为一个初始数据，返回一个数组，数组的第一个值表示变量，第二个值表示用于更新变量的方法。在上述例子中，我们只演示了变量的声明和使用，更新数据的方法，我们将在下一节进行展示。
+
+而在16.8之前使用class component时，通过setState进行数据更新。
 
 ## Vue
 
@@ -33,6 +42,8 @@ const count = ref(0);
 </script>
 ```
 
+在vue3 的composition api中，可以通过ref或者reactive来声明变量。在vue2.X中，变量声明在data()中
+
 ## Svelte
 
 ```html
@@ -42,3 +53,5 @@ const count = ref(0);
 
 <div>变量：{ count }</div>
 ```
+
+可以看到，变量声明在svelte中的声明相比其他两个库，写起来要简介不少。

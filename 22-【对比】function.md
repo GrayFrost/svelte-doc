@@ -22,6 +22,8 @@ export default function Page() {
 
 ```
 
+上一节我们讲解了useState()返回的参数的含义，返回数组中
+
 ## Vue
 
 ```html
