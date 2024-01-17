@@ -19,10 +19,42 @@ export default function Page() {
     </div>
   );
 }
-
 ```
 
-上一节我们讲解了useState()返回的参数的含义，返回数组中
+上一节我们讲解了useState()返回的参数的含义，返回数组中第二个参数用于更新数据。
+
+在class component中，我们沿用上一节的例子：
+
+```javascript
+import React from 'react';
+
+export default class Page extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      count: 0
+    }
+  }
+  updateCount() {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  render() {
+    const { count } = this.state;
+    return (
+      <div>
+        count: {count}
+        <button onClick={() => this.updateCount()}>+1</button>
+      </div>
+    )
+  }
+}
+```
+
+可以发现，如果我们使用class component，代码量比function component多了不少。而且在class component中，我们还需要时刻关注this的指向和组件内的生命周期。
+
+
 
 ## Vue
 
@@ -45,6 +77,10 @@ export default function Page() {
 </script>
 ```
 
+在2.x版本中的使用变化不大。todo例子\modifiers
+
+
+
 ## Svelte
 
 ```html
@@ -62,3 +98,5 @@ export default function Page() {
   <button on:click={updateCount}>+1</button>
 </div>
 ```
+
+todo modifiers
