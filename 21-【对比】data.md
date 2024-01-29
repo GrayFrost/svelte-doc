@@ -63,7 +63,7 @@ const count = ref(0);
 </script>
 ```
 
-在vue3 的composition api中，可以通过`ref`或者`reactive`来声明变量。todo ref和reactive的注意事项。
+在vue3 的composition api中，可以通过 `ref`或者 `reactive`来声明变量。todo ref和reactive的注意事项。
 
 在vue2.X中，变量声明在data()中。
 
@@ -94,3 +94,6 @@ export default {
 ```
 
 可以看到，变量声明在svelte中的声明相比其他两个库，写起来要简介不少。
+
+
+## 小结

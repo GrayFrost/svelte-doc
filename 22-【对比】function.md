@@ -54,7 +54,7 @@ export default class Page extends React.Component {
 
 可以发现，如果我们使用class component，代码量比function component多了不少。而且在class component中，我们还需要时刻关注this的指向和组件内的生命周期。
 
-
+react 方法还需要注意this的指向
 
 ## Vue
 
@@ -77,9 +77,7 @@ export default class Page extends React.Component {
 </script>
 ```
 
-在2.x版本中的使用变化不大。todo例子\modifiers
-
-
+在2.x版本中的使用变化不大，todo定义在methods当中。todo例子\modifiers
 
 ## Svelte
 
