@@ -31,6 +31,21 @@
 
 ## 对比
 
-## 原理
+* data
+* function
+* props
+* lifecycle
+* slot
+* computed
+* watch
+* if
+* for
+* ref
+* style
+* context
+
+## 源码
+* compiler
+* runtime
 
 ## 实现
