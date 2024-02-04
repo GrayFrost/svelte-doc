@@ -184,3 +184,6 @@ methods: {
 
 todo modifiers
 todo event
+
+## 小结
+这一章我们了解了事件绑定在三大框架中的不同写法
