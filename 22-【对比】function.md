@@ -1,7 +1,8 @@
+## 三大框架写法对比 —— function
 有了数据，那必然要有更新数据的方法，以及平时在业务上为了服务数据更新而派生出来的一堆处理数据或者操作页面的方法，那么方法在各个UI库中应该如何定义呢？
 
-## React
-在react中，为元素标签绑定方法使用`on[事件]`的驼峰命名形式，比如点击事件`onClick`，提交事件`onSubmit`等。  
+### React
+在React中，为元素标签绑定方法使用`on[事件]`的驼峰命名形式，比如点击事件`onClick`，提交事件`onSubmit`等。  
 上一节我们讲解了useState()返回的参数的含义，返回数组中第一个参数表示存储值的变量，第二个参数则用于更新数据。
 ```javascript
 import { useState } from "react";
@@ -102,7 +103,24 @@ export default class Page extends React.Component {
 ```
 之所以举了这么多例子，就是想说明一件事，在react的class component中使用方法有一定的心智负担。
 
-## Vue
+#### event
+如果我们要使用事件中的event参数
+```javascript
+export default function Page() {
+  const handleClick = (event) => {
+    console.log(event);
+  }
+  const handleClick2 = (event, param) => {
+    console.log(event);
+  }
+  return <div>
+    <button onClick={handleClick}>click1</button>
+    <button onClick={e => handleClick2(e, 'hello')}>click2</button>
+  </div>
+}
+```
+
+### Vue
 在vue中，为元素标签添加事件使用`@[事件]`或`v-on:[事件]`，带`@`符号的事件绑定是对`v-on`形式的缩写。
 
 ```html
@@ -151,19 +169,36 @@ export default {
 </script>
 ```
 
-在Vue2.x中，在非html标签内，我们则需要使用this来获取当前组件实例的变量，比如
-```
-mounted() {
-  console.log(this.count)
-},
-methods: {
-  updateCount() {
-    this.count++;
-  }
-}
+#### event
+```html
+<template>
+  <div>
+    <button @click="handleClick">click1</button>
+    <button @click="handleClick2($event, 'hello')">click2</button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleClick(event) {
+      console.log(event);
+    },
+    handleClick2(event, param) {
+      console.log(event);
+    },
+  },
+};
+</script>
 ```
 
-## Svelte
+#### 事件修饰符
+在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。Vue提供了一些事件修饰符，我们可以通过他们来优化业务代码，减少关心dom事件细节。事件修复符之间可以链式调用，但要注意调用的顺序。
+```html
+<a v-on:click.stop.prevent="func"></a>
+```
+
+### Svelte
 在Svelte中，添加事件绑定的方式通过`on:[事件]`的方式。
 ```html
 <script>
@@ -182,8 +217,26 @@ methods: {
 ```
 而且我们不用考虑方法this的指向，也无需通过this来获取变量。Svelte仍旧比其他两大框架在写法上更为简洁。
 
-todo modifiers
-todo event
+#### event
+```html
+<script>
+  const handleClick = (event) => {
+    console.log(event)
+  }
+  const handleClick2 = (event, param) => {
+    console.log(event);
+  }
+</script>
 
-## 小结
-这一章我们了解了事件绑定在三大框架中的不同写法
+<button on:click={handleClick}>click1</button>
+<button on:click={(e) => handleClick2(e, 'hello')}>click2</button>
+```
+
+#### 事件修饰符
+同样Svelte也提供了一些事件修饰符，修饰符也可以链式调用，和Vue不同的是，Svelte的事件修饰符使用`|`来引用。
+```html
+<a v-on:click|stop|prevent="func"></a>
+```
+
+### 小结
+这一章我们了解了事件绑定在三大框架中的不同写法，同时Vue和Svelte中均提供了事件修饰符来优化我们的方法。
