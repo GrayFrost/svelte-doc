@@ -149,6 +149,8 @@ alert.less内容如下：
     border: none;
     outline: none;
     cursor: pointer;
+    text-decoration: none;
+	color: @alert-close-color;
 
     .@{iconfont-css-prefix}-close {
       color: @alert-close-color;
@@ -221,7 +223,7 @@ alert.less内容如下：
 
 
 
-在本章，我们先实现banner、closable、showIcon和type这几个传参的功能，因为这几个参数只单是接收参数，没有和slot的联动，也不是用于事件绑定的参数。
+在本章，我们先实现banner、closable、showIcon和type这几个传参的功能，因为这几个参数只单是接收参数，没有和slot的联动。
 
 
 Alert.svelte初始内容如下：
@@ -530,7 +532,9 @@ $: alertCls = classNames(prefixCls, {
   </div>
 ```
 
-最后，实现点击关闭：
+### onClose
+
+实现点击关闭：
 ```html
 <script>
 	import { createEventDispatcher } from "svelte";
@@ -569,3 +573,9 @@ $: alertCls = classNames(prefixCls, {
 ```
 
 ![[test4.gif]]
+
+## 小结
+
+了解了如何使用预处理器
+svelte:component这个标签
+如何在svelte中使用svg
