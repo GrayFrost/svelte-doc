@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "17-【实战】todolist之页面布局.md",
+                "file": "21-【实战】Alert组件之动画.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md",
+                "file": "21-【实战】Alert组件之动画.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-【实战】Alert组件之slot交互.md",
+                "file": "22-【对比】data.md",
                 "mode": "source",
                 "source": false
               }
@@ -67,8 +67,7 @@
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -134,7 +133,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "20-【实战】Alert组件之slot交互.md",
+                "file": "21-【实战】Alert组件之动画.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +150,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "20-【实战】Alert组件之slot交互.md",
+                "file": "21-【实战】Alert组件之动画.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +173,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "20-【实战】Alert组件之slot交互.md"
+                "file": "21-【实战】Alert组件之动画.md"
               }
             }
           }
@@ -195,24 +194,24 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "a89e6c6442f49239",
+  "active": "46bf80433dd99dfd",
   "lastOpenFiles": [
-    "未命名.md",
+    "22-【对比】data.md",
+    "21-【实战】Alert组件之动画.md",
     "20-【实战】Alert组件之slot交互.md",
+    "test6.gif",
+    "19-【实战】Alert组件之简单传值.md",
+    "17-【实战】todolist之页面布局.md",
     "Pasted image 20240221175209.png",
     "Pasted image 20240221173610.png",
-    "19-【实战】Alert组件之简单传值.md",
-    "21-【实战】Alert组件之动画.md",
     "Pasted image 20240221170300.png",
     "test5.gif",
-    "17-【实战】todolist之页面布局.md",
     "18-【实战】todolist之数据交互.md",
     "test4.gif",
     "Pasted image 20240221154736.png",
     "Pasted image 20240221152357.png",
     "Pasted image 20240221141650.png",
     "Pasted image 20240221140009.png",
-    "Pasted image 20240221111312.png",
     "【结尾】.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
     "09-【入门】dom引用.md",

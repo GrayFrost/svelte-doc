@@ -540,16 +540,16 @@ $: alertCls = classNames(prefixCls, {
 	import { createEventDispatcher } from "svelte";
 	
 	const dispatch = createEventDispatcher();
-	let closing = false;
+	let closed = false;
 	...
 
 	const handleClose = (e) => {
-		closing = true;
+		closed = true;
 		dispatch("close", e);
 	};
 </script>
 
-{#if !closing}
+{#if !closed}
 	<div class={alertCls}>
 		...
 	</div>
