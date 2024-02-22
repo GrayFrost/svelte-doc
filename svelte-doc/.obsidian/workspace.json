@@ -14,39 +14,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "30-【对比】ref.md",
+                "file": "37-【源码】runtime.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
-          {
-            "id": "02b8f6637d08a227",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "31-【对比】style.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ac6c0410b7815381",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "10-【入门】样式.md",
-                "mode": "source",
-                "source": false
-              }
-            },
-            "group": "e37065334c58f81f"
           }
-        ],
-        "currentTab": 2
+        ]
       },
       {
         "id": "6fbafc54efec8e46",
@@ -59,10 +33,9 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "37-【源码】runtime.md"
               }
-            },
-            "group": "e37065334c58f81f"
+            }
           }
         ]
       }
@@ -130,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "37-【源码】runtime.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "37-【源码】runtime.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "37-【源码】runtime.md"
               }
             }
           }
@@ -191,8 +164,17 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "ac6c0410b7815381",
+  "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "35-【源码】流程.md",
+    "33-【源码】库.md",
+    "37-【源码】runtime.md",
+    "36-【源码】compiler.md",
+    "34-【源码】位运算.md",
+    "30-【对比】ref.md",
+    "31-【对比】style.md",
+    "【展望】结尾.md",
+    "10-【入门】样式.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
     "25-【对比】lifecycle.md",
@@ -209,20 +191,11 @@
     "04-【入门】组件与属性.md",
     "test8.gif",
     "test7.gif",
-    "未命名.md",
     "Pasted image 20240222140245.png",
     "Pasted image 20240222140143.png",
     "05-【入门】生命周期.md",
     "21-【实战】Alert组件之动画.md",
     "32-【对比】context.md",
-    "18-【实战】todolist之数据交互.md",
-    "17-【实战】todolist之页面布局.md",
-    "31-【对比】style.md",
-    "30-【对比】ref.md",
-    "29-【对比】for.md",
-    "28-【对比】if.md",
-    "24-【对比】props.md",
-    "23-【对比】function.md",
     "image-12.png",
     "test6.gif",
     "Pasted image 20240221175209.png",
