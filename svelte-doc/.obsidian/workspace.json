@@ -6,6 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
+        "dimension": 76.10789980732177,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -37,14 +38,33 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "10-【入门】样式.md",
                 "mode": "source",
                 "source": false
               }
-            }
+            },
+            "group": "e37065334c58f81f"
           }
         ],
         "currentTab": 2
+      },
+      {
+        "id": "6fbafc54efec8e46",
+        "type": "tabs",
+        "dimension": 23.892100192678228,
+        "children": [
+          {
+            "id": "d56ce0d395005fbc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "10-【入门】样式.md"
+              }
+            },
+            "group": "e37065334c58f81f"
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "10-【入门】样式.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "10-【入门】样式.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "32-【对比】context.md"
+                "file": "10-【入门】样式.md"
               }
             }
           }
@@ -173,42 +193,42 @@
   },
   "active": "ac6c0410b7815381",
   "lastOpenFiles": [
-    "31-【对比】style.md",
-    "32-【对比】context.md",
-    "30-【对比】ref.md",
-    "29-【对比】for.md",
-    "28-【对比】if.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
     "25-【对比】lifecycle.md",
+    "14-【进阶】指令.md",
+    "12-【进阶】状态管理.md",
+    "11-【进阶】跨组件传值.md",
+    "13-【进阶】动画.md",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "06-【入门】动态属性.md",
+    "04-【入门】组件与属性.md",
+    "test8.gif",
+    "test7.gif",
+    "未命名.md",
+    "Pasted image 20240222140245.png",
+    "Pasted image 20240222140143.png",
+    "05-【入门】生命周期.md",
+    "21-【实战】Alert组件之动画.md",
+    "32-【对比】context.md",
+    "18-【实战】todolist之数据交互.md",
+    "17-【实战】todolist之页面布局.md",
+    "31-【对比】style.md",
+    "30-【对比】ref.md",
+    "29-【对比】for.md",
+    "28-【对比】if.md",
     "24-【对比】props.md",
     "23-【对比】function.md",
-    "22-【对比】data.md",
     "image-12.png",
-    "21-【实战】Alert组件之动画.md",
-    "20-【实战】Alert组件之slot交互.md",
     "test6.gif",
-    "19-【实战】Alert组件之简单传值.md",
-    "17-【实战】todolist之页面布局.md",
     "Pasted image 20240221175209.png",
     "Pasted image 20240221173610.png",
     "Pasted image 20240221170300.png",
     "test5.gif",
-    "18-【实战】todolist之数据交互.md",
-    "test4.gif",
-    "Pasted image 20240221154736.png",
-    "Pasted image 20240221152357.png",
-    "Pasted image 20240221141650.png",
-    "【结尾】.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "09-【入门】dom引用.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
-    "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
-    "16-【进阶】模板语法之其他.md",
-    "08-【入门】插槽.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
