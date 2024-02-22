@@ -19,8 +19,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1e6102f079c53e55",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "38-【实现】.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "6fbafc54efec8e46",
@@ -33,7 +46,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "37-【源码】runtime.md"
+                "file": "38-【实现】.md"
               }
             }
           }
@@ -103,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "37-【源码】runtime.md",
+                "file": "38-【实现】.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "37-【源码】runtime.md",
+                "file": "38-【实现】.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "37-【源码】runtime.md"
+                "file": "38-【实现】.md"
               }
             }
           }
@@ -164,11 +177,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "71d9c23a99a6313c",
+  "active": "1e6102f079c53e55",
   "lastOpenFiles": [
+    "37-【源码】runtime.md",
+    "38-【实现】.md",
     "35-【源码】流程.md",
     "33-【源码】库.md",
-    "37-【源码】runtime.md",
     "36-【源码】compiler.md",
     "34-【源码】位运算.md",
     "30-【对比】ref.md",
@@ -195,7 +209,6 @@
     "Pasted image 20240222140143.png",
     "05-【入门】生命周期.md",
     "21-【实战】Alert组件之动画.md",
-    "32-【对比】context.md",
     "image-12.png",
     "test6.gif",
     "Pasted image 20240221175209.png",
