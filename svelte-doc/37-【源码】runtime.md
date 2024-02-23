@@ -117,13 +117,12 @@ svelte 组件使用create, mount, patch, destroy 这四个方法实现对 DOM �
 
 视图更新时通过patch函数来完成的。
 
-```
+```javascript
 function patch(ctx, [dirty]) {
   if (dirty & /*name*/ 1) set_data(t1, /*name*/ ctx[0]);
   if (dirty & /*age*/ 2) set_data(t4, /*age*/ ctx[1]);
   if (dirty & /*school*/ 4) set_data(t6, /*school*/ ctx[2]);
 }
-
 ```
 
 通过 dirty 位检查变量是否发生更新，如果发生更新调用 dom 操作函数对 dom 进行局部更新。上面例子的 set_data 函数作用是给 dom 设置 innerText。根据数据更新的视图位置的不同，还会有 set_props之类的更新 dom 属性的函数等

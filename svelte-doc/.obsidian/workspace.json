@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 76.10789980732177,
+        "dimension": 61.4307931570762,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "14-【进阶】指令.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,7 +25,7 @@
       {
         "id": "6fbafc54efec8e46",
         "type": "tabs",
-        "dimension": 23.892100192678228,
+        "dimension": 38.56920684292379,
         "children": [
           {
             "id": "d56ce0d395005fbc",
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "14-【进阶】指令.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "14-【进阶】指令.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           }
@@ -166,15 +166,26 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
-    "07-【入门】模板语法之条件判断与循环判断.md",
+    "43-【展望】结尾.md",
+    "42-【展望】生态.md",
+    "40-【实现】变量更新.md",
+    "41-【实现】自定义标签.md",
+    "39-【实现】parse.md",
+    "38-【实现】基本流程.md",
+    "Pasted image 20240223171118.png",
+    "Pasted image 20240223164724.png",
+    "Pasted image 20240223163834.png",
+    "Pasted image 20240223163552.png",
+    "37-【源码】runtime.md",
+    "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
     "12-【进阶】状态管理.md",
     "10-【入门】样式.md",
     "13-【进阶】动画.md",
     "32-【对比】context.md",
-    "31-【对比】style.md",
     "30-【对比】ref.md",
     "28-【对比】if.md",
     "27-【对比】反应性.md",
@@ -185,23 +196,12 @@
     "22-【对比】data.md",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
-    "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
-    "01-【入门】背景.md",
-    "11-【进阶】跨组件传值.md",
     "test11.gif",
     "Pasted image 20240223142709.png",
     "Pasted image 20240223140533.png",
     "Pasted image 20240223140424.png",
     "Pasted image 20240223114059.png",
-    "37-【源码】runtime.md",
     "Pasted image 20240223112847.png",
-    "test10.gif",
-    "test9.gif",
-    "Pasted image 20240223100836.png",
-    "test8.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
