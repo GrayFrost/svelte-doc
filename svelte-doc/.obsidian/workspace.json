@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             }
           }
@@ -166,42 +166,42 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
+    "14-【进阶】指令.md",
+    "12-【进阶】状态管理.md",
+    "10-【入门】样式.md",
+    "13-【进阶】动画.md",
+    "32-【对比】context.md",
+    "31-【对比】style.md",
+    "30-【对比】ref.md",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "26-【对比】slot.md",
+    "25-【对比】lifecycle.md",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "22-【对比】data.md",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "01-【入门】背景.md",
+    "11-【进阶】跨组件传值.md",
     "test11.gif",
     "Pasted image 20240223142709.png",
     "Pasted image 20240223140533.png",
     "Pasted image 20240223140424.png",
-    "09-【入门】dom引用.md",
-    "10-【入门】样式.md",
-    "14-【进阶】指令.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "08-【入门】插槽.md",
-    "05-【入门】生命周期.md",
-    "06-【入门】动态属性.md",
     "Pasted image 20240223114059.png",
     "37-【源码】runtime.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "21-【实战】Alert组件之动画.md",
-    "20-【实战】Alert组件之slot交互.md",
     "Pasted image 20240223112847.png",
     "test10.gif",
     "test9.gif",
     "Pasted image 20240223100836.png",
-    "04-【入门】组件与属性.md",
-    "38-【实现】.md",
-    "35-【源码】流程.md",
-    "33-【源码】库.md",
-    "36-【源码】compiler.md",
-    "34-【源码】位运算.md",
-    "30-【对比】ref.md",
-    "31-【对比】style.md",
-    "【展望】结尾.md",
-    "27-【对比】反应性.md",
-    "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
-    "12-【进阶】状态管理.md",
-    "11-【进阶】跨组件传值.md",
     "test8.gif",
-    "test7.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

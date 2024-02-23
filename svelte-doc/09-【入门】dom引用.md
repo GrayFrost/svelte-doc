@@ -1,4 +1,6 @@
 
+## bind:this
+
 在《数据与方法》一章，我们在使用双向绑定功能时，用到了`bind:value={value}`的方式。而如果想要访问真实的dom，同样需要使用到`bind`。
 
 ```javascript
@@ -13,7 +15,9 @@ input.focus()
 
 input.click(); // 上传
 
-  
+## 子实例的数据与方法
+
+## 多个子实例
 
 子组件实例
 
@@ -22,5 +26,7 @@ input.click(); // 上传
 如何拿到子组件的数据 方法 export
 
 多个ref ，数组形式存储
+
+
 
 ## 小结
