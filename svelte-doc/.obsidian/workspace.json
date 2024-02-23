@@ -14,26 +14,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "37-【源码】runtime.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1e6102f079c53e55",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "38-【实现】.md",
+                "file": "09-【入门】dom引用.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "6fbafc54efec8e46",
@@ -46,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "38-【实现】.md"
+                "file": "09-【入门】dom引用.md"
               }
             }
           }
@@ -116,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "38-【实现】.md",
+                "file": "09-【入门】dom引用.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "38-【实现】.md",
+                "file": "09-【入门】dom引用.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "38-【实现】.md"
+                "file": "09-【入门】dom引用.md"
               }
             }
           }
@@ -177,9 +164,19 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1e6102f079c53e55",
+  "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "08-【入门】插槽.md",
+    "Pasted image 20240223114059.png",
     "37-【源码】runtime.md",
+    "19-【实战】Alert组件之简单传值.md",
+    "21-【实战】Alert组件之动画.md",
+    "20-【实战】Alert组件之slot交互.md",
+    "Pasted image 20240223112847.png",
+    "test10.gif",
+    "test9.gif",
+    "Pasted image 20240223100836.png",
+    "04-【入门】组件与属性.md",
     "38-【实现】.md",
     "35-【源码】流程.md",
     "33-【源码】库.md",
@@ -199,22 +196,11 @@
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
     "09-【入门】dom引用.md",
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "06-【入门】动态属性.md",
-    "04-【入门】组件与属性.md",
     "test8.gif",
     "test7.gif",
     "Pasted image 20240222140245.png",
     "Pasted image 20240222140143.png",
-    "05-【入门】生命周期.md",
-    "21-【实战】Alert组件之动画.md",
     "image-12.png",
-    "test6.gif",
-    "Pasted image 20240221175209.png",
-    "Pasted image 20240221173610.png",
-    "Pasted image 20240221170300.png",
-    "test5.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

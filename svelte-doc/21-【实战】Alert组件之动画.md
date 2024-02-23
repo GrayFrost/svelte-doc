@@ -113,7 +113,7 @@ const animationEnd = () => {
   }
 
   const dispatch = createEventDispatcher();
-  const slots = $$props.$$slots;
+  const slots = $$slots;
   const props = $$props;
 
   let prefixCls = "ant-alert";

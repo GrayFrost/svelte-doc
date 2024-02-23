@@ -12,7 +12,7 @@
     }
     return null;
   }
-  const slots = $$props.$$slots;
+  const slots = $$slots;
   const props = $$props;
 ```
 ### closeText
