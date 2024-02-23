@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md",
+                "file": "28-【对比】if.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md"
+                "file": "28-【对比】if.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md",
+                "file": "28-【对比】if.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md",
+                "file": "28-【对比】if.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "19-【实战】Alert组件之简单传值.md"
+                "file": "28-【对比】if.md"
               }
             }
           }
@@ -166,6 +166,7 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "19-【实战】Alert组件之简单传值.md",
     "18-【实战】todolist之数据交互.md",
     "img/18-4.gif",
     "img/18-3.gif",
