@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "10-【入门】样式.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "10-【入门】样式.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "10-【入门】样式.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "10-【入门】样式.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "10-【入门】样式.md"
               }
             }
           }
@@ -166,7 +166,17 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "test11.gif",
+    "Pasted image 20240223142709.png",
+    "Pasted image 20240223140533.png",
+    "Pasted image 20240223140424.png",
+    "09-【入门】dom引用.md",
+    "10-【入门】样式.md",
+    "14-【进阶】指令.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
     "08-【入门】插槽.md",
+    "05-【入门】生命周期.md",
+    "06-【入门】动态属性.md",
     "Pasted image 20240223114059.png",
     "37-【源码】runtime.md",
     "19-【实战】Alert组件之简单传值.md",
@@ -185,22 +195,13 @@
     "30-【对比】ref.md",
     "31-【对比】style.md",
     "【展望】结尾.md",
-    "10-【入门】样式.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
     "25-【对比】lifecycle.md",
-    "14-【进阶】指令.md",
     "12-【进阶】状态管理.md",
     "11-【进阶】跨组件传值.md",
-    "13-【进阶】动画.md",
-    "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
-    "09-【入门】dom引用.md",
     "test8.gif",
     "test7.gif",
-    "Pasted image 20240222140245.png",
-    "Pasted image 20240222140143.png",
-    "image-12.png",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
