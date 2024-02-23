@@ -43,7 +43,7 @@ export const tab = writable('todo'); // todo | done | all
 </div>
 ```
 主要的逻辑修改就是，判断当前激活的是哪个tab，然后添加active样式，页面此时如下：
-![[Pasted image 20240220171842.png]]
+![active style](./img/18-1.png)
 当点击其中一个tab时，能够看到tab样式的变化。
 
 在store.js中添加待办项列表的数据：
@@ -124,7 +124,7 @@ export const doneList = derived([list], ([$list]) => {
 </div>
 ```
 
-![[test1.gif]]
+![Add Todo Item](./img/18-2.gif)
 
 在我们点击勾选后，已完成的待办项仍留在Todo栏里。
 完善Item的逻辑，从外部接收tab参数，用来修饰index的样式，然后是为checkbox绑定更新事件：
@@ -206,7 +206,7 @@ export const doneList = derived([list], ([$list]) => {
 {/each}
 ```
 写到这里，读者们应该能正常地添加任务，设置任务状态，然而细心的你一定能够发现，当我们设置完成时，出现了一点小问题：
-![[test2.gif]]
+![Error](./img/18-3.gif)
 当我们在设置第一项已完成后，第一项能够正常移除，然后剩余的第二项变成第一项后，勾选状态却是已完成！这个时候就轮到key出场了。
 ```html
 {#each currentList as { id, text, done }, i (id)}
@@ -297,6 +297,6 @@ export const doneList = derived([list], ([$list]) => {
 
 至此，我们已基本完成了一个功能完整的TodoList项目。
 
-![[test3.gif]]
+![End](./img/18-4.gif)
 
 ## 小结

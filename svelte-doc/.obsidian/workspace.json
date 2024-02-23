@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14-【进阶】指令.md"
+                "file": "19-【实战】Alert组件之简单传值.md"
               }
             }
           }
@@ -66,7 +66,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "test1",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14-【进阶】指令.md"
+                "file": "19-【实战】Alert组件之简单传值.md"
               }
             }
           }
@@ -166,6 +166,14 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "18-【实战】todolist之数据交互.md",
+    "img/18-4.gif",
+    "img/18-3.gif",
+    "img/18-1.png",
+    "img/18-2.gif",
+    "10-【入门】样式.md",
+    "15-【进阶】特定标签.md",
+    "14-【进阶】指令.md",
     "43-【展望】结尾.md",
     "42-【展望】生态.md",
     "40-【实现】变量更新.md",
@@ -180,10 +188,7 @@
     "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
-    "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
     "12-【进阶】状态管理.md",
-    "10-【入门】样式.md",
     "13-【进阶】动画.md",
     "32-【对比】context.md",
     "30-【对比】ref.md",
@@ -194,14 +199,8 @@
     "24-【对比】props.md",
     "23-【对比】function.md",
     "22-【对比】data.md",
-    "09-【入门】dom引用.md",
-    "08-【入门】插槽.md",
     "test11.gif",
     "Pasted image 20240223142709.png",
-    "Pasted image 20240223140533.png",
-    "Pasted image 20240223140424.png",
-    "Pasted image 20240223114059.png",
-    "Pasted image 20240223112847.png",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
