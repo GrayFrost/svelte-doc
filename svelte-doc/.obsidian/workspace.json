@@ -14,19 +14,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "01-【入门】背景.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "a14dac5e5a31b791",
+            "id": "885f087d85ea38bd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "44-【展望】结尾.md",
+                "file": "44-【展望】生态.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "42-【实现】变量更新.md"
+                "file": "01-【入门】背景.md"
               }
             }
           }
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "01-【入门】背景.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "01-【入门】背景.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "42-【实现】变量更新.md"
+                "file": "01-【入门】背景.md"
               }
             }
           }
@@ -178,14 +178,17 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "44-【展望】生态.md",
+    "01-【入门】背景.md",
+    "42-【实现】变量更新.md",
+    "45-【展望】结尾.md",
+    "43-【实现】IfBlock.md",
+    "test16.gif",
     "test15.gif",
     "Pasted image 20240226154432.png",
     "test14.gif",
     "41-【实现】遍历.md",
     "39-【实现】解析script.md",
-    "44-【展望】结尾.md",
-    "43-【展望】生态.md",
-    "42-【实现】变量更新.md",
     "Pasted image 20240226152624.png",
     "Pasted image 20240226151117.png",
     "test13.gif",
@@ -193,8 +196,6 @@
     "test12.gif",
     "Pasted image 20240226140725.png",
     "Pasted image 20240226133916.png",
-    "Pasted image 20240226133849.png",
-    "Pasted image 20240226104315.png",
     "38-【实现】基本流程.md",
     "36-【源码】runtime.md",
     "35-【源码】compiler.md",
@@ -213,7 +214,6 @@
     "32-【对比】context.md",
     "30-【对比】ref.md",
     "27-【对比】反应性.md",
-    "26-【对比】slot.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
