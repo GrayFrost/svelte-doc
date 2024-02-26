@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "44-【展望】生态.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-【入门】背景.md"
+                "file": "44-【展望】生态.md"
               }
             }
           }
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "44-【展望】生态.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "44-【展望】生态.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-【入门】背景.md"
+                "file": "44-【展望】生态.md"
               }
             }
           }
@@ -178,6 +178,7 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "09-【入门】dom引用.md",
     "44-【展望】生态.md",
     "01-【入门】背景.md",
     "42-【实现】变量更新.md",
@@ -213,7 +214,6 @@
     "13-【进阶】动画.md",
     "32-【对比】context.md",
     "30-【对比】ref.md",
-    "27-【对比】反应性.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
