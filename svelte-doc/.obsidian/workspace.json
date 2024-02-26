@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "39-【实现】解析script.md",
+                "file": "42-【实现】变量更新.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "39-【实现】解析script.md"
+                "file": "42-【实现】变量更新.md"
               }
             }
           }
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "39-【实现】解析script.md",
+                "file": "42-【实现】变量更新.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "39-【实现】解析script.md",
+                "file": "42-【实现】变量更新.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "39-【实现】解析script.md"
+                "file": "42-【实现】变量更新.md"
               }
             }
           }
@@ -178,16 +178,19 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "test15.gif",
+    "Pasted image 20240226154432.png",
+    "test14.gif",
+    "41-【实现】遍历.md",
+    "39-【实现】解析script.md",
     "44-【展望】结尾.md",
     "43-【展望】生态.md",
     "42-【实现】变量更新.md",
-    "41-【实现】遍历.md",
     "Pasted image 20240226152624.png",
     "Pasted image 20240226151117.png",
     "test13.gif",
     "40-【实现】解析html.md",
     "test12.gif",
-    "39-【实现】解析script.md",
     "Pasted image 20240226140725.png",
     "Pasted image 20240226133916.png",
     "Pasted image 20240226133849.png",
@@ -200,8 +203,6 @@
     "28-【对比】if.md",
     "19-【实战】Alert组件之简单传值.md",
     "18-【实战】todolist之数据交互.md",
-    "img/18-4.gif",
-    "img/18-3.gif",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
     "31-【对比】style.md",
