@@ -173,6 +173,124 @@ function traverse(node, parent) {
 ![[Pasted image 20240226140725.png]]
 现在如果我们往div标签里添加内容，编译往往会报错。因为还没有实现递归解析html内容的逻辑。这也是为什么笔者在这里只演示了最基本的html标签的写法。
 
+## 解析标签属性
+
+修改parseElement的内容
+```diff
+function parseElement() {
+    skipWhitespace();
+    if (match('<')) {
+      eat('<');
+      const tagName = readWhileMatching(/[a-z]/);
++     const attributes = parseAttributes();
+      eat('>');
+      const endTag = `</${tagName}>`;
+      const element = {
+        type: 'Element',
+        name: tagName,
+-       attributes: [],
++       attributes,
+        children: [],
+      };
+      eat(endTag);
+      skipWhitespace();
+      return element;
+    }
+}
+```
+
+```javascript
+  function parseAttributes() {
+    skipWhitespace();
+    const attributes = [];
+    while(!match('>')) {
+      attributes.push(parseAttribute());
+      skipWhitespace();
+    }
+    return attributes;
+  }
+
+  function parseAttribute() {
+    const name = readWhileMatching(/[^=]/);
+    if (match('={')) {
+      eat('={');
+      const value = parseJavaScript();
+      eat('}');
+      return {
+        type: 'Attribute',
+        name,
+        value,
+      };
+    }
+  }
+```
+
+## 行内表达式
+```javascript
+function parseJavaScript() {
+    const js = acorn.parseExpressionAt(content, i, { ecmaVersion: 2023 });
+    i = js.end;
+    return js;
+}
+```
+
+完善generate里的traverse方法
+```javascript
+function traverse(node, parent) {
+    switch(node.type) {
+      case 'Element': {
+        ...
+        node.attributes.forEach(attribute => {
+          traverse(attribute, variableName);
+        });
+      }
+      case "Attribute": {
+        if (node.name.startsWith("on:")) {
+          const eventName = node.name.slice(3);
+          const eventHandler = node.value.name;
+          const eventNameCall = `${eventName}_${counter++}`;
+          code.variables.push(eventNameCall);
+          code.create.push(
+            `${eventNameCall} = listen(${parent}, "${eventName}", ${eventHandler})`
+          );
+          code.destroy.push(`${eventNameCall}()`);
+        }
+        break;
+      }
+    }
+  }
+  ```
+在开篇时，笔者已和大家说明了，本次实现我们只实现其中的事件绑定。
+因为我们对addEventListener做了封装，当我们执行listen()方法后，会返回一个用于移除事件监听的方法。我们在destroy阶段调用这个方法。
+
+修改App.svelte的内容
+```html
+<script>
+  let count = 0;
+  const updateCount = () => {
+    count++;
+    console.log('update count', count);
+  }
+</script>
+
+文本内容1
+<button on:click={updateCount}></button>
+文本内容2
+```
+因为现在仍不支持标签内添加元素，因此，我们单独在index.html内给button添加样式，方便我们测试
+```html
+<style>
+  button {
+	width: 100px;
+	height:100px;
+	background: orange;
+  }
+</style>
+```
+
+执行`npm run compile`看一下效果吧。
+![[test12.gif]]
+
 ## 完整代码
 按照惯例，本章最后附上代码：
 ```javascript
@@ -241,18 +359,49 @@ function parse(content) {
     if (match('<')) {
       eat('<');
       const tagName = readWhileMatching(/[a-z]/);
+      const attributes = parseAttributes();
       eat('>');
       const endTag = `</${tagName}>`;
       const element = {
         type: 'Element',
         name: tagName,
-        attributes: [],
+        attributes,
         children: [],
       };
       eat(endTag);
       skipWhitespace();
       return element;
     }
+  }
+
+  function parseAttributes() {
+    skipWhitespace();
+    const attributes = [];
+    while(!match('>')) {
+      attributes.push(parseAttribute());
+      skipWhitespace();
+    }
+    return attributes;
+  }
+
+  function parseAttribute() {
+    const name = readWhileMatching(/[^=]/);
+    if (match('={')) {
+      eat('={');
+      const value = parseJavaScript();
+      eat('}');
+      return {
+        type: 'Attribute',
+        name,
+        value,
+      };
+    }
+  }
+
+  function parseJavaScript() {
+    const js = acorn.parseExpressionAt(content, i, { ecmaVersion: 2023 });
+    i = js.end;
+    return js;
   }
 
   function parseText() {
@@ -307,7 +456,10 @@ function generate(ast) {
         code.variables.push(variableName);
         code.create.push(
           `${variableName} = element('${node.name}')`
-        );
+        )
+        node.attributes.forEach(attribute => {
+          traverse(attribute, variableName);
+        });
 
         code.create.push(`append(${parent}, ${variableName})`);
         code.destroy.push(`detach(${variableName})`);
@@ -319,6 +471,19 @@ function generate(ast) {
         code.create.push(`${variableName} = text('${node.value}');`);
         code.create.push(`append(${parent}, ${variableName})`);
         code.destroy.push(`detach(${variableName})`);
+        break;
+      }
+      case "Attribute": {
+        if (node.name.startsWith("on:")) {
+          const eventName = node.name.slice(3);
+          const eventHandler = node.value.name;
+          const eventNameCall = `${eventName}_${counter++}`;
+          code.variables.push(eventNameCall);
+          code.create.push(
+            `${eventNameCall} = listen(${parent}, "${eventName}", ${eventHandler})`
+          );
+          code.destroy.push(`${eventNameCall}()`);
+        }
         break;
       }
     }

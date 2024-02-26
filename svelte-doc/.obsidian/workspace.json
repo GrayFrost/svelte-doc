@@ -26,14 +26,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "41-【实现】解析标签属性.md",
+                "file": "44-【展望】结尾.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "6fbafc54efec8e46",
@@ -46,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "41-【实现】解析标签属性.md"
+                "file": "39-【实现】解析script.md"
               }
             }
           }
@@ -116,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "41-【实现】解析标签属性.md",
+                "file": "39-【实现】解析script.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "41-【实现】解析标签属性.md",
+                "file": "39-【实现】解析script.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "41-【实现】解析标签属性.md"
+                "file": "39-【实现】解析script.md"
               }
             }
           }
@@ -177,15 +176,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "a14dac5e5a31b791",
+  "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "44-【展望】结尾.md",
+    "43-【展望】生态.md",
+    "42-【实现】变量更新.md",
+    "41-【实现】遍历.md",
+    "Pasted image 20240226152624.png",
+    "Pasted image 20240226151117.png",
+    "test13.gif",
     "40-【实现】解析html.md",
+    "test12.gif",
     "39-【实现】解析script.md",
-    "41-【实现】解析标签属性.md",
     "Pasted image 20240226140725.png",
     "Pasted image 20240226133916.png",
     "Pasted image 20240226133849.png",
-    "45-【实现】变量更新.md",
     "Pasted image 20240226104315.png",
     "38-【实现】基本流程.md",
     "36-【源码】runtime.md",
@@ -197,14 +202,8 @@
     "18-【实战】todolist之数据交互.md",
     "img/18-4.gif",
     "img/18-3.gif",
-    "img/18-1.png",
-    "img/18-2.gif",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
-    "43-【展望】结尾.md",
-    "42-【展望】生态.md",
-    "Pasted image 20240223171118.png",
-    "Pasted image 20240223164724.png",
     "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
