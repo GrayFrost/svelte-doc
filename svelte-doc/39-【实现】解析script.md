@@ -21,7 +21,7 @@ function parseFragments() {
 }
 
 function parseFragment() {
-    return parseScript();
+    parseScript();
 }
 ```
 
@@ -142,6 +142,8 @@ export default function() {
 访问localhost:5173
 ![[Pasted image 20240226104315.png]]
 
+## 完整代码
+
 最后，为了防止读者们在跟着步骤来实现时出现代码混淆的情况，在每一章结束后，笔者都会把本章实现后的svelte.js的内容呈现出来，读者可一一比对实现。
 
 ```javascript
@@ -177,12 +179,12 @@ function parse(content) {
 
   function parseFragments() {
     while (i < content.length) {
-      const fragment = parseFragment();
+      parseFragment();
     }
   }
 
   function parseFragment() {
-    return parseScript();
+    parseScript();
   }
 
   function parseScript() {

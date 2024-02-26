@@ -26,7 +26,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "40-【实现】解析标签.md",
+                "file": "41-【实现】解析标签属性.md",
                 "mode": "source",
                 "source": false
               }
@@ -46,7 +46,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "40-【实现】解析标签.md"
+                "file": "41-【实现】解析标签属性.md"
               }
             }
           }
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "40-【实现】解析标签.md",
+                "file": "41-【实现】解析标签属性.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "40-【实现】解析标签.md",
+                "file": "41-【实现】解析标签属性.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "40-【实现】解析标签.md"
+                "file": "41-【实现】解析标签属性.md"
               }
             }
           }
@@ -179,12 +179,15 @@
   },
   "active": "a14dac5e5a31b791",
   "lastOpenFiles": [
-    "45-【实现】变量更新.md",
-    "40-【实现】解析标签.md",
+    "40-【实现】解析html.md",
     "39-【实现】解析script.md",
+    "41-【实现】解析标签属性.md",
+    "Pasted image 20240226140725.png",
+    "Pasted image 20240226133916.png",
+    "Pasted image 20240226133849.png",
+    "45-【实现】变量更新.md",
     "Pasted image 20240226104315.png",
     "38-【实现】基本流程.md",
-    "41-【实现】自定义标签.md",
     "36-【源码】runtime.md",
     "35-【源码】compiler.md",
     "37-【源码】流程.md",
@@ -202,8 +205,6 @@
     "42-【展望】生态.md",
     "Pasted image 20240223171118.png",
     "Pasted image 20240223164724.png",
-    "Pasted image 20240223163834.png",
-    "Pasted image 20240223163552.png",
     "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
@@ -213,8 +214,6 @@
     "30-【对比】ref.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
-    "test11.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
