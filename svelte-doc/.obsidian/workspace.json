@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 79.59183673469387,
+        "dimension": 76.16209773539929,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -37,7 +37,7 @@
       {
         "id": "6fbafc54efec8e46",
         "type": "tabs",
-        "dimension": 20.408163265306122,
+        "dimension": 23.837902264600714,
         "children": [
           {
             "id": "d56ce0d395005fbc",
@@ -99,7 +99,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -158,13 +158,21 @@
                 "file": "44-【展望】生态.md"
               }
             }
+          },
+          {
+            "id": "6ba48065372b323e",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -173,13 +181,15 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
-    "09-【入门】dom引用.md",
+    "14-【进阶】指令.md",
     "44-【展望】生态.md",
+    "09-【入门】dom引用.md",
     "01-【入门】背景.md",
     "42-【实现】变量更新.md",
     "45-【展望】结尾.md",
@@ -206,7 +216,6 @@
     "19-【实战】Alert组件之简单传值.md",
     "18-【实战】todolist之数据交互.md",
     "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
     "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
