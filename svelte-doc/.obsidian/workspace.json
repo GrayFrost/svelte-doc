@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 61.4307931570762,
+        "dimension": 79.59183673469387,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -14,18 +14,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "28-【对比】if.md",
+                "file": "39-【实现】解析script.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a14dac5e5a31b791",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "40-【实现】解析标签.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "6fbafc54efec8e46",
         "type": "tabs",
-        "dimension": 38.56920684292379,
+        "dimension": 20.408163265306122,
         "children": [
           {
             "id": "d56ce0d395005fbc",
@@ -33,7 +46,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "28-【对比】if.md"
+                "file": "40-【实现】解析标签.md"
               }
             }
           }
@@ -103,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "28-【对比】if.md",
+                "file": "40-【实现】解析标签.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "28-【对比】if.md",
+                "file": "40-【实现】解析标签.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "28-【对比】if.md"
+                "file": "40-【实现】解析标签.md"
               }
             }
           }
@@ -164,28 +177,33 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "71d9c23a99a6313c",
+  "active": "a14dac5e5a31b791",
   "lastOpenFiles": [
+    "45-【实现】变量更新.md",
+    "40-【实现】解析标签.md",
+    "39-【实现】解析script.md",
+    "Pasted image 20240226104315.png",
+    "38-【实现】基本流程.md",
+    "41-【实现】自定义标签.md",
+    "36-【源码】runtime.md",
+    "35-【源码】compiler.md",
+    "37-【源码】流程.md",
+    "10-【入门】样式.md",
+    "28-【对比】if.md",
     "19-【实战】Alert组件之简单传值.md",
     "18-【实战】todolist之数据交互.md",
     "img/18-4.gif",
     "img/18-3.gif",
     "img/18-1.png",
     "img/18-2.gif",
-    "10-【入门】样式.md",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
     "43-【展望】结尾.md",
     "42-【展望】生态.md",
-    "40-【实现】变量更新.md",
-    "41-【实现】自定义标签.md",
-    "39-【实现】parse.md",
-    "38-【实现】基本流程.md",
     "Pasted image 20240223171118.png",
     "Pasted image 20240223164724.png",
     "Pasted image 20240223163834.png",
     "Pasted image 20240223163552.png",
-    "37-【源码】runtime.md",
     "31-【对比】style.md",
     "16-【进阶】模板语法之其他.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
@@ -193,15 +211,10 @@
     "13-【进阶】动画.md",
     "32-【对比】context.md",
     "30-【对比】ref.md",
-    "28-【对比】if.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
     "25-【对比】lifecycle.md",
-    "24-【对比】props.md",
-    "23-【对比】function.md",
-    "22-【对比】data.md",
     "test11.gif",
-    "Pasted image 20240223142709.png",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
