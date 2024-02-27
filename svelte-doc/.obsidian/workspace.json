@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 76.16209773539929,
+        "dimension": 79.59183673469387,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "22-【对比】data.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
       {
         "id": "6fbafc54efec8e46",
         "type": "tabs",
-        "dimension": 23.837902264600714,
+        "dimension": 20.408163265306122,
         "children": [
           {
             "id": "d56ce0d395005fbc",
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "22-【对比】data.md"
               }
             }
           }
@@ -99,7 +99,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "22-【对比】data.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "22-【对比】data.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,12 +155,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "22-【对比】data.md"
               }
             }
           },
           {
-            "id": "6ba48065372b323e",
+            "id": "d8ce38c31e3b5069",
             "type": "leaf",
             "state": {
               "type": "advanced-tables-toolbar",
@@ -172,7 +172,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,12 +188,34 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "21-【实战】Alert组件之动画.md",
+    "20-【实战】Alert组件之slot交互.md",
+    "19-【实战】Alert组件之简单传值.md",
+    "18-【实战】todolist之数据交互.md",
+    "17-【实战】todolist之页面布局.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
-    "44-【展望】生态.md",
+    "13-【进阶】动画.md",
+    "12-【进阶】状态管理.md",
+    "11-【进阶】跨组件传值.md",
+    "10-【入门】样式.md",
     "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "04-【入门】组件与属性.md",
+    "Pasted image 20240227113325.png",
+    "Pasted image 20240227112130.png",
+    "Pasted image 20240227111126.png",
+    "Pasted image 20240227110955.png",
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "Pasted image 20240227104631.png",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "44-【展望】生态.md",
+    "45-【展望】致谢.md",
     "01-【入门】背景.md",
     "42-【实现】变量更新.md",
-    "45-【展望】结尾.md",
     "43-【实现】IfBlock.md",
     "test16.gif",
     "test15.gif",
@@ -201,28 +224,6 @@
     "41-【实现】遍历.md",
     "39-【实现】解析script.md",
     "Pasted image 20240226152624.png",
-    "Pasted image 20240226151117.png",
-    "test13.gif",
-    "40-【实现】解析html.md",
-    "test12.gif",
-    "Pasted image 20240226140725.png",
-    "Pasted image 20240226133916.png",
-    "38-【实现】基本流程.md",
-    "36-【源码】runtime.md",
-    "35-【源码】compiler.md",
-    "37-【源码】流程.md",
-    "10-【入门】样式.md",
-    "28-【对比】if.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "18-【实战】todolist之数据交互.md",
-    "15-【进阶】特定标签.md",
-    "31-【对比】style.md",
-    "16-【进阶】模板语法之其他.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "12-【进阶】状态管理.md",
-    "13-【进阶】动画.md",
-    "32-【对比】context.md",
-    "30-【对比】ref.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
