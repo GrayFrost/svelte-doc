@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "22-【对比】data.md",
+                "file": "05-【入门】生命周期.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "22-【对比】data.md"
+                "file": "05-【入门】生命周期.md"
               }
             }
           }
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "22-【对比】data.md",
+                "file": "05-【入门】生命周期.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "22-【对比】data.md",
+                "file": "05-【入门】生命周期.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "22-【对比】data.md"
+                "file": "05-【入门】生命周期.md"
               }
             }
           },
@@ -188,6 +188,13 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "04-【入门】组件与属性.md",
+    "Pasted image 20240227140302.png",
+    "Pasted image 20240227135127.png",
+    "test17.gif",
+    "22-【对比】data.md",
     "21-【实战】Alert组件之动画.md",
     "20-【实战】Alert组件之slot交互.md",
     "19-【实战】Alert组件之简单传值.md",
@@ -202,13 +209,10 @@
     "10-【入门】样式.md",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
-    "04-【入门】组件与属性.md",
     "Pasted image 20240227113325.png",
     "Pasted image 20240227112130.png",
     "Pasted image 20240227111126.png",
     "Pasted image 20240227110955.png",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
     "Pasted image 20240227104631.png",
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
@@ -219,11 +223,6 @@
     "43-【实现】IfBlock.md",
     "test16.gif",
     "test15.gif",
-    "Pasted image 20240226154432.png",
-    "test14.gif",
-    "41-【实现】遍历.md",
-    "39-【实现】解析script.md",
-    "Pasted image 20240226152624.png",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
