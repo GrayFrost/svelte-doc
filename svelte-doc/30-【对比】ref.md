@@ -1,9 +1,10 @@
 ## React
 
-父组件
-
 ```javascript
+// Father.jsx
 import { useRef, useEffect, useState } from "react";
+import Child from './Child';
+
 export default function Page() {
   const fatherRef = useRef(null);
   const childRef = useRef(null);
@@ -35,9 +36,9 @@ export default function Page() {
 
 ```
 
-子组件
 
 ```javascript
+// Child.jsx
 import React, { useImperativeHandle } from "react";
 
 function _Child(props, ref) {
@@ -160,3 +161,5 @@ defineExpose({
 
 <div>子应用</div>
 ```
+
+## 小结

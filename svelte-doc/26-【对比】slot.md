@@ -134,3 +134,5 @@ import SlotContainer2 from "./Child2.vue";
   <footer><slot name="footer"></slot></footer>
 </div>
 ```
+
+## 小结

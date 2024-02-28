@@ -43,7 +43,10 @@ export default function Child(props) {
 }
 ```
 
-react接收props需要考虑组件重复渲染的问题， memo(), usemomo, usecallback, shouldComponentUpdate等一系列优化的方法。ToDo如何限定props类型
+react接收props需要考虑组件重复渲染的问题， memo(), usemomo, usecallback, shouldComponentUpdate等一系列优化的方法。
+
+### 类型限定
+ToDo如何限定props类型
 
 ## Vue
 Vue使用的是单文件的组织形式，在一个文件中，我们在template这种写html内容，然后分别在script标签内和style标签内定义组件的脚本和样式。
@@ -92,7 +95,8 @@ const onClickFunc = () => {
 
 ```
 
-2.x中通过定义在props中来接收父组件data，还能限定数据类型
+### 类型限定
+TODO 2.x中通过定义在props中来接收父组件data，还能限定数据类型
 
 ## Svelte
 Svelte同样使用的是sfc的形式。
@@ -136,5 +140,8 @@ Svelte同样使用的是sfc的形式。
 ```
 
 svelte在父组件中通过`on:[事件]={父组件方法}`的形式为子组件添加事件绑定，通过`变量={父组件变量}`的形式传递。而在子组件中，通过export的方式，将原本限定在组件内的变量，改为能够接受外部的传值。而调用父组件的则通过调用createEventDispatcher方法来创建一个对象，通过调用该对象来调用父组件的方法。如果需要传值，则通过`dispatch(方法名,值)`的形式传递。
+
+TODO: typescript类型限定
+todo: 也能props传方法
 
 ## 小结

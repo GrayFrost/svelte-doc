@@ -47,3 +47,5 @@ const list = reactive([1, 2, 3]);
   {/each}
 </ul>
 ```
+
+## 小结

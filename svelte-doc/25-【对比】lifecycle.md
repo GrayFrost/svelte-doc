@@ -52,3 +52,5 @@ afterUpdate
 onDestroy
 
 tick， vue的$nextTick
+
+## 小结
