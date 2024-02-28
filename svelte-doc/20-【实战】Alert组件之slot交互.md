@@ -1,4 +1,4 @@
-![[Pasted image 20240221111240.png]]
+![[19-2.png]]
 接下来我们完成剩余的api，主要有afterClose回调、closeText、description、icon、message
 
 在Svelte中，我们不能像react那样直接把组件当成一个props来传递，因此对于一些既支持传数据又支持传组件的参数，我们的在Svelte的实现是既支持传值，又支持slot定义。然后在组件内容判断是否有slot值。

@@ -1,12 +1,12 @@
 也许实现一个TodoList项目没有过瘾，这里笔者为大家带来第二个实战内容：使用Svelte来实现[Antd](https://ant-design.antgroup.com/index-cn)的其中一个组件。
 
 这里笔者挑选的Antd组件是Alert组件
-![[Pasted image 20240221111312.png]]
+![](./img/19-1.png)
 
 我们先来看下一个Alert组件对外支持的Api有哪些？
 
 笔者选择了3.X版本的Antd的[Alert](https://3x.ant.design/components/alert-cn/)组件作为演示内容。
-![[Pasted image 20240221111240.png]]
+![](./img/19-2.png)
 
 ```bash
 npm create vite@latest svelte-antd-alert -- --template svelte
@@ -248,7 +248,6 @@ Alert.svelte初始内容如下：
 
 ### type
 
-
 ```html
 <script>
   import classNames from 'classnames';
@@ -286,13 +285,12 @@ Alert.svelte初始内容如下：
 <Alert type="error">error</Alert>
 ```
 可以看到页面内容：
-![[Pasted image 20240221140009.png]]
+![](./img/19-3.png)
 
 
 ### showIcon
 
-
-![[Pasted image 20240221141650.png]]
+![](./img/19-4.png)
 
 然后再添加icon相关的svelte组件
 
@@ -420,7 +418,7 @@ $: icon = {
 <Alert type="error" showIcon={true}>error</Alert>
 ```
 
-![[Pasted image 20240221152357.png]]
+![](./img/19-5.png)
 
 ### banner
 页面顶部通告形式，默认有图标且`type` 为 'warning'。
@@ -466,8 +464,7 @@ App.svelte
 ```
 
 内容如下：
-![[Pasted image 20240221154736.png]]
-
+![](./img/19-6.png)
 ### closable
 
 添加close icon
@@ -572,7 +569,7 @@ $: alertCls = classNames(prefixCls, {
 <br />
 ```
 
-![[test4.gif]]
+![](./img/19-7.gif)
 
 ## 小结
 

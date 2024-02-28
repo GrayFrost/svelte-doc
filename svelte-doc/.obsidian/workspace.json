@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "35-【源码】compiler.md"
+                "file": "19-【实战】Alert组件之简单传值.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "19-【实战】Alert组件之简单传值.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "35-【源码】compiler.md"
+                "file": "19-【实战】Alert组件之简单传值.md"
               }
             }
           },
@@ -176,42 +176,41 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
-    "Pasted image 20240228164257.png",
-    "36-【源码】runtime.md",
-    "Pasted image 20240228162717.png",
+    "img/19-7.gif",
+    "19-【实战】Alert组件之简单传值.md",
+    "17-【实战】todolist之页面布局.md",
+    "Pasted image 20240221170300.png",
+    "img/19-6.png",
+    "img/19-5.png",
+    "img/19-4.png",
+    "img/19-3.png",
+    "img/19-1.png",
+    "img/19-2.png",
+    "05-【入门】生命周期.md",
+    "img/05-4.png",
+    "img/05-3.png",
     "35-【源码】compiler.md",
-    "Pasted image 20240228162645.png",
-    "Pasted image 20240228162550.png",
+    "32-【对比】context.md",
+    "09-【入门】dom引用.md",
+    "38-【实现】基本流程.md",
     "37-【源码】流程.md",
-    "Pasted image 20240228161643.png",
+    "36-【源码】runtime.md",
     "31-【对比】style.md",
-    "Pasted image 20240228144924.png",
     "14-【进阶】指令.md",
     "21-【实战】Alert组件之动画.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "test4.gif",
-    "17-【实战】todolist之页面布局.md",
-    "img/17-4.png",
-    "img/17-3.png",
-    "img/17-2.png",
     "16-【进阶】模板语法之其他.md",
-    "img/17-1.png",
     "44-【展望】生态.md",
     "40-【实现】解析html.md",
     "43-【实现】IfBlock.md",
-    "32-【对比】context.md",
     "30-【对比】ref.md",
     "45-【展望】致谢.md",
     "02-【入门】安装与使用.md",
     "39-【实现】解析script.md",
-    "38-【实现】基本流程.md",
     "34-【源码】位运算.md",
     "33-【源码】库.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
     "27-【对比】反应性.md",
-    "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
