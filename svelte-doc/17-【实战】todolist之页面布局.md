@@ -73,7 +73,7 @@ interface Todo {
 ```
 
 ## 布局
-![[Pasted image 20240220151237.png]]
+![布局](./img/17-1.png)
 我们将页面分成三部分，笔者在这里用不同的颜色进行了标注。分别是输入框、Tab切换以及待办列表展示。
 整体使用flex布局。
 
@@ -120,7 +120,7 @@ interface Todo {
   <Input />
 </div>```
 此时相信读者们能够看到以下内容：
-![[Pasted image 20240220155317.png]]
+![](./img/17-2.png)
 ### Tabs
 新建Tabs.svelte组件，添加内容：
 ```html
@@ -137,7 +137,7 @@ interface Todo {
 </div>
 ```
 App.svelte中引入该组件后，页面展示如下：
-![[Pasted image 20240220160425.png]]
+![](./img/17-3.png)
 
 继续完善Tabs.svelte的内容：
 ```javascript
@@ -264,7 +264,7 @@ App.svelte中引入该组件后，页面展示如下：
 ```
 
 至此，页面上能够看见我们最开始设计的布局结构。
-![[Pasted image 20240220164502.png]]
+![](./img/17-4.png)
 
 当然，此时的页面功能仍不完整，比如无法添加待办项、Tab切换没有样式、待办项勾选后没有放置到对应的Tab栏等等。在下一章，我们将完善剩余的功能。
 
