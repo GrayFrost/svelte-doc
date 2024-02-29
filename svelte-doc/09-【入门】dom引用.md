@@ -1,4 +1,5 @@
 
+
 即使当今的主流开发模式提倡的是数据驱动视图，然而我们仍旧无法完全摆脱对dom的操作，我们也不能摆脱。这里笔者可以随便举几个例子：input输入框的focus和blur的触发、使用`<input type="file" />`来自定义实现上传时的手动click等。
 
 无论是在React还是在Vue中，都有提供对dom的引用的api操作，而这种对dom的引用通常称为Ref。那在Svelte中，我们要如何拿到我们的Ref呢？
@@ -10,26 +11,216 @@
 bind:this={dom_node}
 ```
 
-接下来，
+### dom
+我们看一个例子：
+```html
+<script>
+  let dialogDom;
+  let dialogRef;
 
-input.focus()
+  const open1 = () => {
+    dialogDom = document.querySelector('dialog');
+    console.log('dom', [dialogDom]);
+    if (dialogDom) {
+      dialogDom.showModal();
+    }
+  }
 
+  const open2 = () => {
+    console.log('ref', [dialogRef]);
+    if (dialogRef) {
+      dialogRef.showModal();
+    }
+  }
+
+  const close = () => {
+    dialogDom && dialogDom.close();
+    dialogRef && dialogRef.close();
+  }
+</script>
+
+<button on:click={open1}>打开1</button>
+<button on:click={open2}>打开2</button>
+<dialog bind:this={dialogRef}>
+  dialog content <span on:click={close}>close</span>
+</dialog>
+```
+这里笔者将bind:this绑定到正常的html标签dialog上，然后我们能够看到，通过bind:this得到的数据和使用原声dom api操作得到的数据并无差异。
+![[test26.gif]]
+
+### 组件
+bind:this除了能够绑定html标签上，也能够绑定到组件上。
+
+### 组件数据和方法
+在某些特定场合下，我们可能希望直接操作子组件内的数据和方法。
+
+假设我们有一个子组件：
+```html
+<script>
+  let data = '测试bind:this数据';
+
+  const func = () => {
+    console.log('测试bind:this方法');
+  }
+</script>
+
+子组件
+```
+
+此时我们外部引用这个组件，并打印出这个组件的实例
+```html
+<script>
+  import Child from './Child.svelte';
+
+  let ref;
+
+  $: console.log('ref', ref);
+</script>
+
+<Child bind:this={ref} />
+```
+
+![[Pasted image 20240229142303.png]]
+此时我们并不能拿到子组件的数据和方法。要想拿到子组件的数据和方法，我们需要使用到`export`。
+```html
+<script>
+  export let data = '测试bind:this数据';
+
+  export const func = () => {
+    console.log('测试bind:this方法');
+  }
+</script>
+
+子组件
+```
+![[Pasted image 20240229142614.png]]
+我们可以看到，数据与方法都正常导出了。然而因为使用了`export`，原来的数据变成了一个prop属性，Svelte并不允许我们直接拿到这个属性。我们要么在`<svelte:options>`中做一些配置，要么就是我们在子组件内定义一个专门取数据的方法。
+```html
+<script>
+// Child.svelte
+  export let data = '测试bind:this数据';
+
+  export const func = () => {
+    console.log('测试bind:this方法');
+  }
   
+  export const getData = () => {
+    return data;
+  }
+</script>
 
-input.click(); // 上传
+子组件
+```
 
-## 子实例的数据与方法
+```html
+<script>
+  import Child from './Child.svelte';
 
-## 多个子实例
+  let ref;
 
-子组件实例
+  $: console.log('ref', ref);
 
-  
-组件bind:this
-如何拿到子组件的数据 方法 export
+  $: {
+    if (ref) {
+      let data = ref.getData();
+      console.log('数据拿到了吗：', data);
+    }
+  }
+</script>
 
-多个ref ，数组形式存储
+<Child bind:this={ref} data={'98765'} />
+```
+![[Pasted image 20240229143106.png]]
 
+我们以真实场景来举个例子：
+```html
+<script>
+  import Countdown from "./Countdown.svelte";
 
+  let ref;
 
+  const onCountdownEnd = () => {
+    console.log("倒计时结束！");
+  };
+
+  const onCountdownStart = () => {
+    if (ref) {
+      ref.start();
+    }
+  };
+</script>
+
+<Countdown bind:this={ref} countdown={10} on:end={onCountdownEnd} />
+<button on:click={onCountdownStart}>开始倒计时</button>
+```
+
+```html
+<script>
+  import { onDestroy, createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  export let countdown = 60;
+  export let unit = 's';
+
+  let timer = null;
+
+  const clearTimer = () => {
+    timer && clearInterval(timer);
+  }
+
+  const initTimer = () => {
+    clearTimer();
+    timer = window.setInterval(() => {
+        countdown--;
+        if (countdown < 1) {
+          clearTimer();
+          end();
+        }
+      }, 1000);
+  }
+
+  const end = () => {
+    dispatch('end');
+  }
+
+  export const start = () => {
+    initTimer();
+  }
+
+  onDestroy(() => {
+    clearTimer();
+  })
+</script>
+
+<span>{ countdown }{ unit }</span>
+```
+我们封装了一个倒计时组件，倒计时内部有启动倒计时的功能。而何时触发倒计时则由外部引用的页面决定。
+![[test27.gif]]
+
+## 数组
+
+当我们想在`{#each}`中使用`bind:this`时，使用数组来存储绑定的值。
+
+```html
+<script>
+  let arr = ['red', 'blue', 'green', 'orange']
+  let refArr = [];
+
+  $: {
+    console.log(refArr);
+    refArr.forEach(li => {
+      li.setAttribute('style', `color: ${li.innerText};`)
+    })
+  }
+</script>
+
+<ul>
+{#each arr as item, index}
+  <li bind:this={refArr[index]}>{item}</li>
+{/each}
+</ul>
+```
+
+![[Pasted image 20240229145234.png]]
 ## 小结
