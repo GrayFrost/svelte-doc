@@ -1,4 +1,8 @@
+# Svelte5 抢先看！
+
+```bash
 npm create svelte@latest  svelte-5
+```
 
 ```
 ┌  Welcome to SvelteKit!
@@ -14,9 +18,11 @@ that works without JavaScript!)
 
 ![alt text](image-17.png)
 
+```bash
 cd svelte-5
 npm install 
 npm run dev
+```
 
 
 package.json里的依赖显示
@@ -166,8 +172,20 @@ beforeUpdate
 
 ### `$effect.active`
 
+判断是否运行在`$effect`中
+
 ### `$effect.root`
 
 ### `$props`
 
 ## Snippets
+
+## 事件监听
+原来的事件监听形式是`on:eventname`，Svelte5改为`oneventname`
+
+## 方法
+### untrack
+### unstate
+### mount
+### hydrate
+### render
