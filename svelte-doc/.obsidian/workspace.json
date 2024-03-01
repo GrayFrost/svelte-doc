@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "44-【展望】生态.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "44-【展望】生态.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "44-【展望】生态.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "44-【展望】生态.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "44-【展望】生态.md"
               }
             }
           },
@@ -176,23 +176,32 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "11-【进阶】状态管理.md",
+    "Pasted image 20240301110736.png",
+    "Pasted image 20240301110712.png",
+    "Pasted image 20240301105656.png",
+    "test30.gif",
+    "test29.gif",
+    "test28.gif",
+    "13-【进阶】动画.md",
+    "10-【入门】样式.md",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "04-【入门】组件与属性.md",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "12-【进阶】跨组件传值.md",
     "Pasted image 20240229145234.png",
     "Pasted image 20240229143106.png",
     "Pasted image 20240229142614.png",
     "Pasted image 20240229142303.png",
-    "test27.gif",
-    "test26.gif",
     "19-【实战】Alert组件之简单传值.md",
-    "img/19-7.gif",
     "17-【实战】todolist之页面布局.md",
-    "Pasted image 20240221170300.png",
-    "img/19-6.png",
-    "img/19-5.png",
-    "img/19-4.png",
-    "05-【入门】生命周期.md",
     "35-【源码】compiler.md",
     "32-【对比】context.md",
-    "09-【入门】dom引用.md",
     "38-【实现】基本流程.md",
     "37-【源码】流程.md",
     "36-【源码】runtime.md",
@@ -202,16 +211,6 @@
     "16-【进阶】模板语法之其他.md",
     "44-【展望】生态.md",
     "40-【实现】解析html.md",
-    "43-【实现】IfBlock.md",
-    "30-【对比】ref.md",
-    "45-【展望】致谢.md",
-    "02-【入门】安装与使用.md",
-    "39-【实现】解析script.md",
-    "34-【源码】位运算.md",
-    "33-【源码】库.md",
-    "29-【对比】for.md",
-    "28-【对比】if.md",
-    "27-【对比】反应性.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
