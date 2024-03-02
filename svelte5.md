@@ -6,7 +6,7 @@
 ```bash
 npm create svelte@latest  svelte-5
 ```
-
+当我们在执行上述命令后，首先会看到如下提示：
 ```
 ┌  Welcome to SvelteKit!
 │
@@ -19,8 +19,10 @@ that works without JavaScript!)
 └
 ```
 
+这里给我们提供了体验Svelte 5的选项。
 ![alt text](image-17.png)
 
+接着是正常的安装依赖操作。
 ```bash
 cd svelte-5
 npm install 
@@ -28,26 +30,37 @@ npm run dev
 ```
 
 
-package.json里的依赖显示
+安装完后，我们可以看到package.json里的依赖显示：
 ```json
 {
   "svelte": "^5.0.0-next.1",
 }
 ```
 
-https://svelte-5-preview.vercel.app/docs/introduction
-https://svelte.dev/blog/runes
+当然，如果不想执行上述操作也想体验Svelte 5，那可以尝试官方提供的[REPL](https://svelte-5-preview.vercel.app/)。
 
-引入了Runes。符文
-https://www.leagueoflegends.com/en-au/champions/ryze/
-![瑞兹](https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ryze_0.jpg)
 
-REPL 体验 https://svelte-5-preview.vercel.app/
+REPL 体验 
 
 ## Runes
-也许大家对Runes不太熟悉，但如果说到英雄联盟里的瑞兹，相信大家耳熟能详。瑞兹的英文全称是**THE RUNE MAGE**，中文翻译是符文法师。不错，Runes即符文。 
-为了看起来更自然点，文章中将继续以Runes来说明。  
-Runes是一组函数式的符号，无需额外引入，可以直接使用，是Svelte5语言的特性。
+Svelte 5最大的改动便是引入了**Runes**。  
+
+也许大家对Runes不太熟悉，但如果说到英雄联盟里的[瑞兹](https://www.leagueoflegends.com/en-au/champions/ryze/)，相信大家耳熟能详。瑞兹的英文全称是**THE RUNE MAGE**，中文翻译是符文法师。不错，Runes即符文。 
+![灾难始终慢我一步](https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ryze_0.jpg)
+
+为了读起来更自然点，文章中将继续以Runes来说明。  
+Runes是一组函数式的符号，无需额外引入，可以直接使用，是Svelte5语言的特性，目前有以下Runes：
+
+* `$state`
+* `$state.frozen`
+* `$derived`
+* `$derived.by`
+* `$effect`
+* `$effect.pre`
+* `$effect.active`
+* `$effect.root`
+* `$props`
+* `$inspect`
 
 ### `$state`
 ```html
@@ -149,6 +162,14 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 当我们调用update2时，数组能正常更新。
 
 浅拷贝？
+
+在Svelte4中，数据的声明只能在script的顶部作用域中
+```html
+<script>
+  let data = any;
+</script>
+```
+而使用`$state`Runes则可以摆脱这个限制。
 
 ### `$derived`
 `$derived`接收一个参数，这个参数是一个没有副作用的表达式。
@@ -315,6 +336,7 @@ in template:{console.log('isActive in template', $effect.active())}
 ### `$effect.root`
 
 ### `$props`
+和明显，用来接收props的Runes。
 ```html
 <script>
   export let value;
@@ -330,6 +352,8 @@ in template:{console.log('isActive in template', $effect.active())}
 
 子组件：{value}
 ```
+
+### `$inspect`
 
 ## Snippets
 
@@ -545,3 +569,5 @@ const result = render(App, {
 ## 结尾
 
 ## 参考
+https://svelte-5-preview.vercel.app/docs/introduction
+https://svelte.dev/blog/runes
