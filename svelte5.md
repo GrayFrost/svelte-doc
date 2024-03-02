@@ -1,5 +1,7 @@
 # Svelte5 抢先看！
 
+![alt text](image-20.png)
+
 ## 安装
 ```bash
 npm create svelte@latest  svelte-5
@@ -410,7 +412,136 @@ Svelte4的事件修饰符如下：
 ## 方法
 
 ### untrack
+```html
+<script>
+	let width = $state(10);
+  let height = $state(10);
+  let area;
+
+	$effect(() => {
+		console.log('width or height change', width, height);
+	});
+</script>
+
+width: <input type="number" bind:value={width} />, 
+height: <input type="number" bind:value={height} />
+```
+![alt text](test45.gif)
+如果我们只想在width执行时输出console，那就需要不追踪height的依赖。
+
+```html
+<script>
+  import { untrack } from 'svelte';
+
+	let width = $state(10);
+  let height = $state(10);
+
+	$effect(() => {
+		console.log('width or height change', width, untrack(() => height));
+	});
+</script>
+
+width: <input type="number" bind:value={width} />, 
+height: <input type="number" bind:value={height} />
+```
+
+![alt text](test46.gif)
+
+
 ### unstate
+把使用`$state()`生成的响应式数据（对象或数组）变成非响应式的。
+```html
+<script>
+  // svelte 4
+  export let obj = {
+    name: 'text'
+  };
+
+  const onUpdate = () => {
+    obj.name = '' + Math.random();
+  }
+
+  $: console.log('obj change', obj.name);
+</script>
+
+<button on:click={onUpdate}>update</button><br />
+obj: {obj.name}<br />
+```
+
+```html
+<script>
+  // svelte 5
+  import { unstate } from 'svelte';
+
+  let obj = $state({
+    name: 'text'
+  });
+  let _obj = unstate(obj);
+
+  const onUpdate = () => {
+    obj.name = '' + Math.random();
+    _obj.name = '' + Math.random();
+  }
+
+  $effect(() => {
+    console.log('$state data change', obj.name);
+  });
+
+  $effect(() => {
+    console.log('unstate data cahnge', _obj.name);
+  })
+
+</script>
+
+<button onclick={onUpdate}>update</button><br />
+obj: {obj.name}<br />
+_obj: {_obj.name}
+```
+![alt text](test47.gif)
+
 ### mount
+```javascript
+import { mount } from 'svelte';
+import App from './App.svelte';
+
+const app = mount(App, {
+	target: document.querySelector('#app'),
+	props: { some: 'property' }
+});
+```
+
+Svelte4
+```javascript
+import App from './App.svelte'
+
+const app = new App({
+  target: document.getElementById('app'),
+})
+
+export default app
+```
+
 ### hydrate
+SSR使用。
+```javascript
+import { hydrate } from 'svelte';
+import App from './App.svelte';
+const app = hydrate(App, {
+  target: document.querySelector('#app'),
+  props: { some: 'property' }
+});
+```
+
 ### render
+服务端渲染时使用。接收一个Component并返回一个带有html和head参数的对象。
+```javascript
+import { render } from 'svelte/server';
+import App from './App.svelte';
+const result = render(App, {	
+  props: { some: 'property' }
+});
+```
+
+## 结尾
+
+## 参考
