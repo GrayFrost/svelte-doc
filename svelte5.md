@@ -4,7 +4,7 @@
 
 ## 安装
 ```bash
-npm create svelte@latest  svelte-5
+npm create svelte@latest svelte-5
 ```
 当我们在执行上述命令后，首先会看到如下提示：
 ```
@@ -19,7 +19,7 @@ that works without JavaScript!)
 └
 ```
 
-这里给我们提供了体验Svelte 5的选项。
+从弹出的选项中可以看到，这里给我们提供了体验Svelte 5的选项。
 ![alt text](image-17.png)
 
 接着是正常的安装依赖操作。
@@ -28,7 +28,6 @@ cd svelte-5
 npm install 
 npm run dev
 ```
-
 
 安装完后，我们可以看到package.json里的依赖显示：
 ```json
@@ -39,8 +38,6 @@ npm run dev
 
 当然，如果不想执行上述操作也想体验Svelte 5，那可以尝试官方提供的[REPL](https://svelte-5-preview.vercel.app/)。
 
-
-REPL 体验 
 
 ## Runes
 Svelte 5最大的改动便是引入了**Runes**。  
@@ -566,8 +563,10 @@ const result = render(App, {
 });
 ```
 
-## 结尾
+## 总结
+Svelte 5移除了`onMount`、`beforeUpdate`、`afterUpdate`等生命周期，移除了`createDispatcher`和`slot`，将组件的方法和插槽内容都通过`$props`来传递，让我们不用再关注`CustomEvent.detail`等细节，很明显降低了学习的曲线。同时引入了Runes的概念，对数据状态能够进行更为颗粒度的控制。  
+文章只介绍了较为关键的特性，更多细节内容，还请感兴趣的读者们去官网深度探索。
 
 ## 参考
-https://svelte-5-preview.vercel.app/docs/introduction
-https://svelte.dev/blog/runes
+* [svelte-5-preview](https://svelte-5-preview.vercel.app/docs/introduction)
+* [runes](https://svelte.dev/blog/runes)
