@@ -353,6 +353,68 @@ in template:{console.log('isActive in template', $effect.active())}
 ### `$inspect`
 
 ## Snippets
+俗称片段。使用Snippets可以进行内容复用。
+```html
+<script>
+  let arr = $state([{
+    name: 'carter',
+    age: 18,
+    gender: '男'
+  }, {
+    name: 'lily',
+    age: 19,
+    gender: '女'
+  }]);
+</script>
+
+{#snippet person({ name, age, gender })}
+  <p>
+    <span>姓名：{name}</span>
+    <span> 年龄：{age}</span>
+    <span>性别：{gender}</span>
+  </p>
+{/snippet}
+
+{#each arr as item, i}
+  {@render person(item)}
+{/each}
+```
+使用`{#snippet snippetName()}...{/snippet}`来定义我们要复用的片段，使用`{@render snippetName()}`来复用定义好的片段。
+
+![alt text](image-21.png)
+在之前，如果我们要复用这一段代码，只能把它放入到另一个svelte文件中，当成组件来引用。
+
+### 传递给组件
+能够把片段当成一个属性传递给组件。
+```html
+<script>
+  let { header, footer } = $props();
+</script>
+
+<div>
+  <header>{@render header()}</header>
+  组件内部
+  <footer>{@render footer()}</footer>
+</div>
+```
+
+```html
+<script>
+	import Svelte5 from './Svelte5.svelte';
+
+</script>
+
+{#snippet header()}
+	<div>头部内容</div>
+{/snippet}
+
+{#snippet footer()}
+	<div>尾部内容</div>
+{/snippet}
+
+<Svelte5 {header} {footer} />
+```
+![alt text](image-22.png)
 
 ## 事件
 ### 事件监听
@@ -398,6 +460,29 @@ in template:{console.log('isActive in template', $effect.active())}
 ```
 ![alt text](test44.gif)
 
+除了接收方法，我们还能接收插槽内容。没错，在Svelte5中，插槽的使用转而投向了jsx的写法，通过`let { children } = $props()`来接收插槽内容。
+```html
+<script>
+  let { children } = $props();
+</script>
+
+<div>
+  <header>头部</header>
+  <main>{@render children() }</main>
+  <footer>底部</footer>
+</div>
+```
+
+```html
+<script>
+	import Svelte5 from './Svelte5.svelte';
+</script>
+
+<Svelte5>
+	内容
+</Svelte5>
+```
+这里的`{@render ...}`和后面介绍的Snippets有关。思考：如何接收具名插槽？
 
 ### 事件修饰符
 Svelte4的事件修饰符如下：
@@ -564,7 +649,7 @@ const result = render(App, {
 ```
 
 ## 总结
-Svelte 5移除了`onMount`、`beforeUpdate`、`afterUpdate`等生命周期，移除了`createDispatcher`和`slot`，将组件的方法和插槽内容都通过`$props`来传递，让我们不用再关注`CustomEvent.detail`等细节，很明显降低了学习的曲线。同时引入了Runes的概念，对数据状态能够进行更为颗粒度的控制。  
+Svelte 5移除了`onMount`、`beforeUpdate`、`afterUpdate`等生命周期，移除了`createDispatcher`和`slot`，将组件的方法和插槽内容都通过`$props`来传递，让我们不用再关注`CustomEvent.detail`等细节，很明显降低了学习的曲线。同时引入了Runes的概念，对数据状态能够进行更为颗粒度的控制，引入了Snippets，可以对页面内容进行Element层级的复用。  
 文章只介绍了较为关键的特性，更多细节内容，还请感兴趣的读者们去官网深度探索。
 
 ## 参考
