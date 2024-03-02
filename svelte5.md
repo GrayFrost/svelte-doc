@@ -43,6 +43,8 @@ https://www.leagueoflegends.com/en-au/champions/ryze/
 REPL 体验 https://svelte-5-preview.vercel.app/
 
 ## Runes
+也许大家对Runes不太熟悉，但如果说到英雄联盟里的瑞兹，相信大家耳熟能详。瑞兹的英文全称是**THE RUNE MAGE**，中文翻译是符文法师。不错，Runes即符文。 
+为了看起来更自然点，文章中将继续以Runes来说明。  
 Runes是一组函数式的符号，无需额外引入，可以直接使用，是Svelte5语言的特性。
 
 ### `$state`
@@ -147,6 +149,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 浅拷贝？
 
 ### `$derived`
+`$derived`接收一个参数，这个参数是一个没有副作用的表达式。
 ```html
 <script>
 	let count = $state(0);
@@ -164,22 +167,167 @@ double: {double}
 ```
 ![alt text](test35.gif)
 
+我们可以传`count * 2`，但是不能传`count++`。
+
+在Svelte4中，我们要声明一个派生属性，需在`$: `里进行。
+
 ### `$derived.by`
-接收一个函数
+接收一个函数。
+```html
+<script>
+  let arr = $state([1,2,3]);
+  let total = $derived.by(() => {
+    return arr.reduce((pre, cur) => pre + cur, 0);
+  });
+
+  const onAdd = () => {
+    arr.push(arr.length + 1);
+  }
+</script>
+
+<button on:click={onAdd}>add</button>
+total: {total}
+```
+![alt text](test36.gif)
 
 ### `$effect`
+> runs when the component is mounted, and again whenever `count` or `doubled` change,after the DOM has been updated.
+因此，`$effect`相当于`$: {}`和`afterUpdate`的结合体。笔者对此改动表示热烈欢迎，因为本人始终觉得在有些框架中，一个组件对外提供一大串又丑又长的生命周期，着实加大了开发者的心智负担。
+
+```html
+<script>
+  import { afterUpdate } from 'svelte';
+  let width = 10;
+  let height = 10;
+
+  $: console.log('width改变', width);
+
+  afterUpdate(() => {
+    console.log('afterUpdate')
+  });
+</script>
+
+width: <input type="number" bind:value={width} />
+```
+![alt text](test39.gif)
+
+```html
+<script>
+  let width = $state(10);
+
+  $effect(() => {
+    console.log('width改变', width);
+  });
+</script>
+
+width: <input type="number" bind:value={width} />
+```
+![alt text](test40.gif)
 
 ### `$effect.pre`
 
-beforeUpdate
+用于替代`beforeUpdate`生命周期。
+```html
+<script>
+  import { beforeUpdate, afterUpdate } from 'svelte';
+  let width = 10;
+
+  beforeUpdate(() => {
+    const dom = document.querySelector('#width');
+    if (dom) {
+      console.log('beforeUpdate', dom.innerHTML);
+    }
+  });
+
+  afterUpdate(() => {
+    const dom = document.querySelector('#width');
+    if (dom) {
+      console.log('afterUpdate', dom.innerHTML);
+    }
+  });
+</script>
+
+width: <input type="number" bind:value={width} />
+<span id="width">{width}</span>
+```
+![alt text](test41.gif)
+
+```html
+<script>
+  let width = $state(10);
+
+  $effect.pre(() => {
+    const dom = document.querySelector('#width');
+    if (dom) {
+      console.log('svelte5 beforeUpdate', dom.innerHTML, width);
+    }
+  })
+
+  $effect(() => {
+    const dom = document.querySelector('#width');
+    if (dom) {
+      console.log('svelte5 afterUpdate', dom.innerHTML, width);
+    }
+  });
+</script>
+
+width: <input type="number" bind:value={width} />
+<span id="width">{width}</span>
+```
+![alt text](test42.gif)
+在这里之所以要把width也一起打印出来，是因为`$effect`和`$effect.pre`的后续执行需要依赖width。
 
 ### `$effect.active`
 
-判断是否运行在`$effect`中
+官网给出的说明是用于判断是否在一个effect中或是否在template中
+```html
+<script>
+  let count = $state(0);
+
+  $effect(() => {
+    console.log('effect', count);
+    console.log('isActive in $effect', $effect.active());
+  });
+
+  $effect.pre(() => {
+    console.log('pre', count);
+    console.log('isActive in $effect.pre', $effect.active());
+  });
+
+  let double = $derived.by(() => {
+    console.log('isActive in derived.by', $effect.active());
+    return count * 2;
+  })
+
+  console.log('isActive no runes', $effect.active());
+</script>
+
+<input type="number" bind:value={count} />
+double: {double}
+in template:{console.log('isActive in template', $effect.active())}
+```
+![alt text](test43.gif)
+经过试验，在`$effect`、`$effect.pre`和template中能够正常判断。  
+我们尝试在`$derived.by`中使用，可是打印结果提醒我们`$effect.active`在其中并不适用。
 
 ### `$effect.root`
 
 ### `$props`
+```html
+<script>
+  export let value;
+</script>
+
+子组件：{value}
+```
+
+```html
+<script>
+  let { value } = $props();
+</script>
+
+子组件：{value}
+```
 
 ## Snippets
 
