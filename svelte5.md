@@ -331,8 +331,81 @@ in template:{console.log('isActive in template', $effect.active())}
 
 ## Snippets
 
-## 事件监听
-原来的事件监听形式是`on:eventname`，Svelte5改为`oneventname`
+## 事件
+### 事件监听
+在演示Runes和Snippets时，笔者在使用到数据绑定时，仍旧使用的是Svelte4`on:eventname`的形式。其实在Svelte5中，关于方法的使用也有更新：从原来`on:eventname`的形式转变为`oneventname`的形式。
+
+```diff
+<script>
+  const onClick = () => {
+    console.log('click');
+  }
+</script>
+
+- <button on:click={onClick}>click</button>
++ <button onclick={onClick}>click</button>
+```
+
+### 组件事件
+使用`$props()`来接收方法。终于不用使用难用的`createEventDispatcher`了。
+
+```html
+<script>
+  let { onClick, onClick2 } = $props();
+</script>
+
+<button onclick={onClick}>click</button>
+<button onclick={e => onClick2('hello svelte')}>click2</button>
+```
+
+```html
+<script>
+	import Svelte5 from './Svelte5.svelte';
+
+	const onClick = (event) => {
+		console.log('event', event);
+	}
+
+	const onClick2 = (value) => {
+		console.log('value', value);
+	}
+</script>
+
+<Svelte5 {onClick} {onClick2} />
+```
+![alt text](test44.gif)
+
+
+### 事件修饰符
+Svelte4的事件修饰符如下：
+```html
+<button on:click|once|preventDefault={handler}>...</button>
+```
+像once、preventDefault、stopPropagation等需要自己手动实现：
+```html
+<script>
+	function once(fn) {
+		return function (event) {
+			if (fn) fn.call(this, event);
+			fn = null;
+		};
+	}
+
+	function preventDefault(fn) {
+		return function (event) {
+			event.preventDefault();
+			fn.call(this, event);
+		};
+	}
+</script>
+
+<button onclick={once(preventDefault(handler))}>...</button>
+```
+而`capture`、`passive`、`nonpassive`等，Svelte5仍提供了对应的事件修饰符：
+```html
+<button onclickcapture={...}>...</button>
+```
+说实话，不太美观。
 
 ## 方法
 
