@@ -1,5 +1,6 @@
 # Svelte5 抢先看！
 
+## 安装
 ```bash
 npm create svelte@latest  svelte-5
 ```
@@ -35,7 +36,9 @@ package.json里的依赖显示
 https://svelte-5-preview.vercel.app/docs/introduction
 https://svelte.dev/blog/runes
 
-引入了Runes。
+引入了Runes。符文
+https://www.leagueoflegends.com/en-au/champions/ryze/
+![瑞兹](https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ryze_0.jpg)
 
 REPL 体验 https://svelte-5-preview.vercel.app/
 
@@ -184,6 +187,7 @@ beforeUpdate
 原来的事件监听形式是`on:eventname`，Svelte5改为`oneventname`
 
 ## 方法
+
 ### untrack
 ### unstate
 ### mount
