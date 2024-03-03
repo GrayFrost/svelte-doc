@@ -331,6 +331,26 @@ in template:{console.log('isActive in template', $effect.active())}
 我们尝试在`$derived.by`中使用，可是打印结果提醒我们`$effect.active`在其中并不适用。
 
 ### `$effect.root`
+使用`#effect.root`，我们可以手动地控制`$effect`的生效与否。
+```html
+<script>
+let count = $state(0);
+
+const offEffect = $effect.root(() => {
+    $effect(() => {
+        console.log(count);
+    });
+
+    return () => {
+        console.log('关闭$effect');
+    };
+});
+</script>
+
+<button onclick={() => offEffect()}>关闭$effect</button>
+<button onclick={() => count++}>更新</button>
+```
+![Alt text](test1.gif)
 
 ### `$props`
 和明显，用来接收props的Runes。
