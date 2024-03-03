@@ -371,6 +371,15 @@ const offEffect = $effect.root(() => {
 ```
 
 ### `$inspect`
+```html
+<script>
+    let count = $state(0);
+    $inspect(count); // 当count变化时console.log出来
+</script>
+
+<button onclick={() => count++}>add count</button>
+```
+![Alt text](test2.gif)
 
 ## Snippets
 俗称片段。使用Snippets可以进行内容复用。
