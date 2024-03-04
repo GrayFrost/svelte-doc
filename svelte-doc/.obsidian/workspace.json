@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "08-【入门】插槽.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "08-【入门】插槽.md"
               }
             },
             "group": "932a5a3dbf55d370"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "08-【入门】插槽.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "08-【入门】插槽.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "08-【入门】插槽.md"
               }
             }
           },
@@ -178,10 +178,10 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "11-【进阶】状态管理.md",
     "test51.gif",
     "test50.gif",
     "12-【进阶】跨组件传值.md",
-    "11-【进阶】状态管理.md",
     "test49.gif",
     "test48.gif",
     "44-【展望】生态.md",
@@ -201,7 +201,6 @@
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
-    "Pasted image 20240229145234.png",
     "19-【实战】Alert组件之简单传值.md",
     "17-【实战】todolist之页面布局.md",
     "35-【源码】compiler.md",
