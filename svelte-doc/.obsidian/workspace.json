@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "09-【入门】dom引用.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14-【进阶】指令.md"
+                "file": "09-【入门】dom引用.md"
               }
             }
           }
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "09-【入门】dom引用.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "14-【进阶】指令.md",
+                "file": "09-【入门】dom引用.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14-【进阶】指令.md"
+                "file": "09-【入门】dom引用.md"
               }
             }
           },
@@ -174,8 +174,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "71d9c23a99a6313c",
+  "active": "f4adc900608f174b",
   "lastOpenFiles": [
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "06-【入门】动态属性.md",
+    "img/06-1.gif",
+    "05-【入门】生命周期.md",
+    "04-【入门】组件与属性.md",
+    "img/04-1.png",
+    "img/04-11.png",
+    "img/04-9.gif",
+    "img/04-3.gif",
+    "img/04-2.gif",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "14-【进阶】指令.md",
     "test51.gif",
     "test50.gif",
     "test49.gif",
@@ -185,27 +199,12 @@
     "15-【进阶】特定标签.md",
     "40-【实现】解析html.md",
     "44-【展望】生态.md",
-    "14-【进阶】指令.md",
     "11-【进阶】状态管理.md",
     "09-【入门】dom引用.md",
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
-    "02-【入门】安装与使用.md",
     "43-【实现】IfBlock.md",
-    "Pasted image 20240301110736.png",
-    "Pasted image 20240301110712.png",
-    "Pasted image 20240301105656.png",
-    "test30.gif",
-    "test29.gif",
-    "test28.gif",
     "13-【进阶】动画.md",
     "10-【入门】样式.md",
-    "03-【入门】数据与方法.md",
     "12-【进阶】跨组件传值.md",
-    "Pasted image 20240229145234.png",
     "19-【实战】Alert组件之简单传值.md",
     "17-【实战】todolist之页面布局.md",
     "35-【源码】compiler.md",

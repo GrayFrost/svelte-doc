@@ -1,5 +1,4 @@
 
-
 即使当今的主流开发模式提倡的是数据驱动视图，然而我们仍旧无法完全摆脱对dom的操作，我们也不能摆脱。这里笔者可以随便举几个例子：input输入框的focus和blur的触发、使用`<input type="file" />`来自定义实现上传时的手动click等。
 
 无论是在React还是在Vue中，都有提供对dom的引用的api操作，而这种对dom的引用通常称为Ref。那在Svelte中，我们要如何拿到我们的Ref呢？
@@ -46,7 +45,7 @@ bind:this={dom_node}
 </dialog>
 ```
 这里笔者将bind:this绑定到正常的html标签dialog上，然后我们能够看到，通过bind:this得到的数据和使用原声dom api操作得到的数据并无差异。
-![[test26.gif]]
+![](./img/09-1.gif)
 
 ### 组件
 bind:this除了能够绑定html标签上，也能够绑定到组件上。
@@ -80,7 +79,7 @@ bind:this除了能够绑定html标签上，也能够绑定到组件上。
 <Child bind:this={ref} />
 ```
 
-![[Pasted image 20240229142303.png]]
+![](./img/09-2.png)
 此时我们并不能拿到子组件的数据和方法。要想拿到子组件的数据和方法，我们需要使用到`export`。
 ```html
 <script>
@@ -93,7 +92,7 @@ bind:this除了能够绑定html标签上，也能够绑定到组件上。
 
 子组件
 ```
-![[Pasted image 20240229142614.png]]
+![](./img/09-3.png)
 我们可以看到，数据与方法都正常导出了。然而因为使用了`export`，原来的数据变成了一个prop属性，Svelte并不允许我们直接拿到这个属性。我们要么在`<svelte:options>`中做一些配置，要么就是我们在子组件内定义一个专门取数据的方法。
 ```html
 <script>
@@ -130,7 +129,7 @@ bind:this除了能够绑定html标签上，也能够绑定到组件上。
 
 <Child bind:this={ref} data={'98765'} />
 ```
-![[Pasted image 20240229143106.png]]
+![](./img/09-4.png)
 
 我们以真实场景来举个例子：
 ```html
@@ -196,7 +195,7 @@ bind:this除了能够绑定html标签上，也能够绑定到组件上。
 <span>{ countdown }{ unit }</span>
 ```
 我们封装了一个倒计时组件，倒计时内部有启动倒计时的功能。而何时触发倒计时则由外部引用的页面决定。
-![[test27.gif]]
+![](./img/09-5.gif)
 
 ## 数组
 
@@ -222,5 +221,5 @@ bind:this除了能够绑定html标签上，也能够绑定到组件上。
 </ul>
 ```
 
-![[Pasted image 20240229145234.png]]
+![](./img/09-6.png)
 ## 小结
