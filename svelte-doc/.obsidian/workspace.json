@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 79.59183673469387,
+        "dimension": 78.44660194174757,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -14,28 +14,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "11-【进阶】状态管理.md",
                 "mode": "source",
                 "source": false
               }
-            }
+            },
+            "group": "932a5a3dbf55d370"
           }
         ]
       },
       {
-        "id": "6fbafc54efec8e46",
+        "id": "64d5a0d03ae6e799",
         "type": "tabs",
-        "dimension": 20.408163265306122,
+        "dimension": 21.553398058252426,
         "children": [
           {
-            "id": "d56ce0d395005fbc",
+            "id": "996f88fbf35e8abf",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "11-【进阶】状态管理.md"
               }
-            }
+            },
+            "group": "932a5a3dbf55d370"
           }
         ]
       }
@@ -103,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "11-【进阶】状态管理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "11-【进阶】状态管理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "11-【进阶】状态管理.md"
               }
             }
           },
@@ -176,7 +178,13 @@
   },
   "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "test51.gif",
+    "test50.gif",
+    "12-【进阶】跨组件传值.md",
     "11-【进阶】状态管理.md",
+    "test49.gif",
+    "test48.gif",
+    "44-【展望】生态.md",
     "Pasted image 20240301110736.png",
     "Pasted image 20240301110712.png",
     "Pasted image 20240301105656.png",
@@ -193,11 +201,7 @@
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
-    "12-【进阶】跨组件传值.md",
     "Pasted image 20240229145234.png",
-    "Pasted image 20240229143106.png",
-    "Pasted image 20240229142614.png",
-    "Pasted image 20240229142303.png",
     "19-【实战】Alert组件之简单传值.md",
     "17-【实战】todolist之页面布局.md",
     "35-【源码】compiler.md",
@@ -209,7 +213,6 @@
     "14-【进阶】指令.md",
     "21-【实战】Alert组件之动画.md",
     "16-【进阶】模板语法之其他.md",
-    "44-【展望】生态.md",
     "40-【实现】解析html.md",
     "未命名",
     "未命名 1.canvas",
