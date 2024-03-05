@@ -1,6 +1,8 @@
 
 ## React
 
+### 行内样式
+
 ```javascript
 export default function Page() {
   return (
@@ -16,6 +18,9 @@ export default function Page() {
 }
 ```
 
+### 非行内样式
+### class属性
+
 ## Vue
 
 ```html
@@ -24,10 +29,20 @@ export default function Page() {
 </template>
 ```
 
+### 行内样式
+
+### 非行内样式
+
+### class属性
 ## Svelte
 
 ```html
 <div style="border: 1px solid black;font-size: 16px;">hello world</div>
 ```
 
+### 行内样式
+
+### 非行内样式
+
+### class属性
 ## 小结
