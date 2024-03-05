@@ -1,4 +1,4 @@
-![[19-2.png]]
+![](./img/19-2.png)
 接下来我们完成剩余的api，主要有afterClose回调、closeText、description、icon、message
 
 在Svelte中，我们不能像react那样直接把组件当成一个props来传递，因此对于一些既支持传数据又支持传组件的参数，我们的在Svelte的实现是既支持传值，又支持slot定义。然后在组件内容判断是否有slot值。
@@ -65,7 +65,7 @@ App.svelte中试验一下
 </Alert>
 <br />
 ```
-![[test5.gif]]
+![](./img/20-2.gif)
 
 ### message
 ```javascript
@@ -105,7 +105,7 @@ const hasMessageSlot = !!slots?.message;
 <br />
 ```
 
-![[Pasted image 20240221170300.png]]
+![](./img/20-3.png)
 ### description
 ```javascript
 export let description = undefined;
@@ -192,7 +192,7 @@ $: alertCls = classNames(prefixCls, {
 </Alert>
 ```
 
-![[Pasted image 20240221173610.png]]
+![](./img/20-4.png)
 
 ### icon
 ```javascript
@@ -231,7 +231,7 @@ const hasIconSlot = !!slots?.icon;
 </Alert>
 ```
 
-![[Pasted image 20240221175209.png]]
+![](./img/20-5.png)
 
 我们还剩余一部分内容，那就是关闭时的动画，在下一章中进行讲解。
 

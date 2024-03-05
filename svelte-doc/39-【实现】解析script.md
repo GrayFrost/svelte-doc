@@ -140,7 +140,7 @@ export default function() {
 }
 ```
 访问localhost:5173
-![[Pasted image 20240226104315.png]]
+![[39-1.png]]
 
 ## 完整代码
 

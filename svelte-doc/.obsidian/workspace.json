@@ -6,7 +6,7 @@
       {
         "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 79.59183673469387,
+        "dimension": 78.44660194174757,
         "children": [
           {
             "id": "71d9c23a99a6313c",
@@ -14,28 +14,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "11-【进阶】状态管理.md",
                 "mode": "source",
                 "source": false
               }
-            }
+            },
+            "group": "932a5a3dbf55d370"
           }
         ]
       },
       {
-        "id": "6fbafc54efec8e46",
+        "id": "64d5a0d03ae6e799",
         "type": "tabs",
-        "dimension": 20.408163265306122,
+        "dimension": 21.553398058252426,
         "children": [
           {
-            "id": "d56ce0d395005fbc",
+            "id": "996f88fbf35e8abf",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "11-【进阶】状态管理.md"
               }
-            }
+            },
+            "group": "932a5a3dbf55d370"
           }
         ]
       }
@@ -103,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "11-【进阶】状态管理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "09-【入门】dom引用.md",
+                "file": "11-【进阶】状态管理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09-【入门】dom引用.md"
+                "file": "11-【进阶】状态管理.md"
               }
             }
           },
@@ -176,41 +178,42 @@
   },
   "active": "f4adc900608f174b",
   "lastOpenFiles": [
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "06-【入门】动态属性.md",
-    "img/06-1.gif",
-    "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
-    "img/04-1.png",
-    "img/04-11.png",
-    "img/04-9.gif",
-    "img/04-3.gif",
-    "img/04-2.gif",
-    "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
-    "14-【进阶】指令.md",
-    "test51.gif",
-    "test50.gif",
-    "test49.gif",
-    "test48.gif",
-    "26-【对比】slot.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
-    "40-【实现】解析html.md",
-    "44-【展望】生态.md",
-    "11-【进阶】状态管理.md",
-    "09-【入门】dom引用.md",
-    "43-【实现】IfBlock.md",
-    "13-【进阶】动画.md",
-    "10-【入门】样式.md",
+    "img/38-1.png",
+    "img/38-2.png",
+    "img/39-1.png",
+    "img/40-1.png",
+    "img/40-2.gif",
+    "img/41-2.gif",
+    "img/41-2.png",
+    "img/41-3.png",
+    "img/42-2.png",
+    "img/42-1.gif",
+    "img/42-3.gif",
     "12-【进阶】跨组件传值.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "17-【实战】todolist之页面布局.md",
-    "35-【源码】compiler.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
     "32-【对比】context.md",
-    "38-【实现】基本流程.md",
+    "33-【源码】库.md",
+    "34-【源码】位运算.md",
     "37-【源码】流程.md",
+    "38-【实现】基本流程.md",
+    "39-【实现】解析script.md",
+    "40-【实现】解析html.md",
+    "41-【实现】遍历.md",
+    "42-【实现】变量更新.md",
+    "43-【实现】IfBlock.md",
+    "44-【展望】生态.md",
+    "35-【源码】compiler.md",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "26-【对比】slot.md",
+    "25-【对比】lifecycle.md",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "22-【对比】data.md",
+    "21-【实战】Alert组件之动画.md",
+    "20-【实战】Alert组件之slot交互.md",
+    "19-【实战】Alert组件之简单传值.md",
+    "18-【实战】todolist之数据交互.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

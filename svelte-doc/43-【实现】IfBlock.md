@@ -83,7 +83,7 @@ count: {count}
 {#if count > 2 && count < 5}hello{/if}
 ```
 
-![[test16.gif]]
+![[43-1.gif]]
 
 缺点：多了一个span标签包裹。
 

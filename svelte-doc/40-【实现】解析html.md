@@ -170,7 +170,7 @@ function traverse(node, parent) {
 文本内容2
 ```
 看看`npm run compile`后的结果吧。
-![[Pasted image 20240226140725.png]]
+![[40-1.png]]
 现在如果我们往div标签里添加内容，编译往往会报错。因为还没有实现递归解析html内容的逻辑。这也是为什么笔者在这里只演示了最基本的html标签的写法。
 
 ## 解析标签属性
@@ -289,7 +289,7 @@ function traverse(node, parent) {
 ```
 
 执行`npm run compile`看一下效果吧。
-![[test12.gif]]
+![[40-2.gif]]
 
 ## 完整代码
 按照惯例，本章最后附上代码：

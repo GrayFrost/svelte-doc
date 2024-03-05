@@ -66,7 +66,7 @@ const animationEnd = () => {
 />
 ```
 
-![[test6.gif]]
+![](./img/21-1.gif)
 
 最后附上完整代码
 ```html

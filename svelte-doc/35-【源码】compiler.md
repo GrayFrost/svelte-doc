@@ -1,5 +1,5 @@
 经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写此文章时（2024-02-28），Svelte的最新版本是4.2.12
-![[Pasted image 20240228161643.png]]
+![](./img/35-1.png)
 
 笔者不会对源码过于细致的讲解，因为如果需要对每个细节都进行解读，那完全可以再开一本小册单独讲解了。
 
@@ -11,7 +11,7 @@ TODO: https://zhuanlan.zhihu.com/p/409291132
 git clone git@github.com:sveltejs/svelte.git
 ```
 
-![[Pasted image 20240228162645.png]]
+![](./img/35-2.png)
 在compiler目录下
 compile
 parse
@@ -44,7 +44,7 @@ export default function compile(source, options = {}) {
 通过解读svelte文件的字符串内容，得到ast，将ast转成Component类，然后render dom，最后generate。
 
 ### parse
-![[Pasted image 20240228164257.png]]
+![](./img/35-3.png)
 ```javascript
 export default function parse(template, options = {}) {
 	const parser = new Parser(template, options);
