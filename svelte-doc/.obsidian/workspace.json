@@ -4,40 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "6ebc95ea4003d89c",
+        "id": "64d5a0d03ae6e799",
         "type": "tabs",
-        "dimension": 78.44660194174757,
+        "dimension": 75.0485436893204,
         "children": [
           {
-            "id": "71d9c23a99a6313c",
+            "id": "5e055f9472ebedd9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "14-【进阶】指令.md",
                 "mode": "source",
                 "source": false
               }
             },
-            "group": "932a5a3dbf55d370"
+            "group": "bd81602c77357259"
           }
         ]
       },
       {
-        "id": "64d5a0d03ae6e799",
+        "id": "853774c595959794",
         "type": "tabs",
-        "dimension": 21.553398058252426,
+        "dimension": 24.951456310679614,
         "children": [
           {
-            "id": "996f88fbf35e8abf",
+            "id": "e8d420b3ca8a29f3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "14-【进阶】指令.md"
               }
             },
-            "group": "932a5a3dbf55d370"
+            "group": "bd81602c77357259"
           }
         ]
       }
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "14-【进阶】指令.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "14-【进阶】指令.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           },
@@ -176,8 +176,21 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "f4adc900608f174b",
+  "active": "e8d420b3ca8a29f3",
   "lastOpenFiles": [
+    "14-【进阶】指令.md",
+    "15-【进阶】特定标签.md",
+    "21-【实战】Alert组件之动画.md",
+    "test53 1.gif",
+    "test53.gif",
+    "test52.gif",
+    "29-【对比】for.md",
+    "28-【对比】if.md",
+    "25-【对比】lifecycle.md",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "22-【对比】data.md",
+    "11-【进阶】状态管理.md",
     "img/38-1.png",
     "img/38-2.png",
     "img/39-1.png",
@@ -185,10 +198,6 @@
     "img/40-2.gif",
     "img/41-2.gif",
     "img/41-2.png",
-    "img/41-3.png",
-    "img/42-2.png",
-    "img/42-1.gif",
-    "img/42-3.gif",
     "12-【进阶】跨组件传值.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
     "32-【对比】context.md",
@@ -203,17 +212,8 @@
     "43-【实现】IfBlock.md",
     "44-【展望】生态.md",
     "35-【源码】compiler.md",
-    "28-【对比】if.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
-    "24-【对比】props.md",
-    "23-【对比】function.md",
-    "22-【对比】data.md",
-    "21-【实战】Alert组件之动画.md",
-    "20-【实战】Alert组件之slot交互.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "18-【实战】todolist之数据交互.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

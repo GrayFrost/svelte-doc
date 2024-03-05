@@ -42,7 +42,7 @@ const list = reactive([1, 2, 3]);
 </script>
 
 <ul>
-  {#each list as item, index}
+  {#each list as item, index (key)}
     <li>item - {item}</li>
   {/each}
 </ul>
