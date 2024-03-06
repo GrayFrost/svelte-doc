@@ -4,38 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "6ebc95ea4003d89c",
+        "id": "64d5a0d03ae6e799",
         "type": "tabs",
-        "dimension": 79.59183673469387,
+        "dimension": 75.0485436893204,
         "children": [
           {
-            "id": "71d9c23a99a6313c",
+            "id": "5e055f9472ebedd9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "35-【源码】compiler.md",
                 "mode": "source",
                 "source": false
               }
-            }
+            },
+            "group": "bd81602c77357259"
           }
         ]
       },
       {
-        "id": "6fbafc54efec8e46",
+        "id": "853774c595959794",
         "type": "tabs",
-        "dimension": 20.408163265306122,
+        "dimension": 24.951456310679614,
         "children": [
           {
-            "id": "d56ce0d395005fbc",
+            "id": "e8d420b3ca8a29f3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-【入门】背景.md"
+                "file": "35-【源码】compiler.md"
               }
-            }
+            },
+            "group": "bd81602c77357259"
           }
         ]
       }
@@ -103,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "35-【源码】compiler.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01-【入门】背景.md",
+                "file": "35-【源码】compiler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-【入门】背景.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           },
@@ -174,43 +176,43 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "71d9c23a99a6313c",
+  "active": "5e055f9472ebedd9",
   "lastOpenFiles": [
-    "09-【入门】dom引用.md",
-    "test53.gif",
+    "11-【进阶】状态管理.md",
+    "01-【入门】背景.md",
+    "img/01-4.png",
+    "img/01-3.png",
+    "img/01-2.png",
+    "img/01-1.png",
+    "img/02-1.png",
+    "img/1706512665102.png",
+    "img/1706512640593.png",
     "test53 1.gif",
+    "test53.gif",
     "test52.gif",
-    "img/43-1.gif",
-    "img/42-3.gif",
-    "img/42-2.png",
-    "img/42-1.gif",
-    "img/41-3.png",
-    "img/41-2.png",
-    "img/41-2.gif",
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
+    "17-【实战】todolist之页面布局.md",
+    "18-【实战】todolist之数据交互.md",
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
-    "14-【进阶】指令.md",
-    "26-【对比】slot.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
-    "40-【实现】解析html.md",
+    "28-【对比】if.md",
+    "30-【对比】ref.md",
+    "31-【对比】style.md",
     "44-【展望】生态.md",
-    "11-【进阶】状态管理.md",
-    "43-【实现】IfBlock.md",
-    "13-【进阶】动画.md",
-    "10-【入门】样式.md",
+    "14-【进阶】指令.md",
+    "15-【进阶】特定标签.md",
+    "21-【实战】Alert组件之动画.md",
+    "29-【对比】for.md",
+    "25-【对比】lifecycle.md",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "22-【对比】data.md",
     "12-【进阶】跨组件传值.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "17-【实战】todolist之页面布局.md",
-    "35-【源码】compiler.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
     "32-【对比】context.md",
-    "38-【实现】基本流程.md",
+    "33-【源码】库.md",
+    "34-【源码】位运算.md",
     "37-【源码】流程.md",
+    "38-【实现】基本流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

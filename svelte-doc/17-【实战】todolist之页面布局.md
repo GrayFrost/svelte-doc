@@ -5,7 +5,7 @@
 npm create vite@latest svelte-todolist -- --template svelte
 ```
 
-安装tailwind，读者可自行选择自己喜欢的样式工具
+安装tailwind，这一步读者可自行选择自己喜欢的样式工具。
 
 ```bash
 npm install -D tailwindcss postcss autoprefixer
@@ -119,6 +119,7 @@ interface Todo {
 <div class={divClass}>
   <Input />
 </div>```
+
 此时相信读者们能够看到以下内容：
 ![](./img/17-2.png)
 ### Tabs

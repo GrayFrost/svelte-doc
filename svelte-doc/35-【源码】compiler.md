@@ -3,6 +3,9 @@
 
 笔者不会对源码过于细致的讲解，因为如果需要对每个细节都进行解读，那完全可以再开一本小册单独讲解了。
 
+svelte-loader: https://github.com/sveltejs/svelte-loader/blob/master/index.js
+vite-plugin-svelte: https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/utils/compile.js
+
 TODO: https://zhuanlan.zhihu.com/p/409291132
 
 把项目下载下来，切换到4.2.12分支。
