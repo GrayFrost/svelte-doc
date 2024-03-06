@@ -5,6 +5,7 @@
 在React中，为元素标签绑定方法使用`on[事件]`的驼峰命名形式，比如点击事件`onClick`，提交事件`onSubmit`等。  
 
 ### function component
+
 上一节我们讲解了useState()返回的参数的含义，返回数组中第一个参数表示存储值的变量，第二个参数则用于更新数据。
 ```javascript
 import { useState } from "react";
@@ -25,8 +26,8 @@ export default function Page() {
 }
 ```
 
-
 ### class component
+
 在class component中，我们沿用上一节的例子：
 
 ```javascript
@@ -109,7 +110,8 @@ export default class Page extends React.Component {
 ```
 之所以举了这么多例子，就是想说明一件事，在react的class component中使用方法有一定的心智负担。
 
-### event
+### Event
+
 如果我们要使用事件中的event参数
 ```javascript
 export default function Page() {
@@ -127,7 +129,8 @@ export default function Page() {
 ```
 
 ## Vue
-在vue中，为元素标签添加事件使用`@[事件]`或`v-on:[事件]`，带`@`符号的事件绑定是对`v-on`形式的缩写。
+
+在Vue中，为元素标签添加事件使用`@[事件]`或`v-on:[事件]`，带`@`符号的事件绑定是对`v-on`形式的缩写。
 
 ### 3.x
 ```html
@@ -177,7 +180,7 @@ export default {
 </script>
 ```
 
-### event
+### Event
 ```html
 <template>
   <div>
@@ -201,12 +204,13 @@ export default {
 ```
 
 ### 事件修饰符
-在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。Vue提供了一些事件修饰符，我们可以通过他们来优化业务代码，减少关心dom事件细节。事件修复符之间可以链式调用，但要注意调用的顺序。
+在事件处理程序中调用`event.preventDefault()`或`event.stopPropagation()`是非常常见的需求。Vue提供了一些事件修饰符，我们可以通过他们来优化业务代码，减少关心dom事件细节。事件修复符之间可以链式调用，但要注意调用的顺序。
 ```html
 <a v-on:click.stop.prevent="func"></a>
 ```
 
 ## Svelte
+
 在Svelte中，添加事件绑定的方式通过`on:[事件]`的方式。
 ```html
 <script>
@@ -225,7 +229,7 @@ export default {
 ```
 而且我们不用考虑方法this的指向，也无需通过this来获取变量。Svelte仍旧比其他两大框架在写法上更为简洁。
 
-### event
+### Event
 ```html
 <script>
   const handleClick = (event) => {

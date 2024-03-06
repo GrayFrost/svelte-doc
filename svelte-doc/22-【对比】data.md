@@ -1,16 +1,17 @@
 
-经过了入门篇与进阶篇的学习，相信大家对svelte都有了一定的了解。接下来我们将对比Svelte与React、Vue之间的语法差异，最后一次加强对Svelte的api的掌握程度。经过对比篇的学习之后，相信大家在脑海中都会形成“关于一个UI框架应该向使用者提供何种公共能力”的思维脑图。
+经过了入门篇与进阶篇的学习，相信大家对Svelte都有了一定的了解。接下来我们将对比Svelte与React、Vue之间的语法差异，最后一次加强对Svelte的api的掌握程度。经过对比篇的学习之后，相信大家在脑海中都会形成“关于一个UI框架应该向使用者提供何种公共能力”的思维脑图。
 
 从本篇开始，笔者会带领大家从多个维度认识和学习相同的功能在React、Vue和Svelte中是如何实现的。如果你已经是Vue或者React的老手，那可以跳过篇章或加强巩固；而如果你是其中一种框架的使用者想快速学习另外一种，或是毫无UI框架使用经验的新人，相信本篇章会大大提升你的学习速度。
 
 ## React
 
-在React中，元素标签内使用变量的方式是把变量放置在 `{}`单个花括号内。
+在React中，使用的是[jsx](https://legacy.reactjs.org/docs/introducing-jsx.html)的语法。
+元素标签内使用变量的方式是把变量放置在 `{}`单个花括号内。
 
 ### function component
 
 在React中声明组件有两种方式，我们称之为class component和function component。
-在16.8^的版本，推荐使用function component以及hooks。在function component中，使用useState来进行变量声明和更新。
+在16.8^的版本，推荐使用function component以及hooks。在function component中，使用useState来进行变量声明和更新。UI展示内容写在页面函数的`return`当中。
 
 ```javascript
 const [value, setValue] = useState(null)
@@ -32,7 +33,7 @@ export default function Page() {
 useState接收一个参数作为一个初始数据，返回一个数组，数组的第一个值表示变量，第二个值表示用于更新变量的方法。在上述例子中，我们只演示了变量的声明和使用，更新数据的方法，我们将在下一节进行展示。
 
 ### class component
-而在16.8之前使用class component时，通过setState进行数据更新。
+而在16.8之前使用class component时，通过`this.state`来存储、获取数据，通过`setState`来进行数据更新。UI战士内容写在组件类的render方法的return当中。
 
 ```javascript
 import React from 'react';
@@ -59,6 +60,8 @@ export default class Page extends React.Component {
 
 ## Vue
 
+Vue使用的是[sfc](https://cn.vuejs.org/guide/scaling-up/sfc)的文件组织方式。html、css、js分块管理。html内容写在`<template></template>`内，css写在`<style></style>`内，js写在`<script></script>`内。
+
 在Vue中，元素标签内使用变量的方式是把变量放置在 `{{}}`双个花括号内。
 
 ### 3.x
@@ -77,10 +80,10 @@ console.log(count.value, obj);
 </script>
 ```
 
-在vue3 的composition api中，可以通过 `ref`或者 `reactive`来声明变量。TODO ref和reactive的注意事项。如果你掌握vue3，那在面试中大概率会问到ref和reactive的区别，简单概括就是，如果你想声明一个引用类型的响应式对象，那使用reactive。而如果想把一个简单类型的对象声明成响应式，那使用ref来声明定义。然后使用ref定义的对象，在使用时需要通过 `.value`来取值。这点无疑加重了我们在使用时的心智负担。因为我们不是介绍vue的专题文章，这里就简述了解即可，待感兴趣的笔者深入探究。
+在Vue 3.x的composition api中，可以通过`ref`或者`reactive`来声明变量。如果你掌握vue3，那在面试中大概率会问到ref和reactive的区别，简单概括就是，如果你想声明一个引用类型的响应式对象，那使用reactive。而如果想把一个简单类型的对象声明成响应式，那使用ref来声明定义。然后使用ref定义的对象，在使用时需要通过 `.value`来取值。这点无疑加重了我们在使用时的心智负担。因为我们不是介绍vue的专题文章，这里就简述了解即可，待感兴趣的读者深入探究。
 
 ### 2.x
-在vue2.X中，变量声明在data方法中，在data()方法中，我们返回一个对象，把需要定义的变量全部申明在这个对象里。而在生命周期或声明的方法里使用数据时，则需要用 `this.数据`的方式来使用。
+在Vue 2.x中，变量声明在data()方法中，在data()方法中，我们返回一个对象，把需要定义的变量全部申明在这个对象里。而在生命周期或声明的方法里使用数据时，则需要用 `this.数据`的方式来使用。
 
 ```html
 <template>
@@ -121,6 +124,8 @@ export default {
 ```
 
 ## Svelte
+
+Svelte的文件内容同样使用sfc的组织方式。
 
 Svelte元素标签中使用变量的方式和React相同，使用单个花括号的形式。当然以上这些框架内的mustache标签内使用的变量都是简单类型，如果是引用类型，那么需要使用者进行解构。
 

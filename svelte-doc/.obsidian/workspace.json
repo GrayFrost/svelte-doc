@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "15-【进阶】特定标签.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "35-【源码】compiler.md"
+                "file": "15-【进阶】特定标签.md"
               }
             },
             "group": "bd81602c77357259"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "15-【进阶】特定标签.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "35-【源码】compiler.md",
+                "file": "15-【进阶】特定标签.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "35-【源码】compiler.md"
+                "file": "15-【进阶】特定标签.md"
               }
             }
           },
@@ -157,8 +157,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -178,18 +177,29 @@
   },
   "active": "5e055f9472ebedd9",
   "lastOpenFiles": [
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
+    "12-【进阶】跨组件传值.md",
+    "test58.gif",
+    "Pasted image 20240306163611.png",
+    "Pasted image 20240306163048.png",
+    "Pasted image 20240306162527.png",
+    "test57.gif",
+    "Pasted image 20240306154754.png",
     "11-【进阶】状态管理.md",
+    "test56 1.gif",
+    "test56.gif",
+    "Pasted image 20240306151036.png",
+    "test55.gif",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "22-【对比】data.md",
+    "15-【进阶】特定标签.md",
+    "10-【入门】样式.md",
+    "09-【入门】dom引用.md",
+    "33-【源码】库.md",
+    "35-【源码】compiler.md",
     "01-【入门】背景.md",
-    "img/01-4.png",
-    "img/01-3.png",
-    "img/01-2.png",
-    "img/01-1.png",
-    "img/02-1.png",
-    "img/1706512665102.png",
-    "img/1706512640593.png",
-    "test53 1.gif",
-    "test53.gif",
-    "test52.gif",
     "17-【实战】todolist之页面布局.md",
     "18-【实战】todolist之数据交互.md",
     "03-【入门】数据与方法.md",
@@ -198,21 +208,10 @@
     "30-【对比】ref.md",
     "31-【对比】style.md",
     "44-【展望】生态.md",
-    "14-【进阶】指令.md",
-    "15-【进阶】特定标签.md",
     "21-【实战】Alert组件之动画.md",
     "29-【对比】for.md",
     "25-【对比】lifecycle.md",
-    "24-【对比】props.md",
-    "23-【对比】function.md",
-    "22-【对比】data.md",
-    "12-【进阶】跨组件传值.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
-    "32-【对比】context.md",
-    "33-【源码】库.md",
-    "34-【源码】位运算.md",
-    "37-【源码】流程.md",
-    "38-【实现】基本流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
