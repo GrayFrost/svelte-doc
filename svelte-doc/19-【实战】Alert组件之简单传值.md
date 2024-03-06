@@ -360,7 +360,7 @@ ErrorIcon.svelte
 
 
 在Alert.svelte中，引入icon组件
-```javascript
+```html
 <script>
   import SuccessIcon from './icon/SuccessIcon.svelte';
   import InfoIcon from './icon/InfoIcon.svelte';
