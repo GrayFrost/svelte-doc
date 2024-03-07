@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "32-【对比】context.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "32-【对比】context.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "32-【对比】context.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "32-【对比】context.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "32-【对比】context.md"
               }
             }
           },
@@ -177,11 +177,15 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "43-【实现】IfBlock.md",
+    "42-【实现】变量更新.md",
+    "39-【实现】解析script.md",
+    "38-【实现】基本流程.md",
+    "16-【进阶】模板语法之其他.md",
     "test62.gif",
     "test61.gif",
     "test60.gif",
     "15-【进阶】特定标签.md",
-    "16-【进阶】模板语法之其他.md",
     "44-【展望】生态.md",
     "45-【展望】致谢.md",
     "02-【入门】安装与使用.md",
@@ -207,12 +211,8 @@
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
     "img/11-9.gif",
     "img/11-8.gif",
-    "img/14-2.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

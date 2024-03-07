@@ -1,6 +1,8 @@
 ## 特殊block
 
-这是实现模块的最后一章，笔者会带大家编写如何实现一个简单的if逻辑判断
+这是实现模块的最后一章，笔者会带大家编写如何实现一个简单的if逻辑判断。
+
+首先我们需要在原来判断表达式的逻辑里，加上对特殊html标签的判断。
 ```diff
 function parseExpression() {
 -   if (match("{")) {
@@ -16,12 +18,36 @@ function parseExpression() {
 }
 ```
 
-添加解析特殊标签的逻辑
+添加解析特殊标签的逻辑。
 ```javascript
 function parseFragment() {
     return parseScript() ?? parseElement() ?? parseText() ?? parseExpression() ?? parseBlock();
 }
 ```
+
+parseBlock的具体内容：
+```javascript
+function parseBlock() {
+	if (match('{#')) {
+	  if (match('{#if')) {
+		eat('{#if')
+		skipWhitespace();
+		const expression = parseJavaScript();
+		eat('}');
+		const endTag = '{/if}';
+		const block = {
+		  type: 'IfBlock',
+		  expression,
+		  children: parseFragments(() => !match(endTag))
+		}
+		eat(endTag);
+		return block;
+	  }
+	}
+}
+```
+我们判断在`{#if}{/if}`中的内容为IfBlock。对于里面的内容，继续调用parseFragments进行解析。
+
 
 完善generate里的traverse方法
 ```javascript
