@@ -1,6 +1,6 @@
-default slot, name slot, slot 传递数据？
-
 ## React
+
+### 默认slot
 
 父组件
 
@@ -45,8 +45,15 @@ export default function SlotContainer2(props) {
 }
 ```
 
+### 具名slot
+
+### slot传值
+
+render props
+
 ## Vue
 
+### 默认slot
 父组件
 
 ```html
@@ -92,6 +99,10 @@ import SlotContainer2 from "./Child2.vue";
 </template>
 ```
 
+
+### 具名slot
+
+### slot传值
 ## Svelte
 
 父组件
@@ -134,5 +145,8 @@ import SlotContainer2 from "./Child2.vue";
   <footer><slot name="footer"></slot></footer>
 </div>
 ```
+
+
+### slot传值
 
 ## 小结

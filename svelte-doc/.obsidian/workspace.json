@@ -4,40 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "64d5a0d03ae6e799",
+        "id": "3727474c37f17449",
         "type": "tabs",
-        "dimension": 75.0485436893204,
+        "dimension": 73.88349514563107,
         "children": [
           {
-            "id": "5e055f9472ebedd9",
+            "id": "db6af2f910b70723",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "44-【展望】生态.md",
                 "mode": "source",
                 "source": false
               }
             },
-            "group": "bd81602c77357259"
+            "group": "f11626fe3649dc95"
           }
         ]
       },
       {
-        "id": "853774c595959794",
+        "id": "bacd262c3ebbd81a",
         "type": "tabs",
-        "dimension": 24.951456310679614,
+        "dimension": 26.116504854368934,
         "children": [
           {
-            "id": "e8d420b3ca8a29f3",
+            "id": "e243c20f9a6fa4e4",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "44-【展望】生态.md"
               }
             },
-            "group": "bd81602c77357259"
+            "group": "f11626fe3649dc95"
           }
         ]
       }
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "44-【展望】生态.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "44-【展望】生态.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "44-【展望】生态.md"
               }
             }
           },
@@ -175,43 +175,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5e055f9472ebedd9",
+  "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "45-【展望】致谢.md",
+    "44-【展望】生态.md",
+    "02-【入门】安装与使用.md",
+    "32-【对比】context.md",
+    "31-【对比】style.md",
+    "30-【对比】ref.md",
+    "29-【对比】for.md",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "26-【对比】slot.md",
+    "25-【对比】lifecycle.md",
+    "22-【对比】data.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
+    "Pasted image 20240307105653.png",
+    "Pasted image 20240307105256.png",
+    "Pasted image 20240307104106.png",
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
+    "image-11.png",
+    "test59.gif",
     "12-【进阶】跨组件传值.md",
     "11-【进阶】状态管理.md",
+    "10-【入门】样式.md",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "04-【入门】组件与属性.md",
+    "03-【入门】数据与方法.md",
     "img/11-9.gif",
     "img/11-8.gif",
-    "14-【进阶】指令.md",
     "img/14-2.gif",
     "test56.gif",
     "img/11-14.gif",
-    "img/14-1.gif",
-    "13-【进阶】动画.md",
-    "01-【入门】背景.md",
-    "15-【进阶】特定标签.md",
-    "19-【实战】Alert组件之简单传值.md",
-    "Pasted image 20240306173440.png",
-    "img/12-6.gif",
-    "img/12-5.png",
-    "img/12-4.png",
-    "24-【对比】props.md",
-    "23-【对比】function.md",
-    "22-【对比】data.md",
-    "10-【入门】样式.md",
-    "09-【入门】dom引用.md",
-    "33-【源码】库.md",
-    "35-【源码】compiler.md",
-    "17-【实战】todolist之页面布局.md",
-    "18-【实战】todolist之数据交互.md",
-    "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
-    "28-【对比】if.md",
-    "30-【对比】ref.md",
-    "31-【对比】style.md",
-    "44-【展望】生态.md",
-    "21-【实战】Alert组件之动画.md",
-    "29-【对比】for.md",
-    "25-【对比】lifecycle.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
