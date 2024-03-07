@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "44-【展望】生态.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "44-【展望】生态.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             }
           },
@@ -177,8 +177,13 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
-    "45-【展望】致谢.md",
+    "test62.gif",
+    "test61.gif",
+    "test60.gif",
+    "15-【进阶】特定标签.md",
+    "16-【进阶】模板语法之其他.md",
     "44-【展望】生态.md",
+    "45-【展望】致谢.md",
     "02-【入门】安装与使用.md",
     "32-【对比】context.md",
     "31-【对比】style.md",
@@ -189,8 +194,6 @@
     "26-【对比】slot.md",
     "25-【对比】lifecycle.md",
     "22-【对比】data.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
     "Pasted image 20240307105653.png",
     "Pasted image 20240307105256.png",
     "Pasted image 20240307104106.png",
@@ -207,12 +210,9 @@
     "06-【入门】动态属性.md",
     "05-【入门】生命周期.md",
     "04-【入门】组件与属性.md",
-    "03-【入门】数据与方法.md",
     "img/11-9.gif",
     "img/11-8.gif",
     "img/14-2.gif",
-    "test56.gif",
-    "img/11-14.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
