@@ -1,8 +1,7 @@
 ## React
 
-父组件 Father.jsx
-
 ```javascript
+// Father.jsx
 import { createContext, useState } from 'react';
 import Child from './Child';
 
@@ -26,9 +25,9 @@ export default function Page() {
 }
 ```
 
-子组件 Child.jsx
 
 ```javascript
+// Child.jsx
 import GrandSon from './GrandSon';
 
 export default function Child() {
@@ -36,9 +35,9 @@ export default function Child() {
 };
 ```
 
-孙组件 GrandSon.jsx
 
 ```javascript
+// GrandSon.jsx
 import { useContext } from 'react';
 import { ThemeContext } from './Father';
 
@@ -61,9 +60,8 @@ const GrandSon = () => {
 
 ## Vue
 
-父组件 Father.vue
-
 ```html
+<!-- Father.vue -->
 <template>
   <Child />
 </template>
@@ -90,9 +88,9 @@ const GrandSon = () => {
 </script>
 ```
 
-子组件 Child.vue
 
 ```html
+<!-- Child.vue -->
 <template>
   <GrandSon />
 </template>
@@ -102,9 +100,9 @@ const GrandSon = () => {
 </script>
 ```
 
-孙组件 GrandSon.vue
 
 ```html
+<!-- GrandSon.vue -->
 <template>
   <div>
       <p>最外层text: {{text}}</p>
@@ -128,10 +126,9 @@ const GrandSon = () => {
 
 ## Svelte
 
-父组件 Father.svelte
-
 ```html
 <script context="module">
+// Father.svelte
   export const ContextKey = 'ThemeContext'
 </script>
 <script>
@@ -156,20 +153,19 @@ const GrandSon = () => {
 <Child />
 ```
 
-子组件 Child.svelte
-
 ```html
 <script>
+// Child.svelte
   import GrandSon from './GrandSon.svelte';
 </script>
 
 <GrandSon />
 ```
 
-孙组件 GrandSon.svelte
 
 ```html
 <script>
+// GrandSon.svelte
   import { getContext } from "svelte";
   import { ContextKey } from "./Father.svelte";
   const { text, theme, setTheme } = getContext(ContextKey);

@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "mode": "source",
                 "source": false
               }
@@ -26,7 +26,7 @@
       {
         "id": "bacd262c3ebbd81a",
         "type": "tabs",
-        "dimension": 26.116504854368934,
+        "dimension": 26.11650485436893,
         "children": [
           {
             "id": "e243c20f9a6fa4e4",
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "32-【对比】context.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "32-【对比】context.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "32-【对比】context.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             }
           },
@@ -177,40 +177,40 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "18-【实战】TodoList之数据交互.md",
+    "17-【实战】TodoList之页面布局.md",
+    "25-【对比】lifecycle.md",
+    "26-【对比】slot.md",
+    "27-【对比】反应性.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "32-【对比】context.md",
     "43-【实现】IfBlock.md",
     "42-【实现】变量更新.md",
     "39-【实现】解析script.md",
     "38-【实现】基本流程.md",
-    "16-【进阶】模板语法之其他.md",
     "test62.gif",
     "test61.gif",
     "test60.gif",
-    "15-【进阶】特定标签.md",
     "44-【展望】生态.md",
     "45-【展望】致谢.md",
     "02-【入门】安装与使用.md",
-    "32-【对比】context.md",
     "31-【对比】style.md",
     "30-【对比】ref.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
-    "27-【对比】反应性.md",
-    "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
     "22-【对比】data.md",
     "Pasted image 20240307105653.png",
     "Pasted image 20240307105256.png",
     "Pasted image 20240307104106.png",
-    "14-【进阶】指令.md",
-    "13-【进阶】动画.md",
     "image-11.png",
     "test59.gif",
     "12-【进阶】跨组件传值.md",
     "11-【进阶】状态管理.md",
     "10-【入门】样式.md",
-    "09-【入门】dom引用.md",
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
     "img/11-9.gif",
     "img/11-8.gif",
     "未命名",
