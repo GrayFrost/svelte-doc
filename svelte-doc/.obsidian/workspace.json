@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "11-【进阶】状态管理.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "11-【进阶】状态管理.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "11-【进阶】状态管理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "11-【进阶】状态管理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "11-【进阶】状态管理.md"
               }
             }
           },
@@ -177,12 +177,17 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "35-【源码】compiler.md",
+    "10-【入门】样式.md",
+    "01-【入门】背景.md",
+    "33-【源码】库.md",
+    "34-【源码】位运算.md",
+    "16-【进阶】模板语法之其他.md",
     "18-【实战】TodoList之数据交互.md",
     "17-【实战】TodoList之页面布局.md",
     "25-【对比】lifecycle.md",
     "26-【对比】slot.md",
     "27-【对比】反应性.md",
-    "16-【进阶】模板语法之其他.md",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
     "13-【进阶】动画.md",
@@ -201,16 +206,11 @@
     "31-【对比】style.md",
     "30-【对比】ref.md",
     "29-【对比】for.md",
-    "28-【对比】if.md",
-    "22-【对比】data.md",
     "Pasted image 20240307105653.png",
     "Pasted image 20240307105256.png",
     "Pasted image 20240307104106.png",
     "image-11.png",
     "test59.gif",
-    "12-【进阶】跨组件传值.md",
-    "11-【进阶】状态管理.md",
-    "10-【入门】样式.md",
     "img/11-9.gif",
     "img/11-8.gif",
     "未命名",

@@ -1,3 +1,7 @@
+https://pic1.zhimg.com/80/v2-5de464e8217c79ab0a12a279ee7cf42c_1440w.webp
+https://github.com/forthealllight/blog/issues/71
+https://github.com/Jarweb/thinking-in-deep/issues/15
+
 经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写此文章时（2024-02-28），Svelte的最新版本是4.2.12
 ![](./img/35-1.png)
 
