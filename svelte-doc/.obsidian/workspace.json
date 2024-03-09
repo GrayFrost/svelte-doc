@@ -4,40 +4,38 @@
     "type": "split",
     "children": [
       {
-        "id": "3727474c37f17449",
+        "id": "6ebc95ea4003d89c",
         "type": "tabs",
-        "dimension": 73.88349514563107,
+        "dimension": 79.59183673469387,
         "children": [
           {
-            "id": "db6af2f910b70723",
+            "id": "71d9c23a99a6313c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "01-【入门】背景.md",
                 "mode": "source",
                 "source": false
               }
-            },
-            "group": "f11626fe3649dc95"
+            }
           }
         ]
       },
       {
-        "id": "bacd262c3ebbd81a",
+        "id": "6fbafc54efec8e46",
         "type": "tabs",
-        "dimension": 26.11650485436893,
+        "dimension": 20.408163265306122,
         "children": [
           {
-            "id": "e243c20f9a6fa4e4",
+            "id": "d56ce0d395005fbc",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "01-【入门】背景.md"
               }
-            },
-            "group": "f11626fe3649dc95"
+            }
           }
         ]
       }
@@ -68,7 +66,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "todo.",
+                "query": "test1",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -105,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "01-【入门】背景.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "11-【进阶】状态管理.md",
+                "file": "01-【入门】背景.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "11-【进阶】状态管理.md"
+                "file": "01-【入门】背景.md"
               }
             }
           },
@@ -157,7 +155,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -175,44 +174,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "db6af2f910b70723",
+  "active": "f4adc900608f174b",
   "lastOpenFiles": [
-    "35-【源码】compiler.md",
-    "10-【入门】样式.md",
-    "01-【入门】背景.md",
-    "33-【源码】库.md",
-    "34-【源码】位运算.md",
-    "16-【进阶】模板语法之其他.md",
-    "18-【实战】TodoList之数据交互.md",
-    "17-【实战】TodoList之页面布局.md",
-    "25-【对比】lifecycle.md",
-    "26-【对比】slot.md",
-    "27-【对比】反应性.md",
-    "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
-    "13-【进阶】动画.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "32-【对比】context.md",
-    "43-【实现】IfBlock.md",
-    "42-【实现】变量更新.md",
-    "39-【实现】解析script.md",
-    "38-【实现】基本流程.md",
+    "Pasted image 20240309161932.png",
+    "img/01-5.jpeg",
     "test62.gif",
     "test61.gif",
     "test60.gif",
-    "44-【展望】生态.md",
-    "45-【展望】致谢.md",
-    "02-【入门】安装与使用.md",
-    "31-【对比】style.md",
-    "30-【对比】ref.md",
-    "29-【对比】for.md",
-    "Pasted image 20240307105653.png",
-    "Pasted image 20240307105256.png",
-    "Pasted image 20240307104106.png",
-    "image-11.png",
     "test59.gif",
-    "img/11-9.gif",
-    "img/11-8.gif",
+    "test56.gif",
+    "img/14-2.gif",
+    "img/14-1.gif",
+    "img/12-6.gif",
+    "img/12-5.png",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "06-【入门】动态属性.md",
+    "05-【入门】生命周期.md",
+    "04-【入门】组件与属性.md",
+    "03-【入门】数据与方法.md",
+    "02-【入门】安装与使用.md",
+    "14-【进阶】指令.md",
+    "26-【对比】slot.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
+    "40-【实现】解析html.md",
+    "44-【展望】生态.md",
+    "11-【进阶】状态管理.md",
+    "43-【实现】IfBlock.md",
+    "13-【进阶】动画.md",
+    "10-【入门】样式.md",
+    "12-【进阶】跨组件传值.md",
+    "19-【实战】Alert组件之简单传值.md",
+    "17-【实战】todolist之页面布局.md",
+    "35-【源码】compiler.md",
+    "32-【对比】context.md",
+    "38-【实现】基本流程.md",
+    "37-【源码】流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
