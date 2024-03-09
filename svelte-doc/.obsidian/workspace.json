@@ -174,8 +174,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "f4adc900608f174b",
+  "active": "71d9c23a99a6313c",
   "lastOpenFiles": [
+    "Pasted image 20240309222135.png",
+    "Pasted image 20240309221120.png",
+    "02-【入门】安装与使用.md",
+    "01-【入门】背景.md",
     "img/01-6.png",
     "img/01-5.jpeg",
     "test62.gif",
@@ -185,8 +189,6 @@
     "test56.gif",
     "img/14-2.gif",
     "img/14-1.gif",
-    "img/12-6.gif",
-    "img/12-5.png",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
@@ -194,7 +196,6 @@
     "05-【入门】生命周期.md",
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
-    "02-【入门】安装与使用.md",
     "14-【进阶】指令.md",
     "26-【对比】slot.md",
     "16-【进阶】模板语法之其他.md",
@@ -211,7 +212,6 @@
     "35-【源码】compiler.md",
     "32-【对比】context.md",
     "38-【实现】基本流程.md",
-    "37-【源码】流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
