@@ -6,6 +6,7 @@
       {
         "id": "6e56baf23f53a95f",
         "type": "tabs",
+        "dimension": 80.6949806949807,
         "children": [
           {
             "id": "c7a6cedf59b6f6ad",
@@ -13,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           },
@@ -23,14 +24,33 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "14-【进阶】指令.md",
                 "mode": "source",
                 "source": false
               }
-            }
+            },
+            "group": "c7dc0a434fac98ea"
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "047d063ba02f86fe",
+        "type": "tabs",
+        "dimension": 19.305019305019304,
+        "children": [
+          {
+            "id": "f755b77ddad5a9a2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "14-【进阶】指令.md"
+              }
+            },
+            "group": "c7dc0a434fac98ea"
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -96,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "14-【进阶】指令.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "10-【入门】样式.md",
+                "file": "14-【进阶】指令.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10-【入门】样式.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           },
@@ -167,31 +187,31 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "af1a3a73f13a5b7b",
+  "active": "f755b77ddad5a9a2",
   "lastOpenFiles": [
-    "img/10-4.png",
+    "11-【进阶】状态管理.md",
     "10-【入门】样式.md",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "img/10-4.png",
     "16-【进阶】模板语法之其他.md",
     "15-【进阶】特定标签.md",
     "14-【进阶】指令.md",
     "13-【进阶】动画.md",
     "12-【进阶】跨组件传值.md",
-    "11-【进阶】状态管理.md",
     "44-【展望】生态.md",
     "img/10-8.gif",
     "img/10-7.gif",
     "img/10-6.gif",
     "img/10-5.png",
     "img/10-9.gif",
-    "09-【入门】dom引用.md",
     "01-【入门】背景.md",
     "img/01-13.png",
     "Pasted image 20240307105653.png",
     "Pasted image 20240310081301.png",
     "img/01-10.png",
     "02-【入门】安装与使用.md",
-    "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
     "06-【入门】动态属性.md",
     "05-【入门】生命周期.md",
     "04-【入门】组件与属性.md",
