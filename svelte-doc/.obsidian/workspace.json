@@ -12,9 +12,11 @@
             "id": "71d9c23a99a6313c",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Pasted image 20240307105653.png"
+                "file": "01-【入门】背景.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -31,7 +33,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pasted image 20240307105653.png"
+                "file": "01-【入门】背景.md"
               }
             }
           }
@@ -101,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pasted image 20240307105653.png",
+                "file": "01-【入门】背景.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pasted image 20240307105653.png",
+                "file": "01-【入门】背景.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pasted image 20240307105653.png"
+                "file": "01-【入门】背景.md"
               }
             }
           },
@@ -174,6 +176,8 @@
   },
   "active": "f4adc900608f174b",
   "lastOpenFiles": [
+    "img/01-13.png",
+    "Pasted image 20240307105653.png",
     "01-【入门】背景.md",
     "Pasted image 20240310081301.png",
     "img/01-10.png",
@@ -185,7 +189,6 @@
     "02-【入门】安装与使用.md",
     "img/01-6.png",
     "img/01-5.jpeg",
-    "test62.gif",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
