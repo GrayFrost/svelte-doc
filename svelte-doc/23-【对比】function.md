@@ -155,7 +155,7 @@ export default function Page() {
 我们这里可以先对比下vue和react的事件绑定方式的不同，拿click方法来说，vue使用的是`@click="func"`的形式，而React则是`onClick={func}`的形式。
 
 ### 2.x
-在2.x版本中，事件的绑定方式不变，事件的声明则在options api的methods选项中。
+在Vue 2.x中，事件的绑定方式不变，事件的声明则在options api的methods选项中。
 ```html
 <template>
   <div>
