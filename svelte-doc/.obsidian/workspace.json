@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "14-【进阶】指令.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "14-【进阶】指令.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "14-【进阶】指令.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "14-【进阶】指令.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "14-【进阶】指令.md"
               }
             }
           },
@@ -177,8 +177,10 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
-    "14-【进阶】指令.md",
     "13-【进阶】动画.md",
+    "16-【进阶】模板语法之其他.md",
+    "14-【进阶】指令.md",
+    "test75.gif",
     "12-【进阶】跨组件传值.md",
     "11-【进阶】状态管理.md",
     "test74.gif",
@@ -210,9 +212,7 @@
     "17-【实战】TodoList之页面布局.md",
     "test67.gif",
     "23-【对比】function.md",
-    "24-【对比】props.md",
     "Pasted image 20240311154050.png",
-    "test66.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
