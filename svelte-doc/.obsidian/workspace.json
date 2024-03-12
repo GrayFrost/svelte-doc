@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "13-【进阶】动画.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "29-【对比】for.md"
+                "file": "13-【进阶】动画.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "13-【进阶】动画.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "13-【进阶】动画.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "29-【对比】for.md"
+                "file": "13-【进阶】动画.md"
               }
             }
           },
@@ -177,7 +177,28 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
+    "12-【进阶】跨组件传值.md",
+    "11-【进阶】状态管理.md",
+    "test74.gif",
+    "test73.gif",
+    "test72.gif",
+    "test71.gif",
+    "test70.gif",
+    "09-【入门】dom引用.md",
+    "08-【入门】插槽.md",
+    "07-【入门】模板语法之条件判断与循环判断.md",
+    "37-【源码】流程.md",
+    "36-【源码】runtime.md",
+    "35-【源码】compiler.md",
+    "34-【源码】位运算.md",
+    "33-【源码】库.md",
+    "32-【对比】context.md",
+    "31-【对比】style.md",
+    "29-【对比】for.md",
     "28-【对比】if.md",
+    "30-【对比】ref.md",
     "test69.gif",
     "test68.gif",
     "26-【对比】slot.md",
@@ -190,28 +211,8 @@
     "test67.gif",
     "23-【对比】function.md",
     "24-【对比】props.md",
-    "44-【展望】生态.md",
-    "27-【对比】反应性.md",
-    "29-【对比】for.md",
-    "30-【对比】ref.md",
-    "42-【实现】变量更新.md",
-    "43-【实现】IfBlock.md",
     "Pasted image 20240311154050.png",
-    "25-【对比】lifecycle.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
     "test66.gif",
-    "14-【进阶】指令.md",
-    "03-【入门】数据与方法.md",
-    "11-【进阶】状态管理.md",
-    "04-【入门】组件与属性.md",
-    "10-【入门】样式.md",
-    "09-【入门】dom引用.md",
-    "test65.gif",
-    "test64.gif",
-    "test63.gif",
-    "img/10-9.gif",
-    "img/10-8.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
