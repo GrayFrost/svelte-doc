@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "33-【源码】库.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "42-【实现】变量更新.md"
+                "file": "33-【源码】库.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "33-【源码】库.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "42-【实现】变量更新.md",
+                "file": "33-【源码】库.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "42-【实现】变量更新.md"
+                "file": "33-【源码】库.md"
               }
             }
           },
@@ -177,11 +177,15 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "Pasted image 20240313171042.png",
+    "Pasted image 20240313170854.png",
+    "Pasted image 20240313170645.png",
+    "39-【实现】解析script.md",
+    "33-【源码】库.md",
+    "42-【实现】变量更新.md",
     "41-【实现】遍历.md",
     "40-【实现】解析html.md",
-    "42-【实现】变量更新.md",
     "43-【实现】IfBlock.md",
-    "39-【实现】解析script.md",
     "38-【实现】基本流程.md",
     "37-【源码】流程.md",
     "36-【源码】runtime.md",
@@ -200,19 +204,15 @@
     "test73.gif",
     "test72.gif",
     "test71.gif",
-    "test70.gif",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
     "35-【源码】compiler.md",
     "34-【源码】位运算.md",
-    "33-【源码】库.md",
     "32-【对比】context.md",
     "31-【对比】style.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
-    "30-【对比】ref.md",
-    "test69.gif",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
