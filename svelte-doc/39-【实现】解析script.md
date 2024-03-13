@@ -1,5 +1,10 @@
-## 解析fragment
-ast.html ast.script
+
+我们继续完善上一章中的parse方法。我们从App.svelte读取到字符串内容后，传递进了compile方法中，继而传进到parse方法中。在parse方法内，我们定义一个parseFragments方法，将解析出的字符串内容分类存储。
+
+## parseFragments
+
+首先设置一个索引`i`，从0开始，这个索引指向文件字符串内容的第i位。
+同时定义了一个变量`ast`，最终我们的parse方法会返回这个ast对象。
 ```javascript
 function parse(content) {
   let i = 0;
@@ -11,8 +16,7 @@ function parse(content) {
 }
 ```
 
-parseFragments的内容如下
-
+parseFragments的内容如下：
 ```javascript
 function parseFragments() {
 	while (i < content.length) { // 因为i是从0开始的，所以使用<比较即可
@@ -25,15 +29,20 @@ function parseFragment() {
 }
 ```
 
-因为本章我们讲解的是解析script，所以parseFragment内部只有一个parseScript方法。
+parseFragments内部是一个while循环，表示从文件内容的开始执行到结束。内部的parseFragment方法包含了i索引的变更。
 
-## acorn
-引入acorn
+本章笔者将率先讲解的是解析script，所以parseFragment内部只有一个parseScript方法。
+
+### parseScript
+#### acorn
+前面的章节中，我们已经了解了acorn的作用，它能将合理的字符串解析成ast对象。
+引入acorn：
 ```bash
 npm install acorn -D
 ```
 
 ```javascript
+// svelte.js
 import * as fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
@@ -44,6 +53,7 @@ import * as acorn from "acorn";
 
 parseScript内容如下：
 ```javascript
+// svelte.js
   function parseScript() {
     skipWhitespace();
     if (match("<script>")) {
@@ -59,16 +69,17 @@ parseScript内容如下：
   }
 ```
 
-读取script标签内的内容，使用acorn对读取到的字符串内容进行解析，然后把解析出来的script内容存到ast.script变量中
+主要逻辑是解析`<script></script>`内的内容，使用acorn对读取到的字符串内容进行解析，然后把解析出来的script内容存到ast.script变量中。
 
-## escodegen
+#### escodegen
 
-引入escodegen
+为了将ast转换成正常的代码，我们需要引入escodegen：
 ```bash
 npm install escodegen -D
 ```
 
 ```javascript
+// svelte.js
 import * as fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
@@ -78,7 +89,7 @@ import * as escodegen from "escodegen";
 ...
 ```
 
-将ast.script变量的内容重新生成出来。在generate方法返回的模板字符串中
+将ast.script变量的内容重新生成出来。在generate方法返回的模板字符串中，调用`escodegen.generate`：
 ```javascript
 function generate(ast) {
   return `
@@ -268,3 +279,5 @@ bootstrap();
 ```
 
 ## 小结
+
+在本章中，我们完成了对script内容的解析。在下一章，我们将着重解析html的内容。

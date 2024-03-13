@@ -134,8 +134,7 @@ async function bootstrap() {
     const inputPath = resolve(modulePath, "./App.svelte");
     const outputPath = resolve(modulePath, "./app.js");
     const content = fs.readFileSync(inputPath, "utf-8");
-    fs.writeFileSync(outputPath, compile(content), "utf-8");
-    const compiledContent = fs.readFileSync(outputPath, "utf-8");
+    const compiledContent = compile(content);
     const prettierContent = await prettier.format(compiledContent, {
       parser: "babel",
     });
