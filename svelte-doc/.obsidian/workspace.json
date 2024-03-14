@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "29-【对比】for.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "33-【源码】库.md"
+                "file": "29-【对比】for.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "29-【对比】for.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "29-【对比】for.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "33-【源码】库.md"
+                "file": "29-【对比】for.md"
               }
             }
           },
@@ -177,11 +177,24 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "test76.gif",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "29-【对比】for.md",
+    "26-【对比】slot.md",
+    "25-【对比】lifecycle.md",
+    "24-【对比】props.md",
+    "23-【对比】function.md",
+    "16-【进阶】模板语法之其他.md",
+    "15-【进阶】特定标签.md",
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
+    "11-【进阶】状态管理.md",
+    "33-【源码】库.md",
     "Pasted image 20240313171042.png",
     "Pasted image 20240313170854.png",
     "Pasted image 20240313170645.png",
     "39-【实现】解析script.md",
-    "33-【源码】库.md",
     "42-【实现】变量更新.md",
     "41-【实现】遍历.md",
     "40-【实现】解析html.md",
@@ -190,29 +203,16 @@
     "37-【源码】流程.md",
     "36-【源码】runtime.md",
     "22-【对比】data.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
     "Pasted image 20240313113253.png",
     "Pasted image 20240313111747.png",
     "Pasted image 20240313111641.png",
-    "13-【进阶】动画.md",
     "test75.gif",
     "12-【进阶】跨组件传值.md",
-    "11-【进阶】状态管理.md",
     "test74.gif",
     "test73.gif",
     "test72.gif",
-    "test71.gif",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
-    "35-【源码】compiler.md",
-    "34-【源码】位运算.md",
-    "32-【对比】context.md",
-    "31-【对比】style.md",
-    "29-【对比】for.md",
-    "28-【对比】if.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
