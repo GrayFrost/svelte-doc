@@ -1,5 +1,7 @@
 ## React
 
+https://blog.bitsrc.io/how-to-use-sass-and-css-modules-with-create-react-app-83fa8b805e5e
+
 ### 行内样式
 
 在React中，行内样式需要以`style={styleObj}`的形式
@@ -17,6 +19,10 @@ export default function Page() {
 在样式对象内，之前在行内样式中使用`-`连接的属性需要转成使用驼峰的形式，比如`font-size`要写成`fontSize`、`background-color`要写成`backgroundColor`等。
 
 ### 非行内样式
+React的样式通常集中写在一个样式文件中，在jsx中只写js代码和长得像html的代码。
+
+当然，如果是使用cssinjs库，则能够直接在jsx文件或tsx文件中写样式。
+
 ### class属性
 
 ### 模块化

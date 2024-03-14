@@ -155,8 +155,7 @@ defineExpose({
 
 ```
 
-子组件
-
+在子组件中，使用export的方式导出方法。
 ```html
 <script>
   export const sayHello = () => {
@@ -166,5 +165,6 @@ defineExpose({
 
 <div>子应用</div>
 ```
+如果想要父组件操作子组件的数据，需要对外export一个能够获取该数据的方法，而不是直接export数据。因为直接export数据在Svelte中是把该数据声明为一个对外的prop。
 
 ## 小结
