@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "31-【对比】style.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "29-【对比】for.md"
+                "file": "31-【对比】style.md"
               }
             },
             "group": "f11626fe3649dc95"
@@ -89,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 273.5
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "31-【对比】style.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "29-【对比】for.md",
+                "file": "31-【对比】style.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "29-【对比】for.md"
+                "file": "31-【对比】style.md"
               }
             }
           },
@@ -177,12 +177,18 @@
   },
   "active": "db6af2f910b70723",
   "lastOpenFiles": [
+    "Pasted image 20240314162045.png",
+    "Pasted image 20240314161849.png",
+    "Pasted image 20240314160708.png",
+    "Pasted image 20240314155402.png",
+    "30-【对比】ref.md",
+    "31-【对比】style.md",
+    "29-【对比】for.md",
+    "25-【对比】lifecycle.md",
+    "26-【对比】slot.md",
+    "27-【对比】反应性.md",
     "test76.gif",
     "28-【对比】if.md",
-    "27-【对比】反应性.md",
-    "29-【对比】for.md",
-    "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
     "24-【对比】props.md",
     "23-【对比】function.md",
     "16-【进阶】模板语法之其他.md",
@@ -206,13 +212,7 @@
     "Pasted image 20240313113253.png",
     "Pasted image 20240313111747.png",
     "Pasted image 20240313111641.png",
-    "test75.gif",
     "12-【进阶】跨组件传值.md",
-    "test74.gif",
-    "test73.gif",
-    "test72.gif",
-    "09-【入门】dom引用.md",
-    "08-【入门】插槽.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
