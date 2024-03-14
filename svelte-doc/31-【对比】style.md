@@ -112,6 +112,7 @@ export default {}
 ```
 
 ### 非行内样式
+正常我们的样式都写在`<style></style>`标签中。
 
 ### class属性
 
@@ -132,5 +133,5 @@ Svelte文件的`<style></style>`标签内的样式，默认启用了模块化特
 翻看编译后的结果，发现我们的样式类型都带上了后缀。
 ## 小结
 
-除了以上特性外，还可以结合诸如Tailwind等原子类库和Emotion等cssinjs库来实现页面样式。
+除了以上特性外，还可以结合诸如Tailwind等原子类库、Emotion等cssinjs库以及Less、Sass等样式预处理器来实现页面样式。
 
