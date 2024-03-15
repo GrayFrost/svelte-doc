@@ -4,29 +4,9 @@
     "type": "split",
     "children": [
       {
-        "id": "3727474c37f17449",
-        "type": "tabs",
-        "dimension": 75.0242954324587,
-        "children": [
-          {
-            "id": "db6af2f910b70723",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "31-【对比】style.md",
-                "mode": "source",
-                "source": false
-              }
-            },
-            "group": "f11626fe3649dc95"
-          }
-        ]
-      },
-      {
         "id": "bacd262c3ebbd81a",
         "type": "tabs",
-        "dimension": 24.975704567541296,
+        "dimension": 77.99791449426485,
         "children": [
           {
             "id": "e243c20f9a6fa4e4",
@@ -34,10 +14,65 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "31-【对比】style.md"
+                "file": "15-【进阶】特定标签.md"
+              }
+            }
+          },
+          {
+            "id": "54b344022472154a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04-【入门】组件与属性.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2eb1bad655a1223a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "09-【入门】dom引用.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f3c36f997a156be5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "15-【进阶】特定标签.md",
+                "mode": "source",
+                "source": false
               }
             },
-            "group": "f11626fe3649dc95"
+            "group": "afd2b6baa84073df"
+          }
+        ],
+        "currentTab": 3
+      },
+      {
+        "id": "d7fa9e2506e1e175",
+        "type": "tabs",
+        "dimension": 22.002085505735145,
+        "children": [
+          {
+            "id": "621dd6088b876a6c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "15-【进阶】特定标签.md"
+              }
+            },
+            "group": "afd2b6baa84073df"
           }
         ]
       }
@@ -89,7 +124,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 273.5
+    "width": 246.5
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -105,7 +140,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "31-【对比】style.md",
+                "file": "15-【进阶】特定标签.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +157,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "31-【对比】style.md",
+                "file": "15-【进阶】特定标签.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +180,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "31-【对比】style.md"
+                "file": "15-【进阶】特定标签.md"
               }
             }
           },
@@ -175,44 +210,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "db6af2f910b70723",
+  "active": "f3c36f997a156be5",
   "lastOpenFiles": [
+    "test81.gif",
+    "Pasted image 20240315152006.png",
+    "Pasted image 20240315151526.png",
+    "04-【入门】组件与属性.md",
+    "09-【入门】dom引用.md",
+    "15-【进阶】特定标签.md",
+    "16-【进阶】模板语法之其他.md",
+    "test79.gif",
+    "test78.gif",
+    "14-【进阶】指令.md",
+    "Pasted image 20240315104157.png",
+    "Pasted image 20240315104056.png",
+    "().md",
+    "test77.gif",
+    "12-【进阶】跨组件传值.md",
+    "31-【对比】style.md",
     "34-【源码】位运算.md",
     "30-【对比】ref.md",
-    "31-【对比】style.md",
     "Pasted image 20240314162045.png",
     "Pasted image 20240314161849.png",
     "Pasted image 20240314160708.png",
-    "Pasted image 20240314155402.png",
     "29-【对比】for.md",
     "25-【对比】lifecycle.md",
     "26-【对比】slot.md",
     "27-【对比】反应性.md",
-    "test76.gif",
     "28-【对比】if.md",
     "24-【对比】props.md",
     "23-【对比】function.md",
-    "16-【进阶】模板语法之其他.md",
-    "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
     "13-【进阶】动画.md",
     "11-【进阶】状态管理.md",
     "33-【源码】库.md",
-    "Pasted image 20240313171042.png",
-    "Pasted image 20240313170854.png",
-    "Pasted image 20240313170645.png",
     "39-【实现】解析script.md",
     "42-【实现】变量更新.md",
     "41-【实现】遍历.md",
     "40-【实现】解析html.md",
     "43-【实现】IfBlock.md",
-    "38-【实现】基本流程.md",
-    "37-【源码】流程.md",
-    "36-【源码】runtime.md",
-    "22-【对比】data.md",
-    "Pasted image 20240313113253.png",
-    "Pasted image 20240313111747.png",
-    "12-【进阶】跨组件传值.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
