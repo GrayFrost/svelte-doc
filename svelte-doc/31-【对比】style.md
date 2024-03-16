@@ -21,18 +21,171 @@ export default function Page() {
 ### 非行内样式
 React的样式通常集中写在一个样式文件中，在jsx中只写js代码和长得像html的代码。
 
+```javascript
+// Child.jsx
+import "./Child.css";
+
+export default function Child() {
+  return (
+    <div className="color">子组件</div>
+  );
+}
+```
+
 当然，如果是使用cssinjs库，则能够直接在jsx文件或tsx文件中写样式。
 
 ### class属性
 
+在React中，写样式class需要写在`className`中，对于className的传值，和其他传递属性无异，可以正常的执行js表达式。
+
 ### 模块化
-TODO 演示
-create-react-app module.css
-自定义类型BEM
+
+我们使用[create-react-app](https://create-react-app.dev/)来创建一个React项目：
+```bash
+npx create-react-app react-test
+```
+
+我们创建一个子组件：
+```javascript
+// Child.jsx
+import "./Child.css";
+import styles from "./Child.module.css";
+
+export default function Child() {
+  return (
+    <div>
+      <div className="color">子组件</div>
+      <div className={styles.color}>子组件 模块化样式</div>
+    </div>
+  );
+}
+```
+
+```css
+.color {
+  color: red;
+}
+```
+
+在页面中：
+```javascript
+import './App.css';
+import Child from './Child';
+
+function App() {
+  return (
+    <div>
+      <div className="color">父组件</div>
+      <Child />
+    </div>
+  );
+}
+
+export default App;
+```
+而在App.css中：
+```css
+.color {
+  color: green;
+}
+```
+![[Pasted image 20240316164953.png]]
+我们可以看到，原本我们是想子组件的红色，父组件里的字体是绿色，然而现在都变成了红色。
+
+在React中，要想实现样式模块化，通常有以下方式：
+* module css
+* BEM
+* css-in-js
+这里以前两种来举例。
+
+##### module
+在使用create-react-app创建的项目中，我们把样式文件名写成`xxx.module.css`的形式，然后以变量的形式引入。
+将上述例子的Child.css改成Child.module.css，调整Child.jsx的逻辑：
+```javascript
+import styles from "./Child.module.css";
+
+export default function Child() {
+  return <div className={styles.color}>子组件 模块化样式</div>;
+}
+```
+
+![[Pasted image 20240316165753.png]]
+可以看到，子组件的color样式选择器已经被改动了。
+##### BEM
+[BEM](https://yandex.com/dev/bem/)风格规范指的是 Block、Element、Modifier 这三者的简称，这个规范将 CSS 拆分成块、元素、修饰符，根本作用是帮助开发者快速理解HTML与 CSS 之间的关系。我们可以根据不同的标签层级，使用约定好格式的类名，以此来到达维护css的目的。
+
+我们并非严格地按照BEM规范来执行，而是以此规范为参考，为每个组件人工地添加一个唯一前缀，然后把组件的样式都限定在这个唯一的选择器内，实现其中的核心思想。
+
+继续以上述Child.jsx为例，假如不使用module css，那我们修改我们的样式文件：
+```css
+.child-color {
+  color: red;
+}
+
+.child-background {
+  background: red;
+}
+```
+
+然后修改我们的Child.jsx：
+```javascript
+import "./Child.css";
+
+export default function Child() {
+  return (
+    <>
+      <div className="child-color">子组件 模块化样式</div>
+      <div className="child-background">子组件</div>
+    </>
+  );
+}
+```
+
+从页面上看，同样可以达到样式模块化。
+![[Pasted image 20240316171245.png]]
+
+可能有些读者会质疑这种实现方式，不仅要每个class都要添加前缀，样式文件的选择器也复杂化了。那是因为现在我们还是用css来演示，如果我们结合样式预处理器，那操作则简化了很多。
+
+为了演示方便，我们使用vite重新创建一个项目
+```bash
+npm create vite@latest react-test-vite -- --template react
+```
+
+同时使用Less：
+```bash
+npm install -D less
+```
+
+修改Child.jsx内容：
+```javascript
+import './Child.less';
+
+export default function Child () {
+  return (<div className="child">
+    <div className="color">子组件 样式模块化</div>
+  </div>)
+}
+```
+
+Child.less内容：
+```css
+.child {
+  .color {
+    color: red;
+  }
+}
+```
+
+![[Pasted image 20240316172746.png]]
+因为我们为组件最外层添加了一层包裹，`.child .color`的优先级大于`.color`的优先级。
+
+BEM规范同样能应用在Vue、Svelte等框架中，它的一个劣势是我们需要人工地确保各组件有唯一的前缀或唯一的用于包裹的选择器。
 
 ## Vue
 
 ### 行内样式
+
+Vue的行内样式同样接收一个变量，以`:style="styleObject"`的形式：
 ```html
 <template>
   <div :style="{ border: '1px solid black', fontSize: 16 }">hello world</div>
@@ -40,11 +193,129 @@ create-react-app module.css
 ```
 
 ### 非行内样式
+Vue的非行内样式写在`<style></style>`标签内，可以在该标签内写css内容，也可以在标签内引入样式文件。
+```html
+<template>
+  <div></div>
+</template>
+
+<style>
+  div {
+    color: red;
+  }
+</style>
+```
 
 ### class属性
+Vue为开发者提供了大量便捷地操作class属性的方式。
+
+#### 默认
+```html
+<div class="rounded"></div>
+```
+
+#### 动态class
+```html
+<script setup>
+  import { ref } from 'vue';
+  let colorClass = ref('red');
+</script>
+
+<template>
+  <div>
+    <select v-model="colorClass">
+      <option value="red">red</option>
+      <option value="green">green</option>
+      <option value="blue">blue</option>
+    </select>
+    <div :class="colorClass">text</div>
+  </div>
+</template>
+
+<style scoped>
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
+}
+</style>
+```
+![[test12.gif]]
+
+#### 表达式
+```html
+<div :class="isActive ? 'active' : ''"></div>
+```
+
+#### 数组形式
+能够通过操作数组动态增删class：
+```html
+<script setup>
+  import { reactive } from 'vue';
+
+  const classArr = reactive(['class1', 'class2']);
+
+  const addClass = () => {
+    classArr.push('class3');
+  }
+</script>
+<template>
+  <div>
+    <button @click="addClass">add class</button>
+    <div :class="classArr">text</div>
+  </div>
+</template>
+
+<style scoped>
+.class1 {
+  color: white;
+}
+.class2 {
+  background: black;
+}
+.class3 {
+  width: 100px;
+  height: 100px;
+}
+</style>
+```
+
+![[test13.gif]]
+
+#### 对象形式
+通过key:value的形式，当value为true时，key才生效
+```html
+<script setup>
+  import { ref } from 'vue';
+  let isActive = ref(false);
+
+  const toggle = () => {
+    isActive.value = !isActive.value;
+  }
+</script>
+
+<template>
+  <div>
+    <button @click="toggle">toggle</button>
+    <div :class="{ active:isActive }">text</div>
+  </div>
+</template>
+
+<style scoped>
+.active {
+  color: red;
+}
+</style>
+```
+![[test11.gif]]
 
 ### 模块化
 
+我们先看以下例子：
 ```html
 <!-- Father.vue -->
 <template>
@@ -88,7 +359,7 @@ export default {}
 我们原本期望子组件的颜色是绿色，然而得到的却是如下：
 ![[Pasted image 20240314161849.png]]
 
-要想实现样式模块化，需要在`<style>`标签中添加scoped属性：
+要想实现样式模块化，需要在`<style>`标签中添加`scoped`属性：
 ```diff
 <template>
   <div class="style">style</div>
@@ -120,7 +391,77 @@ export default {}
 ### 非行内样式
 正常我们的样式都写在`<style></style>`标签中。
 
+```html
+<div></div>
+
+<style>
+  div {
+    color: red;
+  }
+</style>
+```
+
 ### class属性
+
+#### 默认
+Svelte中，正常写class，不用像React中一样使用className。
+```html
+<div class="rounded"></div>
+```
+
+#### 动态class
+如果需要支持动态class，以`class={variable}`的形式：
+```html
+<script>
+  let colorClass = 'red';
+</script>
+
+<select bind:value={colorClass}>
+  <option value="red">red</option>
+  <option value="blue">blue</option>
+  <option value="green">green</option>
+</select>
+<div class={colorClass}>color</div>
+
+<style>
+  .red {
+    color: red;
+  }
+  .blue {
+    color: blue;
+  }
+  .green {
+    color: green;
+  }
+</style>
+```
+![[test14.gif]]
+
+#### 表达式
+```html
+<script>
+  let isActive = false;
+  const toggle = () => {
+    isActive = !isActive
+  }
+</script>
+
+<button on:click={toggle}>toggle</button>
+<div class={isActive ? 'active' : ''}>color</div>
+
+<style>
+  .active {
+    color: red;
+  }
+</style>
+```
+
+![[test15.gif]]
+
+我们能够使用`class`指令来简化表达式的形式，对于`class={isActive ? 'active' : ''}`的写法，我们可以简写成：
+```html
+<div class:active={isActive}></div>
+```
 
 ### 模块化
 
