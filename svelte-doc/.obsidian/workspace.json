@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "31-【对比】style.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "31-【对比】style.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "31-【对比】style.md"
               }
             },
             "group": "c7dc0a434fac98ea"
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "31-【对比】style.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md",
+                "file": "31-【对比】style.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "16-【进阶】模板语法之其他.md"
+                "file": "31-【对比】style.md"
               }
             }
           },
@@ -189,6 +189,13 @@
   },
   "active": "af1a3a73f13a5b7b",
   "lastOpenFiles": [
+    "30-【对比】ref.md",
+    "29-【对比】for.md",
+    "31-【对比】style.md",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "26-【对比】slot.md",
+    "16-【进阶】模板语法之其他.md",
     "test10.gif",
     "test9.gif",
     "test8.gif",
@@ -201,13 +208,11 @@
     "test78.gif",
     "test77.gif",
     "test76.gif",
-    "test75.gif",
     "11-【进阶】状态管理.md",
     "10-【入门】样式.md",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
-    "16-【进阶】模板语法之其他.md",
     "13-【进阶】动画.md",
     "12-【进阶】跨组件传值.md",
     "44-【展望】生态.md",
@@ -217,14 +222,9 @@
     "05-【入门】生命周期.md",
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
-    "26-【对比】slot.md",
     "40-【实现】解析html.md",
     "43-【实现】IfBlock.md",
     "19-【实战】Alert组件之简单传值.md",
-    "17-【实战】todolist之页面布局.md",
-    "35-【源码】compiler.md",
-    "32-【对比】context.md",
-    "38-【实现】基本流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
