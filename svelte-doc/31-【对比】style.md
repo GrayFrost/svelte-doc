@@ -15,7 +15,7 @@ export default function Page() {
 }
 ```
 
-![[Pasted image 20240314155402.png]]
+![[31-1.png]]
 在样式对象内，之前在行内样式中使用`-`连接的属性需要转成使用驼峰的形式，比如`font-size`要写成`fontSize`、`background-color`要写成`backgroundColor`等。
 
 ### 非行内样式
@@ -89,7 +89,7 @@ export default App;
   color: green;
 }
 ```
-![[Pasted image 20240316164953.png]]
+![[31-2.png]]
 我们可以看到，原本我们是想子组件的红色，父组件里的字体是绿色，然而现在都变成了红色。
 
 在React中，要想实现样式模块化，通常有以下方式：
@@ -109,7 +109,7 @@ export default function Child() {
 }
 ```
 
-![[Pasted image 20240316165753.png]]
+![[31-3.png]]
 可以看到，子组件的color样式选择器已经被改动了。
 ##### BEM
 [BEM](https://yandex.com/dev/bem/)风格规范指的是 Block、Element、Modifier 这三者的简称，这个规范将 CSS 拆分成块、元素、修饰符，根本作用是帮助开发者快速理解HTML与 CSS 之间的关系。我们可以根据不同的标签层级，使用约定好格式的类名，以此来到达维护css的目的。
@@ -142,7 +142,7 @@ export default function Child() {
 ```
 
 从页面上看，同样可以达到样式模块化。
-![[Pasted image 20240316171245.png]]
+![[31-4.png]]
 
 可能有些读者会质疑这种实现方式，不仅要每个class都要添加前缀，样式文件的选择器也复杂化了。那是因为现在我们还是用css来演示，如果我们结合样式预处理器，那操作则简化了很多。
 
@@ -176,7 +176,7 @@ Child.less内容：
 }
 ```
 
-![[Pasted image 20240316172746.png]]
+![[31-5.png]]
 因为我们为组件最外层添加了一层包裹，`.child .color`的优先级大于`.color`的优先级。
 
 BEM规范同样能应用在Vue、Svelte等框架中，它的一个劣势是我们需要人工地确保各组件有唯一的前缀或唯一的用于包裹的选择器。
@@ -244,7 +244,7 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 }
 </style>
 ```
-![[test12.gif]]
+![[31-6.gif]]
 
 #### 表达式
 ```html
@@ -284,7 +284,7 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 </style>
 ```
 
-![[test13.gif]]
+![[31-7.gif]]
 
 #### 对象形式
 通过key:value的形式，当value为true时，key才生效
@@ -311,7 +311,7 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 }
 </style>
 ```
-![[test11.gif]]
+![[31-8.gif]]
 
 ### 模块化
 
@@ -357,7 +357,7 @@ export default {}
 </style>
 ```
 我们原本期望子组件的颜色是绿色，然而得到的却是如下：
-![[Pasted image 20240314161849.png]]
+![[31-9.png]]
 
 要想实现样式模块化，需要在`<style>`标签中添加`scoped`属性：
 ```diff
@@ -376,7 +376,7 @@ export default {}
   }
 </style>
 ```
-![[Pasted image 20240314162045.png]]
+![[31-10.png]]
 可以看到，Vue是通过添加`data-v-xxx`属性的形式来实现模块化。
 
 ## Svelte
@@ -435,7 +435,7 @@ Svelte中，正常写class，不用像React中一样使用className。
   }
 </style>
 ```
-![[test14.gif]]
+![[31-11.gif]]
 
 #### 表达式
 ```html
@@ -456,7 +456,7 @@ Svelte中，正常写class，不用像React中一样使用className。
 </style>
 ```
 
-![[test15.gif]]
+![[31-12.gif]]
 
 我们能够使用`class`指令来简化表达式的形式，对于`class={isActive ? 'active' : ''}`的写法，我们可以简写成：
 ```html
@@ -476,7 +476,7 @@ Svelte文件的`<style></style>`标签内的样式，默认启用了模块化特
 </style>
 ```
 
-![[Pasted image 20240314160708.png]]
+![[31-13.png]]
 翻看编译后的结果，发现我们的样式类型都带上了后缀。
 ## 小结
 

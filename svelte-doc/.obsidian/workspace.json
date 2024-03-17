@@ -14,22 +14,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "34-【源码】位运算.md"
               }
             }
           },
           {
-            "id": "af1a3a73f13a5b7b",
+            "id": "1c052e31fb6d5d20",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "34-【源码】位运算.md",
                 "mode": "source",
                 "source": false
               }
-            },
-            "group": "c7dc0a434fac98ea"
+            }
           }
         ],
         "currentTab": 1
@@ -45,10 +44,9 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "34-【源码】位运算.md"
               }
-            },
-            "group": "c7dc0a434fac98ea"
+            }
           }
         ]
       }
@@ -100,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 307.5
+    "width": 304.5
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -116,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "34-【源码】位运算.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "34-【源码】位运算.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "34-【源码】位运算.md"
               }
             }
           },
@@ -187,23 +185,25 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "af1a3a73f13a5b7b",
+  "active": "1c052e31fb6d5d20",
   "lastOpenFiles": [
+    "33-【源码】库.md",
+    "Pasted image 20240222140143.png",
+    "image-11.png",
+    "44-【展望】生态.md",
+    "img/31-2.png",
+    "31-【对比】style.md",
+    "13-【进阶】动画.md",
     "test18.gif",
     "test17.gif",
     "test16.gif",
     "16-【进阶】模板语法之其他.md",
     "14-【进阶】指令.md",
     "15-【进阶】特定标签.md",
-    "31-【对比】style.md",
-    "test15.gif",
-    "test14.gif",
-    "test13.gif",
-    "test12.gif",
-    "test11.gif",
-    "Pasted image 20240316172746.png",
-    "Pasted image 20240316171245.png",
-    "Pasted image 20240316165753.png",
+    "img/31-12.gif",
+    "img/31-11.gif",
+    "img/31-7.gif",
+    "img/31-6.gif",
     "30-【对比】ref.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
@@ -214,9 +214,7 @@
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
-    "13-【进阶】动画.md",
     "12-【进阶】跨组件传值.md",
-    "44-【展望】生态.md",
     "01-【入门】背景.md",
     "02-【入门】安装与使用.md",
     "06-【入门】动态属性.md",
