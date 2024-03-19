@@ -6,7 +6,6 @@
       {
         "id": "6e56baf23f53a95f",
         "type": "tabs",
-        "dimension": 80.6949806949807,
         "children": [
           {
             "id": "1c052e31fb6d5d20",
@@ -17,23 +16,6 @@
                 "file": "source code all.md",
                 "mode": "source",
                 "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "047d063ba02f86fe",
-        "type": "tabs",
-        "dimension": 19.305019305019304,
-        "children": [
-          {
-            "id": "f755b77ddad5a9a2",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "source code all.md"
               }
             }
           }
@@ -160,7 +142,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -173,7 +156,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "1c052e31fb6d5d20",
+  "active": "d8ce38c31e3b5069",
   "lastOpenFiles": [
     "44-【展望】生态.md",
     "source code all.md",
