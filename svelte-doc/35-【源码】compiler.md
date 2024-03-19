@@ -12,6 +12,37 @@ vite-plugin-svelte: https://github.com/sveltejs/vite-plugin-svelte/blob/main/pac
 
 TODO: https://zhuanlan.zhihu.com/p/409291132
 
+svelte 官方的 webpack 插件[svelte-loader](https://github.com/sveltejs/svelte-loader)和 rollup 插件[rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte)的主要都是基于 svelte.compile，这个编译器主要分为两部分 parse 和 compile，parse 是解析的过程，解析 script 和 style 等 tag 标签以及 each 和 ifelse 等 mustache 模版语法。compile 则是包含了 parse 的动作，将解析出来的 ast 语法树转换为可执行的代码
+
+在 svelte 源码里，使用了 acorn 将 javascript 编译成 ast 树，然后对 javascript 的语义解释过程做了额外的工作：
+
+* 编译赋值语句时，除了生成对应的赋值逻辑，额外生成数据更新逻辑代码
+* 编译变量声明时，变量被编译成上下文数组
+* 编译模板时，标记依赖，并对每个变量引用生成更新逻辑
+
+svelte 组件使用create, mount, patch, destroy 这四个方法实现对 DOM 视图的操作。
+
+* create 负责组件dom的创建
+* mount 负责将 dom 挂载到对应的父节点上
+* patch 负责根据数据的变化更新 dom
+* destroy 负责销毁对应的 dom
+* 首先解析 svelte 模板并生成模板 AST
+* 然后遍历模板 AST
+* * 如果碰到普通的 html tag 或者文本，输出 dom 创建语句（dom.createElement)
+  * 如果碰到变量
+  * * 转换为上下文引用方式并输出取值语句（如： name 被生成为 ctx[/** name */0])
+    * 在 patch 函数中生成对应的更新语句
+  * 如果碰到 if 模板
+  * * 获取 condition 语句，输出选择函数 select_block （子模板选择器）
+    * 获取 condition 为 true 的模板片段，输出 if_block 子模板构建函数
+    * 获取 condition 为 false 的模板片段，输出 else_block 子模板构建函数
+  * 如果碰到 each 模板
+  * * 获取循环模板片段，生成块构建函数 create_each_block
+    * 根据循环内变量引用，生成循环实例上下文获取 get_each_block_context
+* 生成 key获取函数 get_key
+* 生成基于key更新列表的patch逻辑函数 update_keyed_each
+
+
 把项目下载下来，切换到4.2.12分支。
 
 ```bash

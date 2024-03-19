@@ -9,17 +9,19 @@
         "dimension": 80.6949806949807,
         "children": [
           {
-            "id": "c7a6cedf59b6f6ad",
+            "id": "1c052e31fb6d5d20",
             "type": "leaf",
             "state": {
-              "type": "outline",
+              "type": "markdown",
               "state": {
-                "file": "source code all.md"
+                "file": "source code all.md",
+                "mode": "source",
+                "source": false
               }
             }
           },
           {
-            "id": "1c052e31fb6d5d20",
+            "id": "38c2d72154eb2f3e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -185,8 +187,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "1c052e31fb6d5d20",
+  "active": "38c2d72154eb2f3e",
   "lastOpenFiles": [
+    "36-【源码】runtime.md",
+    "35-【源码】compiler.md",
+    "source code all.md",
     "Pasted image 20240319104611.png",
     "34-【源码】位运算.md",
     "Pasted image 20240318171243.png",
@@ -205,7 +210,6 @@
     "15-【进阶】特定标签.md",
     "img/31-12.gif",
     "img/31-11.gif",
-    "img/31-7.gif",
     "30-【对比】ref.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
@@ -221,8 +225,6 @@
     "02-【入门】安装与使用.md",
     "06-【入门】动态属性.md",
     "05-【入门】生命周期.md",
-    "04-【入门】组件与属性.md",
-    "03-【入门】数据与方法.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

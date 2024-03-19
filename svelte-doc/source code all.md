@@ -264,10 +264,56 @@ init的逻辑：
 - 执行完这个组件的逻辑后，重置当前组件为父组件。
 
 ### `$$invalidate`
+
+```typescript
+(i, ret, ...rest) => {
+	const value = rest.length ? rest[0] : ret;
+	if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+		if (ready) make_dirty(component, i);
+	}
+	return ret;
+}
+```
 `$$invalidate`的逻辑：
 - 首先是编译器将我们原来的赋值代码进行了更改，将`count++`转变成`$$invalidate(0, count++, count)`，看下`$$invalidate`的三个参数`(i, ret, ...rest)`：i表示是组件内的第几个变量，ret是表达式，`...rest`是剩余参数
 - 首先是进行赋值`($$.ctx[i] = value)`，然后通过`not_equal`判断赋值前后的变量是否改变，如果改变了，通过`make_dirty`标记组件为dirty（非常关键！！！）
 
+#### make_dirty
+源码路径：`packages/svelte/src/runtime/internal/Component.js`
+```javascript
+function make_dirty(component, i) {
+	if (component.$$.dirty[0] === -1) {
+		dirty_components.push(component);
+		schedule_update();
+		component.$$.dirty.fill(0);
+	}
+	component.$$.dirty[(i / 31) | 0] |= 1 << i % 31;
+}
+```
+
+这段代码是在JavaScript框架Svelte中使用的，用于标记组件的某个部分（由参数i指定）为"dirty"，即需要更新。这是Svelte的响应式系统的一部分，当组件的状态改变时，它会自动更新DOM。
+
+具体来说，这个函数的工作原理如下：
+
+首先，它检查组件是否已经被标记为"dirty"。如果没有（即`component.$$.dirty[0] === -1`),那么它将组件添加到dirty_components数组中，并调度一个更新。
+然后，它将组件的dirty标志位数组填充为0，表示所有部分都已清理。
+最后，它将参数i指定的部分标记为"dirty"。这是通过将dirty标志位数组的相应元素设置为1来实现的。这里使用了位操作，以便在一个整数中存储多个标志位。
+总的来说，这个函数的目的是在组件的状态改变时，确保只有需要更新的部分才会被重新渲染，从而提高性能。
+
+##### schedule_update
+
+```typescript
+const resolved_promise = /* @__PURE__ */ Promise.resolve();
+let update_scheduled = false;
+
+export function schedule_update() {
+	if (!update_scheduled) {
+		update_scheduled = true;
+		resolved_promise.then(flush);
+	}
+}
+```
+TODO:  作用
 ### create_fragment
 ```javascript
 function create_fragment(ctx) {
@@ -320,9 +366,57 @@ function instance($$self, $$props, $$invalidate) {
 	return [count, updateCount];
 }
 ```
-- `create_fragment`方法返回一个对象，可以把这个对象理解为是组件的生命周期对象，内部的`c`、`m`、`p`、`d`对应了创建、挂载、更新和卸载。
+- `create_fragment`方法返回一个对象，这个对象内包含 `c,m,p,i,o,d`等特殊名称的函数，这些函数并非编译混淆，而是 Fragment 内部的生命周期缩写。
+```javascript
+// 源码路径：packages/svelte/src/runtime/internal/private.d.ts
+export interface Fragment {
+	key: string | null;
+	first: null;
+	/* create  */ c: () => void;
+	/* claim   */ l: (nodes: any) => void;
+	/* hydrate */ h: () => void;
+	/* mount   */ m: (target: HTMLElement, anchor: any) => void;
+	/* update  */ p: (ctx: T$$['ctx'], dirty: T$$['dirty']) => void;
+	/* measure */ r: () => void;
+	/* fix     */ f: () => void;
+	/* animate */ a: () => void;
+	/* intro   */ i: (local: any) => void;
+	/* outro   */ o: (local: any) => void;
+	/* destroy */ d: (detaching: 0 | 1) => void;
+}
+```
 - 在创建时，会调用封装好的`element`、`space`、`text`等方法；在挂在时调用`insert`、`append`等方法；在更新时，通过dirty数组中的值进行位运算，判断是否需要更新数据，还记得我们前面章节学习到的位运算的知识吗，在Svelte源码中，凡是涉及到dirty的地方，位运算无处不在；在卸载时调用`detach`等方法。
 
+#### 封装
+
+```typescript
+export function append(target: Node, node: Node) {
+	target.appendChild(node);
+}
+
+export function detach(node: Node) {
+	if (node.parentNode) {
+		node.parentNode.removeChild(node);
+	}
+}
+
+export function element<K extends keyof HTMLElementTagNameMap>(name: K) {
+	return document.createElement<K>(name);
+}
+
+export function insert(target: Node, node: Node, anchor?: Node) {
+	target.insertBefore(node, anchor || null);
+}
+
+export function listen(node: EventTarget, event: string, handler: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | EventListenerOptions) {
+	node.addEventListener(event, handler, options);
+	return () => node.removeEventListener(event, handler, options);
+}
+
+export function text(data: string) {
+	return document.createTextNode(data);
+}
+```
 ## mount_component
 源码路径：`packages/svelte/src/runtime/internal/Component.js
 ```javascript
@@ -343,3 +437,77 @@ export function mount_component(component, target, anchor) {
 	after_update.forEach(add_render_callback);
 }
 ```
+调用fragment的`m()`方法，这里我们可以看到，会调用`onMount`方法，如果`onMount`有返回值，则相当于是`destroy`方法。
+
+## flush
+
+源码路径：`packages/svelte/src/runtime/internal/scheduler.js
+```javascript
+let flushidx = 0;
+
+export function flush() {
+	if (flushidx !== 0) {
+		return;
+	}
+	const saved_component = current_component;
+	do {
+		try {
+			while (flushidx < dirty_components.length) {
+				const component = dirty_components[flushidx];
+				flushidx++;
+				set_current_component(component);
+				update(component.$$);
+			}
+		} catch (e) {
+			dirty_components.length = 0;
+			flushidx = 0;
+			throw e;
+		}
+		set_current_component(null);
+		dirty_components.length = 0;
+		flushidx = 0;
+		while (binding_callbacks.length) binding_callbacks.pop()();
+		for (let i = 0; i < render_callbacks.length; i += 1) {
+			const callback = render_callbacks[i];
+			if (!seen_callbacks.has(callback)) {
+				seen_callbacks.add(callback);
+				callback();
+			}
+		}
+		render_callbacks.length = 0;
+	} while (dirty_components.length);
+	while (flush_callbacks.length) {
+		flush_callbacks.pop()();
+	}
+	update_scheduled = false;
+	seen_callbacks.clear();
+	set_current_component(saved_component);
+}
+```
+`flush`函数的主要作用是更新和渲染组件，其步骤如下：
+- 通过`flushidx !== 0`检查是否已经在更新脏组件，如果是则返回，避免无限循环。
+- 先保存当前组件，然后在一个do-while循环中，首先调用beforeUpdate函数并更新组件。如果在更新过程中出现错误，会重置脏状态以避免死锁。
+- 清空脏组件列表，重置flushidx，然后调用所有`bind:this`回调函数。
+- 在组件更新后，调用afterUpdate函数。这可能会导致后续的更新，所以需要防止无限循环。之后清空渲染回调列表。
+- 如果还有脏组件，重复上述步骤。
+- 调用所有flush回调函数。清除已调用的回调函数列表。
+- 恢复保存的当前组件。
+
+这个函数的主要目的是确保所有的组件都被正确地更新和渲染，同时避免因为错误或无限循环导致的问题
+
+### update
+```typescript
+function update($$) {
+	if ($$.fragment !== null) {
+		$$.update();
+		run_all($$.before_update);
+		const dirty = $$.dirty;
+		$$.dirty = [-1];
+		$$.fragment && $$.fragment.p($$.ctx, dirty);
+
+		$$.after_update.forEach(add_render_callback);
+	}
+}
+```
+TODO: 作用
+## 小结
