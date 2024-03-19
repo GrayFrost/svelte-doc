@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "source code all.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "source code all.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "source code all.md",
+                "file": "16-【进阶】模板语法之其他.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "source code all.md"
+                "file": "16-【进阶】模板语法之其他.md"
               }
             }
           },
@@ -156,44 +156,44 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d8ce38c31e3b5069",
+  "active": "f4adc900608f174b",
   "lastOpenFiles": [
-    "44-【展望】生态.md",
+    "img/16-10.gif",
+    "img/16-9.gif",
+    "img/16-8.gif",
+    "img/16-7.gif",
+    "img/16-3.gif",
+    "img/16-2.gif",
+    "img/16-1.gif",
+    "15-【进阶】特定标签.md",
+    "img/15-13.gif",
+    "img/15-12.png",
+    "img/15-11.png",
+    "img/15-10.gif",
+    "14-【进阶】指令.md",
+    "10-【入门】样式.md",
+    "30-【对比】ref.md",
+    "31-【对比】style.md",
+    "32-【对比】context.md",
+    "42-【实现】变量更新.md",
+    "43-【实现】IfBlock.md",
     "source code all.md",
+    "44-【展望】生态.md",
     "36-【源码】runtime.md",
     "35-【源码】compiler.md",
-    "Pasted image 20240319104611.png",
     "34-【源码】位运算.md",
-    "Pasted image 20240318171243.png",
     "33-【源码】库.md",
-    "Pasted image 20240222140143.png",
-    "image-11.png",
-    "img/31-2.png",
-    "31-【对比】style.md",
     "13-【进阶】动画.md",
-    "test18.gif",
-    "test17.gif",
-    "test16.gif",
     "16-【进阶】模板语法之其他.md",
-    "14-【进阶】指令.md",
-    "15-【进阶】特定标签.md",
-    "img/31-12.gif",
-    "img/31-11.gif",
-    "30-【对比】ref.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
     "11-【进阶】状态管理.md",
-    "10-【入门】样式.md",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
     "07-【入门】模板语法之条件判断与循环判断.md",
     "12-【进阶】跨组件传值.md",
-    "01-【入门】背景.md",
-    "02-【入门】安装与使用.md",
-    "06-【入门】动态属性.md",
-    "05-【入门】生命周期.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
