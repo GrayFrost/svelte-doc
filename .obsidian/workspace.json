@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "11-【进阶】状态管理.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "11-【进阶】状态管理.md"
               }
             },
             "group": "c37fc473c7379e30"
@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "test1",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +85,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -105,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "11-【进阶】状态管理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "11-【进阶】状态管理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "11-【进阶】状态管理.md"
               }
             }
           },
@@ -178,10 +179,12 @@
   },
   "active": "81cc90e7ed25f4da",
   "lastOpenFiles": [
+    "test83.gif",
+    "test82.gif",
+    "13-【进阶】动画.md",
     "32-【对比】context.md",
     "31-【对比】style.md",
     "25-【对比】lifecycle.md",
-    "13-【进阶】动画.md",
     "12-【进阶】跨组件传值.md",
     "11-【进阶】状态管理.md",
     "16-【进阶】模板语法之其他.md",
@@ -195,7 +198,6 @@
     "15-【进阶】特定标签.md",
     "img/15-13.gif",
     "img/15-12.png",
-    "img/15-11.png",
     "14-【进阶】指令.md",
     "10-【入门】样式.md",
     "30-【对比】ref.md",
@@ -213,7 +215,6 @@
     "26-【对比】slot.md",
     "09-【入门】dom引用.md",
     "08-【入门】插槽.md",
-    "07-【入门】模板语法之条件判断与循环判断.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
