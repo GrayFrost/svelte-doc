@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "25-【对比】lifecycle.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "25-【对比】lifecycle.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
       {
         "id": "0cde03872d4edefd",
         "type": "tabs",
-        "dimension": 24.33862433862434,
+        "dimension": 24.338624338624342,
         "children": [
           {
             "id": "8e7f6abd5e3057dd",
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "25-【对比】lifecycle.md"
               }
             },
             "group": "e0739dd81f8b0a00"
@@ -100,7 +100,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 231.5
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "25-【对比】lifecycle.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "25-【对比】lifecycle.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "25-【对比】lifecycle.md"
               }
             }
           },
@@ -189,10 +189,19 @@
   },
   "active": "fac4af517fd2e6d9",
   "lastOpenFiles": [
+    "lifecycle.DLmSwRQE.png",
+    "Pasted image 20240321113020.png",
+    "29-【对比】for.md",
+    "28-【对比】if.md",
+    "27-【对比】反应性.md",
+    "26-【对比】slot.md",
+    "25-【对比】lifecycle.md",
+    "16-【进阶】模板语法之其他.md",
+    "14-【进阶】指令.md",
+    "13-【进阶】动画.md",
     "Pasted image 20240320172945.png",
     "Pasted image 20240320171637.png",
     "13-13.png",
-    "13-【进阶】动画.md",
     "test84.gif",
     "缓动方程.md",
     "11-【进阶】状态管理.md",
@@ -200,16 +209,11 @@
     "test82.gif",
     "32-【对比】context.md",
     "31-【对比】style.md",
-    "25-【对比】lifecycle.md",
     "12-【进阶】跨组件传值.md",
-    "16-【进阶】模板语法之其他.md",
     "img/16-10.gif",
     "img/16-9.gif",
     "img/16-8.gif",
-    "img/16-7.gif",
-    "img/16-3.gif",
     "15-【进阶】特定标签.md",
-    "14-【进阶】指令.md",
     "10-【入门】样式.md",
     "30-【对比】ref.md",
     "42-【实现】变量更新.md",
@@ -220,10 +224,6 @@
     "35-【源码】compiler.md",
     "34-【源码】位运算.md",
     "33-【源码】库.md",
-    "29-【对比】for.md",
-    "28-【对比】if.md",
-    "27-【对比】反应性.md",
-    "26-【对比】slot.md",
     "09-【入门】dom引用.md",
     "未命名",
     "未命名 1.canvas",
