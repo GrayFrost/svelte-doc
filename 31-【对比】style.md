@@ -1,7 +1,5 @@
 ## React
 
-https://blog.bitsrc.io/how-to-use-sass-and-css-modules-with-create-react-app-83fa8b805e5e
-
 ### 行内样式
 
 在React中，行内样式需要以`style={styleObj}`的形式

@@ -37,6 +37,31 @@ git clone git@github.com:sveltejs/svelte.git
 ## preprocess
 
 源码路径：`packages/svelte/src/compiler/preprocess/index.js`
+```javascript
+export default async function preprocess(source, preprocessor, options) {
+
+	const filename = (options && options.filename) || /** @type {any} */ (preprocessor).filename; // legacy
+	const preprocessors = preprocessor
+		? Array.isArray(preprocessor)
+			? preprocessor
+			: [preprocessor]
+		: [];
+	const result = new PreprocessResult(source, filename);
+	for (const preprocessor of preprocessors) {
+		if (preprocessor.markup) {
+			result.update_source(await process_markup(preprocessor.markup, result));
+		}
+		if (preprocessor.script) {
+			result.update_source(await process_tag('script', preprocessor.script, result));
+		}
+		if (preprocessor.style) {
+			result.update_source(await process_tag('style', preprocessor.style, result));
+		}
+	}
+
+	return result.to_processed();
+}
+```
 
 下是这个文件的主要功能：
 
