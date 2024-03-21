@@ -509,5 +509,6 @@ function update($$) {
 	}
 }
 ```
-TODO: 作用
+
+一言蔽之，就是把需要更新的组件给更新了。调用 `$$.update`,调用组件里的`$$.fragment.p`方法，执行`$$.after_update`的回调。
 ## 小结

@@ -46,8 +46,8 @@
 ## Svelte
 
 - `onMount`
-- `beforeUpdate`
-- `afterUpdate`
+- `beforeUpdate`：在 DOM 更新之前执行
+- `afterUpdate`：
 - `onDestroy`
 - `tick`
 

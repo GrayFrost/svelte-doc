@@ -4,51 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "8d07f1f9cc019eeb",
+        "id": "0cde03872d4edefd",
         "type": "tabs",
-        "dimension": 75.66137566137566,
+        "dimension": 69.07775768535262,
         "children": [
           {
-            "id": "724e3f3bba3ea452",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "25-【对比】lifecycle.md"
-              }
-            }
-          },
-          {
-            "id": "fac4af517fd2e6d9",
+            "id": "a970dcd3d303e537",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "35-【源码】compiler.md",
                 "mode": "source",
                 "source": false
               }
             },
-            "group": "e0739dd81f8b0a00"
+            "group": "9bd48163dad24077"
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
-        "id": "0cde03872d4edefd",
+        "id": "a891803f719d4f9c",
         "type": "tabs",
-        "dimension": 24.338624338624342,
+        "dimension": 30.92224231464738,
         "children": [
           {
-            "id": "8e7f6abd5e3057dd",
+            "id": "a955e31f0e73520b",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "25-【对比】lifecycle.md"
+                "file": "35-【源码】compiler.md"
               }
             },
-            "group": "e0739dd81f8b0a00"
+            "group": "9bd48163dad24077"
           }
         ]
       }
@@ -116,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "35-【源码】compiler.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "35-【源码】compiler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "25-【对比】lifecycle.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           },
@@ -187,18 +176,30 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fac4af517fd2e6d9",
+  "active": "a970dcd3d303e537",
   "lastOpenFiles": [
+    "37-【源码】流程.md",
+    "35-【源码】compiler.md",
+    "36-【源码】runtime.md",
+    "bak/33-【源码】源码.md",
+    "bak/37-【源码】流程.md",
+    "source code all.md",
+    "bak/34-【源码】源码1.md",
+    "bak/36-【源码】位运算.md",
+    "bak/源码3.md",
+    "bak/源码4.md",
+    "Pasted image 20240321141818.png",
+    "13-【进阶】动画.md",
+    "32-【对比】context.md",
+    "25-【对比】lifecycle.md",
     "lifecycle.DLmSwRQE.png",
     "Pasted image 20240321113020.png",
     "29-【对比】for.md",
     "28-【对比】if.md",
     "27-【对比】反应性.md",
     "26-【对比】slot.md",
-    "25-【对比】lifecycle.md",
     "16-【进阶】模板语法之其他.md",
     "14-【进阶】指令.md",
-    "13-【进阶】动画.md",
     "Pasted image 20240320172945.png",
     "Pasted image 20240320171637.png",
     "13-13.png",
@@ -207,24 +208,12 @@
     "11-【进阶】状态管理.md",
     "test83.gif",
     "test82.gif",
-    "32-【对比】context.md",
     "31-【对比】style.md",
     "12-【进阶】跨组件传值.md",
     "img/16-10.gif",
-    "img/16-9.gif",
-    "img/16-8.gif",
     "15-【进阶】特定标签.md",
     "10-【入门】样式.md",
     "30-【对比】ref.md",
-    "42-【实现】变量更新.md",
-    "43-【实现】IfBlock.md",
-    "source code all.md",
-    "44-【展望】生态.md",
-    "36-【源码】runtime.md",
-    "35-【源码】compiler.md",
-    "34-【源码】位运算.md",
-    "33-【源码】库.md",
-    "09-【入门】dom引用.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
