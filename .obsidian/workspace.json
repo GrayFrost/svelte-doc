@@ -4,16 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "a891803f719d4f9c",
+        "id": "a2d3373ecad8799b",
         "type": "tabs",
+        "dimension": 80.15873015873017,
         "children": [
           {
-            "id": "a955e31f0e73520b",
+            "id": "5176bdce7c6e7fa2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "32-【对比】context.md",
+                "mode": "source",
+                "source": false
+              }
+            },
+            "group": "f0eab9ce991bf11a"
+          }
+        ]
+      },
+      {
+        "id": "c03328002681a5df",
+        "type": "tabs",
+        "dimension": 19.841269841269842,
+        "children": [
+          {
+            "id": "be12e122780d4da8",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
-            }
+              "state": {
+                "file": "32-【对比】context.md"
+              }
+            },
+            "group": "f0eab9ce991bf11a"
           }
         ]
       }
@@ -81,6 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "32-【对比】context.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "32-【对比】context.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +144,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "32-【对比】context.md"
+              }
             }
           },
           {
@@ -148,12 +176,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "a955e31f0e73520b",
+  "active": "5176bdce7c6e7fa2",
   "lastOpenFiles": [
+    "test88.gif",
+    "10-【入门】样式.md",
+    "32-【对比】context.md",
+    "test87.gif",
+    "test86.gif",
+    "test85.gif",
     "01-【入门】背景.md",
     "img/01-14.png",
     "35-【源码】compiler.md",
-    "32-【对比】context.md",
     "31-【对比】style.md",
     "37-【源码】流程.md",
     "36-【源码】runtime.md",
@@ -178,14 +211,9 @@
     "Pasted image 20240320172945.png",
     "Pasted image 20240320171637.png",
     "13-13.png",
-    "test84.gif",
     "缓动方程.md",
     "11-【进阶】状态管理.md",
-    "test83.gif",
-    "test82.gif",
     "12-【进阶】跨组件传值.md",
-    "15-【进阶】特定标签.md",
-    "10-【入门】样式.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
