@@ -14,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "35-【源码】compiler.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,7 +34,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "35-【源码】compiler.md"
               }
             },
             "group": "f0eab9ce991bf11a"
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "35-【源码】compiler.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "35-【源码】compiler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           },
@@ -178,6 +178,9 @@
   },
   "active": "5176bdce7c6e7fa2",
   "lastOpenFiles": [
+    "36-【源码】runtime.md",
+    "34-【源码】位运算.md",
+    "13-【进阶】动画.md",
     "test99.gif",
     "test98.gif",
     "test97.gif",
@@ -188,14 +191,12 @@
     "Pasted image 20240325153144.png",
     "Pasted image 20240325153001.png",
     "test94.gif",
-    "test93.gif",
     "32-【对比】context.md",
     "10-【入门】样式.md",
     "01-【入门】背景.md",
     "35-【源码】compiler.md",
     "31-【对比】style.md",
     "37-【源码】流程.md",
-    "36-【源码】runtime.md",
     "bak/33-【源码】源码.md",
     "bak/37-【源码】流程.md",
     "source code all.md",
@@ -203,7 +204,6 @@
     "bak/36-【源码】位运算.md",
     "bak/源码3.md",
     "bak/源码4.md",
-    "13-【进阶】动画.md",
     "25-【对比】lifecycle.md",
     "29-【对比】for.md",
     "28-【对比】if.md",
