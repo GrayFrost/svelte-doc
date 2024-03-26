@@ -6,6 +6,7 @@
       {
         "id": "c03328002681a5df",
         "type": "tabs",
+        "dimension": 80.33509700176367,
         "children": [
           {
             "id": "be12e122780d4da8",
@@ -13,36 +14,43 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "33-【源码】库.md"
               }
             }
           },
           {
-            "id": "4e8746e212c498a0",
+            "id": "7fc3a4c8e629a62d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "27-【对比】reactivity.md",
+                "file": "33-【源码】库.md",
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "dd1bc762d81cc1de",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
+            },
+            "group": "65e34a230c37080b"
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
+      },
+      {
+        "id": "abe5287cabdfa8aa",
+        "type": "tabs",
+        "dimension": 19.66490299823633,
+        "children": [
+          {
+            "id": "2782e9cf913b98f5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "33-【源码】库.md"
+              }
+            },
+            "group": "65e34a230c37080b"
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -92,7 +100,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 327.5
+    "width": 200
   },
   "right": {
     "id": "431f4e44ad8839e8",
@@ -108,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "33-【源码】库.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "33-【源码】库.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "33-【源码】库.md"
               }
             }
           },
@@ -179,25 +187,28 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "dd1bc762d81cc1de",
+  "active": "7fc3a4c8e629a62d",
   "lastOpenFiles": [
+    "Pasted image 20240326155551.png",
+    "Pasted image 20240326155457.png",
+    "Pasted image 20240326155402.png",
+    "Pasted image 20240326153111.png",
+    "Pasted image 20240326152820.png",
+    "Pasted image 20240326152145.png",
+    "Pasted image 20240326152044.png",
+    "Pasted image 20240326151939.png",
+    "Pasted image 20240326151048.png",
+    "Pasted image 20240326150144.png",
+    "Pasted image 20240326150049.png",
+    "13-【进阶】动画.md",
+    "14-【进阶】指令.md",
+    "source code all.md",
     "27-【对比】reactivity.md",
     "README.md",
     "09-【入门】节点引用.md",
     "35-【源码】compiler.md",
     "36-【源码】runtime.md",
     "34-【源码】位运算.md",
-    "13-【进阶】动画.md",
-    "test99.gif",
-    "test98.gif",
-    "test97.gif",
-    "Pasted image 20240325160457.png",
-    "test96.gif",
-    "Pasted image 20240325153814.png",
-    "test95.gif",
-    "Pasted image 20240325153144.png",
-    "Pasted image 20240325153001.png",
-    "test94.gif",
     "32-【对比】context.md",
     "10-【入门】样式.md",
     "01-【入门】背景.md",
@@ -205,7 +216,6 @@
     "37-【源码】流程.md",
     "bak/33-【源码】源码.md",
     "bak/37-【源码】流程.md",
-    "source code all.md",
     "bak/34-【源码】源码1.md",
     "bak/36-【源码】位运算.md",
     "bak/源码3.md",
@@ -215,8 +225,6 @@
     "28-【对比】if.md",
     "26-【对比】slot.md",
     "16-【进阶】模板语法之其他.md",
-    "14-【进阶】指令.md",
-    "缓动方程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
