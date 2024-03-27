@@ -84,6 +84,9 @@ export default async function preprocess(source, preprocessor, options) {
 
 ## compile
 
+
+首先会将 parse 过程中拿到的语法树（包含 html，css，instance 和 module）转换为 Component，然后在 render_dom 中通过 code-red 中的 print 函数将component 的转换为 js 可运行代码，最终输出 complier 的结果
+
 将parse解析得到的语法树转成js文件
 
 语法的最终编译是来自[code-red](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FRich-Harris%2Fcode-red "https://github.com/Rich-Harris/code-red")的 print 将调整后的语法树转换成为代码
@@ -206,6 +209,8 @@ while (this.index < this.template.length) {
 
 TODO：script分为instance和module
 
+Instance 是指 script 标签中响应式的属性和方法，module 是使用 `<script context="module"` 声明 的无响应的变量和方法。
+
 script 的解析主要靠的是[code-red](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FRich-Harris%2Fcode-red "https://github.com/Rich-Harris/code-red")，它是基于[acorn](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Facornjs%2Facorn "https://github.com/acornjs/acorn")的封装
 
 #### fragment
@@ -232,10 +237,10 @@ export default function fragment(parser) {
 ```
 #### tag
 tag除了原生，还包括svelte:html, svelte:body, svelte:component, svelte:element等等
-
+TODO: 重写 tag 解析的内容以 `<` 作为标识，包括 HTMLElement、style标签、script标签以及用户自定义的 svelte 组件以及 svelte 实现的一些特殊标签如 `svelte:head` 、`svelte:options` 、`svelte:window` 以及`svelte:body` 等
 #### mustache
 mustache模板语法
-
+TODO: 重写 mustache 以 `{` 作为标识，识别的内容除了模板语法之外，还包括 svelte 的逻辑渲染(else……if、each)等语法、`{``@html``}`、`{``@debug}` 等
 #### text
 逻辑相对简单很多，记录`type: 'Text'`的数据节点：
 ```javascript

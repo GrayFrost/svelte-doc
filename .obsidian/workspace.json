@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "13-【进阶】动画.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "13-【进阶】动画.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "13-【进阶】动画.md"
               }
             }
           }
@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "13-【进阶】动画.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "13-【进阶】动画.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "13-【进阶】动画.md"
               }
             }
           },
@@ -187,18 +187,26 @@
   },
   "active": "fc69782002505dca",
   "lastOpenFiles": [
-    "34-【源码】位运算.md",
+    "14-【进阶】指令.md",
+    "17-【实战】TodoList之页面布局.md",
+    "18-【实战】TodoList之数据交互.md",
+    "19-【实战】Alert组件之简单传值.md",
+    "20-【实战】Alert组件之slot交互.md",
+    "21-【实战】Alert组件之动画.md",
+    "25-【对比】lifecycle.md",
+    "35-【源码】compiler.md",
+    "37-【源码】流程.md",
+    "Pasted image 20240327173206.png",
     "36-【源码】runtime.md",
+    "34-【源码】位运算.md",
     "41-【实现】遍历.md",
     "43-【实现】IfBlock.md",
     "Pasted image 20240327154422.png",
     "未命名.md",
-    "14-【进阶】指令.md",
     "13-【进阶】动画.md",
     "Pasted image 20240327142947.png",
     "test100.gif",
     "01-【入门】背景.md",
-    "35-【源码】compiler.md",
     "source code all.md",
     "33-【源码】库.md",
     "Pasted image 20240327103518.png",
@@ -207,22 +215,14 @@
     "Pasted image 20240327101927.png",
     "Pasted image 20240327101906.png",
     "Pasted image 20240326174611.png",
-    "Pasted image 20240326174503.png",
     "27-【对比】reactivity.md",
     "README.md",
     "09-【入门】节点引用.md",
     "32-【对比】context.md",
     "10-【入门】样式.md",
     "31-【对比】style.md",
-    "37-【源码】流程.md",
     "bak/33-【源码】源码.md",
     "bak/37-【源码】流程.md",
-    "bak/34-【源码】源码1.md",
-    "bak/36-【源码】位运算.md",
-    "bak/源码3.md",
-    "bak/源码4.md",
-    "25-【对比】lifecycle.md",
-    "29-【对比】for.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
