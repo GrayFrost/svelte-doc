@@ -115,6 +115,24 @@ count: {count}
 
 有了parseBlock方法，我们就可以在里面继续添加EachBlock、AwaitBlock等其他特殊标签的解析。
 
+```javascript
+addBtn.addEventListener('click', function() {
+        text = document.createTextNode('');
+        const div = document.createElement('div');
+        div.innerHTML = 'hello';
+        
+        box.appendChild(text);
+        box.appendChild(div);
+      })
+
+      removeBtn.addEventListener('click', function() {
+        if (text) {
+          console.log('zzh text', text.parentNode, text.nextElementSibling);
+          text.parentNode.removeChild(text.nextElementSibling);
+          text.parentNode.removeChild(text);
+        }
+      })
+      ```
 
 ## 完整代码
 ```javascript
