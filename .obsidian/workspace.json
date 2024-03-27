@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "33-【源码】库.md"
+                "file": "36-【源码】runtime.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "36-【源码】runtime.md",
                 "mode": "source",
                 "source": false
               }
@@ -45,7 +45,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "33-【源码】库.md"
+                "file": "36-【源码】runtime.md"
               }
             },
             "group": "65e34a230c37080b"
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "36-【源码】runtime.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "33-【源码】库.md",
+                "file": "36-【源码】runtime.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "33-【源码】库.md"
+                "file": "36-【源码】runtime.md"
               }
             }
           },
@@ -189,26 +189,26 @@
   },
   "active": "7fc3a4c8e629a62d",
   "lastOpenFiles": [
+    "source code all.md",
+    "36-【源码】runtime.md",
+    "35-【源码】compiler.md",
+    "34-【源码】位运算.md",
+    "33-【源码】库.md",
+    "Pasted image 20240327103518.png",
+    "Pasted image 20240327103417.png",
+    "Pasted image 20240327102832.png",
+    "Pasted image 20240327101927.png",
+    "Pasted image 20240327101906.png",
     "Pasted image 20240326174611.png",
     "Pasted image 20240326174503.png",
     "Pasted image 20240326172229.png",
     "Pasted image 20240326170819.png",
     "Pasted image 20240326170620.png",
-    "Pasted image 20240326170533.png",
-    "Pasted image 20240326170452.png",
-    "Pasted image 20240326165056.png",
-    "Pasted image 20240326155551.png",
-    "Pasted image 20240326155457.png",
-    "Pasted image 20240326155402.png",
     "13-【进阶】动画.md",
     "14-【进阶】指令.md",
-    "source code all.md",
     "27-【对比】reactivity.md",
     "README.md",
     "09-【入门】节点引用.md",
-    "35-【源码】compiler.md",
-    "36-【源码】runtime.md",
-    "34-【源码】位运算.md",
     "32-【对比】context.md",
     "10-【入门】样式.md",
     "01-【入门】背景.md",
