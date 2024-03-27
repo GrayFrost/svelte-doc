@@ -254,17 +254,38 @@ init(
 
 init的逻辑：
 - 进入`init`，首先设置当前组件为正在运行的组件，往组件的`$$`属性中挂载大量属性
-- 执行`instance`方法，`instance`接收三个参数，第一个参数是组件实例，第三个参数是一个方法，其实它就是`$$invalidate`（待会分析），执行后将返回值挂载到`$$.ctx`。
+- 执行`instance`方法，`instance`接收三个参数，第一个参数是组件实例，第三个参数是一个方法，其实它就是`$$invalidate`（待会分析），执行后将返回值挂载到`$$.ctx`。我们可以把`$$.ctx`理解为组件的上下文，每个组件都有自己的上下文，其中存储的是在`<script></script>`内定义的变量的值和涉及到变量更新的方法，Svelte会按照变量在组件内的声明顺序依次保存在`$$.ctx`数组当中，先保存变量，再变量方法。
 - 进行更新，`run_all($$.before_update)`在`mount_component`之前，对应了我们在生命周期里了解到的第一次`beforeUpdate`是在`onMount`之前执行的。
 - `create_fragment`创建组件的fragment，同时挂载到`$$.fragment`。`mount_component`挂载组件到页面上。
 - 执行`flush`方法。
 - 执行完这个组件的逻辑后，重置当前组件为父组件。
 
-每个 svelte 组件都会有自己的上下文，上下文存储的就是 script 标签内定义的变量的值。svelte 会为每个组件实例内定义的数据生成上下文，按照变量的声明顺序保存在一个名为 ctx 数组内
-
 ### instance
 
-可以理解为 instance方法是 svelte 组件的构造器。写在 script 里的代码，会被生成在 instance 方法里。每个组件实例都会调用一次形成自己的闭包，从而隔离各自的数据，通过 instance 方法返回的数组就是上下文。代码中的赋值语句，会被生成为数据更新逻辑。变量定义会被收集生成上下文数组
+我们可以把`instance`方法是理解成是svelte实例的执行器，里面包含的是一个组件应该如何运行的逻辑。我们在Svelte组件中写在`<script></script>`里的代码，会被编译进`instance`方法内。每个组件在执行`init`初始化时，会调用一次`instance`方法形成自己的闭包，从而达到数据隔离的目的。
+
+比如我们最开始的例子里：
+```javascript
+<script>
+	let count = 0;
+	const updateCount = () => {
+		count++;
+	}
+</script>
+```
+
+被编译后，变成：
+```javascript
+function instance($$self, $$props, $$invalidate) {
+	let count = 0;
+
+	const updateCount = () => {
+		$$invalidate(0, count++, count);
+	};
+
+	return [count, updateCount];
+}
+```
 
 #### `$$invalidate`
 ```typescript
@@ -280,9 +301,10 @@ init的逻辑：
 - 首先是编译器将我们原来的赋值代码进行了更改，将`count++`转变成`$$invalidate(0, count++, count)`，看下`$$invalidate`的三个参数`(i, ret, ...rest)`：i表示是组件内的第几个变量，ret是表达式，`...rest`是剩余参数
 - 首先是进行赋值`($$.ctx[i] = value)`，然后通过`not_equal`判断赋值前后的变量是否改变，如果改变了，通过`make_dirty`标记组件为dirty（非常关键！！！）
 
+调用`$$invalidate`，会对某个改动的变量进行标记，然后在微任务中调用`flush`函数，根据变量改动的dirty标记进行局部更新。
 
-每个数据的赋值语句，svelte都会生成对`$$invalidate`的调用，invalidate的调用主要做的是对某个改动的变量进行标记，然后在微任务中调用patch函数，根据变量改动的脏标记进行局部更新
 ##### make_dirty
+
 源码路径：`packages/svelte/src/runtime/internal/Component.js`
 ```javascript
 function make_dirty(component, i) {
@@ -295,14 +317,13 @@ function make_dirty(component, i) {
 }
 ```
 
-这段代码是在JavaScript框架Svelte中使用的，用于标记组件的某个部分（由参数i指定）为"dirty"，即需要更新。这是Svelte的响应式系统的一部分，当组件的状态改变时，它会自动更新DOM。
+`make_dirty`的逻辑如下：
+- 首先检查组件是否已经被标记为dirty。如果没有（Svelte中约定，`$$.dirty`数组的第一项如果是-1，则非dirty)，那么将组件添加到dirty_components数组中，并调度一个更新。
+- 将组件的dirty标志位数组原来是`[-1]`的填充为`[0]`，TODO
+- 最后将参数i指定的部分标记为dirty，通过将dirty标志位数组的相应元素设置为1来实现的。终于轮到位运算上场！
 
-具体来说，这个函数的工作原理如下：
 
-首先，它检查组件是否已经被标记为"dirty"。如果没有（即`component.$$.dirty[0] === -1`),那么它将组件添加到dirty_components数组中，并调度一个更新。
-然后，它将组件的dirty标志位数组填充为0，表示所有部分都已清理。
-最后，它将参数i指定的部分标记为"dirty"。这是通过将dirty标志位数组的相应元素设置为1来实现的。这里使用了位操作，以便在一个整数中存储多个标志位。
-总的来说，这个函数的目的是在组件的状态改变时，确保只有需要更新的部分才会被重新渲染，从而提高性能。
+TODO: 详细演示
 
 ###### schedule_update
 
@@ -317,8 +338,10 @@ export function schedule_update() {
 	}
 }
 ```
-TODO:  作用
+在`Promise.then`微任务中执行更新。
 ### create_fragment
+
+`create_fragment`是Svelte文件编译后输出的一个方法，里面包含了组件具体的生命周期。
 ```javascript
 function create_fragment(ctx) {
 	let button;
@@ -359,18 +382,9 @@ function create_fragment(ctx) {
 }```
 `create_fragment`的逻辑：
 - `create_fragment`接收一个参数ctx，我们通过前面知道，这个ctx就是`instance`方法执行后的返回值，ctx是一个数组，包含了数据和用于更新数据的方法，比如：
-```javascript
-function instance($$self, $$props, $$invalidate) {
-	let count = 0;
+![[Pasted image 20240327154422.png]]
 
-	const updateCount = () => {
-		$$invalidate(0, count++, count);
-	};
-
-	return [count, updateCount];
-}
-```
-- `create_fragment`方法返回一个对象，这个对象内包含 `c,m,p,i,o,d`等特殊名称的函数，这些函数并非编译混淆，而是 Fragment 内部的生命周期缩写。
+- `create_fragment`方法返回一个对象，这个对象内包含 `c,m,p,i,o,d`等特殊名称的函数，这些函数并非编译混淆，而是Fragment内部的生命周期缩写，这个对象会挂载到`$$.fragment`上。
 ```javascript
 // 源码路径：packages/svelte/src/runtime/internal/private.d.ts
 export interface Fragment {
@@ -393,6 +407,7 @@ export interface Fragment {
 
 #### 封装
 
+源码路径：`packages/svelte/src/runtime/internal/dom.js`
 ```typescript
 export function append(target: Node, node: Node) {
 	target.appendChild(node);
@@ -421,7 +436,9 @@ export function text(data: string) {
 	return document.createTextNode(data);
 }
 ```
-## mount_component
+
+### mount_component
+
 源码路径：`packages/svelte/src/runtime/internal/Component.js
 ```javascript
 export function mount_component(component, target, anchor) {
@@ -443,7 +460,7 @@ export function mount_component(component, target, anchor) {
 ```
 调用fragment的`m()`方法，这里我们可以看到，会调用`onMount`方法，如果`onMount`有返回值，则相当于是`destroy`方法。
 
-## flush
+### flush
 
 源码路径：`packages/svelte/src/runtime/internal/scheduler.js
 ```javascript
@@ -497,9 +514,9 @@ export function flush() {
 - 调用所有flush回调函数。清除已调用的回调函数列表。
 - 恢复保存的当前组件。
 
-这个函数的主要目的是确保所有的组件都被正确地更新和渲染，同时避免因为错误或无限循环导致的问题
+这个函数的主要目的是确保所有的组件都被正确地更新和渲染，同时避免因为错误或无限循环导致的问题。
 
-### update
+#### update
 ```typescript
 function update($$) {
 	if ($$.fragment !== null) {
@@ -518,15 +535,105 @@ function update($$) {
 
 
 
+## 更新流程
 
-1. 事件或者其他操作出发更新流程
-2. 在instance的`$$invalidate`方法中，比较操作前后ctx中的值有没有发生改变，如果发生改变则继续往下
-3. 执行make_dirty函数标记为脏值，添加带有脏值需要更新的组件，从而继续触发更新
-4. 执行schedule_update函数
-5. 执行flush函数，将所有的脏值组件取出，以此执行其update方法
-6. 在update方法中，执行的是Fragment自身的p方法，p方法做的事情就是确定需要更新组件，并操作和更新dom组件，从而完成了最后的流程
+我们重新整理下组件的更新逻辑：
+- 用户执行具体操作触发更新流程
+- 在instance的`$$invalidate`方法中，通过`not_equal`比较操作前后`$$.ctx`中的值是否发生了改变，如果发生改变则继续执行`make_dirty`
+- 执行`make_dirty`函数标记为脏值，添加带有脏值需要更新的组件，从而继续触发更新
+- 执行`schedule_update`函数
+- 执行`flush`函数，取出所有的脏值组件，执行update方法`update(component.$$)`
+- 在`update`方法中，执行的是组件的`fragment.p`方法，p方法的逻辑就是确定需要更新组件，并操作和更新dom组件，从而完成了最后的流程
 
+我们用以下例子来进行说明：
+```html
+<script>
+  let count = 0;
+  let count2 = 0;
+</script>
 
-TODO: 演示两个例子，及其编译后的js代码。第一个例子，直接简单的hello world，第二个例子，count更新。
+<button on:click={() => count++}>add</button>
+<button on:click={() => count2++}>add2</button>
+{count} {count2}
+```
 
+它的编译结果如下：
+```javascript
+/* App.svelte generated by Svelte v4.2.12 */
+import {
+	...
+} from "svelte/internal";
+
+function create_fragment(ctx) {
+	...
+
+	return {
+		c() {
+			button0 = element("button");
+			button0.textContent = "add";
+			t1 = space();
+			button1 = element("button");
+			button1.textContent = "add2";
+			t3 = space();
+			t4 = text(/*count*/ ctx[0]);
+			t5 = space();
+			t6 = text(/*count2*/ ctx[1]);
+		},
+		m(target, anchor) {
+			...
+
+			if (!mounted) {
+				dispose = [
+					listen(button0, "click", /*click_handler*/ ctx[2]),
+					listen(button1, "click", /*click_handler_1*/ ctx[3])
+				];
+
+				mounted = true;
+			}
+		},
+		p(ctx, [dirty]) {
+			if (dirty & /*count*/ 1) set_data(t4, /*count*/ ctx[0]);
+			if (dirty & /*count2*/ 2) set_data(t6, /*count2*/ ctx[1]);
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			...
+		}
+	};
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let count = 0;
+	let count2 = 0;
+	const click_handler = () => $$invalidate(0, count++, count);
+	const click_handler_1 = () => $$invalidate(1, count2++, count2);
+	return [count, count2, click_handler, click_handler_1];
+}
+
+class App extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance, create_fragment, safe_not_equal, {});
+	}
+}
+
+export default App;
+```
+
+- 当我们点击按钮1时，执行`click_handler`方法，内部调用`$$invalidate(0, count++, count)`
+- `$$invalidate`内部执行`not_equal($$.ctx[i], $$.ctx[i] = value)`，i此时是0，`$$.ctx[0]`是0，执行`$$.ctx[0] = 1`之后，和原来的值不一样，执行`make_dirty`
+- 首先是初始`dirty[0]`是-1，先填充为`dirty.fill(0)`，变成`dirty[0]`是0。执行`component.$$.dirty[(i / 31) | 0] |= 1 << i % 31`，`0 % 31`是0，`1<<0`仍是1，`(0 / 31) | 0`得到0，我们需要注意`component.$$.dirty[xxx] |= xxx`中间是一个位或运算。`0 | 1`得到1，最终`component.$$.dirty[0] = 1`。
+- 微任务中执行`schedule_update`里的逻辑，调用`fragment.p`方法，此时`[dirty]`数组是`[1]`，`1 && 1`是1，能够执行`set_data(t4, /*count*/ ctx[0])`，`set_data`方法内通过设置`document.createTextNode().data`的值来更新页面的展示。`1 & 2`是0，不执行`set_data(t6, /*count2*/ ctx[1])`。之后`dirty`数组重新变成`[-1]`
+```javascript
+p(ctx, [dirty]) {
+	if (dirty & /*count*/ 1) set_data(t4, /*count*/ ctx[0]);
+	if (dirty & /*count2*/ 2) set_data(t6, /*count2*/ ctx[1]);
+}
+```
+
+- 当点击按钮2时，执行`click_handler`方法，内部调用`$$invalidate(1, count++, count)`
+- `$$invalidate`内部执行`not_equal($$.ctx[i], $$.ctx[i] = value)`，i此时是1，`$$.ctx[1]`是1，执行`$$.ctx[1] = 1`之后，和原来的值不一样，执行`make_dirty`
+-  依旧是初始`dirty[0]`是-1，先填充为`dirty.fill(0)`，变成`dirty[0]`是0。执行`component.$$.dirty[(i / 31) | 0] |= 1 << i % 31`，`1 % 31`是1，`1<<1`是2，`(1 / 31) | 0`得到0，`0 | 2`得到2，最终`component.$$.dirty[0] = 2`。
+- 执行`schedule_update`，调用`fragment.p`方法，此时`[dirty]`数组是`[2]`，`2 && 2`是1，能够执行`set_data(t6, /*count2*/ ctx[1])`，`2 & 1`是0，不执行`set_data(t4, /*count*/ ctx[0])`
 ## 小结
