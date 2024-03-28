@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "37-【源码】流程.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "37-【源码】流程.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "37-【源码】流程.md"
               }
             }
           }
@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "37-【源码】流程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "13-【进阶】动画.md",
+                "file": "37-【源码】流程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "13-【进阶】动画.md"
+                "file": "37-【源码】流程.md"
               }
             }
           },
@@ -187,6 +187,13 @@
   },
   "active": "fc69782002505dca",
   "lastOpenFiles": [
+    "bak/Svelte.mindnode",
+    "Svelte.png",
+    "svelte-mind.webp",
+    "35-【源码】compiler.md",
+    "32-【对比】context.md",
+    "33-【源码】库.md",
+    "13-【进阶】动画.md",
     "14-【进阶】指令.md",
     "17-【实战】TodoList之页面布局.md",
     "18-【实战】TodoList之数据交互.md",
@@ -194,7 +201,6 @@
     "20-【实战】Alert组件之slot交互.md",
     "21-【实战】Alert组件之动画.md",
     "25-【对比】lifecycle.md",
-    "35-【源码】compiler.md",
     "37-【源码】流程.md",
     "Pasted image 20240327173206.png",
     "36-【源码】runtime.md",
@@ -203,26 +209,20 @@
     "43-【实现】IfBlock.md",
     "Pasted image 20240327154422.png",
     "未命名.md",
-    "13-【进阶】动画.md",
     "Pasted image 20240327142947.png",
     "test100.gif",
     "01-【入门】背景.md",
     "source code all.md",
-    "33-【源码】库.md",
     "Pasted image 20240327103518.png",
     "Pasted image 20240327103417.png",
     "Pasted image 20240327102832.png",
     "Pasted image 20240327101927.png",
-    "Pasted image 20240327101906.png",
-    "Pasted image 20240326174611.png",
     "27-【对比】reactivity.md",
     "README.md",
     "09-【入门】节点引用.md",
-    "32-【对比】context.md",
     "10-【入门】样式.md",
     "31-【对比】style.md",
     "bak/33-【源码】源码.md",
-    "bak/37-【源码】流程.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",

@@ -437,12 +437,25 @@ TODO: 拿其中一个举例
 总的来说，`walk_instance_js_post_template()`函数的主要任务是在模板解析之后处理实例脚本，包括后处理AST，提升声明，提取响应式声明，以及检查标签的动态内容
 ## render_dom
 
+源码路径：`packages/svelte/src/compiler/compile/render_dom/index.js`
+
+code-red
 #### Renderer
+
+#### style
+
+####
 
 ## generate
 隶属于`Component`中的一个方法
 
 调用code-red的print方法。
+
+### walk
+
+### create_module
+
+### print
 
 
 ## 小结
