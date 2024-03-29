@@ -2,7 +2,7 @@
 
 ## React
 
-![[Pasted image 20240321113020.png]] 
+![](./img/25-1.png) 
 [图片来源](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
 - `constructor`：一个构造器，里面可以接收一个父组件传来的props然后初始化state值。
@@ -18,7 +18,7 @@
 
 ## Vue
 
-![[lifecycle.DLmSwRQE.png]]
+![](./img/25-2.png)
 [图片来源](https://vuejs.org/guide/essentials/lifecycle)
 
 在Vue 2.x中，
@@ -45,7 +45,7 @@
 
 ## Svelte
 
-![[Pasted image 20240329110832.png]]
+![](./img/25-3.png)
 
 - `onMount`
 - `beforeUpdate`：在 DOM 更新之前执行
