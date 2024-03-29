@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "15-【进阶】特定标签.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "15-【进阶】特定标签.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "15-【进阶】特定标签.md"
               }
             }
           }
@@ -94,8 +94,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -115,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "15-【进阶】特定标签.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "36-【源码】runtime.md",
+                "file": "15-【进阶】特定标签.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "36-【源码】runtime.md"
+                "file": "15-【进阶】特定标签.md"
               }
             }
           },
@@ -186,25 +185,31 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "dede31b1f9d1ac31",
+  "active": "fc69782002505dca",
   "lastOpenFiles": [
+    "img/15-16.gif",
+    "img/15-15.gif",
+    "img/15-14.gif",
+    "15-16.gif",
+    "15-15.gif",
+    "15-14.gif",
+    "14-【进阶】指令.md",
+    "12-【进阶】跨组件传值.md",
+    "11-【进阶】状态管理.md",
+    "10-【入门】样式.md",
+    "09-【入门】节点引用.md",
+    "08-【入门】插槽.md",
+    "36-【源码】runtime.md",
+    "img/06-5.gif",
+    "06-5.gif",
     "img/05-6.gif",
     "img/05-5.gif",
     "05-6.gif",
-    "05-5.gif",
-    "img/04-12.png",
-    "04-12.png",
-    "img/03-2.png",
-    "03-2.png",
-    "img/03-1.png",
-    "03-1.png",
     "34-【源码】位运算.md",
     "32-【对比】context.md",
     "25-【对比】lifecycle.md",
-    "Pasted image 20240329110832.png",
     "15-【进阶】特定标签.md",
     "13-【进阶】动画.md",
-    "08-【入门】插槽.md",
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
     "02-【入门】安装与使用.md",
@@ -214,17 +219,11 @@
     "bak/Svelte.mindnode",
     "35-【源码】compiler.md",
     "33-【源码】库.md",
-    "14-【进阶】指令.md",
     "17-【实战】TodoList之页面布局.md",
     "18-【实战】TodoList之数据交互.md",
     "19-【实战】Alert组件之简单传值.md",
     "20-【实战】Alert组件之slot交互.md",
     "21-【实战】Alert组件之动画.md",
-    "36-【源码】runtime.md",
-    "41-【实现】遍历.md",
-    "43-【实现】IfBlock.md",
-    "未命名.md",
-    "source code all.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
