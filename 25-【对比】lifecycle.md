@@ -45,11 +45,13 @@
 
 ## Svelte
 
+![[Pasted image 20240329110832.png]]
+
 - `onMount`
 - `beforeUpdate`：在 DOM 更新之前执行
 - `afterUpdate`：
-- `onDestroy`
-- `tick`
+- `onDestroy`：
+- `tick`：
 
 TODO
 ## 小结
