@@ -43,7 +43,7 @@ export default {
 如无意外，相信读者朋友们能在页面上看到玫瑰色的app字样。
 
 
-从[dribble](https://dribbble.com/shots/12342455-ToDo-List-042-DailyUI)上吸取灵感，挑选了一些好看的颜色。在tailwind.config.js上配置
+从[dribble](https://dribbble.com/shots/12342455-ToDo-List-042-DailyUI)上获取灵感，挑选了一些好看的颜色。在`tailwind.config.js`上配置
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -59,7 +59,8 @@ export default {
     },
   },
   plugins: [],
-}```
+}
+```
 
 ## 数据结构
 
@@ -141,7 +142,7 @@ App.svelte中引入该组件后，页面展示如下：
 ![](./img/17-3.png)
 
 继续完善Tabs.svelte的内容：
-```javascript
+```html
 <script>
   let tabsClass = "grid grid-cols-3 gap-4 h-12 my-4";
   let tabClass =
@@ -246,6 +247,7 @@ App.svelte中引入该组件后，页面展示如下：
 ```
 这里我们mock了两个待办项的假数据，一个状态未完成，另一个状态已完成。
 最后，我们在App.svelte中引用List.svelte并使用它。
+
 ```html
 <script>
   import Input from './Input.svelte';
@@ -270,3 +272,5 @@ App.svelte中引入该组件后，页面展示如下：
 当然，此时的页面功能仍不完整，比如无法添加待办项、Tab切换没有样式、待办项勾选后没有放置到对应的Tab栏等等。在下一章，我们将完善剩余的功能。
 
 ## 小结
+
+本章中，我们搭建了待办项应用的基本布局。

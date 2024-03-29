@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "15-【进阶】特定标签.md"
+                "file": "18-【实战】TodoList之数据交互.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "15-【进阶】特定标签.md",
+                "file": "18-【实战】TodoList之数据交互.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "15-【进阶】特定标签.md"
+                "file": "18-【实战】TodoList之数据交互.md"
               }
             }
           }
@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "15-【进阶】特定标签.md",
+                "file": "18-【实战】TodoList之数据交互.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "15-【进阶】特定标签.md",
+                "file": "18-【实战】TodoList之数据交互.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "15-【进阶】特定标签.md"
+                "file": "18-【实战】TodoList之数据交互.md"
               }
             }
           },
@@ -187,6 +187,8 @@
   },
   "active": "fc69782002505dca",
   "lastOpenFiles": [
+    "17-【实战】TodoList之页面布局.md",
+    "15-【进阶】特定标签.md",
     "img/15-16.gif",
     "img/15-15.gif",
     "img/15-14.gif",
@@ -204,11 +206,9 @@
     "06-5.gif",
     "img/05-6.gif",
     "img/05-5.gif",
-    "05-6.gif",
     "34-【源码】位运算.md",
     "32-【对比】context.md",
     "25-【对比】lifecycle.md",
-    "15-【进阶】特定标签.md",
     "13-【进阶】动画.md",
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
@@ -219,7 +219,6 @@
     "bak/Svelte.mindnode",
     "35-【源码】compiler.md",
     "33-【源码】库.md",
-    "17-【实战】TodoList之页面布局.md",
     "18-【实战】TodoList之数据交互.md",
     "19-【实战】Alert组件之简单传值.md",
     "20-【实战】Alert组件之slot交互.md",

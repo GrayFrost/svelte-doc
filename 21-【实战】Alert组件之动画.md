@@ -1,3 +1,4 @@
+## 动画
 ```javascript
 <script>
   import { circInOut } from "svelte/easing";
@@ -65,10 +66,10 @@ const animationEnd = () => {
   closable
 />
 ```
-
 ![](./img/21-1.gif)
 
-最后附上完整代码
+## 完整代码
+最后附上完整代码：
 ```html
 <script>
   import { createEventDispatcher } from "svelte";
@@ -221,3 +222,5 @@ const animationEnd = () => {
 ```
 
 ## 小结
+
+本章为Alert组件添加了动画。

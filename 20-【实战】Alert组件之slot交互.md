@@ -1,19 +1,20 @@
+## api
 ![](./img/19-2.png)
 接下来我们完成剩余的api，主要有afterClose回调、closeText、description、icon、message
 
 在Svelte中，我们不能像react那样直接把组件当成一个props来传递，因此对于一些既支持传数据又支持传组件的参数，我们的在Svelte的实现是既支持传值，又支持slot定义。然后在组件内容判断是否有slot值。
 ```javascript
-  function getPropsSlot(slots, props, prop = 'default') {
-    if (props && props[prop]) {
-      return props[prop];
-    }
-    if (slots && slots[prop]) {
-      return slots[prop];
-    }
-    return null;
+function getPropsSlot(slots, props, prop = 'default') {
+  if (props && props[prop]) {
+    return props[prop];
   }
-  const slots = $$slots;
-  const props = $$props;
+  if (slots && slots[prop]) {
+    return slots[prop];
+  }
+  return null;
+}
+const slots = $$slots;
+const props = $$props;
 ```
 ### closeText
 ```javascript
@@ -23,38 +24,37 @@ const closeTextData = getPropsSlot(slots, props, 'closeText');
 const hasCloseTextSlot = !!slots?.closeText;
 
 if (closeTextData) {
-    closable = true;
+  closable = true;
 }
 ```
 
 修改html的内容
 ```html
-    {#if closable}
-      <a
-        href={""}
-        on:click|preventDefault={handleClose}
-        class={`${prefixCls}-close-icon`}
-        role="button"
-        tabindex="0"
-      >
-        {#if hasCloseTextSlot}
-          <slot name="closeText" />
-        {:else if closeTextData}
-          {closeText}
-        {:else}
-          <i class={`anticon anticon-close ${prefixCls}-icon`}>
-            <CloseIcon />
-          </i>
-        {/if}
-      </a>
+{#if closable}
+  <a
+    href={""}
+    on:click|preventDefault={handleClose}
+    class={`${prefixCls}-close-icon`}
+    role="button"
+    tabindex="0"
+  >
+    {#if hasCloseTextSlot}
+      <slot name="closeText" />
+    {:else if closeTextData}
+      {closeText}
+    {:else}
+      <i class={`anticon anticon-close ${prefixCls}-icon`}>
+        <CloseIcon />
+      </i>
     {/if}
+  </a>
+{/if}
 ```
 
 App.svelte中试验一下
 ```html
 <script>
   import Alert from "./Alert.svelte";
-
 </script>
 
 <Alert closeText="Close Text">Text</Alert>
@@ -158,7 +158,7 @@ SuccessIcon.svelte
 let iconTheme = 'filled';
 
 if (!!descriptionData) {
-    iconTheme = 'outlined';
+  iconTheme = 'outlined';
 }
 ```
 
@@ -212,7 +212,7 @@ const hasIconSlot = !!slots?.icon;
 {/if}
 ```
 
-我们自定义一个Icon组件，笔者这里就不列出这部分代码了，读者朋友们可以自行定义
+我们自定义一个Icon组件，笔者这里就不列出这部分代码了，读者朋友们可以自行定义。
 在App.svelte中验证一下
 
 ```html
@@ -236,3 +236,4 @@ const hasIconSlot = !!slots?.icon;
 我们还剩余一部分内容，那就是关闭时的动画，在下一章中进行讲解。
 
 ## 小结
+本章中，我们完善了剩余的Alert组件对外提供的api。

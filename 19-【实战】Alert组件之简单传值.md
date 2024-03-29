@@ -1,3 +1,4 @@
+
 也许实现一个TodoList项目没有过瘾，这里笔者为大家带来第二个实战内容：使用Svelte来实现[Antd](https://ant-design.antgroup.com/index-cn)的其中一个组件。
 
 这里笔者挑选的Antd组件是Alert组件
@@ -8,17 +9,18 @@
 笔者选择了3.X版本的Antd的[Alert](https://3x.ant.design/components/alert-cn/)组件作为演示内容。
 ![](./img/19-2.png)
 
+## 安装依赖
+
 ```bash
 npm create vite@latest svelte-antd-alert -- --template svelte
 ```
 
-这次我们选择的less作为样式预处理器
-
+这次我们选择的Less作为样式预处理器：
 ```bash
 npm install svelte-preprocess-less less -D
 ```
 
-vite.config.js
+修改`vite.config.js`的配置：
 ```javascript
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -38,6 +40,7 @@ export default defineConfig({
 npm install classnames
 ```
 
+## 样式
 alert.less内容如下：
 ```less
 @alert-prefix-cls: 'ant-alert';
@@ -150,7 +153,7 @@ alert.less内容如下：
     outline: none;
     cursor: pointer;
     text-decoration: none;
-	color: @alert-close-color;
+	  color: @alert-close-color;
 
     .@{iconfont-css-prefix}-close {
       color: @alert-close-color;
@@ -221,7 +224,7 @@ alert.less内容如下：
 }
 ```
 
-
+## api
 
 在本章，我们先实现banner、closable、showIcon和type这几个传参的功能，因为这几个参数只单是接收参数，没有和slot的联动。
 
