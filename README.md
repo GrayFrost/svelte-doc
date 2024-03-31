@@ -41,8 +41,8 @@
 - [ ] slot
 - [ ] reactivity
 - [ ] if
-- [ ]  for
-- [ ]  ref
+- [ ] for
+- [ ] ref
 - [ ] style
 - [ ] context
 
