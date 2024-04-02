@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "25-【对比】lifecycle.md"
+                "file": "09-【入门】节点引用.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "09-【入门】节点引用.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "25-【对比】lifecycle.md"
+                "file": "09-【入门】节点引用.md"
               }
             }
           }
@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "09-【入门】节点引用.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "25-【对比】lifecycle.md",
+                "file": "09-【入门】节点引用.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "25-【对比】lifecycle.md"
+                "file": "09-【入门】节点引用.md"
               }
             }
           },
@@ -187,6 +187,9 @@
   },
   "active": "fc69782002505dca",
   "lastOpenFiles": [
+    "08-【入门】插槽.md",
+    "06-【入门】动态属性.md",
+    "25-【对比】lifecycle.md",
     "img/13-29.gif",
     "img/13-28.gif",
     "img/13-27.gif",
@@ -197,7 +200,6 @@
     "img/13-22.png",
     "img/13-21.gif",
     "img/13-20.png",
-    "img/13-19.gif",
     "33-【源码】库.md",
     "18-【实战】TodoList之数据交互.md",
     "17-【实战】TodoList之页面布局.md",
@@ -207,11 +209,9 @@
     "11-【进阶】状态管理.md",
     "10-【入门】样式.md",
     "09-【入门】节点引用.md",
-    "08-【入门】插槽.md",
     "36-【源码】runtime.md",
     "34-【源码】位运算.md",
     "32-【对比】context.md",
-    "25-【对比】lifecycle.md",
     "13-【进阶】动画.md",
     "04-【入门】组件与属性.md",
     "03-【入门】数据与方法.md",
