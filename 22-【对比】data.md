@@ -6,7 +6,7 @@
 ## React
 
 在React中，使用的是[jsx](https://legacy.reactjs.org/docs/introducing-jsx.html)的语法。
-元素标签内使用变量的方式是把变量放置在 `{}`单个花括号内。
+元素标签内使用变量的方式是把变量放置在`{}`单个花括号内。
 
 ### function component
 
@@ -106,7 +106,7 @@ export default {
 ```
 
 ### 双向绑定
-在vue中，使用v-model来进行双向绑定。
+在vue中，使用`v-model`来进行双向绑定。
 
 ```html
 <template>
@@ -142,10 +142,10 @@ Svelte元素标签中使用变量的方式和React相同，使用单个花括号
 <div>{ obj.a }</div> // 正确
 ```
 
-可以看到，变量声明在svelte中的声明相比其他两个库，写起来要简介不少，和我们平时直接使用js来声明变量无异。
+可以看到，变量声明在Svelte中的声明相比其他两个库，写起来要简介不少，和我们平时直接使用js来声明变量无异。
 
 ### 双向绑定
-在Svelte中，如果我们要使用双向绑定，则写法如下
+在Svelte中，如果我们要使用双向绑定，则写法如下：
 
 ```html
 <script>

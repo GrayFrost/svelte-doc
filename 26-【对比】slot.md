@@ -14,7 +14,7 @@ export default function Page() {
 }
 ```
 
-在子组件中，通过props中的children属性来接收插槽内容。
+在子组件中，通过props中的`children`属性来接收插槽内容。
 ```javascript
 // Child1.jsx
 export default function SlotContainer1(props) {
@@ -55,6 +55,7 @@ export default function SlotContainer2(props) {
 ```
 
 ### slot传值
+
 在实际业务开发中，当然不可能都是简单的直接在子组件内填充静态内容，往往涉及到组件内部希望往插槽的内容传递数据。最常见的例子就是表格组件，笔者这里举个伪代码的例子：
 ```javascript
 <Table data={list}>
@@ -79,7 +80,6 @@ export default function Father() {
   );
 } 
 ```
-
 
 ## Vue
 
@@ -108,6 +108,7 @@ import SlotContainer1 from "./Child1.vue";
 ### 具名slot
 
 在页面中，除了往组件标签内插入默认内容外，还能通过`v-slot`标签来表示往具体名称的插槽中填值，`#name`的表示形式是`v-slot:name`的简写。
+
 ```html
 <!-- Father.vue -->
 <template>

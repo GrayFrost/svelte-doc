@@ -1,24 +1,25 @@
 ## React
 
-在React中，我们可以灵活地操作数组类型的数据，如果要把数组数据以列表的形式展示到页面上，jsx允许我们正常地使用数组支持的方法，比如map、forEach等。
-在function component的return中或者class component的render方法的return中，我们通常直接使用map来返回列表：
+在React中，我们可以灵活地操作数组类型的数据，如果要把数组数据以列表的形式展示到页面上，jsx允许我们正常地使用数组支持的方法，比如map、forEach等。  
+
+在`function component`的`return`中或者`class component`的`render`方法的`return`中，我们通常直接使用map来返回列表：
 ```javascript
 function FunctionComponent() {
-	return (
-		list.map((item, index) => {
-			return 内容;
-		})
-	)
+  return (
+    list.map((item, index) => {
+      return 内容;
+    })
+  )
 }
 
 class ClassComponent extends React.Component {
-	render() {
-		return (
-			list.map((item, index) => {
-				return 内容;
-			})
-		)
-	}
+  render() {
+    return (
+      list.map((item, index) => {
+        return 内容;
+      })
+    )
+  }
 }
 ```
 
@@ -115,10 +116,10 @@ export default function Page() {
   );
 }
 ```
-![[test76.gif]]
+![](./img/29-1.gif)
 我们可以看到，我们在两个不同的列表中，同样是在Foo输入框中输入值，但使用index作为key的输入框，在添加了新的输入框后，表现异常，原来在Foo输入框的值，一直存在在第一个输入框中，而使用id作为key的输入框则表现正常。
 
-key 帮助 React 识别哪些元素改变了，比如被添加或删除。如果列表项目的顺序可能会变化，不建议使用索引来用作 key 值，因为这样做会导致性能变差，还可能引起组件状态的问题。这种异常表现在Vue和Svelte中都存在。
+key可以帮助React识别出哪些元素改变了，比如被添加或删除。如果列表项目的顺序可能会变化，不建议使用索引来用作key值，因为这样做会导致性能变差，还可能引起组件状态的问题。这种异常表现在Vue和Svelte中都存在。
 
 ## Vue
 
@@ -265,3 +266,4 @@ export default {
 </div>
 ```
 ## 小结
+本章我们了解了在三大框架中如何使用循环。

@@ -42,7 +42,7 @@ export default function Child(props) {
 }
 ```
 
-在class component中的使用大同小异：
+在`class component`中的使用大同小异：
 ```javascript
 import React from 'react';
 
@@ -70,10 +70,11 @@ export default class Father extends React.Component {
 }
 ```
 
-React接收props需要考虑组件重复渲染的问题，为此，可以结合memo(), useMemo, useCallback, shouldComponentUpdate等一系列优化的方法来使用。
+React接收props需要考虑组件重复渲染的问题，为此，可以结合`memo()`、 `useMemo`、`useCallback`、`shouldComponentUpdate`等一系列优化的方法来使用。
 
 ### 类型限定
-组件通过props接收外部传递的值，然而如果传递的值的类型不符合组件的要求，可能会导致组件内的逻辑错误，因此，限定props的传值类型是很有必要的。
+组件通过props接收外部传递的值，然而如果传递的值的类型不符合组件的要求，可能会导致组件内的逻辑错误，因此，限定props的传值类型是很有必要的。  
+
 在React中，可以如下进行类型限定：
 
 ```javascript
@@ -147,6 +148,7 @@ MyComponent.propTypes = {
 Vue使用的是单文件的组织形式，在一个文件中，我们在template这种写html内容，然后分别在script标签内和style标签内定义组件的脚本和样式。
 
 在Vue中，父组件将数据以`:key="value"`或`key="value"`的形式向子组件传值（传变量时使用`:key`，传常量时使用`key`）；以`@function="callback"`的形式来监听子组件派发的事件。
+
 ```html
 <!-- Father.vue -->
 <template>
@@ -326,7 +328,8 @@ export default {
 ```
 
 当我们传递了错误的类型时，可以看到控制台的警告信息。
-![[Pasted image 20240311154050.png]]
+![](./img/24-1.png)
+
 ## Svelte
 Svelte同样使用的是sfc的形式。
 
@@ -344,7 +347,8 @@ Svelte在父组件中通过`on:[function]={callback}`的形式为子组件添加
 <Child name={name} on:sayHello={sayHello} />
 ```
 
-在子组件中，通过export的方式，将原本限定在组件内的变量，改为能够接受外部的传值。而调用父组件的则通过调用createEventDispatcher方法来创建一个对象，通过调用该对象来调用父组件的方法。如果需要传值，则通过`dispatch(方法名,值)`的形式传递。
+在子组件中，通过`export`的方式，将原本限定在组件内的变量，改为能够接受外部的传值。而调用父组件的则通过调用`createEventDispatcher`方法来创建一个对象，通过调用该对象来调用父组件的方法。如果需要传值，则通过`dispatch(方法名, 值)`的形式传递。
+
 ```html
 <script>
   import { createEventDispatcher } from "svelte";
@@ -363,7 +367,6 @@ Svelte在父组件中通过`on:[function]={callback}`的形式为子组件添加
     调用父级方法
   </button>
 </div>
-
 ```
 
 在父组件传值的形式比较像React，子组件派发事件的形式比较像Vue。
@@ -404,6 +407,7 @@ const props = defineProps<Props>()
   export let name: string;
 </script>
 ```
+
 ## 小结
 
 本章中，我们学习了三大框架各自传值的不同点，同时介绍了如何在三大框架中对传值类型进行校验。

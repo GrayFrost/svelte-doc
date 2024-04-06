@@ -34,14 +34,14 @@
 
 ## 对比
 
-- [ ] data
-- [ ] function
-- [ ] props
+- [x] data
+- [x] function
+- [x] props
 - [ ] lifecycle
-- [ ] slot
-- [ ] reactivity
-- [ ] if
-- [ ] for
+- [x] slot
+- [x] reactivity
+- [x] if
+- [x] for
 - [ ] ref
 - [ ] style
 - [ ] context

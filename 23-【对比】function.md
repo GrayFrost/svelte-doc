@@ -1,4 +1,3 @@
-
 有了数据，那必然要有更新数据的方法，以及平时在业务上为了服务数据更新而派生出来的一堆处理数据或者操作页面的方法，那么方法在各个UI库中应该如何定义呢？
 
 ## React
@@ -6,7 +5,7 @@
 
 ### function component
 
-上一节我们讲解了useState()返回的参数的含义，返回数组中第一个参数表示存储值的变量，第二个参数则用于更新数据。
+上一节我们讲解了`useState()`返回的参数的含义，返回数组中第一个参数表示存储值的变量，第二个参数则用于更新数据。
 ```javascript
 import { useState } from "react";
 
@@ -28,7 +27,7 @@ export default function Page() {
 
 ### class component
 
-在class component中，我们沿用上一节的例子：
+在`class component`中，我们沿用上一节的例子：
 
 ```javascript
 import React from 'react';
@@ -57,16 +56,12 @@ export default class Page extends React.Component {
 }
 ```
 
-可以发现，如果我们使用class component，代码量比function component多了不少。
+可以发现，如果我们使用`class component`，代码量比`function component`多了不少。
 
 #### this
-在class component中，我们还需要时刻关注this的指向和组件内的生命周期。拿上述的代码来说，如果我们把
-`onClick={() => this.updateCount()}`改成`onClick={this.updateCount}`，那你在控制台便能看到
-```
-Uncaught TypeError: Cannot read properties of undefined (reading 'setState')
-```
-这种报错。当然造成这种现象的最根本原因是javascript的this指向问题
-而要解决这种问题，有几种方式，
+在`class component`中，我们还需要时刻关注this的指向和组件内的生命周期。拿上述的代码来说，如果我们把`onClick={() => this.updateCount()}`改成`onClick={this.updateCount}`，那你在控制台便能看到`Uncaught TypeError: Cannot read properties of undefined (reading 'setState')`这种报错。当然造成这种现象的最根本原因是javascript的`this`指向问题。
+
+而要解决这种问题，有几种方式。
 
 方式一：在constructor中进行bind绑定
 ```diff
@@ -108,7 +103,7 @@ export default class Page extends React.Component {
     })
   }
 ```
-之所以举了这么多例子，就是想说明一件事，在react的class component中使用方法有一定的心智负担。
+之所以举了这么多例子，就是想说明一件事，在React的`class component`中使用方法有一定的心智负担。
 
 ### Event
 
@@ -204,7 +199,7 @@ export default {
 ```
 
 ### 事件修饰符
-在事件处理程序中调用`event.preventDefault()`或`event.stopPropagation()`是非常常见的需求。Vue提供了一些事件修饰符，我们可以通过他们来优化业务代码，减少关心dom事件细节。事件修复符之间可以链式调用，但要注意调用的顺序。
+在事件处理程序中调用`event.preventDefault()`或`event.stopPropagation()`是非常常见的需求。Vue提供了一些事件修饰符，我们可以通过他们来优化业务代码，减少关心DOM事件细节。事件修复符之间可以链式调用，但要注意调用的顺序。
 ```html
 <a v-on:click.stop.prevent="func"></a>
 ```
@@ -227,7 +222,7 @@ export default {
   <button on:click={updateCount}>+1</button>
 </div>
 ```
-而且我们不用考虑方法this的指向，也无需通过this来获取变量。Svelte仍旧比其他两大框架在写法上更为简洁。
+而且我们不用考虑方法this的指向，也无需通过`this`来获取变量。Svelte仍旧比其他两大框架在写法上更为简洁。
 
 ### Event
 ```html
@@ -245,6 +240,7 @@ export default {
 ```
 
 ### 事件修饰符
+
 同样Svelte也提供了一些事件修饰符，修饰符也可以链式调用，和Vue不同的是，Svelte的事件修饰符使用`|`来引用。
 ```html
 <a v-on:click|stop|prevent="func"></a>
