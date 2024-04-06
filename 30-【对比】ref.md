@@ -1,4 +1,5 @@
 ref主要用于获取组件实例或访问 DOM 节点,也可以用于组件间通信。
+
 ## React
 
 React中使用ref的主要形式如下：
@@ -14,7 +15,7 @@ export default function Page() {
 ### 元素标签
 
 如果我们把ref绑定到html标签上，可以直接获取到DOM节点。
-首先通过`useRef`声明变量（在React中，useRef还能用来存储不会触发重新渲染的值），这个变量是一个对象，当其有值时，需要通过ref.current来获取其中的值，比如下列例子中的`faterRef.current`：
+首先通过`useRef`声明变量（在React中，`useRef`还能用来存储不会触发重新渲染的值），这个变量是一个对象，当其有值时，需要通过`ref.current`来获取其中的值，比如下列例子中的`faterRef.current`：
 
 ```javascript
 // Father.jsx
@@ -44,6 +45,7 @@ export default function Page() {
 如果把ref绑定到组件上，可以获取取件的实例。
 
 在子组件中，我们定义了一个方法，如果我们希望把子组件的方法对外暴露，需要使用`useImperativeHandle`和`React.forwardRef`的方式。
+
 ```javascript
 // Child.jsx
 import React, { useImperativeHandle } from "react";
@@ -87,7 +89,7 @@ export default function Page() {
 }
 ```
 
-在class component中，使用`createRef`来创建ref对象：
+在`class component`中，使用`createRef`来创建ref对象：
 ```javascript
 class MyComponent extends React.Component {
   constructor(props) {
@@ -225,7 +227,7 @@ export default {
 
 ### 组件
 
-在子组件中，使用export的方式导出组件内部的方法。
+在子组件中，使用`export`的方式导出组件内部的方法。
 ```html
 <script>
   export const sayHello = () => {
@@ -257,6 +259,7 @@ export default {
   <Child bind:this={childRef} />
 </section>
 ```
-如果想要父组件操作子组件的数据，需要对外export一个能够获取该数据的方法，而不是直接export数据。因为直接export数据在Svelte中是把该数据声明为一个对外的prop，亦或者像我们在《特定标签》中学习到的配置`<svelte:options>`的`accessors`属性为true。
+如果想要父组件操作子组件的数据，需要对外`export`一个能够获取该数据的方法，而不是直接`export`数据。因为直接export数据在Svelte中是把该数据声明为一个对外的prop，亦或者像我们在《特定标签》中学习到的配置`<svelte:options>`的`accessors`属性为true。
 
 ## 小结
+本章我们了解了三大框架如何操作真实DOM，以及如何获取组件实例上的数据和方法。

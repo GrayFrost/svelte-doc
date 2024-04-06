@@ -42,9 +42,9 @@
 - [x] reactivity
 - [x] if
 - [x] for
-- [ ] ref
-- [ ] style
-- [ ] context
+- [x] ref
+- [x] style
+- [x] context
 
 ## 源码
 - [x] 库

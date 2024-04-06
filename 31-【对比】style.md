@@ -13,7 +13,7 @@ export default function Page() {
 }
 ```
 
-![[31-1.png]]
+![](./img/31-1.png)
 在样式对象内，之前在行内样式中使用`-`连接的属性需要转成使用驼峰的形式，比如`font-size`要写成`fontSize`、`background-color`要写成`backgroundColor`等。
 
 ### 非行内样式
@@ -34,7 +34,7 @@ export default function Child() {
 
 ### class属性
 
-在React中，写样式class需要写在`className`中，对于className的传值，和其他传递属性无异，可以正常的执行js表达式。
+在React中，写样式class需要写在`className`中，对于`className`的传值，和其他传递属性无异，可以正常的执行js表达式。
 
 ### 模块化
 
@@ -81,23 +81,24 @@ function App() {
 
 export default App;
 ```
+
 而在App.css中：
 ```css
 .color {
   color: green;
 }
 ```
-![[31-2.png]]
+![](./img/31-2.png)
 我们可以看到，原本我们是想子组件的红色，父组件里的字体是绿色，然而现在都变成了红色。
 
 在React中，要想实现样式模块化，通常有以下方式：
-* module css
-* BEM
-* css-in-js
+- module css
+- BEM
+- css-in-js
 这里以前两种来举例。
 
-##### module
-在使用create-react-app创建的项目中，我们把样式文件名写成`xxx.module.css`的形式，然后以变量的形式引入。
+#### module
+在使用`create-react-app`创建的项目中，我们把样式文件名写成`xxx.module.css`的形式，然后以变量的形式引入。
 将上述例子的Child.css改成Child.module.css，调整Child.jsx的逻辑：
 ```javascript
 import styles from "./Child.module.css";
@@ -107,10 +108,11 @@ export default function Child() {
 }
 ```
 
-![[31-3.png]]
+![](./img/31-3.png)
 可以看到，子组件的color样式选择器已经被改动了。
-##### BEM
-[BEM](https://yandex.com/dev/bem/)风格规范指的是 Block、Element、Modifier 这三者的简称，这个规范将 CSS 拆分成块、元素、修饰符，根本作用是帮助开发者快速理解HTML与 CSS 之间的关系。我们可以根据不同的标签层级，使用约定好格式的类名，以此来到达维护css的目的。
+
+#### BEM
+[BEM](https://yandex.com/dev/bem/)风格规范指的是Block、Element、Modifier这三者的简称，这个规范将CSS拆分成块、元素、修饰符，根本作用是帮助开发者快速理解HTML与CSS之间的关系。我们可以根据不同的标签层级，使用约定好格式的类名，以此来到达维护css的目的。
 
 我们并非严格地按照BEM规范来执行，而是以此规范为参考，为每个组件人工地添加一个唯一前缀，然后把组件的样式都限定在这个唯一的选择器内，实现其中的核心思想。
 
@@ -140,11 +142,11 @@ export default function Child() {
 ```
 
 从页面上看，同样可以达到样式模块化。
-![[31-4.png]]
+![](./img/31-4.png)
 
 可能有些读者会质疑这种实现方式，不仅要每个class都要添加前缀，样式文件的选择器也复杂化了。那是因为现在我们还是用css来演示，如果我们结合样式预处理器，那操作则简化了很多。
 
-为了演示方便，我们使用vite重新创建一个项目
+为了演示方便，我们使用vite重新创建一个项目：
 ```bash
 npm create vite@latest react-test-vite -- --template react
 ```
@@ -174,7 +176,7 @@ Child.less内容：
 }
 ```
 
-![[31-5.png]]
+![](./img/31-5.png)
 因为我们为组件最外层添加了一层包裹，`.child .color`的优先级大于`.color`的优先级。
 
 BEM规范同样能应用在Vue、Svelte等框架中，它的一个劣势是我们需要人工地确保各组件有唯一的前缀或唯一的用于包裹的选择器。
@@ -191,6 +193,7 @@ Vue的行内样式同样接收一个变量，以`:style="styleObject"`的形式�
 ```
 
 ### 非行内样式
+
 Vue的非行内样式写在`<style></style>`标签内，可以在该标签内写css内容，也可以在标签内引入样式文件。
 ```html
 <template>
@@ -205,6 +208,7 @@ Vue的非行内样式写在`<style></style>`标签内，可以在该标签内写
 ```
 
 ### class属性
+
 Vue为开发者提供了大量便捷地操作class属性的方式。
 
 #### 默认
@@ -242,7 +246,7 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 }
 </style>
 ```
-![[31-6.gif]]
+![](./img/31-6.gif)
 
 #### 表达式
 ```html
@@ -282,10 +286,11 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 </style>
 ```
 
-![[31-7.gif]]
+![](./img/31-7.gif)
 
 #### 对象形式
-通过key:value的形式，当value为true时，key才生效
+通过`key:value`的形式，当value为true时，key才生效。
+
 ```html
 <script setup>
   import { ref } from 'vue';
@@ -309,7 +314,7 @@ Vue为开发者提供了大量便捷地操作class属性的方式。
 }
 </style>
 ```
-![[31-8.gif]]
+![](./img/31-8.gif)
 
 ### 模块化
 
@@ -355,7 +360,7 @@ export default {}
 </style>
 ```
 我们原本期望子组件的颜色是绿色，然而得到的却是如下：
-![[31-9.png]]
+![](./img/31-9.png)
 
 要想实现样式模块化，需要在`<style>`标签中添加`scoped`属性：
 ```diff
@@ -374,7 +379,7 @@ export default {}
   }
 </style>
 ```
-![[31-10.png]]
+![](./img/31-10.png)
 可以看到，Vue是通过添加`data-v-xxx`属性的形式来实现模块化。
 
 ## Svelte
@@ -402,7 +407,7 @@ export default {}
 ### class属性
 
 #### 默认
-Svelte中，正常写class，不用像React中一样使用className。
+Svelte中，正常写`class`，不用像React中一样使用`className`。
 ```html
 <div class="rounded"></div>
 ```
@@ -454,7 +459,7 @@ Svelte中，正常写class，不用像React中一样使用className。
 </style>
 ```
 
-![[31-12.gif]]
+![](./img/31-12.gif)
 
 我们能够使用`class`指令来简化表达式的形式，对于`class={isActive ? 'active' : ''}`的写法，我们可以简写成：
 ```html
@@ -474,8 +479,9 @@ Svelte文件的`<style></style>`标签内的样式，默认启用了模块化特
 </style>
 ```
 
-![[31-13.png]]
+![](./img/31-13.png)
 翻看编译后的结果，发现我们的样式类型都带上了后缀。
+
 ## 小结
 
 除了以上特性外，还可以结合诸如Tailwind等原子类库、Emotion等cssinjs库以及Less、Sass等样式预处理器来实现页面样式。

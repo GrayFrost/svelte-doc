@@ -1,5 +1,5 @@
-
 我们在本章对比一下三大框架的跨组件传值能力。
+
 ## React
 
 ### function component
@@ -33,7 +33,7 @@ export default function Page() {
 }
 ```
 首先我们定义一个父组件，父组件内count变量用来测试在外层更改后，内层接收到的变量是否有更改，theme和setTheme变量用来测试传递到孙子组件的变量与方法是否生效。
-在function component中，通过`createContext`创建得到一个对象`ThemeContext`，然后使用Context.Provider来包裹住需要接收到context数据的组件。
+在`function component`中，通过`createContext`创建得到一个对象`ThemeContext`，然后使用Context.Provider来包裹住需要接收到context数据的组件。
 ```css
 /* Father.css */
 .theme-content {
@@ -86,11 +86,11 @@ const GrandSon = () => {
 
 export default GrandSon;
 ```
-![[test85.gif]]
+![](./img/32-1.gif)  
 可以看到，通过context传递的变量在跨组件内接收后，能够正常使用，而且传递到组件内的父组件的方法，也能够正常被执行。需要注意的一点时，context并非是万能的银弹，使用context时需要注意传递的值会不会影响到页面的刷新，这对于有性能要求的页面来说非常重要。
 
 ### class component
-在class component中，父组件同样使用`createContext`，而孙子组件中，可以使用Context.Consumer来接收context的传值
+在`class component`中，父组件同样使用`createContext`，而孙子组件中，可以使用Context.Consumer来接收context的传值。
 ```javascript
 // GrandSon.jsx
 import React from "react";
@@ -203,7 +203,7 @@ export default GrandSon;
 </script>
 ```
 
-![[test86.gif]]
+![](./img/32-2.gif)
 
 ### 2.x
 ```html
@@ -276,13 +276,13 @@ export default {
 </script>
 ```
 
-![[test87.gif]]
+![](./img/32-3.gif)
 
 不管是在3.x还是2.x中，`provide`和`inject`传递的数据都是非响应性的，但是由于引用类型的特殊性，在子孙组件拿到了数据之后，它们的属性还是能够正常地响应变化，这也是为什么我们直接在3.x中传递`ref`定义的数据后能够实现响应性。那在2.x中，当我们传递基本数据类型的值，也想组件内接收到的值能够响应式地变化，该如何实现呢？
 
-要想拿到基本数据类型的最新值，我们可以将传值改为一个方法，在这个方法中return我们的基本数据类型数值。
+要想拿到基本数据类型的最新值，我们可以将传值改为一个方法，在这个方法中`return`我们的基本数据类型数值。
 
-首先是改造App里provide的返回：
+首先是改造App里`provide`的返回：
 ```javascript
 provide() {
 	return {
@@ -299,22 +299,23 @@ provide() {
 ```html
 <template>
   <div>
-      <p>最外层count: {{ThemeContext.count()}}</p>
-      <p>主题：{{ThemeContext.theme()}}</p>
-      <button @click="ThemeContext.setTheme('dark')">
-        Dark
-      </button>
-      <button @click="ThemeContext.setTheme('light')">
-        Light
-      </button>
-    </div>
+    <p>最外层count: {{ThemeContext.count()}}</p>
+    <p>主题：{{ThemeContext.theme()}}</p>
+    <button @click="ThemeContext.setTheme('dark')">
+      Dark
+    </button>
+    <button @click="ThemeContext.setTheme('light')">
+      Light
+    </button>
+  </div>
 </template>
 ```
+
 ## Svelte
 
 ```html
 <script context="module">
-// Father.svelte
+  // Father.svelte
   export const ContextKey = "ThemeContext";
 </script>
 
@@ -367,9 +368,9 @@ provide() {
 ```html
 <script>
   // GrandSon.svelte
-    import { getContext } from "svelte";
-    import { ContextKey } from "./Father.svelte";
-    const { count, theme, setTheme } = getContext(ContextKey);
+  import { getContext } from "svelte";
+  import { ContextKey } from "./Father.svelte";
+  const { count, theme, setTheme } = getContext(ContextKey);
 </script>
 
 <div>
@@ -383,7 +384,7 @@ provide() {
 	</button>
 </div>
 ```
-![[test88.gif]]
+![](./img/32-4.gif)  
 Svelte的Context传值同样不支持响应性，要想使传递的值具有响应性，我们需要结合`svelte/store`进行使用。
 
 首先是对Father.svelte进行改造：
@@ -440,4 +441,4 @@ Svelte的Context传值同样不支持响应性，要想使传递的值具有响�
 ```
 ## 小结
 
-对比篇到这里就告一段落，相信大家经过前面一些篇章的学习，已经有所发现：一个最基本的前端框架，应该向使用者提供xxxxx方法。
+对比篇到这里就告一段落，相信大家经过前面一些篇章的学习，已经有所发现：一个最基本的前端框架，应该向使用者提供xxxxx方法。 TODO
