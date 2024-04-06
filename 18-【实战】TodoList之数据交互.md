@@ -5,7 +5,7 @@
 ```bash
 npm install tailwind-merge -D
 ```
-tailwind-merge是一个类似于classnames的工具
+tailwind-merge是一个类似于classnames的工具。
 
 
 新建store.js，用来管理我们的数据
@@ -209,14 +209,15 @@ export const doneList = derived([list], ([$list]) => {
 {/each}
 ```
 写到这里，读者们应该能正常地添加任务，设置任务状态，然而细心的你一定能够发现，当我们设置完成时，出现了一点小问题：
-![Error](./img/18-3.gif)
+![Error](./img/18-3.gif)  
+
 当我们在设置第一项已完成后，第一项能够正常移除，然后剩余的第二项变成第一项后，勾选状态却是已完成！这个时候就轮到key出场了。
+
 ```html
 {#each currentList as { id, text, done }, i (id)}
 ```
 
-接着我们将All栏的展示改成禁止点击，
-现在Item.svelte中
+接着我们将All栏的展示改成禁止点击，现在Item.svelte中：
 ```html
 <script>
   ...
@@ -229,18 +230,17 @@ export const doneList = derived([list], ([$list]) => {
     "flex-1 overflow-hidden text-ellipsis",
     disabled && "opacity-65"
   );
-  
 </script>
 
 <div class={divClass}>
-    ...
-    <input
-      type="checkbox"
-      checked={done}
-      on:change={changeDone}
-      {disabled}
-    />
-  </span>
+  ...
+  <input
+    type="checkbox"
+    checked={done}
+    on:change={changeDone}
+    {disabled}
+  />
+  ...
 </div>
 
 <style>
@@ -255,8 +255,8 @@ export const doneList = derived([list], ([$list]) => {
 然后在List.svelte中
 ```html
 <Item
-    ...
-    disabled={$tab === 'all'}
+  ...
+  disabled={$tab === 'all'}
 />
 ```
 ## 动画
@@ -265,20 +265,20 @@ export const doneList = derived([list], ([$list]) => {
 
 为了能够观察到动画效果，在List.svelte中，我们将数据更新做一个延迟
 ```javascript
-  const updateItem = (id, value) => {
-    const newArr = $list.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          done: value,
-        };
-      }
-      return item;
-    });
-    setTimeout(() => {
-      $list = newArr;
-    }, 300);
-  };
+const updateItem = (id, value) => {
+  const newArr = $list.map((item) => {
+    if (item.id === id) {
+      return {
+        ...item,
+        done: value,
+      };
+    }
+    return item;
+  });
+  setTimeout(() => {
+    $list = newArr;
+  }, 300);
+};
 ```
 
 接着我们为Item.svelte添加一些Svelte自带的动画效果
@@ -303,3 +303,4 @@ export const doneList = derived([list], ([$list]) => {
 ![End](./img/18-4.gif)
 
 ## 小结
+本章我们了解了如何使用`svelte/store`来进行项目内数据的管理。

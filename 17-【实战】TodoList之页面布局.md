@@ -17,14 +17,14 @@ npx tailwindcss init -p
 
 删除lib/Counter.svelte，清空App.svelte的内容，清空app.css的内容。
 
-将tailwind的基本内容添加进app.css
+将tailwind的基本内容添加进app.css：
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
-修改tailwind.config.js的内容
+修改`tailwind.config.js`的内容
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -43,7 +43,7 @@ export default {
 如无意外，相信读者朋友们能在页面上看到玫瑰色的app字样。
 
 
-从[dribble](https://dribbble.com/shots/12342455-ToDo-List-042-DailyUI)上获取灵感，挑选了一些好看的颜色。在`tailwind.config.js`上配置
+从[dribble](https://dribbble.com/shots/12342455-ToDo-List-042-DailyUI)上获取灵感，挑选了一些好看的颜色。在`tailwind.config.js`上配置：
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -64,7 +64,7 @@ export default {
 
 ## 数据结构
 
-首先我们需要确定待办列表的一个待办项的数据结构，目前笔者定义如下
+首先我们需要确定待办列表的一个待办项的数据结构，目前笔者定义如下：
 ```typescript
 interface Todo {
 	id: number,
@@ -119,11 +119,14 @@ interface Todo {
 
 <div class={divClass}>
   <Input />
-</div>```
+</div>
+```
 
 此时相信读者们能够看到以下内容：
 ![](./img/17-2.png)
+
 ### Tabs
+
 新建Tabs.svelte组件，添加内容：
 ```html
 <script>
@@ -166,7 +169,7 @@ App.svelte中引入该组件后，页面展示如下：
 
 ### 列表
 
-首先我们实现Item.svelte内的展示
+首先我们实现Item.svelte内的展示：
 ```html
 <script>
   export let index = 0;
