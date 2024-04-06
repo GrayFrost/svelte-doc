@@ -151,7 +151,7 @@ export default function() {
 }
 ```
 访问localhost:5173
-![[39-1.png]]
+![](./img/39-1.png)
 
 ## 完整代码
 

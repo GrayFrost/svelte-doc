@@ -109,7 +109,7 @@ count: {count}
 {#if count > 2 && count < 5}hello{/if}
 ```
 
-![[43-1.gif]]
+![](./img/43-1.gif)
 
 缺点：多了一个span标签包裹。
 
@@ -117,22 +117,22 @@ count: {count}
 
 ```javascript
 addBtn.addEventListener('click', function() {
-        text = document.createTextNode('');
-        const div = document.createElement('div');
-        div.innerHTML = 'hello';
-        
-        box.appendChild(text);
-        box.appendChild(div);
-      })
+  text = document.createTextNode('');
+  const div = document.createElement('div');
+  div.innerHTML = 'hello';
+  
+  box.appendChild(text);
+  box.appendChild(div);
+})
 
-      removeBtn.addEventListener('click', function() {
-        if (text) {
-          console.log('zzh text', text.parentNode, text.nextElementSibling);
-          text.parentNode.removeChild(text.nextElementSibling);
-          text.parentNode.removeChild(text);
-        }
-      })
-      ```
+removeBtn.addEventListener('click', function() {
+  if (text) {
+    console.log('zzh text', text.parentNode, text.nextElementSibling);
+    text.parentNode.removeChild(text.nextElementSibling);
+    text.parentNode.removeChild(text);
+  }
+})
+```
 
 ## 完整代码
 ```javascript

@@ -379,7 +379,9 @@ function create_fragment(ctx) {
 			}
 		}
 	};
-}```
+}
+```
+
 `create_fragment`的逻辑：
 - `create_fragment`接收一个参数ctx，我们通过前面知道，这个ctx就是`instance`方法执行后的返回值，ctx是一个数组，包含了数据和用于更新数据的方法，比如：
 ![[Pasted image 20240327154422.png]]
@@ -533,8 +535,6 @@ function update($$) {
 
 一言蔽之，就是把需要更新的组件给更新了。调用 `$$.update`,调用组件里的`$$.fragment.p`方法，执行`$$.after_update`的回调。
 
-
-
 ## 更新流程
 
 我们重新整理下组件的更新逻辑：
@@ -636,4 +636,5 @@ p(ctx, [dirty]) {
 - `$$invalidate`内部执行`not_equal($$.ctx[i], $$.ctx[i] = value)`，i此时是1，`$$.ctx[1]`是1，执行`$$.ctx[1] = 1`之后，和原来的值不一样，执行`make_dirty`
 -  依旧是初始`dirty[0]`是-1，先填充为`dirty.fill(0)`，变成`dirty[0]`是0。执行`component.$$.dirty[(i / 31) | 0] |= 1 << i % 31`，`1 % 31`是1，`1<<1`是2，`(1 / 31) | 0`得到0，`0 | 2`得到2，最终`component.$$.dirty[0] = 2`。
 - 执行`schedule_update`，调用`fragment.p`方法，此时`[dirty]`数组是`[2]`，`2 && 2`是1，能够执行`set_data(t6, /*count2*/ ctx[1])`，`2 & 1`是0，不执行`set_data(t4, /*count*/ ctx[0])`
+
 ## 小结
