@@ -1,6 +1,6 @@
 ## api
-![](./img/19-2.png)
-接下来我们完成剩余的api，主要有afterClose回调、closeText、description、icon、message
+![](./img/19-2.png)  
+接下来我们完成剩余的api，主要有afterClose回调、closeText、description、icon、message。
 
 在Svelte中，我们不能像react那样直接把组件当成一个props来传递，因此对于一些既支持传数据又支持传组件的参数，我们的在Svelte的实现是既支持传值，又支持slot定义。然后在组件内容判断是否有slot值。
 ```javascript
@@ -16,7 +16,9 @@ function getPropsSlot(slots, props, prop = 'default') {
 const slots = $$slots;
 const props = $$props;
 ```
+
 ### closeText
+
 ```javascript
 export let closeText = undefined;
 
@@ -51,7 +53,7 @@ if (closeTextData) {
 {/if}
 ```
 
-App.svelte中试验一下
+App.svelte中试验一下：
 ```html
 <script>
   import Alert from "./Alert.svelte";
@@ -68,6 +70,7 @@ App.svelte中试验一下
 ![](./img/20-2.gif)
 
 ### message
+
 ```javascript
 export let message = undefined;
 const messageData = getPropsSlot(slots, props, 'message');
@@ -91,7 +94,7 @@ const hasMessageSlot = !!slots?.message;
 </div>
 ```
 
-在App.svelte中试验一下
+在App.svelte中试验一下：
 ```html
 <script>
   import Alert from "./Alert.svelte";
@@ -106,7 +109,9 @@ const hasMessageSlot = !!slots?.message;
 ```
 
 ![](./img/20-3.png)
+
 ### description
+
 ```javascript
 export let description = undefined;
 const descriptionData = getPropsSlot(slots, props, 'description');
@@ -114,7 +119,7 @@ const hasDescriptionSlot = !!slots?.description;
 ```
 在Antd的Alert组件中，当使用了description时，需要使用另一种样式的icon，为此我们需要重构下我们的icon组件，笔者这里只拿SuccessIcon作为例子，其他type的icon更改逻辑相同。
 
-SuccessIcon.svelte
+SuccessIcon.svelte：
 ```html
 <script>
   export let theme = "filled";

@@ -228,7 +228,6 @@ alert.less内容如下：
 
 在本章，我们先实现banner、closable、showIcon和type这几个传参的功能，因为这几个参数只单是接收参数，没有和slot的联动。
 
-
 Alert.svelte初始内容如下：
 ```html
 <script>  
@@ -247,7 +246,6 @@ Alert.svelte初始内容如下：
   @import './alert.less';
 </style>
 ```
-
 
 ### type
 
@@ -275,7 +273,6 @@ Alert.svelte初始内容如下：
 </style>
 ```
 
-
 在App.svelte中
 ```html
 <script>
@@ -290,14 +287,13 @@ Alert.svelte初始内容如下：
 可以看到页面内容：
 ![](./img/19-3.png)
 
-
 ### showIcon
 
 ![](./img/19-4.png)
 
 然后再添加icon相关的svelte组件
 
-SuccessIcon.svelte
+SuccessIcon.svelte：
 ```html
 <svg
   viewBox="64 64 896 896"
@@ -313,7 +309,7 @@ SuccessIcon.svelte
   ></path></svg>
 ```
 
-InfoIcon.svelte
+InfoIcon.svelte：
 ```html
 <svg
   viewBox="64 64 896 896"
@@ -329,7 +325,7 @@ InfoIcon.svelte
   ></path></svg>
 ```
 
-WarningIcon.svelte
+WarningIcon.svelte：
 ```html
 <svg
   viewBox="64 64 896 896"
@@ -345,7 +341,7 @@ WarningIcon.svelte
   ></path></svg>
 ```
 
-ErrorIcon.svelte
+ErrorIcon.svelte：
 ```html
 <svg
   viewBox="64 64 896 896"
@@ -360,7 +356,6 @@ ErrorIcon.svelte
     d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 0 1-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
   ></path></svg>
 ```
-
 
 在Alert.svelte中，引入icon组件
 ```html
@@ -380,18 +375,18 @@ export let showIcon = false;
 设置样式
 ```javascript
 $: alertCls = classNames(prefixCls, {
-    [`${prefixCls}-${type}`]: true,
-    [`${prefixCls}-no-icon`]: !showIcon,
+  [`${prefixCls}-${type}`]: true,
+  [`${prefixCls}-no-icon`]: !showIcon,
 });
 ```
 
 设置当前的icon类型
 ```javascript
 $: icon = {
-    'success': SuccessIcon,
-    'info': InfoIcon,
-    'warning': WarningIcon,
-    'error': ErrorIcon
+  'success': SuccessIcon,
+  'info': InfoIcon,
+  'warning': WarningIcon,
+  'error': ErrorIcon
 }[type];
 ```
 
@@ -428,24 +423,24 @@ $: icon = {
 
 showIcon在`banner` 模式下默认值为 true
 
-```
+```javascript
 export let banner = false;
 ```
 
 联动
 ```javascript
-  // banner模式默认有 Icon
-  showIcon = banner && showIcon === false ? true : showIcon;
-  // banner模式默认为警告
-  type = banner && type === 'info' ? 'warning' : type;
+// banner模式默认有 Icon
+showIcon = banner && showIcon === false ? true : showIcon;
+// banner模式默认为警告
+type = banner && type === 'info' ? 'warning' : type;
 ```
 
 样式
 ```javascript
 $: alertCls = classNames(prefixCls, {
-    [`${prefixCls}-${type}`]: true,
-    [`${prefixCls}-no-icon`]: !showIcon,
-    [`${prefixCls}-banner`]: banner,
+  [`${prefixCls}-${type}`]: true,
+  [`${prefixCls}-no-icon`]: !showIcon,
+  [`${prefixCls}-banner`]: banner,
 });
 ```
 
@@ -468,11 +463,12 @@ App.svelte
 
 内容如下：
 ![](./img/19-6.png)
+
 ### closable
 
-添加close icon
+首先我们需要添加一个关闭按钮的icon。
 
-CloseIcon.svelte
+CloseIcon.svelte：
 ```html
 <svg
   viewBox="64 64 896 896"

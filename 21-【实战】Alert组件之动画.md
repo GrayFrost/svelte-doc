@@ -1,4 +1,7 @@
 ## 动画
+
+当我们点击关闭Alert组件时，会出现一段向上关闭的动画。我们使用`svelte/easing`配合`transition`指令来实现相似的动画。
+
 ```javascript
 <script>
   import { circInOut } from "svelte/easing";
@@ -19,7 +22,7 @@
 </script>
 ```
 
-然后修改html内容
+然后修改html内容：
 ```html
 {#if !closed}
 	<div class={alertCls} transition:slideUp on:outroend={animationEnd}>
@@ -27,7 +30,7 @@
 {/if}
 ```
 
-添加最后一个api事件afterClose
+添加最后一个api事件afterClose：
 ```javascript
 const animationEnd = () => {
     dispatch("afterClose");
@@ -69,6 +72,7 @@ const animationEnd = () => {
 ![](./img/21-1.gif)
 
 ## 完整代码
+
 最后附上完整代码：
 ```html
 <script>
