@@ -149,12 +149,13 @@ export default App;
 ```
 
 我们理一下编译后的大体逻辑：
-* 首先是建一个`SvelteComponent`类，该类由`svelte/internal`导出。在`SvelteComponent`类实例化时调用`init`方法。`init`方法中比较关键的参数有`instance`和`create_fragment`。
-* `instance`是一个方法，里面有用于触发响应式更新的方法`$$invalidate`。
-* `create_fragment`组件完整的生命周期，包含了创建、挂载、更新和卸载等。
+- 首先是建一个`SvelteComponent`类，该类由`svelte/internal`导出。在`SvelteComponent`类实例化时调用`init`方法。`init`方法中比较关键的参数有`instance`和`create_fragment`。
+- `instance`是一个方法，里面有用于触发响应式更新的方法`$$invalidate`。
+- `create_fragment`组件完整的生命周期，包含了创建、挂载、更新和卸载等。
 
 我们所关注的运行时逻辑都在源码仓库的`packages/svelte/src/runtime`里。
-![[Pasted image 20240319104611.png]]
+![](./img/36-1.png)
+
 ## SvelteComponent
 
 源码路径：`packages/svelte/src/runtime/internal/Component.js`
@@ -169,10 +170,12 @@ export class SvelteComponent {
 ```
 
 `SvelteComponent`中定义了一些属性和方法，在官网的[Client-side component API](https://svelte.dev/docs/client-side-component-api)中，有介绍这些方法的使用，我们集中关注`$$`这个属性，后面大量的数据会挂载到这个属性上。
+
 ## init
 `init`方法，在组件初始化时执行的唯一方法，由`svelte/internal`导出。
 
-源码路径：`packages/svelte/src/runtime/internal/Component.js
+源码路径：`packages/svelte/src/runtime/internal/Component.js`
+
 ```javascript
 export function init(
 	component,
@@ -319,11 +322,8 @@ function make_dirty(component, i) {
 
 `make_dirty`的逻辑如下：
 - 首先检查组件是否已经被标记为dirty。如果没有（Svelte中约定，`$$.dirty`数组的第一项如果是-1，则非dirty)，那么将组件添加到dirty_components数组中，并调度一个更新。
-- 将组件的dirty标志位数组原来是`[-1]`的填充为`[0]`，TODO
+- 将组件的dirty标志位数组原来是`[-1]`的填充为`[0]`，既标记了组件是dirty状态，又方便后续的位运算操作
 - 最后将参数i指定的部分标记为dirty，通过将dirty标志位数组的相应元素设置为1来实现的。终于轮到位运算上场！
-
-
-TODO: 详细演示
 
 ###### schedule_update
 
@@ -441,7 +441,8 @@ export function text(data: string) {
 
 ### mount_component
 
-源码路径：`packages/svelte/src/runtime/internal/Component.js
+源码路径：`packages/svelte/src/runtime/internal/Component.js`
+
 ```javascript
 export function mount_component(component, target, anchor) {
 	const { fragment, after_update } = component.$$;
@@ -464,7 +465,8 @@ export function mount_component(component, target, anchor) {
 
 ### flush
 
-源码路径：`packages/svelte/src/runtime/internal/scheduler.js
+源码路径：`packages/svelte/src/runtime/internal/scheduler.js`
+
 ```javascript
 let flushidx = 0;
 
@@ -509,11 +511,11 @@ export function flush() {
 ```
 `flush`函数的主要作用是更新和渲染组件，其步骤如下：
 - 通过`flushidx !== 0`检查是否已经在更新脏组件，如果是则返回，避免无限循环。
-- 先保存当前组件，然后在一个do-while循环中，首先调用beforeUpdate函数并更新组件。如果在更新过程中出现错误，会重置脏状态以避免死锁。
-- 清空脏组件列表，重置flushidx，然后调用所有`bind:this`回调函数。
-- 在组件更新后，调用afterUpdate函数。这可能会导致后续的更新，所以需要防止无限循环。之后清空渲染回调列表。
+- 先保存当前组件，然后在一个do-while循环中，首先调用`beforeUpdate`函数并更新组件。如果在更新过程中出现错误，会重置脏状态以避免死锁。
+- 清空脏组件列表，重置`flushidx`，然后调用所有`bind:this`回调函数。
+- 在组件更新后，调用`afterUpdate`函数。这可能会导致后续的更新，所以需要防止无限循环。之后清空渲染回调列表。
 - 如果还有脏组件，重复上述步骤。
-- 调用所有flush回调函数。清除已调用的回调函数列表。
+- 调用所有`flush`回调函数。清除已调用的回调函数列表。
 - 恢复保存的当前组件。
 
 这个函数的主要目的是确保所有的组件都被正确地更新和渲染，同时避免因为错误或无限循环导致的问题。
@@ -638,3 +640,5 @@ p(ctx, [dirty]) {
 - 执行`schedule_update`，调用`fragment.p`方法，此时`[dirty]`数组是`[2]`，`2 && 2`是1，能够执行`set_data(t6, /*count2*/ ctx[1])`，`2 & 1`是0，不执行`set_data(t4, /*count*/ ctx[0])`
 
 ## 小结
+
+本章中，我们了解了Svelte如何运行编译后的代码。

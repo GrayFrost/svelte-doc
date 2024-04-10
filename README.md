@@ -50,7 +50,7 @@
 - [x] 库
 - [ ] 位运算
 - [ ] compiler
-- [ ] runtime
+- [x] runtime
 - [ ] 流程
 
 ## 实现

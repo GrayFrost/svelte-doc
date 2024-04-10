@@ -187,6 +187,7 @@
   },
   "active": "f4adc900608f174b",
   "lastOpenFiles": [
+    "36-1.png",
     "08-【入门】插槽.md",
     "06-【入门】动态属性.md",
     "25-【对比】lifecycle.md",
@@ -223,7 +224,6 @@
     "35-【源码】compiler.md",
     "19-【实战】Alert组件之简单传值.md",
     "20-【实战】Alert组件之slot交互.md",
-    "21-【实战】Alert组件之动画.md",
     "未命名",
     "未命名 1.canvas",
     "未命名.canvas",
