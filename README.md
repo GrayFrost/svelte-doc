@@ -37,7 +37,7 @@
 - [x] data
 - [x] function
 - [x] props
-- [ ] lifecycle
+- [x] lifecycle
 - [x] slot
 - [x] reactivity
 - [x] if

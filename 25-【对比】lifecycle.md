@@ -47,13 +47,12 @@
 
 ![](./img/25-3.png)
 
-- `onMount`
-- `beforeUpdate`：在 DOM 更新之前执行
-- `afterUpdate`：
-- `onDestroy`：
-- `tick`：
+- `onMount`：组件首次渲染到DOM后立即执行
+- `beforeUpdate`：在DOM更新之前执行
+- `afterUpdate`：数据同步到DOM之后执行
+- `onDestroy`：组件销毁时执行
+- `tick`：返回一个promise，让后续代码在下一次微任务中执行
 
-TODO
 ## 小结
 
 本章我们简单对比了三大框架的生命周期，对外提供的生命周期数量的优势，仁者见仁。一方面，繁多的生命周期钩子可以让开发者更细致地控制组件；而另一方面，大量的生命周期钩子也提升了框架的学习曲线。
