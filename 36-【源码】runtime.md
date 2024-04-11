@@ -384,7 +384,7 @@ function create_fragment(ctx) {
 
 `create_fragment`的逻辑：
 - `create_fragment`接收一个参数ctx，我们通过前面知道，这个ctx就是`instance`方法执行后的返回值，ctx是一个数组，包含了数据和用于更新数据的方法，比如：
-![[Pasted image 20240327154422.png]]
+![](./img/36-2.png)
 
 - `create_fragment`方法返回一个对象，这个对象内包含 `c,m,p,i,o,d`等特殊名称的函数，这些函数并非编译混淆，而是Fragment内部的生命周期缩写，这个对象会挂载到`$$.fragment`上。
 ```javascript
