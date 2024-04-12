@@ -1,6 +1,6 @@
 # Svelte5 抢先看！
 
-![alt text](image-20.png)
+![](image-20.png)
 
 ## 安装
 ```bash
@@ -20,7 +20,7 @@ that works without JavaScript!)
 ```
 
 从弹出的选项中可以看到，这里给我们提供了体验Svelte 5的选项。
-![alt text](image-17.png)
+![](image-17.png)
 
 接着是正常的安装依赖操作。
 ```bash
@@ -70,7 +70,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 </button>
 {count}
 ```
-![alt text](test31.gif)
+![](test31.gif)
 
 在class中也能使用
 ```html
@@ -90,7 +90,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 姓名：{person.name}
 ```
 
-![alt text](test32.gif)
+![](test32.gif)
 
 对比之前的数据声明，多了`$state`。
 
@@ -114,7 +114,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 </p>
 数组：{arr.join(',')}
 ```
-![alt text](test33.gif)
+![](test33.gif)
 
 ```html
 <script>
@@ -129,7 +129,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 <input bind:value={obj.foo.bar} />
 {obj.foo.bar}
 ```
-![alt text](test34.gif)
+![](test34.gif)
 
 
 ### `$state.frozen`
@@ -152,9 +152,9 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 </p>
 数组：{arr.join(',')}
 ```
-![alt text](image-18.png)
+![](image-18.png)
 
-![alt text](image-19.png)
+![](image-19.png)
 
 当我们调用update2时，数组能正常更新。
 
@@ -185,7 +185,7 @@ Runes是一组函数式的符号，无需额外引入，可以直接使用，是
 count: {count}
 double: {double}
 ```
-![alt text](test35.gif)
+![](test35.gif)
 
 我们可以传`count * 2`，但是不能传`count++`。
 
@@ -208,7 +208,7 @@ double: {double}
 <button on:click={onAdd}>add</button>
 total: {total}
 ```
-![alt text](test36.gif)
+![](test36.gif)
 
 ### `$effect`
 > runs when the component is mounted, and again whenever `count` or `doubled` change,after the DOM has been updated.
@@ -229,7 +229,7 @@ total: {total}
 
 width: <input type="number" bind:value={width} />
 ```
-![alt text](test39.gif)
+![](test39.gif)
 
 ```html
 <script>
@@ -242,7 +242,7 @@ width: <input type="number" bind:value={width} />
 
 width: <input type="number" bind:value={width} />
 ```
-![alt text](test40.gif)
+![](test40.gif)
 
 ### `$effect.pre`
 
@@ -270,7 +270,7 @@ width: <input type="number" bind:value={width} />
 width: <input type="number" bind:value={width} />
 <span id="width">{width}</span>
 ```
-![alt text](test41.gif)
+![](test41.gif)
 
 ```html
 <script>
@@ -294,7 +294,7 @@ width: <input type="number" bind:value={width} />
 width: <input type="number" bind:value={width} />
 <span id="width">{width}</span>
 ```
-![alt text](test42.gif)
+![](test42.gif)
 在这里之所以要把width也一起打印出来，是因为`$effect`和`$effect.pre`的后续执行需要依赖width。
 
 ### `$effect.active`
@@ -326,7 +326,7 @@ width: <input type="number" bind:value={width} />
 double: {double}
 in template:{console.log('isActive in template', $effect.active())}
 ```
-![alt text](test43.gif)
+![](test43.gif)
 经过试验，在`$effect`、`$effect.pre`和template中能够正常判断。  
 我们尝试在`$derived.by`中使用，可是打印结果提醒我们`$effect.active`在其中并不适用。
 
@@ -350,7 +350,7 @@ const offEffect = $effect.root(() => {
 <button onclick={() => offEffect()}>关闭$effect</button>
 <button onclick={() => count++}>更新</button>
 ```
-![Alt text](test1.gif)
+![](test1.gif)
 
 ### `$props`
 和明显，用来接收props的Runes。
@@ -379,7 +379,7 @@ const offEffect = $effect.root(() => {
 
 <button onclick={() => count++}>add count</button>
 ```
-![Alt text](test2.gif)
+![](test2.gif)
 
 ## Snippets
 俗称片段。使用Snippets可以进行内容复用。
@@ -410,7 +410,7 @@ const offEffect = $effect.root(() => {
 ```
 使用`{#snippet snippetName()}...{/snippet}`来定义我们要复用的片段，使用`{@render snippetName()}`来复用定义好的片段。
 
-![alt text](image-21.png)
+![](image-21.png)
 在之前，如果我们要复用这一段代码，只能把它放入到另一个svelte文件中，当成组件来引用。
 
 ### 传递给组件
@@ -443,7 +443,7 @@ const offEffect = $effect.root(() => {
 
 <Svelte5 {header} {footer} />
 ```
-![alt text](image-22.png)
+![](image-22.png)
 
 ## 事件
 ### 事件监听
@@ -487,7 +487,7 @@ const offEffect = $effect.root(() => {
 
 <Svelte5 {onClick} {onClick2} />
 ```
-![alt text](test44.gif)
+![](test44.gif)
 
 除了接收方法，我们还能接收插槽内容。没错，在Svelte5中，插槽的使用转而投向了jsx的写法，通过`let { children } = $props()`来接收插槽内容。
 ```html
@@ -561,7 +561,7 @@ Svelte4的事件修饰符如下：
 width: <input type="number" bind:value={width} />, 
 height: <input type="number" bind:value={height} />
 ```
-![alt text](test45.gif)
+![](test45.gif)
 如果我们只想在width执行时输出console，那就需要不追踪height的依赖。
 
 ```html
@@ -580,7 +580,7 @@ width: <input type="number" bind:value={width} />,
 height: <input type="number" bind:value={height} />
 ```
 
-![alt text](test46.gif)
+![](test46.gif)
 
 
 ### unstate
@@ -632,7 +632,7 @@ obj: {obj.name}<br />
 obj: {obj.name}<br />
 _obj: {_obj.name}
 ```
-![alt text](test47.gif)
+![](test47.gif)
 
 ### mount
 ```javascript

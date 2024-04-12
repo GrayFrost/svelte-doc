@@ -127,7 +127,6 @@ addBtn.addEventListener('click', function() {
 
 removeBtn.addEventListener('click', function() {
   if (text) {
-    console.log('zzh text', text.parentNode, text.nextElementSibling);
     text.parentNode.removeChild(text.nextElementSibling);
     text.parentNode.removeChild(text);
   }
@@ -368,7 +367,7 @@ function analyse(ast) {
         fragment.children.forEach((child) => traverse(child));
         break;
       case "Expression": {
-        extractNames(fragment.expression).forEach((name) => {
+        periscopic.extract_names(fragment.expression).forEach((name) => {
           result.useInTemplate.add(name);
         });
         break;
@@ -380,18 +379,6 @@ function analyse(ast) {
   return result;
 }
 
-function extractNames(jsNode, result = []) {
-  switch (jsNode.type) {
-    case "Identifier":
-      result.push(jsNode.name);
-      break;
-    case "BinaryExpression":
-      extractNames(jsNode.left, result);
-      extractNames(jsNode.right, result);
-      break;
-  }
-  return result;
-}
 
 function generate(ast, analysis) {
   const code = {
@@ -450,22 +437,9 @@ function generate(ast, analysis) {
         code.create.push(`append(${parent}, ${variableName});`);
 
         // 更新
-        const names = extractNames(node.expression);
-        if (names.some((name) => analysis.willChange.has(name))) {
-          const changes = new Set();
-          names.forEach((name) => {
-            if (analysis.willChange.has(name)) {
-              changes.add(name);
-            }
-          });
-          let condition;
-          if (changes.size > 1) {
-            condition = `${JSON.stringify(
-              Array.from(changes)
-            )}.some(name => changed.includes(name))`;
-          } else {
-            condition = `changed.includes('${Array.from(changes)[0]}')`;
-          }
+        const names = periscopic.extract_names(node.expression);
+        if (analysis.willChange.has(names[0])) {
+          let condition = `changed.includes('${names[0]}')`;
           code.update.push(`if (${condition}) {
             ${variableName}.data = ${expressionStr};
           }`);
