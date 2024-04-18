@@ -572,6 +572,9 @@ $: alertCls = classNames(prefixCls, {
 
 ## 小结
 
-了解了如何使用预处理器
-svelte:component这个标签
-如何在svelte中使用svg
+本章我们完成了：
+- Alert组件项目的环境搭建
+- 预处理器Less的使用
+- 通过`$`和`classnames`实现动态class
+- `<svelte:component>`动态加载标签组件爱你
+- 在Svelte中定义和使用svg

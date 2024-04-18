@@ -303,4 +303,8 @@ const updateItem = (id, value) => {
 ![End](./img/18-4.gif)
 
 ## 小结
-本章我们了解了如何使用`svelte/store`来进行项目内数据的管理。
+
+本章我们完成了：
+- 使用`svelte/store`进行状态管理
+- 循环列表中key值的使用，防止不正常的渲染
+- 为待办项的增加和减少添加动画

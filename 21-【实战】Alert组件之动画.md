@@ -227,4 +227,7 @@ const animationEnd = () => {
 
 ## 小结
 
-本章为Alert组件添加了动画。
+本章我们完成了：
+- `transition:fn`指令的使用
+- 自定义过渡效果
+- 完整的代码演示
