@@ -247,4 +247,11 @@ export default {
 ```
 
 ## 小结
-这一章我们了解了事件绑定在三大框架中的不同写法，同时Vue和Svelte中均提供了事件修饰符来优化我们的方法。
+
+本章我们对比了：
+- React中使用`on[事件]`的驼峰形式绑定事件、Vue使用`@[事件]`或`v-on:[事件]`的形式绑定事件、Svele使用`on:[事件]`的形式绑定事件
+- React的`function component`中使用`useState`hooks时，返回值的第二个参数用于更新数据；`class component`中使用`this.setState`更新数据
+- React进行事件绑定时需要注意this的指向
+- Vue`2.x`中事件需要定义在`methods`中
+- Svelte的事件除了要求写在script内无其他额外要求
+- 三大框架绑定事件后的event对象的获取

@@ -157,4 +157,9 @@ Svelte元素标签中使用变量的方式和React相同，使用单个花括号
 
 ## 小结
 
-在这一章中，我们分别对比了三个框架的声明变量的写法。知道了React在class component和function component中有不同的写法，Vue也因为版本不同提供了不同的写法。而Svelte相对其他两个框架来说，变量的声明更为简洁方便。同时我们比较了双向绑定在Vue和Svelte中的不同写法。
+本章我们对比了：
+- React在`function component`中可以通过`useState()`来声明和更新数据，而在`class component`中则通过`this.state`来实现。变量在`{}`单花括号中展示。
+- Vue在`3.x`中通过`ref`和`reactive`来声明变量，在`2.x`中通过`data() { return {}}`来声明存储变量。变量在`{{}}`双花括号中展示。
+- Svelte中像正常js般声明变量即可。变量也是在`{}`单花括号中展示。
+- Vue的双向数据绑定使用`v-model`来实现
+- Svelte的双向数据绑定使用`bind:`来实现。

@@ -410,4 +410,12 @@ const props = defineProps<Props>()
 
 ## 小结
 
-本章中，我们学习了三大框架各自传值的不同点，同时介绍了如何在三大框架中对传值类型进行校验。
+本章我们对比了：
+- React页面往组件传值使用`key={value}`的形式；组件接收外部的值通过`props`属性接收
+- Vue页面往组件传值使用`:key="value"`或`key="value"`的形式；在`2.x`中组件接收外部的值通过`props: {}`来接收，在`3.x`中组件接收外部的值通过`defineProps([key])`的形式
+- Svelte同样是通过`key={value}`的形式往组件内传值，而组件接收外部的值则通过`export let key`的形式
+- React父子页面事件的沟通仍通过props传递实现
+- Vue通过`@function="callback"`的形式监听子页面派发的事件，在`2.x`中子页面通过`this.$emit()`的方式派发事件，在`3.x`中子页面通过`defineEmits()`来派发事件
+- Svelte中父页面通过`on:[function]={callback}`的形式监听子页面派发的事件，在子页面中则需借助`createEventDispatcher`来进行事件派发
+- 三大框架对props传值类型的限定
+
