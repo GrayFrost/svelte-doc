@@ -5,23 +5,23 @@
 首先我们需要在原来判断表达式的逻辑里，加上对特殊html标签的判断。
 ```diff
 function parseExpression() {
--   if (match("{")) {
-+   if (match("{") && !match('{#')) {
-      eat("{");
-      const expression = parseJavaScript();
-      eat("}");
-      return {
-        type: "Expression",
-        expression,
-      };
-    }
+- if (match("{")) {
++ if (match("{") && !match('{#')) {
+    eat("{");
+    const expression = parseJavaScript();
+    eat("}");
+    return {
+      type: "Expression",
+      expression,
+    };
+  }
 }
 ```
 
 添加解析特殊标签的逻辑。
 ```javascript
 function parseFragment() {
-    return parseScript() ?? parseElement() ?? parseText() ?? parseExpression() ?? parseBlock();
+  return parseScript() ?? parseElement() ?? parseText() ?? parseExpression() ?? parseBlock();
 }
 ```
 
@@ -52,45 +52,44 @@ function parseBlock() {
 完善generate里的traverse方法
 ```javascript
 function traverse(node, parent) {
-    switch (node.type) {
-      case "IfBlock": {
-        const variableName = `if_block_${counter++}`;
-        const funcName = `${variableName}_func`;
-        const funcCallName = `${funcName}_call`;
-        const expressionStr = escodegen.generate(node.expression);
-        code.variables.push(variableName);
-        code.variables.push(funcName);
-        code.variables.push(funcCallName);
+  switch (node.type) {
+    case "IfBlock": {
+      const variableName = `if_block_${counter++}`;
+      const funcName = `${variableName}_func`;
+      const funcCallName = `${funcName}_call`;
+      const expressionStr = escodegen.generate(node.expression);
+      code.variables.push(variableName);
+      code.variables.push(funcName);
+      code.variables.push(funcCallName);
+		  code.create.push(`
+      ${funcName} = () => {
+        if (${expressionStr}) {
+          if (${funcCallName}) {return;}
+          ${variableName} = element('span');
+        `)
+      node.children.forEach(subNode => {
+        traverse(subNode, variableName)
+      });
 
-		code.create.push(`
-        ${funcName} = () => {
-          if (${expressionStr}) {
-            if (${funcCallName}) {return;}
-            ${variableName} = element('span');
-          `)
-          node.children.forEach(subNode => {
-            traverse(subNode, variableName)
-          });
-
-        code.create.push(`
-          append(${parent}, ${variableName});
-          ${funcCallName} = true;
-          } else {
-            ${funcCallName} = false;
-            if (${variableName} && ${variableName}.parentNode) {
-              detach(${variableName});
-            }
+      code.create.push(`
+        append(${parent}, ${variableName});
+        ${funcCallName} = true;
+        } else {
+          ${funcCallName} = false;
+          if (${variableName} && ${variableName}.parentNode) {
+            detach(${variableName});
           }
         }
-        ${funcName}()
-        `);
-        
-        code.destroy.push(`detach(${variableName})`);
-        code.update.push(`${funcName}()`);
-        
-        break;
       }
+      ${funcName}()
+      `);
+      
+      code.destroy.push(`detach(${variableName})`);
+      code.update.push(`${funcName}()`);
+      
+      break;
     }
+  }
 }
 ```
 
@@ -110,8 +109,6 @@ count: {count}
 ```
 
 ![](./img/43-1.gif)
-
-缺点：多了一个span标签包裹。
 
 有了parseBlock方法，我们就可以在里面继续添加EachBlock、AwaitBlock等其他特殊标签的解析。
 
@@ -582,3 +579,8 @@ bootstrap();
 ```
 
 ## 小结
+
+本章我们实现了：
+- IfBlock的解析。
+
+笔者在本章使用的实现方式存在一个缺点：IfBlock的内容外层多了一个span标签包裹。然而对于不是专门介绍框架实现的小册内容来说，瑕不掩瑜。
