@@ -441,4 +441,19 @@ Svelte的Context传值同样不支持响应性，要想使传递的值具有响�
 ```
 ## 小结
 
-对比篇到这里就告一段落，相信大家经过前面一些篇章的学习，已经有所发现：一个最基本的前端框架，应该向使用者提供xxxxx方法。 TODO
+本章我们对比了：
+- React的`function component`中通过`createContext`和`useContext`来实现跨组件传值。在`class component`中同样通过`createContext`来创建context对象，在内层组件中通过`Context.Consumer`来接收context的传值
+- Vue中通过`provide`和`inject`来实现跨组件传值。
+- Svelte中通过`setContext`和`getContext`来实现跨组件传值。
+
+对比篇到这里就告一段落，相信大家经过前面一些篇章的学习，已经有所发现：一个最基本的前端框架，应该向使用者提供以下但不限于这些基本功能：
+- 定义数据和更新数据的方法
+- 事件监听
+- 父子传值的能力
+- 生命周期钩子
+- 插槽
+- 数据响应性
+- 条件判断和循环判断
+- DOM引用
+- 样式处理
+- 跨组件传值

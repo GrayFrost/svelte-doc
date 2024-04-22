@@ -2,7 +2,7 @@
 
 ### 行内样式
 
-在React中，行内样式需要以`style={styleObj}`的形式
+在React中，行内样式需要以`style={styleObj}`的形式：
 ```javascript
 export default function Page() {
   return <div style={{
@@ -484,5 +484,10 @@ Svelte文件的`<style></style>`标签内的样式，默认启用了模块化特
 
 ## 小结
 
-除了以上特性外，还可以结合诸如Tailwind等原子类库、Emotion等cssinjs库以及Less、Sass等样式预处理器来实现页面样式。
+本章我们对比了：
+- React的行内样式的写法、非行内样式的引入方式。React中写样式的`class`需要写成`className`。
+- Vue的行内样式的写法、非行内样式的处理。Vue动态class的几种写法。
+- Svelte的行内样式的写法、非行内样式的处理。class表达式的写法。
+- 三大框架样式模块化的处理方式。
+- 除了以上特性外，框架还可以结合诸如Tailwind等原子类库、Emotion等cssinjs库以及Less、Sass等样式预处理器来实现页面样式。
 
