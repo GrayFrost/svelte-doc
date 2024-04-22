@@ -262,4 +262,9 @@ export default {
 如果想要父组件操作子组件的数据，需要对外`export`一个能够获取该数据的方法，而不是直接`export`数据。因为直接export数据在Svelte中是把该数据声明为一个对外的prop，亦或者像我们在《特定标签》中学习到的配置`<svelte:options>`的`accessors`属性为true。
 
 ## 小结
-本章我们了解了三大框架如何操作真实DOM，以及如何获取组件实例上的数据和方法。
+
+本章我们对比了：
+- 框架的ref功能如果绑定到正常的html标签，可以获取DOM节点的引用，如果绑定到组件上，可以获取组件的实例
+- React的`function component`中通过`useRef`来定义ref，通过`useImperativeHandle`来定义组件对外暴露的方法。在`class component`中使用`createRef`来定义ref。ref的具体值在ref.current上。
+- 在Vue`3.x`中通过`ref()`来定义ref，通过`defineExpose()`来定义组件对外暴露的方法。在`2.x`中通过`this.$refs`来调用。
+- Svelte通过`bind:this`来实现ref。组件内通过`export`来定义对外暴露的方法。

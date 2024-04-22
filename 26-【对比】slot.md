@@ -231,4 +231,6 @@ import Child from "./Child.vue";
 ## 小结
 
 本章我们对比了：
-本章我们学习了三大框架中插槽的定义与使用方式。
+- React通过props上的children来接收插槽内容，通过render props的方式来进行插槽和组件间的传值
+- Vue通过`<slot>`标签来完成插槽功能。通过`<slot name="x">`的形式来定义特定名称的插槽占位，然后外部通过`v-slot:name`或`#name`来向具名插槽填值。Vue的slot和组件间的传值通过`<slot message>`和`v-slot`来实现。
+- Svelte同样通过`<slot>`标签来实现插槽。通过`<slot name="x">`的形式来定义特定名称的插槽占位，外部通过`slot="name"`来向具名插槽填值。Svelte的slot和组件间的传值通过`<slot xxx={}>`和`let:xxx={}`的形式来实现。
