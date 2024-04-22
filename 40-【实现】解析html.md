@@ -1,4 +1,3 @@
-
 在上一章中，我们完成了script的解析，其主要逻辑都集中在parseScript中
 
 ## 标签
@@ -50,7 +49,6 @@ function parseFragments() {
     return fragments;
 }
 ```
-
 
 将parseFragments()返回值赋给ast.html：
 ```javascript
@@ -140,12 +138,12 @@ function generate(ast) {
 		${escodegen.generate(ast.script)}
 
 			var lifecycle = {
-		        create(target) {
-		          ${code.create.join('\n')}
-		        },
-		        destroy(target) {
-		          ${code.destroy.join('\n')}
-		        }
+        create(target) {
+          ${code.create.join('\n')}
+        },
+        destroy(target) {
+          ${code.destroy.join('\n')}
+        }
 			};
 		    return lifecycle;
 	    }	
@@ -161,20 +159,20 @@ function generate(ast) {
 解析完Element之后，我们开始解析纯文本Text：
 ```javascript
 function parseFragment() {
-    return parseScript() ?? parseElement() ?? parseText();
+  return parseScript() ?? parseElement() ?? parseText();
 }
 ```
 
 解析得到的对象，我们将其类型定义为`type: 'Text'`：
 ```javascript
 function parseText() {
-    const text = readWhileMatching(/[^<{]/);
-    if (text.trim() !== '') {
-      return {
-        type: 'Text',
-        value: text.trim(),
-      }
+  const text = readWhileMatching(/[^<{]/);
+  if (text.trim() !== '') {
+    return {
+      type: 'Text',
+      value: text.trim(),
     }
+  }
 }
 ```
 
@@ -182,19 +180,19 @@ function parseText() {
 完善generate里的traverse方法，添加对Text类型的转换：
 ```javascript
 function traverse(node, parent) {
-    switch(node.type) {
-      case 'Element': {
-        ...
-      }
-      case 'Text': {
-        const variableName = `txt_${counter++}`;
-        code.variables.push(variableName);
-        code.create.push(`${variableName} = text('${node.value}');`);
-        code.create.push(`append(${parent}, ${variableName})`);
-        code.destroy.push(`detach(${variableName})`);
-        break;
-      }
+  switch(node.type) {
+    case 'Element': {
+      ...
     }
+    case 'Text': {
+      const variableName = `txt_${counter++}`;
+      code.variables.push(variableName);
+      code.create.push(`${variableName} = text('${node.value}');`);
+      code.create.push(`append(${parent}, ${variableName})`);
+      code.destroy.push(`detach(${variableName})`);
+      break;
+    }
+  }
 }
 ```
 同样是在create时存入创建文本内容的逻辑，在destroy时存入销毁文本内容的逻辑。
@@ -219,52 +217,52 @@ function traverse(node, parent) {
 修改parseElement的内容：
 ```diff
 function parseElement() {
+  skipWhitespace();
+  if (match('<')) {
+    eat('<');
+    const tagName = readWhileMatching(/[a-z]/);
++   const attributes = parseAttributes();
+    eat('>');
+    const endTag = `</${tagName}>`;
+    const element = {
+      type: 'Element',
+      name: tagName,
+-     attributes: [],
++     attributes,
+      children: [],
+    };
+    eat(endTag);
     skipWhitespace();
-    if (match('<')) {
-      eat('<');
-      const tagName = readWhileMatching(/[a-z]/);
-+     const attributes = parseAttributes();
-      eat('>');
-      const endTag = `</${tagName}>`;
-      const element = {
-        type: 'Element',
-        name: tagName,
--       attributes: [],
-+       attributes,
-        children: [],
-      };
-      eat(endTag);
-      skipWhitespace();
-      return element;
-    }
+    return element;
+  }
 }
 ```
 在一开始，我们把attributes设置成了空数组，现在我们通过parseAttributes来解析出这部分内容。
 
 ```javascript
-  function parseAttributes() {
+function parseAttributes() {
+  skipWhitespace();
+  const attributes = [];
+  while(!match('>')) {
+    attributes.push(parseAttribute());
     skipWhitespace();
-    const attributes = [];
-    while(!match('>')) {
-      attributes.push(parseAttribute());
-      skipWhitespace();
-    }
-    return attributes;
   }
+  return attributes;
+}
 
-  function parseAttribute() {
-    const name = readWhileMatching(/[^=]/);
-    if (match('={')) {
-      eat('={');
-      const value = parseJavaScript();
-      eat('}');
-      return {
-        type: 'Attribute',
-        name,
-        value,
-      };
-    }
+function parseAttribute() {
+  const name = readWhileMatching(/[^=]/);
+  if (match('={')) {
+    eat('={');
+    const value = parseJavaScript();
+    eat('}');
+    return {
+      type: 'Attribute',
+      name,
+      value,
+    };
   }
+}
 ```
 parseAttributes的主要逻辑是解析从`<`到`>`之间的内容，其内部调用parseAttribute方法；
 而parseAttribute则解析`key={value}`格式的内容，之后返回`type: Attribute`的对象。因此parseAttributes返回的是`type: Attribute`对象数组。
@@ -273,9 +271,9 @@ parseAttributes的主要逻辑是解析从`<`到`>`之间的内容，其内部�
 ### 解析行内表达式
 ```javascript
 function parseJavaScript() {
-    const js = acorn.parseExpressionAt(content, i, { ecmaVersion: 2023 });
-    i = js.end;
-    return js;
+  const js = acorn.parseExpressionAt(content, i, { ecmaVersion: 2023 });
+  i = js.end;
+  return js;
 }
 ```
 这里同样使用acron提供的能力。
@@ -283,29 +281,30 @@ function parseJavaScript() {
 完善generate里的traverse方法：
 ```javascript
 function traverse(node, parent) {
-    switch(node.type) {
-      case 'Element': {
-        ...
-        node.attributes.forEach(attribute => {
-          traverse(attribute, variableName);
-        });
+  switch(node.type) {
+    case 'Element': {
+      ...
+      node.attributes.forEach(attribute => {
+        traverse(attribute, variableName);
+      });
+    }
+    case "Attribute": {
+      if (node.name.startsWith("on:")) {
+        const eventName = node.name.slice(3);
+        const eventHandler = node.value.name;
+        const eventNameCall = `${eventName}_${counter++}`;
+        code.variables.push(eventNameCall);
+        code.create.push(
+          `${eventNameCall} = listen(${parent}, "${eventName}", ${eventHandler})`
+        );
+        code.destroy.push(`${eventNameCall}()`);
       }
-      case "Attribute": {
-        if (node.name.startsWith("on:")) {
-          const eventName = node.name.slice(3);
-          const eventHandler = node.value.name;
-          const eventNameCall = `${eventName}_${counter++}`;
-          code.variables.push(eventNameCall);
-          code.create.push(
-            `${eventNameCall} = listen(${parent}, "${eventName}", ${eventHandler})`
-          );
-          code.destroy.push(`${eventNameCall}()`);
-        }
-        break;
-      }
+      break;
     }
   }
-  ```
+}
+```
+
 判断属性是不是`on:`开头，是才处理。因为我们对addEventListener做了封装，当我们执行listen()方法后，会返回一个用于移除事件监听的方法。我们在destroy阶段调用这个方法。
 
 修改App.svelte的内容：
@@ -326,11 +325,11 @@ function traverse(node, parent) {
 ```html
 <!-- index.html -->
 <style>
-  button {
-	width: 100px;
-	height:100px;
-	background: orange;
-  }
+button {
+  width: 100px;
+  height:100px;
+  background: orange;
+}
 </style>
 ```
 
@@ -585,4 +584,7 @@ bootstrap();
 
 ## 小结
 
-本章中，我们完成了对html内容的解析，我们能够解析出正常的html标签内容、纯文本、以及能够对标签进行事件绑定。
+本章我们实现了：
+- 解析正常的html标签
+- 解析纯文本
+- 解析标签上的属性，解析行内表达式，完成对标签进行事件绑定的功能
