@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "37-【源码】流程.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           },
@@ -24,7 +24,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "37-【源码】流程.md",
+                "file": "35-【源码】compiler.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "37-【源码】流程.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           }
@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "37-【源码】流程.md",
+                "file": "35-【源码】compiler.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "37-【源码】流程.md",
+                "file": "35-【源码】compiler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "37-【源码】流程.md"
+                "file": "35-【源码】compiler.md"
               }
             }
           },
@@ -187,6 +187,7 @@
   },
   "active": "fc69782002505dca",
   "lastOpenFiles": [
+    "37-【源码】流程.md",
     "09-【入门】节点引用.md",
     "img/33-25.png",
     "33-25.png",
@@ -218,7 +219,6 @@
     "02-【入门】安装与使用.md",
     "01-【入门】背景.md",
     "05-【入门】生命周期.md",
-    "37-【源码】流程.md",
     "bak/Svelte.mindnode",
     "35-【源码】compiler.md",
     "19-【实战】Alert组件之简单传值.md",

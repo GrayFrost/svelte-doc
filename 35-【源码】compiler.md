@@ -71,24 +71,8 @@ export default async function preprocess(source, preprocessor, options) {
 
 ## compile
 
-
-首先会将 parse 过程中拿到的语法树（包含 html，css，instance 和 module）转换为 Component，然后在 render_dom 中通过 code-red 中的 print 函数将component 的转换为 js 可运行代码，最终输出 complier 的结果
-
-将parse解析得到的语法树转成js文件
-
-语法的最终编译是来自[code-red](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FRich-Harris%2Fcode-red "https://github.com/Rich-Harris/code-red")的 print 将调整后的语法树转换成为代码
-
-第一步将 parse 过程中拿到的语法树（包含 html，css，instance 和 module）转换为 Component，第二步将 Component 进入**render dom**处理并生成 component 的转换代码以及 runtime，第三步输出 compiler 的结果
-
-packages/svelte/src/compiler/compile/index.js
+进入到`packages/svelte/src/compiler/compile/index.js`，
 ```javascript
-/**
- * `compile` takes your component source code, and turns it into a JavaScript module that exports a class.
- *
- * https://svelte.dev/docs/svelte-compiler#svelte-compile
- * @param {string} source
- * @param {import('../interfaces.js').CompileOptions} options
- */
 export default function compile(source, options = {}) {
   const ast = parse(source, options);
   const component = new Component(
@@ -101,32 +85,21 @@ export default function compile(source, options = {}) {
   return component.generate(result);
 }
 ```
-我们去掉不相关的代码，可以看到基本的compile逻辑。
+我们去掉不相关的代码，可以看到基本的compile逻辑：
 
-通过解读svelte文件的字符串内容，得到ast，将ast转成Component类，然后render dom，最后generate。
+- 首先会将`parse`过程中拿到的语法树ast转换为`component`
+- 然后在`render_dom`中调整成特定的语法树
+- 最后`component.generate`中，通过[code-red](https://github.com/Rich-Harris/code-red)的`print`将调整后的语法树转换成为代码
 
-
-compiler这个编译器主要分为两部分 parse 和 compile，parse 是解析的过程，解析 script 和 style 等 tag 标签以及 each 和 ifelse 等 mustache 模版语法。compile 则是包含了 parse 的动作，将解析出来的 ast 语法树转换为可执行的代码
-
-## parse
+### parse
 
 首先我们查看下compile方法：
-```diff
-export default function compile(source, options = {}) {
-+  const ast = parse(source, options);
-  const component = new Component(
-    ast,
-    source,
-    options.name || get_name_from_filename(options.filename) || 'Component',
-    options,
-  );
-  const result = render_dom(component, options);
-  return component.generate(result);
-}
+```javascript
+const ast = parse(source, options);
 ```
-它的第一步逻辑便是调用parse来解析文件内容。
+`compile`第一步的逻辑便是调用parse来解析文件内容。
 
-跳转到parse方法的主入口`packages/svelte/src/compiler/parse/index.js`：
+跳转到`parse`方法的主入口`packages/svelte/src/compiler/parse/index.js`：
 ```javascript
 export default function parse(template, options = {}) {
   const parser = new Parser(template, options);
@@ -142,14 +115,13 @@ export default function parse(template, options = {}) {
   };
 }
 ```
-逻辑都封装在`Parser`类中。
+逻辑都封装在`Parser`类中，经过`Parser`处理后，返回带有`html`、`css`、`instance`、`module`属性值的对象。`html`和`css`容易理解，而`instance`存储的是正常的`script`内容，`module`存储的则是`<script context="module"></script>`内的js内容。
 
 我们在REPL中可以看到，AST的输出结构正是上述的返回对象。
 ![](./img/35-3.png)
 
-### Parser
+#### Parser
 
-源码路径：`packages/svelte/src/compiler/parse/index.js`
 ```javascript
 export class Parser {
   template = undefined;
@@ -182,7 +154,7 @@ export class Parser {
 }
 ```
 
-在Parse类中，定义了一些如何解析模板字符串的方法，比如`match`用来判断是否匹配对应字符串、`eat`用来“吃掉”当前字符串，用于确保读取字符串模板的索引index的正确指向等等。
+在`Parse`类中，定义了一些如何解析模板字符串的方法，比如`match`用来判断是否匹配对应字符串、`eat`用来“吃掉”当前字符串，用于确保读取字符串模板的索引index的正确指向等等。
 
 我们着重关注的是在`constructor`里的一段代码：
 ```javascript
@@ -192,16 +164,8 @@ while (this.index < this.template.length) {
 }
 ```
 
-我们需要有个认知，作为阅读Parser源码的前提，那就是内部的所有逻辑都是为了转变成ast对象服务的。
-
-TODO：script分为instance和module
-
-Instance 是指 script 标签中响应式的属性和方法，module 是使用 `<script context="module"` 声明 的无响应的变量和方法。
-
-script 的解析主要靠的是[code-red](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FRich-Harris%2Fcode-red "https://github.com/Rich-Harris/code-red")，它是基于[acorn](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Facornjs%2Facorn "https://github.com/acornjs/acorn")的封装
-
 #### fragment
-源码路径：`packages/svelte/src/compiler/parse/state/fragment.js`
+进入到`fragment`的文件中`packages/svelte/src/compiler/parse/state/fragment.js`：
 ```javascript
 import tag from './tag.js';
 import mustache from './mustache.js';
@@ -222,12 +186,196 @@ export default function fragment(parser) {
   return text;
 }
 ```
+可以看到，`fragment`内部是使用了三种不同的解析处理，分别是`tag`、`mustache`和`text`。
+
 #### tag
-tag除了原生，还包括svelte:html, svelte:body, svelte:component, svelte:element等等
-TODO: 重写 tag 解析的内容以 `<` 作为标识，包括 HTMLElement、style标签、script标签以及用户自定义的 svelte 组件以及 svelte 实现的一些特殊标签如 `svelte:head` 、`svelte:options` 、`svelte:window` 以及`svelte:body` 等
+
+当解析的内容是以`<`开头时，进入到`tag`的解析流程。`tag`除了解析原生html、css、script标签外，还支持了Svelte自定义的标签如`svelte:html`、`svelte:body`、`svelte:component`等等。
+
+```javascript
+if (parser.eat('!--')) {
+  const data = parser.read_until(regex_closing_comment);
+  parser.eat('-->', true, parser_errors.unclosed_comment);
+  parser.current().children.push({
+    start,
+    end: parser.index,
+    type: 'Comment',
+    data,
+    ignores: extract_svelte_ignore(data)
+  });
+  return;
+}
+```
+当在`<`之后遇到的是`!--`，表明解析到了注释语句，返回`Comment`类型的节点。
+
+```javascript
+const meta_tags = new Map([
+  ['svelte:head', 'Head'],
+  ['svelte:options', 'Options'],
+  ['svelte:window', 'Window'],
+  ['svelte:document', 'Document'],
+  ['svelte:body', 'Body']
+]);
+const valid_meta_tags = Array.from(meta_tags.keys()).concat(
+  'svelte:self',
+  'svelte:component',
+  'svelte:fragment',
+  'svelte:element'
+);
+
+const type = meta_tags.has(name)
+  ? meta_tags.get(name)
+  : regex_capital_letter.test(name[0]) || name === 'svelte:self' || name === 'svelte:component'
+  ? 'InlineComponent'
+  : name === 'svelte:fragment'
+  ? 'SlotTemplate'
+  : name === 'title' && parent_is_head(parser.stack)
+  ? 'Title'
+  : name === 'slot'
+  ? 'Slot'
+  : 'Element';
+```
+遇到Svelte的自定义标签时，返回特定类型的节点，剩余的原生html标签，则标记为`Element`类型节点。
+
+
+```javascript
+const specials = new Map([
+	[
+		'script',
+		{
+			read: read_script,
+			property: 'js'
+		}
+	],
+	[
+		'style',
+		{
+			read: read_style,
+			property: 'css'
+		}
+	]
+]);
+
+if (is_top_level_script_or_style) {
+  const special = specials.get(name);
+  parser.eat('>', true);
+  const content = special.read(parser, start, element.attributes);
+  if (content) parser[special.property].push(content);
+  return;
+}
+```
+当遇到`script`标签时，用`read_script`进行解析；当遇到`style`标签时，用`read_style`进行解析。
+
+`read_script`的逻辑如下，核心是调用`code-red`的`parse`方法对script的内容进行解析：
+```javascript
+export default function read_script(parser, start, attributes) {
+	...
+	let ast;
+	try {
+		ast = acorn.parse(source);
+	} catch (err) {
+		parser.acorn_error(err);
+	}
+	
+	return {
+		type: 'Script',
+		start,
+		end: parser.index,
+		context: get_context(parser, attributes, start),
+		content: ast
+	};
+}
+```
+
+acorn.parse的逻辑：
+```javascript
+export const parse = (source) =>
+	code_red.parse(source, {
+		sourceType: 'module',
+		ecmaVersion: 13,
+		locations: true
+	});
+```
+
+`read_style`的逻辑如下，核心是使用了`css-tree`的`fork`功能：
+```javascript
+import { parse } from './css-tree-cq/css_tree_parse.js'; // Use extended css-tree for 
+import { walk } from 'estree-walker';
+
+export default function read_style(parser, start, attributes) {
+	...
+
+	let ast;
+
+	try {
+		ast = parse(styles, {
+			positions: true,
+			offset: content_start,
+			onParseError(error) {
+				throw error;
+			}
+		});
+	} catch (err) {
+		...
+	}
+
+	ast = JSON.parse(JSON.stringify(ast));
+
+	walk(ast, {
+		enter: (node) => {
+			...
+
+		}
+	});
+
+	parser.read(regex_starts_with_closing_style_tag);
+
+	const end = parser.index;
+
+	return {
+		type: 'Style',
+		start,
+		end,
+		attributes,
+		children: ast.children,
+		content: {
+			start: content_start,
+			end: content_end,
+			styles
+		}
+	};
+}
+```
+
+css`parse`的逻辑：
+```javascript
+import { fork } from 'css-tree';
+import * as node from './node/index.js';
+
+const cq_syntax = fork({
+	atrule: {
+		container: {
+			parse: {
+				prelude() {
+					return this.createSingleNodeList(this.ContainerQuery());
+				},
+				block(is_style_block = false) {
+					return this.Block(is_style_block);
+				}
+			}
+		}
+	},
+	node
+});
+
+export const parse = cq_syntax.parse;
+```
+
 #### mustache
-mustache模板语法
-TODO: 重写 mustache 以 `{` 作为标识，识别的内容除了模板语法之外，还包括 svelte 的逻辑渲染(else……if、each)等语法、`{``@html``}`、`{``@debug}` 等
+
+当解析的内容是以`{`开头时，进入到`mustache`的解析流程。除了识别正常的`{xxx}`语法外，还识别Svelte的逻辑渲染语法如`{#if}`、`{#each}`、`{@html}`等等。
+
+
 #### text
 逻辑相对简单很多，记录`type: 'Text'`的数据节点：
 ```javascript
@@ -246,7 +394,7 @@ export default function text(parser) {
 }
 ```
 
-## Component
+### Component
 经过`parse`的处理，我们拿到了ast对象，然后我们往`Component`中传入字符串内容和ast对象：
 ```diff
 export default function compile(source, options = {}) {
@@ -305,7 +453,7 @@ export default class Component {
 }
 ```
 
-### walk_module_js
+#### walk_module_js
 这个walk_module_js()函数是Svelte编译器的一部分，它处理Svelte组件中的`<script>`标签的内容。这个函数的主要任务是遍历（或“walk”）模块脚本的抽象语法树（AST），并对其进行一些处理和转换。
 
 以下是这个函数的主要步骤：
@@ -324,7 +472,7 @@ export default class Component {
 
 总的来说，walk_module_js()函数的主要任务是处理Svelte组件中的模块脚本，包括提取导入和导出的信息，创建作用域，以及处理声明和全局变量。
 
-### walk_instance_js_pre_template
+#### walk_instance_js_pre_template
 
 这个`walk_instance_js_pre_template()`函数是Svelte编译器的一部分，它处理Svelte组件中的`<script>`标签的内容。这个函数的主要任务是遍历（或“walk”）实例脚本的抽象语法树（AST），并对其进行一些处理和转换。
 
@@ -345,7 +493,7 @@ export default class Component {
 
 总的来说，`walk_instance_js_pre_template()`函数的主要任务是处理Svelte组件中的实例脚本，包括提取响应式声明的变量，创建作用域，以及处理声明和全局变量
 
-### Fragment
+#### Fragment
 源码路径：`packages/svelte/src/compiler/compile/nodes/Fragment.js`
 ```javascript
 export default class Fragment extends Node {
@@ -406,7 +554,7 @@ function get_constructor(type) {
 ```
 
 TODO: 拿其中一个举例
-### walk_instance_js_post_template
+#### walk_instance_js_post_template
 
 是这个函数的主要步骤：
 
@@ -422,7 +570,7 @@ TODO: 拿其中一个举例
     
 
 总的来说，`walk_instance_js_post_template()`函数的主要任务是在模板解析之后处理实例脚本，包括后处理AST，提升声明，提取响应式声明，以及检查标签的动态内容
-## render_dom
+### render_dom
 
 源码路径：`packages/svelte/src/compiler/compile/render_dom/index.js`
 
@@ -431,18 +579,17 @@ code-red
 
 #### style
 
-####
 
-## generate
+### generate
 隶属于`Component`中的一个方法
 
 调用code-red的print方法。
 
-### walk
+#### walk
 
-### create_module
+#### create_module
 
-### print
+#### print
 
 
 ## 小结
