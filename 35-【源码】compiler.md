@@ -675,24 +675,48 @@ walk_module_js() {
 
 #### walk_instance_js_pre_template
 
-这个`walk_instance_js_pre_template()`函数是Svelte编译器的一部分，它处理Svelte组件中的`<script>`标签的内容。这个函数的主要任务是遍历（或“walk”）实例脚本的抽象语法树（AST），并对其进行一些处理和转换。
+```javascript
+walk_instance_js_pre_template() {
+  const script = this.ast.instance;
+  if (!script) return;
+  // inject vars for reactive declarations
+  script.content.body.forEach((node) => {
+    ...
+    extract_names(expression.left).forEach((name) => {
+      if (!this.var_lookup.has(name) && name[0] !== '$') {
+        this.injected_reactive_declaration_vars.add(name);
+      }
+    });
+  });
+  const { scope: instance_scope, map, globals } = create_scopes(script.content);
+  this.instance_scope = instance_scope;
+  this.instance_scope_map = map;
+  instance_scope.declarations.forEach((node, name) => {
+    ...
+    const { type } = node;
+    this.add_var(node, {
+      name,
+      initialised: instance_scope.initialised_declarations.has(name),
+      imported: type.startsWith('Import'),
+      writable: type === 'VariableDeclaration' && (node.kind === 'var' || node.kind === 'let')
+    });
+    this.node_for_declaration.set(name, node);
+  });
+  // NOTE: add store variable first, then only $store value
+  // as `$store` will mark `store` variable as referenced and subscribable
+  const global_keys = Array.from(globals.keys());
+  const sorted_globals = [
+    ...global_keys.filter((key) => key[0] !== '$'),
+    ...global_keys.filter((key) => key[0] === '$')
+  ];
+  ...
+  this.track_references_and_mutations();
+}
+```
 
-以下是这个函数的主要步骤：
+`walk_instance_js_pre_template()`方法在处理html模板之前解析`ast.instance`即`<script></script>`标签中的内容，主要处理功能包括处理变量声明、提取响应式声明的变量，解析作用域等。
 
-1. 首先，它检查是否存在实例脚本。如果不存在，函数就会直接返回。
-    
-2. 然后，它遍历实例脚本的所有语句，对于每个标签语句，它会检查是否是响应式声明。如果是，它会提取出声明的变量名，并将其添加到`this.injected_reactive_declaration_vars`中。
-    
-3. 接下来，它创建了实例脚本的作用域，并将其存储在`this.instance_scope`中。在创建作用域的过程中，它会收集所有的声明和全局变量。
-    
-4. 对于每个声明，它会检查变量名是否以`$`开头，如果是，它会抛出一个错误，因为在实例脚本中，变量名不能以`$`开头。然后，它会将这个声明添加到组件的变量列表中。
-    
-5. 对于每个全局变量，它会检查变量名是否以`$`开头，如果是，它会抛出一个错误。然后，它会将这个全局变量添加到组件的变量列表中。
-    
-6. 最后，它会跟踪实例脚本中的所有引用和变异。
-    
 
-总的来说，`walk_instance_js_pre_template()`函数的主要任务是处理Svelte组件中的实例脚本，包括提取响应式声明的变量，创建作用域，以及处理声明和全局变量
 
 #### Fragment
 源码路径：`packages/svelte/src/compiler/compile/nodes/Fragment.js`
@@ -755,42 +779,669 @@ function get_constructor(type) {
 ```
 
 TODO: 拿其中一个举例
+
+
 #### walk_instance_js_post_template
-
-是这个函数的主要步骤：
-
-1. 首先，它检查是否存在实例脚本。如果不存在，函数就会直接返回。
-    
-2. 然后，它调用`this.post_template_walk()`，这个函数会遍历实例脚本的抽象语法树（AST），并对其进行一些后处理，比如检查变量的引用，处理赋值语句等。
-    
-3. 接下来，它调用`this.hoist_instance_declarations()`，这个函数会将实例脚本中的所有声明提升到顶部，这是因为在JavaScript中，变量和函数的声明会被提升。
-    
-4. 然后，它调用`this.extract_reactive_declarations()`，这个函数会提取出实例脚本中的所有响应式声明。在Svelte中，响应式声明是一种特殊的声明，它们以`$:`开头，当它们的依赖变化时，它们会自动重新计算。
-    
-5. 最后，它调用`this.check_if_tags_content_dynamic()`，这个函数会检查模板中的标签是否包含动态内容。如果包含，它会生成相应的更新代码。
+```javascript
+walk_instance_js_post_template() {
+  const script = this.ast.instance;
+  if (!script) return;
+  this.post_template_walk();
+  this.hoist_instance_declarations();
+  this.extract_reactive_declarations();
+  this.check_if_tags_content_dynamic();
+}
+```
+`walk_instance_js_post_template`在处理外模板之后解析`ast.instance`。该方法用于处理一些额外工作，比如移除不需要的节点，处理导入和导出等TODO
     
 
 总的来说，`walk_instance_js_post_template()`函数的主要任务是在模板解析之后处理实例脚本，包括后处理AST，提升声明，提取响应式声明，以及检查标签的动态内容
+
 ### render_dom
+解析完`new Component()`，我们继续执行下一步：
+```javascript
+const result =
+  options.generate === false
+    ? null
+    : options.generate === 'ssr'
+    ? render_ssr(component, options)
+    : render_dom(component, options);
+```
+关注`render_dom`部分，源码路径：`packages/svelte/src/compiler/compile/render_dom/index.js`：
 
-源码路径：`packages/svelte/src/compiler/compile/render_dom/index.js`
+```javascript
+export default function dom(component, options) {
+	const { name } = component;
+	const renderer = new Renderer(component, options);
+	const { block } = renderer;
+	block.has_outro_method = true;
+	...
 
-code-red
+	const blocks = renderer.blocks.slice().reverse();
+	push_array(
+		body,
+		blocks.map((block) => {
+			if (/** @type {import('./Block.js').default} */ (block).render)
+				return /** @type {import('./Block.js').default} */ (block).render();
+			return block;
+		})
+	);
+
+	const uses_slots = component.var_lookup.has('$$slots');
+
+	...
+
+	const rest = uses_rest
+		? b`
+		const ${omit_props_names.name} = [${props.map((prop) => `"${prop.export_name}"`).join(',')}];
+		let $$restProps = ${compute_rest};
+	`
+		: null;
+	...
+	
+	// instrument assignments
+	if (component.ast.instance) {
+		let scope = component.instance_scope;
+		const map = component.instance_scope_map;
+
+		/** @type {import('estree').Node | null} */
+		let execution_context = null;
+		walk(component.ast.instance.content, {
+			enter(node) {
+				if (map.has(node)) {
+					scope = /** @type {import('periscopic').Scope} */ (map.get(node));
+					if (!execution_context && !scope.block) {
+						execution_context = node;
+					}
+				} else if (
+					!execution_context &&
+					node.type === 'LabeledStatement' &&
+					node.label.name === '$'
+				) {
+					execution_context = node;
+				}
+			},
+			leave(node) {
+				if (map.has(node)) {
+					scope = scope.parent;
+				}
+				if (execution_context === node) {
+					execution_context = null;
+				}
+				if (node.type === 'AssignmentExpression' || node.type === 'UpdateExpression') {
+					const assignee = node.type === 'AssignmentExpression' ? node.left : node.argument;
+					const names = new Set(extract_names(/** @type {import('estree').Node} */ (assignee)));
+					this.replace(invalidate(renderer, scope, node, names, execution_context === null));
+				}
+			}
+		});
+		component.rewrite_props(({ name, reassigned, export_name }) => {
+			const value = `$${name}`;
+			const i = renderer.context_lookup.get(`$${name}`).index;
+			const insert =
+				reassigned || export_name
+					? b`${`$$subscribe_${name}`}()`
+					: b`@component_subscribe($$self, ${name}, #value => $$invalidate(${i}, ${value} = #value))`;
+			if (component.compile_options.dev) {
+				return b`@validate_store(${name}, '${name}'); ${insert}`;
+			}
+			return insert;
+		});
+	}
+	...
+	// has_create_fragment is intentionally to be true in dev mode.
+	const has_create_fragment = component.compile_options.dev || block.has_content();
+	if (has_create_fragment) {
+		body.push(b`
+			function create_fragment(#ctx) {
+				${block.get_contents()}
+			}
+		`);
+	}
+	body.push(b`
+		${component.extract_javascript(component.ast.module)}
+
+		${component.fully_hoisted}
+	`);
+	...
+	
+	if (has_definition) {
+		/** @type {import('estree').Node | import('estree').Node[]} */
+		const reactive_declarations = [];
+
+		/** @type {import('estree').Node[]} */
+		const fixed_reactive_declarations = []; // not really 'reactive' but whatever
+		component.reactive_declarations.forEach((d) => {
+			const dependencies = Array.from(d.dependencies);
+			const uses_rest_or_props = !!dependencies.find((n) => n === '$$props' || n === '$$restProps');
+			const writable = dependencies.filter((n) => {
+				const variable = component.var_lookup.get(n);
+				return variable && (variable.export_name || variable.mutated || variable.reassigned);
+			});
+			const condition =
+				!uses_rest_or_props && writable.length > 0 && renderer.dirty(writable, true);
+			let statement = d.node; // TODO remove label (use d.node.body) if it's not referenced
+			if (condition)
+				statement = /** @type {import('estree').Statement} */ (
+					b`if (${condition}) { ${statement} }`[0]
+				);
+			if (condition || uses_rest_or_props) {
+				reactive_declarations.push(statement);
+			} else {
+				fixed_reactive_declarations.push(statement);
+			}
+		});
+
+		...
+
+		const return_value = {
+			type: 'ArrayExpression',
+			elements: renderer.initial_context.map(
+				(member) =>
+					/** @type {import('estree').Expression} */ ({
+						type: 'Identifier',
+						name: member.name
+					})
+			)
+		};
+		body.push(b`
+			function ${definition}(${args}) {
+				${injected.map((name) => b`let ${name};`)}
+
+				...
+
+				${instance_javascript}
+
+				...
+
+				${
+					reactive_declarations.length > 0 &&
+					b`
+				$$self.$$.update = () => {
+					${reactive_declarations}
+				};
+				`
+				}
+
+				...
+
+				return ${return_value};
+			}
+		`);
+	}
+
+	...
+
+	const superclass = {
+		type: 'Identifier',
+		name: options.dev ? '@SvelteComponentDev' : '@SvelteComponent'
+	};
+	...
+	const declaration = /** @type {import('estree').ClassDeclaration} */ (
+		b`
+		class ${name} extends ${superclass} {
+			constructor(options) {
+				super(${options.dev && 'options'});
+				@init(this, options, ${definition}, ${
+			has_create_fragment ? 'create_fragment' : 'null'
+		}, ${not_equal}, ${prop_indexes}, ${optional_parameters});
+				${
+					options.dev &&
+					b`@dispatch_dev("SvelteRegisterComponent", { component: this, tagName: "${name.name}", options, id: create_fragment.name });`
+				}
+			}
+		}
+	`[0]
+	);
+	push_array(declaration.body.body, accessors);
+	body.push(/** @type {any} */ (declaration));
+
+  ...
+
+	return { js: flatten(body), css };
+}
+```
+
 #### Renderer
 
-#### style
+##### Block
+```javascript
+import { b, x } from 'code-red';
+import { is_head } from './wrappers/shared/is_head.js';
+import { regex_double_quotes } from '../../utils/patterns.js';
+import { flatten } from '../../utils/flatten.js';
 
+export default class Block {
+  ...
+
+	/** @param {BlockOptions} options */
+	constructor(options) {
+		...
+		this.chunks = {
+			declarations: [],
+			init: [],
+			create: [],
+			claim: [],
+			hydrate: [],
+			mount: [],
+			measure: [],
+			restore_measurements: [],
+			fix: [],
+			animate: [],
+			intro: [],
+			update: [],
+			outro: [],
+			destroy: []
+		};
+		...
+	}
+
+	assign_variable_names() {}
+
+	...
+
+	add_element(id, render_statement, claim_statement, parent_node, no_detach) {
+		this.add_variable(id);
+		this.chunks.create.push(b`${id} = ${render_statement};`);
+		if (this.renderer.options.hydratable) {
+			this.chunks.claim.push(b`${id} = ${claim_statement || render_statement};`);
+		}
+		if (parent_node) {
+			this.chunks.mount.push(b`@append(${parent_node}, ${id});`);
+			if (is_head(parent_node) && !no_detach) this.chunks.destroy.push(b`@detach(${id});`);
+		} else {
+			this.chunks.mount.push(b`@insert(#target, ${id}, #anchor);`);
+			if (!no_detach) this.chunks.destroy.push(b`if (detaching) @detach(${id});`);
+		}
+	}
+
+	...
+
+	/** @param {any} [key] */
+	get_contents(key) {
+		...
+		/** @type {Record<string, any>} */
+		const properties = {};
+		const noop = x`@noop`;
+		properties.key = key;
+		if (this.first) {
+			properties.first = x`null`;
+			this.chunks.hydrate.push(b`this.first = ${this.first};`);
+		}
+		if (this.chunks.create.length === 0 && this.chunks.hydrate.length === 0) {
+			properties.create = noop;
+		} else {
+			const hydrate =
+				this.chunks.hydrate.length > 0 &&
+				(this.renderer.options.hydratable ? b`this.h();` : this.chunks.hydrate);
+			properties.create = x`function #create() {
+				${this.chunks.create}
+				${hydrate}
+			}`;
+		}
+		...
+		if (this.chunks.mount.length === 0) {
+			properties.mount = noop;
+		} else if (this.event_listeners.length === 0) {
+			properties.mount = x`function #mount(#target, #anchor) {
+				${this.chunks.mount}
+			}`;
+		} else {
+			properties.mount = x`function #mount(#target, #anchor) {
+				${this.chunks.mount}
+			}`;
+		}
+		...
+		if (this.has_animation) {
+			...
+		}
+		if (this.has_intro_method || this.has_outro_method) {
+			...
+		}
+		if (this.chunks.destroy.length === 0) {
+			properties.destroy = noop;
+		} else {
+			const dispose_elements = [];
+			// Coalesce if blocks with the same condition
+			const others = flatten(this.chunks.destroy).filter(
+				/** @param {import('estree').Node} node */
+				(node) => {
+					if (
+						node.type === 'IfStatement' &&
+						node.test.type === 'Identifier' &&
+						node.test.name === 'detaching'
+					) {
+						dispose_elements.push(node.consequent);
+						return false;
+					} else {
+						return true;
+					}
+				}
+			);
+
+			properties.destroy = x`function #destroy(detaching) {
+				${dispose_elements.length ? b`if (detaching) { ${dispose_elements} }` : null}
+				${others}
+			}`;
+		}
+		...
+
+		/** @type {any} */
+		const return_value = x`{
+			key: ${properties.key},
+			first: ${properties.first},
+			c: ${properties.create},
+			l: ${properties.claim},
+			h: ${properties.hydrate},
+			m: ${properties.mount},
+			p: ${properties.update},
+			r: ${properties.measure},
+			s: ${properties.restore_measurements},
+			f: ${properties.fix},
+			a: ${properties.animate},
+			i: ${properties.intro},
+			o: ${properties.outro},
+			d: ${properties.destroy}
+		}`;
+		const block = dev && this.get_unique_name('block');
+		const body = b`
+			${this.chunks.declarations}
+
+			${Array.from(this.variables.values()).map(({ id, init }) => {
+				return init ? b`let ${id} = ${init}` : b`let ${id}`;
+			})}
+
+			${this.chunks.init}
+
+			${
+				dev
+					? b`
+					const ${block} = ${return_value};
+					@dispatch_dev("SvelteRegisterBlock", {
+						block: ${block},
+						id: ${this.name || 'create_fragment'}.name,
+						type: "${this.type}",
+						source: "${this.comment ? this.comment.replace(regex_double_quotes, '\\"') : ''}",
+						ctx: #ctx
+					});
+					return ${block};`
+					: b`
+					return ${return_value};`
+			}
+		`;
+		return body;
+	}
+
+	/** @returns {boolean} */
+	has_content() {}
+
+	render() {
+		const key = this.key && this.get_unique_name('key');
+
+		/** @type {any[]} */
+		const args = [x`#ctx`];
+		if (key) args.unshift(key);
+		const fn = b`function ${this.name}(${args}) {
+			${this.get_contents(key)}
+		}`;
+		return this.comment
+			? b`
+				// ${this.comment}
+				${fn}`
+			: fn;
+	}
+
+	render_listeners(chunk = '') {}
+	render_binding_groups() {}
+}
+```
+
+##### FragmentWrapper
+```javascript
+...
+const wrappers = {
+	AwaitBlock,
+	Body,
+	Comment,
+	DebugTag,
+	Document,
+	EachBlock,
+	Element,
+	Head,
+	IfBlock,
+	InlineComponent,
+	KeyBlock,
+	MustacheTag,
+	Options: null,
+	RawMustacheTag,
+	Slot,
+	SlotTemplate,
+	Text,
+	Title,
+	Window
+};
+
+...
+
+export default class FragmentWrapper {
+	nodes;
+	constructor(renderer, block, nodes, parent, strip_whitespace, next_sibling) {
+		this.nodes = [];
+    ...
+		while (i--) {
+			const child = nodes[i];
+			...
+			if (child.type === 'Window') {
+				window_wrapper = new Window(renderer, block, parent, child);
+				continue;
+			}
+			if (child.type === 'Text') {
+				...
+			} else {
+				const Wrapper = wrappers[child.type];
+				if (!Wrapper || (child.type === 'Comment' && !renderer.options.preserveComments)) continue;
+				const wrapper = new Wrapper(
+					renderer,
+					block,
+					parent,
+					child,
+					strip_whitespace,
+					last_child || next_sibling
+				);
+				this.nodes.unshift(wrapper);
+				link(last_child, (last_child = wrapper));
+			}
+		}
+		...
+	}
+
+	/**
+	 * @param {import('../Block.js').default} block
+	 * @param {import('estree').Identifier} parent_node
+	 * @param {import('estree').Identifier} parent_nodes
+	 */
+	render(block, parent_node, parent_nodes) {
+		for (let i = 0; i < this.nodes.length; i += 1) {
+			this.nodes[i].render(block, parent_node, parent_nodes);
+		}
+	}
+}
+```
+
+##### render
+```javascript
+this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
+```
+调用各自的render方法
 
 ### generate
-隶属于`Component`中的一个方法
+隶属于`Component`中的一个方法。
 
-调用code-red的print方法。
+```javascript
+generate(result) {
+  let js = null;
+  let css = null;
+  if (result) {
 
-#### walk
+    const program = { type: 'Program', body: result.js };
+    walk(program, {
+      enter: (node, parent, key) => {
+        if (node.type === 'Identifier') {
+          if (node.name[0] === '@') {
+            ...
+          } else if (node.name[0] !== '#' && !is_valid(node.name)) {
+            const literal = { type: 'Literal', value: node.name };
+            if (parent.type === 'Property' && key === 'key') {
+              parent.key = literal;
+            } else if (parent.type === 'MemberExpression' && key === 'property') {
+              parent.property = literal;
+              parent.computed = true;
+            }
+          }
+        }
+      }
+    });
+    ...
+    create_module(
+      program,
+      name,
+      banner,
+      compile_options.sveltePath,
+      imported_helpers,
+      referenced_globals,
+      this.imports,
+      this.vars
+        .filter((variable) => variable.module && variable.export_name)
+        .map((variable) => ({
+          name: variable.name,
+          as: variable.export_name
+        })),
+      this.exports_from
+    );
+    css = compile_options.customElement ? { code: null, map: null } : result.css;
+    const js_sourcemap_enabled = check_enable_sourcemap(compile_options.enableSourcemap, 'js');
+    if (!js_sourcemap_enabled) {
+      js = print(program);
+      js.map = null;
+    } else {
+      ...
+    }
+  }
+  return {
+    js,
+    css,
+    ast: this.original_ast,
+    warnings: this.warnings,
+    vars: this.get_vars_report(),
+    stats: this.stats.render()
+  };
+}
+```
 
 #### create_module
+```javascript
+export default function create_module(
+	program,
+	name,
+	banner,
+	svelte_path = 'svelte',
+	helpers,
+	globals,
+	imports,
+	module_exports,
+	exports_from
+) {
+	const internal_path = `${svelte_path}/internal`;
+	helpers.sort((a, b) => (a.name < b.name ? -1 : 1));
+	globals.sort((a, b) => (a.name < b.name ? -1 : 1));
+	return esm(
+		program,
+		name,
+		banner,
+		svelte_path,
+		internal_path,
+		helpers,
+		globals,
+		imports,
+		module_exports,
+		exports_from
+	);
+}
+```
+
+```javascript
+function esm(
+	program,
+	name,
+	banner,
+	svelte_path,
+	internal_path,
+	helpers,
+	globals,
+	imports,
+	module_exports,
+	exports_from
+) {
+  
+	...
+
+	program.body = b`
+		/* ${banner} */
+
+		${import_declaration}
+		${internal_globals}
+		${imports}
+		${exports_from}
+
+		${program.body}
+
+		export default ${name};
+		${exports}
+	`;
+}
+```
 
 #### print
+```javascript
+export function print(node, opts = {}) {
+	if (Array.isArray(node)) {
+		return print(
+			{
+				type: 'Program',
+				body: node,
+				sourceType: 'module'
+			},
+			opts
+		);
+	}
 
+	const {
+		getName = /** @param {string} x */ (x) => {
+			throw new Error(`Unhandled sigil @${x}`);
+		}
+	} = opts;
+
+	let { map: scope_map, scope } = perisopic.analyze(node);
+	const deconflicted = new WeakMap();
+
+	const chunks = handle(node, {
+		indent: '',
+		getName,
+		scope,
+		scope_map,
+		deconflicted,
+		comments: []
+	});
+
+	...
+
+	return {
+		code,
+		map
+	};
+}
+```
 
 ## 小结
+
+本章我们学习了：
