@@ -1,12 +1,12 @@
-https://pic1.zhimg.com/80/v2-5de464e8217c79ab0a12a279ee7cf42c_1440w.webp
 https://github.com/Jarweb/thinking-in-deep/issues/15
 TODO: https://zhuanlan.zhihu.com/p/409291132
 
-经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写此文章时（2024-02-28），Svelte的最新版本是4.2.12
+经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写文章时，Svelte的最新版本是4.2.12。
 ![](./img/35-1.png)
 
 我们要想在webpack或vite中Svelte，必须安装`svelte-loader`或`vite-plugin-svelte`，它们的重要性不言而喻。
-[svelte-loader](https://github.com/sveltejs/svelte-loader/blob/master/index.js): 
+
+看下[svelte-loader](https://github.com/sveltejs/svelte-loader/blob/master/index.js)的核心逻辑: 
 ```javascript
 const svelte = require('svelte/compiler');
 
@@ -14,7 +14,8 @@ svelte.preprocess(source, options.preprocess).then(processed => {
   const compiled = svelte.compile(processed.toString(), compileOptions);
 }
 ```
-[vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/utils/compile.js): 
+
+看下[vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/utils/compile.js)的核心逻辑: 
 ```javascript
 import * as svelte from 'svelte/compiler';
 
@@ -32,53 +33,39 @@ compiled = svelte.compile(finalCode, finalCompileOptions);
 ```bash
 git clone git@github.com:sveltejs/svelte.git
 ```
-
 ![](./img/35-2.png)
+
 ## preprocess
 
 源码路径：`packages/svelte/src/compiler/preprocess/index.js`
 ```javascript
 export default async function preprocess(source, preprocessor, options) {
+  const filename = (options && options.filename) || /** @type {any} */ (preprocessor).filename; // legacy
+  const preprocessors = preprocessor
+    ? Array.isArray(preprocessor)
+      ? preprocessor
+      : [preprocessor]
+    : [];
+  const result = new PreprocessResult(source, filename);
+  for (const preprocessor of preprocessors) {
+    if (preprocessor.markup) {
+      result.update_source(await process_markup(preprocessor.markup, result));
+    }
+    if (preprocessor.script) {
+      result.update_source(await process_tag('script', preprocessor.script, result));
+    }
+    if (preprocessor.style) {
+      result.update_source(await process_tag('style', preprocessor.style, result));
+    }
+  }
 
-	const filename = (options && options.filename) || /** @type {any} */ (preprocessor).filename; // legacy
-	const preprocessors = preprocessor
-		? Array.isArray(preprocessor)
-			? preprocessor
-			: [preprocessor]
-		: [];
-	const result = new PreprocessResult(source, filename);
-	for (const preprocessor of preprocessors) {
-		if (preprocessor.markup) {
-			result.update_source(await process_markup(preprocessor.markup, result));
-		}
-		if (preprocessor.script) {
-			result.update_source(await process_tag('script', preprocessor.script, result));
-		}
-		if (preprocessor.style) {
-			result.update_source(await process_tag('style', preprocessor.style, result));
-		}
-	}
-
-	return result.to_processed();
+  return result.to_processed();
 }
 ```
-
-下是这个文件的主要功能：
-
-1. `PreprocessResult`类：这个类表示预处理的中间状态。它包含了源代码、文件名、源代码映射列表、依赖列表等信息。
-    
-2. `processed_content_to_code`函数：这个函数将预处理后的代码和其源代码映射转换为一个`MappedCode`对象。
-    
-3. `processed_tag_to_code`函数：这个函数将预处理后的标签和其内容转换为一个`MappedCode`对象。
-    
-4. `parse_tag_attributes`函数：这个函数解析标签的属性。
-    
-5. `process_tag`函数：这个函数处理指定标签的所有实例。它会调用预处理器函数，然后将预处理后的代码和源代码映射转换为一个`MappedCode`对象。
-    
-6. `process_markup`函数：这个函数处理标记语言。它会调用预处理器函数，然后将预处理后的代码和源代码映射转换为一个`MappedCode`对象。
-    
-7. `preprocess`函数：这是主要的预处理函数。它接收源代码、预处理器和选项作为参数，然后对源代码进行预处理。预处理的步骤包括处理标记语言、处理`<script>`标签和处理`<style>`标签。
-    
+简单理解：
+- 首先是从外部接收要编译的文件`source`和预处理器对象`preprocessor`。
+- 判断`preprocessor`是不是数组，因为可能传了多个`preprocessor`，遍历执行预处理器的功能
+- 分别处理`markup`、`script`、`style`，即对应着html标记、js脚本和css样式的编译处理。
 
 总的来说，这个文件提供了预处理Svelte组件源代码的功能，它允许你在编译前对源代码进行任意的转换。
 
@@ -103,15 +90,15 @@ packages/svelte/src/compiler/compile/index.js
  * @param {import('../interfaces.js').CompileOptions} options
  */
 export default function compile(source, options = {}) {
-	const ast = parse(source, options);
-	const component = new Component(
-		ast,
-		source,
-		options.name || get_name_from_filename(options.filename) || 'Component',
-		options,
-	);
-	const result = render_dom(component, options);
-	return component.generate(result);
+  const ast = parse(source, options);
+  const component = new Component(
+    ast,
+    source,
+    options.name || get_name_from_filename(options.filename) || 'Component',
+    options,
+  );
+  const result = render_dom(component, options);
+  return component.generate(result);
 }
 ```
 我们去掉不相关的代码，可以看到基本的compile逻辑。
@@ -126,15 +113,15 @@ compiler这个编译器主要分为两部分 parse 和 compile，parse 是解析
 首先我们查看下compile方法：
 ```diff
 export default function compile(source, options = {}) {
-+	const ast = parse(source, options);
-	const component = new Component(
-		ast,
-		source,
-		options.name || get_name_from_filename(options.filename) || 'Component',
-		options,
-	);
-	const result = render_dom(component, options);
-	return component.generate(result);
++  const ast = parse(source, options);
+  const component = new Component(
+    ast,
+    source,
+    options.name || get_name_from_filename(options.filename) || 'Component',
+    options,
+  );
+  const result = render_dom(component, options);
+  return component.generate(result);
 }
 ```
 它的第一步逻辑便是调用parse来解析文件内容。
@@ -142,17 +129,17 @@ export default function compile(source, options = {}) {
 跳转到parse方法的主入口`packages/svelte/src/compiler/parse/index.js`：
 ```javascript
 export default function parse(template, options = {}) {
-	const parser = new Parser(template, options);
-	
-	const instance_scripts = parser.js.filter((script) => script.context === 'default');
-	const module_scripts = parser.js.filter((script) => script.context === 'module');
+  const parser = new Parser(template, options);
+  
+  const instance_scripts = parser.js.filter((script) => script.context === 'default');
+  const module_scripts = parser.js.filter((script) => script.context === 'module');
 
-	return {
-		html: parser.html,
-		css: parser.css[0],
-		instance: instance_scripts[0],
-		module: module_scripts[0]
-	};
+  return {
+    html: parser.html,
+    css: parser.css[0],
+    instance: instance_scripts[0],
+    module: module_scripts[0]
+  };
 }
 ```
 逻辑都封装在`Parser`类中。
@@ -205,7 +192,7 @@ while (this.index < this.template.length) {
 }
 ```
 
-我们需要有个认知作为阅读Parser源码的前提，那就是内部的所有逻辑都是为了转变成ast对象服务的。
+我们需要有个认知，作为阅读Parser源码的前提，那就是内部的所有逻辑都是为了转变成ast对象服务的。
 
 TODO：script分为instance和module
 
@@ -224,15 +211,15 @@ import text from './text.js';
  * @param {import('../index.js').Parser} parser
  */
 export default function fragment(parser) {
-	if (parser.match('<')) {
-		return tag;
-	}
+  if (parser.match('<')) {
+    return tag;
+  }
 
-	if (parser.match('{')) {
-		return mustache;
-	}
+  if (parser.match('{')) {
+    return mustache;
+  }
 
-	return text;
+  return text;
 }
 ```
 #### tag
@@ -245,17 +232,17 @@ TODO: 重写 mustache 以 `{` 作为标识，识别的内容除了模板语法
 逻辑相对简单很多，记录`type: 'Text'`的数据节点：
 ```javascript
 export default function text(parser) {
-	...
+  ...
 
-	const node = {
-		start,
-		end: parser.index,
-		type: 'Text',
-		raw: data,
-		data: decode_character_references(data, false)
-	};
+  const node = {
+    start,
+    end: parser.index,
+    type: 'Text',
+    raw: data,
+    data: decode_character_references(data, false)
+  };
 
-	parser.current().children.push(node);
+  parser.current().children.push(node);
 }
 ```
 
@@ -263,15 +250,15 @@ export default function text(parser) {
 经过`parse`的处理，我们拿到了ast对象，然后我们往`Component`中传入字符串内容和ast对象：
 ```diff
 export default function compile(source, options = {}) {
-	const ast = parse(source, options);
-+	const component = new Component(
-		ast,
-		source,
-		options.name || get_name_from_filename(options.filename) || 'Component',
-		options,
-	);
-	const result = render_dom(component, options);
-	return component.generate(result);
+  const ast = parse(source, options);
++  const component = new Component(
+    ast,
+    source,
+    options.name || get_name_from_filename(options.filename) || 'Component',
+    options,
+  );
+  const result = render_dom(component, options);
+  return component.generate(result);
 }
 ```
 
@@ -291,26 +278,26 @@ export default function compile(source, options = {}) {
 
 ```javascript
 export default class Component {
-	constructor(ast, source, name, compile_options, stats, warnings) {
-		this.ast = ast;
-		this.source = source;
+  constructor(ast, source, name, compile_options, stats, warnings) {
+    this.ast = ast;
+    this.source = source;
 
-		// styles
-		this.stylesheet = new Stylesheet({
-			source,
-			ast,
-			filename: compile_options.filename,
-			component_name: name,
-			dev: compile_options.dev,
-			get_css_hash: compile_options.cssHash
-		});
+    // styles
+    this.stylesheet = new Stylesheet({
+      source,
+      ast,
+      filename: compile_options.filename,
+      component_name: name,
+      dev: compile_options.dev,
+      get_css_hash: compile_options.cssHash
+    });
 
-		this.walk_module_js();
-		this.walk_instance_js_pre_template();
-		this.fragment = new Fragment(this, ast.html);
+    this.walk_module_js();
+    this.walk_instance_js_pre_template();
+    this.fragment = new Fragment(this, ast.html);
 
-		this.walk_instance_js_post_template();
-	}
+    this.walk_instance_js_post_template();
+  }
   generate(result) {}
   walk_module_js() {}
   walk_instance_js_pre_template() {}
@@ -362,59 +349,59 @@ export default class Component {
 源码路径：`packages/svelte/src/compiler/compile/nodes/Fragment.js`
 ```javascript
 export default class Fragment extends Node {
-	block;
-	children;
-	scope;
-	constructor(component, info) {
-		const scope = new TemplateScope();
-		super(component, null, scope, info);
-		this.scope = scope;
-		this.children = map_children(component, this, scope, info.children);
-	}
+  block;
+  children;
+  scope;
+  constructor(component, info) {
+    const scope = new TemplateScope();
+    super(component, null, scope, info);
+    this.scope = scope;
+    this.children = map_children(component, this, scope, info.children);
+  }
 }
 ```
 
 map_children源码路径：`packages/svelte/src/compiler/compile/nodes/shared/map_children.js`
 ```javascript
 export default function map_children(component, parent, scope, children) {
-	let last = null;
-	let ignores = [];
-	return children.map((child) => {
-		const constructor = get_constructor(child.type);
-		...
-		const node = new constructor(component, parent, scope, child);
-		...
-		return node;
-	});
+  let last = null;
+  let ignores = [];
+  return children.map((child) => {
+    const constructor = get_constructor(child.type);
+    ...
+    const node = new constructor(component, parent, scope, child);
+    ...
+    return node;
+  });
 }
 ```
 
 get_constructor经过new得到一个node对象：
 ```javascript
 function get_constructor(type) {
-	switch (type) {
-		case 'AwaitBlock':
-			return AwaitBlock;
-		case 'Body':
-			return Body;
-		case 'Comment':
-			return Comment;
-		case 'ConstTag':
-			return ConstTag;
-		case 'Document':
-			return Document;
-		case 'EachBlock':
-			return EachBlock;
-		case 'Element':
-			return Element;
-		case 'Head':
-			return Head;
-		case 'IfBlock':
-			return IfBlock;
-		...
-		default:
-			throw new Error(`Not implemented: ${type}`);
-	}
+  switch (type) {
+    case 'AwaitBlock':
+      return AwaitBlock;
+    case 'Body':
+      return Body;
+    case 'Comment':
+      return Comment;
+    case 'ConstTag':
+      return ConstTag;
+    case 'Document':
+      return Document;
+    case 'EachBlock':
+      return EachBlock;
+    case 'Element':
+      return Element;
+    case 'Head':
+      return Head;
+    case 'IfBlock':
+      return IfBlock;
+    ...
+    default:
+      throw new Error(`Not implemented: ${type}`);
+  }
 }
 ```
 
