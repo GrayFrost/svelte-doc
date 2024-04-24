@@ -1,5 +1,5 @@
 https://github.com/Jarweb/thinking-in-deep/issues/15
-TODO: https://zhuanlan.zhihu.com/p/409291132
+TODO: 
 
 经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写文章时，Svelte的最新版本是4.2.12。
 ![](./img/35-1.png)
@@ -240,20 +240,20 @@ const type = meta_tags.has(name)
 
 ```javascript
 const specials = new Map([
-	[
-		'script',
-		{
-			read: read_script,
-			property: 'js'
-		}
-	],
-	[
-		'style',
-		{
-			read: read_style,
-			property: 'css'
-		}
-	]
+  [
+    'script',
+    {
+      read: read_script,
+      property: 'js'
+    }
+  ],
+  [
+    'style',
+    {
+      read: read_style,
+      property: 'css'
+    }
+  ]
 ]);
 
 if (is_top_level_script_or_style) {
@@ -269,32 +269,32 @@ if (is_top_level_script_or_style) {
 `read_script`的逻辑如下，核心是调用`code-red`的`parse`方法对script的内容进行解析：
 ```javascript
 export default function read_script(parser, start, attributes) {
-	...
-	let ast;
-	try {
-		ast = acorn.parse(source);
-	} catch (err) {
-		parser.acorn_error(err);
-	}
-	
-	return {
-		type: 'Script',
-		start,
-		end: parser.index,
-		context: get_context(parser, attributes, start),
-		content: ast
-	};
+  ...
+  let ast;
+  try {
+    ast = acorn.parse(source);
+  } catch (err) {
+    parser.acorn_error(err);
+  }
+  
+  return {
+    type: 'Script',
+    start,
+    end: parser.index,
+    context: get_context(parser, attributes, start),
+    content: ast
+  };
 }
 ```
 
 acorn.parse的逻辑：
 ```javascript
 export const parse = (source) =>
-	code_red.parse(source, {
-		sourceType: 'module',
-		ecmaVersion: 13,
-		locations: true
-	});
+  code_red.parse(source, {
+    sourceType: 'module',
+    ecmaVersion: 13,
+    locations: true
+  });
 ```
 
 `read_style`的逻辑如下，核心是使用了`css-tree`的`fork`功能：
@@ -303,47 +303,47 @@ import { parse } from './css-tree-cq/css_tree_parse.js'; // Use extended css-tre
 import { walk } from 'estree-walker';
 
 export default function read_style(parser, start, attributes) {
-	...
+  ...
 
-	let ast;
+  let ast;
 
-	try {
-		ast = parse(styles, {
-			positions: true,
-			offset: content_start,
-			onParseError(error) {
-				throw error;
-			}
-		});
-	} catch (err) {
-		...
-	}
+  try {
+    ast = parse(styles, {
+      positions: true,
+      offset: content_start,
+      onParseError(error) {
+        throw error;
+      }
+    });
+  } catch (err) {
+    ...
+  }
 
-	ast = JSON.parse(JSON.stringify(ast));
+  ast = JSON.parse(JSON.stringify(ast));
 
-	walk(ast, {
-		enter: (node) => {
-			...
+  walk(ast, {
+    enter: (node) => {
+      ...
 
-		}
-	});
+    }
+  });
 
-	parser.read(regex_starts_with_closing_style_tag);
+  parser.read(regex_starts_with_closing_style_tag);
 
-	const end = parser.index;
+  const end = parser.index;
 
-	return {
-		type: 'Style',
-		start,
-		end,
-		attributes,
-		children: ast.children,
-		content: {
-			start: content_start,
-			end: content_end,
-			styles
-		}
-	};
+  return {
+    type: 'Style',
+    start,
+    end,
+    attributes,
+    children: ast.children,
+    content: {
+      start: content_start,
+      end: content_end,
+      styles
+    }
+  };
 }
 ```
 
@@ -353,19 +353,19 @@ import { fork } from 'css-tree';
 import * as node from './node/index.js';
 
 const cq_syntax = fork({
-	atrule: {
-		container: {
-			parse: {
-				prelude() {
-					return this.createSingleNodeList(this.ContainerQuery());
-				},
-				block(is_style_block = false) {
-					return this.Block(is_style_block);
-				}
-			}
-		}
-	},
-	node
+  atrule: {
+    container: {
+      parse: {
+        prelude() {
+          return this.createSingleNodeList(this.ContainerQuery());
+        },
+        block(is_style_block = false) {
+          return this.Block(is_style_block);
+        }
+      }
+    }
+  },
+  node
 });
 
 export const parse = cq_syntax.parse;
@@ -375,9 +375,212 @@ export const parse = cq_syntax.parse;
 
 当解析的内容是以`{`开头时，进入到`mustache`的解析流程。除了识别正常的`{xxx}`语法外，还识别Svelte的逻辑渲染语法如`{#if}`、`{#each}`、`{@html}`等等。
 
+```javascript
+import read_context from '../read/context.js';
+import read_expression from '../read/expression.js';
+import { closing_tag_omitted } from '../utils/html.js';
+import { regex_whitespace } from '../../utils/patterns.js';
+import { trim_start, trim_end } from '../../utils/trim.js';
+import { to_string } from '../utils/node.js';
+import parser_errors from '../errors.js';
+
+/**
+ * @param {import('../../interfaces.js').TemplateNode} block
+ * @param {boolean} trim_before
+ * @param {boolean} trim_after
+ */
+function trim_whitespace(block, trim_before, trim_after) {
+  if (!block.children || block.children.length === 0) return; // AwaitBlock
+  const first_child = block.children[0];
+  const last_child = block.children[block.children.length - 1];
+  if (first_child.type === 'Text' && trim_before) {
+    first_child.data = trim_start(first_child.data);
+    if (!first_child.data) block.children.shift();
+  }
+  if (last_child.type === 'Text' && trim_after) {
+    last_child.data = trim_end(last_child.data);
+    if (!last_child.data) block.children.pop();
+  }
+  if (block.else) {
+    trim_whitespace(block.else, trim_before, trim_after);
+  }
+  if (first_child.elseif) {
+    trim_whitespace(first_child, trim_before, trim_after);
+  }
+}
+const regex_whitespace_with_closing_curly_brace = /^\s*}/;
+
+/**
+ * @param {import('../index.js').Parser} parser
+ */
+export default function mustache(parser) {
+  ...
+  // {/if}, {/each}, {/await} or {/key}
+  if (parser.eat('/')) {
+    
+    ...
+  } else if (parser.eat(':else')) {
+    ...
+    // :else if
+    if (parser.eat('if')) {
+      ...
+      block.else = {
+        start: parser.index,
+        end: null,
+        type: 'ElseBlock',
+        children: [
+          {
+            start: parser.index,
+            end: null,
+            type: 'IfBlock',
+            elseif: true,
+            expression,
+            children: []
+          }
+        ]
+      };
+      parser.stack.push(block.else.children[0]);
+    } else {
+      // :else
+      ...
+      block.else = {
+        start: parser.index,
+        end: null,
+        type: 'ElseBlock',
+        children: []
+      };
+      parser.stack.push(block.else);
+    }
+  } else if (parser.match(':then') || parser.match(':catch')) {
+    const block = parser.current();
+    const is_then = parser.eat(':then') || !parser.eat(':catch');
+    ...
+    
+    const new_block = {
+      start,
+      end: null,
+      type: is_then ? 'ThenBlock' : 'CatchBlock',
+      children: [],
+      skip: false
+    };
+    await_block[is_then ? 'then' : 'catch'] = new_block;
+    parser.stack.push(new_block);
+  } else if (parser.eat('#')) {
+    // {#if foo}, {#each foo} or {#await foo}
+    let type;
+    if (parser.eat('if')) {
+      type = 'IfBlock';
+    } else if (parser.eat('each')) {
+      type = 'EachBlock';
+    } else if (parser.eat('await')) {
+      type = 'AwaitBlock';
+    } else if (parser.eat('key')) {
+      type = 'KeyBlock';
+    } else {
+      parser.error(parser_errors.expected_block_type);
+    }
+    parser.require_whitespace();
+    const expression = read_expression(parser);
+    const block =
+      type === 'AwaitBlock'
+        ? {
+            start,
+            end: null,
+            type,
+            expression,
+            value: null,
+            error: null,
+            pending: {
+              start: null,
+              end: null,
+              type: 'PendingBlock',
+              children: [],
+              skip: true
+            },
+            then: {
+              start: null,
+              end: null,
+              type: 'ThenBlock',
+              children: [],
+              skip: true
+            },
+            catch: {
+              start: null,
+              end: null,
+              type: 'CatchBlock',
+              children: [],
+              skip: true
+            }
+          }
+        : {
+            start,
+            end: null,
+            type,
+            expression,
+            children: []
+          };
+    parser.allow_whitespace();
+    // {#each} blocks must declare a context – {#each list as item}
+    if (type === 'EachBlock') {
+      ...
+    }
+    
+    ...
+  } else if (parser.eat('@html')) {
+    // {@html content} tag
+    parser.require_whitespace();
+    const expression = read_expression(parser);
+    parser.allow_whitespace();
+    parser.eat('}', true);
+    parser.current().children.push({
+      start,
+      end: parser.index,
+      type: 'RawMustacheTag',
+      expression
+    });
+  } else if (parser.eat('@debug')) {
+    let identifiers;
+    // Implies {@debug} which indicates "debug all"
+    if (parser.read(regex_whitespace_with_closing_curly_brace)) {
+      identifiers = [];
+    } else {
+      const expression = read_expression(parser);
+      ...
+    }
+    parser.current().children.push({
+      start,
+      end: parser.index,
+      type: 'DebugTag',
+      identifiers
+    });
+  } else if (parser.eat('@const')) {
+    // {@const a = b}
+    parser.require_whitespace();
+    const expression = read_expression(parser);
+    ...
+    parser.current().children.push({
+      start,
+      end: parser.index,
+      type: 'ConstTag',
+      expression
+    });
+  } else {
+    const expression = read_expression(parser);
+    parser.allow_whitespace();
+    parser.eat('}', true);
+    parser.current().children.push({
+      start,
+      end: parser.index,
+      type: 'MustacheTag',
+      expression
+    });
+  }
+}
+```
+笔者已经把大部分细节代码删除，从上述代码中，我们大体能够知道，`mustache`方法能够解析`{}`、`{@html}`、`{@debug}`、`{@const}`、`{#if}`、`{#each}`、`{#await}`、`{#key}`、`{:else}`、`{:else if}`、`{:then}`、`{:catch}`、`{/if}`、`{/each}`、`{/await}`、`{/key}`等。
 
 #### text
-逻辑相对简单很多，记录`type: 'Text'`的数据节点：
+逻辑相对简单很多，主要是用于解析纯文本，返回`Text`类型的数据节点：
 ```javascript
 export default function text(parser) {
   ...
@@ -394,35 +597,19 @@ export default function text(parser) {
 }
 ```
 
+`const ast = parse(source, options);`的流程解析到此，回到`compile`。
+
 ### Component
+
 经过`parse`的处理，我们拿到了ast对象，然后我们往`Component`中传入字符串内容和ast对象：
-```diff
-export default function compile(source, options = {}) {
-  const ast = parse(source, options);
-+  const component = new Component(
-    ast,
-    source,
-    options.name || get_name_from_filename(options.filename) || 'Component',
-    options,
-  );
-  const result = render_dom(component, options);
-  return component.generate(result);
-}
+```javascript
+const component = new Component(
+  ast,
+  source,
+  options.name || get_name_from_filename(options.filename) || 'Component',
+  options,
+);
 ```
-
-以下是这个文件的主要功能：
-
-解析：它首先使用Svelte的解析器将源代码解析为一个抽象语法树（AST）。
-
-验证：然后，它会对AST进行一些验证检查，以确保组件代码没有明显的错误。
-
-编译：接下来，它会将AST转换为JavaScript代码。这个过程包括处理Svelte特定的语法，如块级元素、插槽、动态属性等。
-
-生成：最后，它会生成最终的JavaScript代码，这包括创建渲染函数、更新函数等。
-
-这个文件还包含了处理Svelte组件生命周期、响应式声明、上下文API等特性的代码。
-
-总的来说，Component.js文件是Svelte编译器的核心，它负责将Svelte组件源代码转换为可以在浏览器中运行的JavaScript代码。
 
 ```javascript
 export default class Component {
@@ -454,23 +641,37 @@ export default class Component {
 ```
 
 #### walk_module_js
-这个walk_module_js()函数是Svelte编译器的一部分，它处理Svelte组件中的`<script>`标签的内容。这个函数的主要任务是遍历（或“walk”）模块脚本的抽象语法树（AST），并对其进行一些处理和转换。
-
-以下是这个函数的主要步骤：
-
-首先，它检查是否存在模块脚本。如果不存在，函数就会直接返回。
-
-然后，它使用walk函数遍历模块脚本的AST。在遍历过程中，它会检查是否存在标签为$的语句，这在Svelte中是不允许的，因为$是用于响应式声明的特殊符号。
-
-接下来，它创建了模块脚本的作用域，并将其存储在this.module_scope中。在创建作用域的过程中，它会收集所有的声明和全局变量。
-
-对于每个声明，它会检查变量名是否以$开头，如果是，它会抛出一个错误，因为在模块脚本中，变量名不能以$开头。然后，它会将这个声明添加到组件的变量列表中。
-
-对于每个全局变量，它也会检查变量名是否以$开头，如果是，它会抛出一个错误。然后，它会将这个全局变量添加到组件的变量列表中。
-
-最后，它会遍历模块脚本的所有语句，对于每个ImportDeclaration，它会提取出导入的信息。对于每个以export开头的语句，它会提取出导出的信息。
-
-总的来说，walk_module_js()函数的主要任务是处理Svelte组件中的模块脚本，包括提取导入和导出的信息，创建作用域，以及处理声明和全局变量。
+```javascript
+walk_module_js() {
+  const component = this;
+  const script = this.ast.module;
+  if (!script) return;
+  walk(script.content, {
+    /** @param {import('estree').Node} node */
+    enter(node) {
+      ...
+    }
+  });
+  const { scope, globals } = create_scopes(script.content);
+  this.module_scope = scope;
+  scope.declarations.forEach((node, name) => {
+    if (name[0] === '$') {
+      return this.error(/** @type {any} */ (node), compiler_errors.illegal_declaration);
+    }
+    const writable =
+      node.type === 'VariableDeclaration' && (node.kind === 'var' || node.kind === 'let');
+    const imported = node.type.startsWith('Import');
+    this.add_var(node, {
+      name,
+      module: true,
+      hoistable: true,
+      writable,
+      imported
+    });
+  });
+}
+```
+这个方法主要`ast.module`的内容进行解析，即对`<script context="module"></script>`中的内容进行解析，比如判断里面是否声明了`$`相关的响应式语句，对`import`、`export`语句的处理等。
 
 #### walk_instance_js_pre_template
 
