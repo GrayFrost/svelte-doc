@@ -1101,6 +1101,8 @@ export default class Renderer {
 
 ```
 
+TODO: 对原来在`new Component()`中生成的fragment进行包裹，这里的fragment属性经过包裹后，和原来的fragment已经不同。
+
 ##### Block
 ```javascript
 import { b, x } from 'code-red';
