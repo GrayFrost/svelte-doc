@@ -1,10 +1,7 @@
-https://github.com/Jarweb/thinking-in-deep/issues/15
-TODO: 
-
-经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写文章时，Svelte的最新版本是4.2.12。
+经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写文章时，Svelte的最新版本是4.2.12。  
 ![](./img/35-1.png)
 
-我们要想在webpack或vite中Svelte，必须安装`svelte-loader`或`vite-plugin-svelte`，它们的重要性不言而喻。
+我们要想在`webpack`或`vite`中使用`Svelte`，必须安装`svelte-loader`或`vite-plugin-svelte`，它们的重要性不言而喻。
 
 看下[svelte-loader](https://github.com/sveltejs/svelte-loader/blob/master/index.js)的核心逻辑: 
 ```javascript
@@ -15,7 +12,7 @@ svelte.preprocess(source, options.preprocess).then(processed => {
 }
 ```
 
-看下[vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/utils/compile.js)的核心逻辑: 
+再看下[vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/utils/compile.js)的核心逻辑: 
 ```javascript
 import * as svelte from 'svelte/compiler';
 
@@ -27,9 +24,9 @@ let compiled;
 compiled = svelte.compile(finalCode, finalCompileOptions);
 ```
 
-从源码可以看到，Svelte官方的webpack插件[svelte-loader](https://github.com/sveltejs/svelte-loader)和Rollup插件[rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte)的主入口都是svelte.compile，这也是我们的切入点。
+从源码可以看到，`Svelte`官方的`webpack`插件[svelte-loader](https://github.com/sveltejs/svelte-loader)和`Rollup`插件[rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte)的主入口都是`svelte.compile`，这也是我们的切入点。
 
-把项目下载下来，切换到4.2.12分支。
+把项目下载下来，切换到**4.2.12**分支。
 ```bash
 git clone git@github.com:sveltejs/svelte.git
 ```
@@ -37,7 +34,7 @@ git clone git@github.com:sveltejs/svelte.git
 
 ## preprocess
 
-源码路径：`packages/svelte/src/compiler/preprocess/index.js`
+首先是预处理。源码路径：`packages/svelte/src/compiler/preprocess/index.js`
 ```javascript
 export default async function preprocess(source, preprocessor, options) {
   const filename = (options && options.filename) || /** @type {any} */ (preprocessor).filename; // legacy
@@ -71,7 +68,7 @@ export default async function preprocess(source, preprocessor, options) {
 
 ## compile
 
-进入到`packages/svelte/src/compiler/compile/index.js`，
+进入到`packages/svelte/src/compiler/compile/index.js`：
 ```javascript
 export default function compile(source, options = {}) {
   const ast = parse(source, options);
@@ -88,8 +85,27 @@ export default function compile(source, options = {}) {
 我们去掉不相关的代码，可以看到基本的compile逻辑：
 
 - 首先会将`parse`过程中拿到的语法树ast转换为`component`
-- 然后在`render_dom`中调整成特定的语法树
-- 最后`component.generate`中，通过[code-red](https://github.com/Rich-Harris/code-red)的`print`将调整后的语法树转换成为代码
+- 然后在`render_dom`中调整成特定的代码片段
+- 最后`component.generate`中，通过[code-red](https://github.com/Rich-Harris/code-red)的`print`将调整后的代码片段拼成完整的代码
+
+用以下代码来进行编译为例：
+```html
+<script>
+  let count = 0;
+  const addCount = () => {
+    count++;
+  }
+<\/script>
+
+<button on:click={addCount}>add</button>
+count:{count}
+```
+我们分别把`ast`、`component`、`result`这几个变量打印出来看下：
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
 
 ### parse
 
@@ -124,17 +140,11 @@ export default function parse(template, options = {}) {
 
 ```javascript
 export class Parser {
-  template = undefined;
-  filename = undefined;
-  customElement = undefined;
-  css_mode = undefined;
   index = 0;
   stack = [];
   html = undefined;
   css = [];
   js = [];
-  meta_tags = {};
-  last_auto_closed_tag = undefined;
 
   constructor(template, options) {
     let state = fragment;
@@ -376,43 +386,6 @@ export const parse = cq_syntax.parse;
 当解析的内容是以`{`开头时，进入到`mustache`的解析流程。除了识别正常的`{xxx}`语法外，还识别Svelte的逻辑渲染语法如`{#if}`、`{#each}`、`{@html}`等等。
 
 ```javascript
-import read_context from '../read/context.js';
-import read_expression from '../read/expression.js';
-import { closing_tag_omitted } from '../utils/html.js';
-import { regex_whitespace } from '../../utils/patterns.js';
-import { trim_start, trim_end } from '../../utils/trim.js';
-import { to_string } from '../utils/node.js';
-import parser_errors from '../errors.js';
-
-/**
- * @param {import('../../interfaces.js').TemplateNode} block
- * @param {boolean} trim_before
- * @param {boolean} trim_after
- */
-function trim_whitespace(block, trim_before, trim_after) {
-  if (!block.children || block.children.length === 0) return; // AwaitBlock
-  const first_child = block.children[0];
-  const last_child = block.children[block.children.length - 1];
-  if (first_child.type === 'Text' && trim_before) {
-    first_child.data = trim_start(first_child.data);
-    if (!first_child.data) block.children.shift();
-  }
-  if (last_child.type === 'Text' && trim_after) {
-    last_child.data = trim_end(last_child.data);
-    if (!last_child.data) block.children.pop();
-  }
-  if (block.else) {
-    trim_whitespace(block.else, trim_before, trim_after);
-  }
-  if (first_child.elseif) {
-    trim_whitespace(first_child, trim_before, trim_after);
-  }
-}
-const regex_whitespace_with_closing_curly_brace = /^\s*}/;
-
-/**
- * @param {import('../index.js').Parser} parser
- */
 export default function mustache(parser) {
   ...
   // {/if}, {/each}, {/await} or {/key}
@@ -599,6 +572,8 @@ export default function text(parser) {
 
 `const ast = parse(source, options);`的流程解析到此，回到`compile`。
 
+![alt text](image-5.png)
+
 ### Component
 
 经过`parse`的处理，我们拿到了ast对象，然后我们往`Component`中传入字符串内容和ast对象：
@@ -671,7 +646,7 @@ walk_module_js() {
   });
 }
 ```
-这个方法主要`ast.module`的内容进行解析，即对`<script context="module"></script>`中的内容进行解析，比如判断里面是否声明了`$`相关的响应式语句，对`import`、`export`语句的处理等。
+这个方法主要对`ast.module`的内容进行解析，即对`<script context="module"></script>`中的内容进行解析，比如判断里面是否声明了`$`相关的响应式语句，对`import`、`export`语句的处理等。
 
 #### walk_instance_js_pre_template
 
@@ -716,8 +691,6 @@ walk_instance_js_pre_template() {
 
 `walk_instance_js_pre_template()`方法在处理html模板之前解析`ast.instance`即`<script></script>`标签中的内容，主要处理功能包括处理变量声明、提取响应式声明的变量，解析作用域等。
 
-
-
 #### Fragment
 源码路径：`packages/svelte/src/compiler/compile/nodes/Fragment.js`
 ```javascript
@@ -734,7 +707,7 @@ export default class Fragment extends Node {
 }
 ```
 
-map_children源码路径：`packages/svelte/src/compiler/compile/nodes/shared/map_children.js`
+`map_children`源码路径：`packages/svelte/src/compiler/compile/nodes/shared/map_children.js`
 ```javascript
 export default function map_children(component, parent, scope, children) {
   let last = null;
@@ -749,7 +722,7 @@ export default function map_children(component, parent, scope, children) {
 }
 ```
 
-get_constructor经过new得到一个node对象：
+`get_constructor`经过new得到一个node对象：
 ```javascript
 function get_constructor(type) {
   switch (type) {
@@ -778,8 +751,13 @@ function get_constructor(type) {
 }
 ```
 
-TODO: 拿其中一个举例
+我们把`this.fragment`打印出来看下：
+![alt text](image-6.png)  
+`children`属性中，就是经过各种各种node类型实例化后的对象。
 
+我们拿数组中一个子元素来看：
+![alt text](image-7.png)
+里面的`component`属性其实就是在`this.fragment = new Fragment(this, ast.html);`时传递的`this`。
 
 #### walk_instance_js_post_template
 ```javascript
@@ -796,6 +774,14 @@ walk_instance_js_post_template() {
     
 
 总的来说，`walk_instance_js_post_template()`函数的主要任务是在模板解析之后处理实例脚本，包括后处理AST，提升声明，提取响应式声明，以及检查标签的动态内容
+
+TODO:walk_instance_js_pre_template函数在模板解析之前被调用，主要用于处理组件实例的script标签中的代码。这个函数会遍历script标签中的所有语句，对其中的变量声明、函数声明等进行处理，以便在后续的编译过程中使用。
+
+walk_instance_js_post_template函数在模板解析之后被调用，主要用于处理组件实例的script标签中的代码与模板之间的关系。这个函数会遍历script标签中的所有语句，对其中与模板相关的部分进行处理，例如更新模板中引用的变量的值，处理模板中的事件处理函数等。
+
+总的来说，这两个函数的主要区别在于它们被调用的时间和处理的内容。walk_instance_js_pre_template主要处理script标签中的代码本身，而walk_instance_js_post_template主要处理script标签中的代码与模板之间的关系。
+
+![alt text](image-8.png)
 
 ### render_dom
 解析完`new Component()`，我们继续执行下一步：
@@ -1002,7 +988,118 @@ export default function dom(component, options) {
 }
 ```
 
+TODO:这个文件中定义了一个Renderer类，这个类包含了一系列的方法，用于生成各种DOM操作的代码，例如创建元素、设置属性、添加事件监听器等。这个类还包含了一些辅助方法，用于处理Svelte特有的特性，例如条件渲染、列表渲染等。
+
+当编译一个Svelte组件时，Svelte编译器会创建一个Renderer实例，然后调用这个实例的方法生成对应的DOM操作代码。这些代码最终会被包含在编译后的JavaScript文件中，用于在浏览器中渲染和更新Svelte组件。
+
 #### Renderer
+
+```javascript
+import Block from './Block.js';
+import FragmentWrapper from './wrappers/Fragment.js';
+import { x } from 'code-red';
+import flatten_reference from '../utils/flatten_reference.js';
+import { reserved_keywords } from '../utils/reserved_keywords.js';
+import { renderer_invalidate } from './invalidate.js';
+
+export default class Renderer {
+
+	...
+
+	constructor(component, options) {
+		this.component = component;
+		...
+		// main block
+		this.block = new Block({
+			renderer: this,
+			name: null,
+			type: 'component',
+			key: null,
+			bindings: new Map(),
+			dependencies: new Set()
+		});
+		this.block.has_update_method = true;
+		this.fragment = new FragmentWrapper(
+			this,
+			this.block,
+			component.fragment.children,
+			null,
+			true,
+			null
+		);
+		// TODO messy
+		this.blocks.forEach((block) => {
+			if (block instanceof Block) {
+				block.assign_variable_names();
+			}
+		});
+		this.block.assign_variable_names();
+		this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
+		
+		...
+	}
+
+	...
+
+	invalidate(name, value, main_execution_context = false) {
+		return renderer_invalidate(this, name, value, main_execution_context);
+	}
+
+	dirty(names, is_reactive_declaration = false) {
+		const renderer = this;
+		const dirty = /** @type {| import('estree').Identifier
+                    | import('estree').MemberExpression} */ (
+			is_reactive_declaration ? x`$$self.$$.dirty` : x`#dirty`
+		);
+		const get_bitmask = () => {
+			/** @type {BitMasks} */
+			const bitmask = [];
+			names.forEach((name) => {
+				const member = renderer.context_lookup.get(name);
+				if (!member) return;
+				if (member.index.value === -1) {
+					throw new Error('unset index');
+				}
+				const value = /** @type {number} */ (member.index.value);
+				const i = (value / 31) | 0;
+				const n = 1 << value % 31;
+				if (!bitmask[i]) bitmask[i] = { n: 0, names: [] };
+				bitmask[i].n |= n;
+				bitmask[i].names.push(name);
+			});
+			return bitmask;
+		};
+		return ({
+			type: 'ParenthesizedExpression',
+			get expression() {
+				const bitmask = get_bitmask();
+				if (!bitmask.length) {
+					return /** @type {import('estree').BinaryExpression} */ (
+						x`${dirty} & /*${names.join(', ')}*/ 0`
+					);
+				}
+				if (renderer.context_overflow) {
+					return bitmask
+						.map((b, i) => ({ b, i }))
+						.filter(({ b }) => b)
+						.map(({ b, i }) => x`${dirty}[${i}] & /*${b.names.join(', ')}*/ ${b.n}`)
+						.reduce((lhs, rhs) => x`${lhs} | ${rhs}`);
+				}
+				return /** @type {import('estree').BinaryExpression} */ (
+					x`${dirty} & /*${names.join(', ')}*/ ${bitmask[0].n}`
+				);
+			}
+		});
+	}
+
+  ...
+
+	remove_block(block) {
+		this.blocks.splice(this.blocks.indexOf(block), 1);
+	}
+}
+
+```
 
 ##### Block
 ```javascript
@@ -1275,6 +1372,10 @@ this.fragment.render(this.block, null, /** @type {import('estree').Identifier} *
 调用各自的render方法
 
 ### generate
+
+首先看下result的大致结构：
+![alt text](image-1.png)
+
 隶属于`Component`中的一个方法。
 
 ```javascript
