@@ -813,8 +813,6 @@ export default function dom(component, options) {
 		})
 	);
 
-	const uses_slots = component.var_lookup.has('$$slots');
-
 	...
 
 	const rest = uses_rest
@@ -834,18 +832,7 @@ export default function dom(component, options) {
 		let execution_context = null;
 		walk(component.ast.instance.content, {
 			enter(node) {
-				if (map.has(node)) {
-					scope = /** @type {import('periscopic').Scope} */ (map.get(node));
-					if (!execution_context && !scope.block) {
-						execution_context = node;
-					}
-				} else if (
-					!execution_context &&
-					node.type === 'LabeledStatement' &&
-					node.label.name === '$'
-				) {
-					execution_context = node;
-				}
+				...
 			},
 			leave(node) {
 				if (map.has(node)) {
@@ -861,21 +848,11 @@ export default function dom(component, options) {
 				}
 			}
 		});
-		component.rewrite_props(({ name, reassigned, export_name }) => {
-			const value = `$${name}`;
-			const i = renderer.context_lookup.get(`$${name}`).index;
-			const insert =
-				reassigned || export_name
-					? b`${`$$subscribe_${name}`}()`
-					: b`@component_subscribe($$self, ${name}, #value => $$invalidate(${i}, ${value} = #value))`;
-			if (component.compile_options.dev) {
-				return b`@validate_store(${name}, '${name}'); ${insert}`;
-			}
-			return insert;
-		});
+		...
 	}
+
 	...
-	// has_create_fragment is intentionally to be true in dev mode.
+
 	const has_create_fragment = component.compile_options.dev || block.has_content();
 	if (has_create_fragment) {
 		body.push(b`
@@ -884,74 +861,43 @@ export default function dom(component, options) {
 			}
 		`);
 	}
-	body.push(b`
-		${component.extract_javascript(component.ast.module)}
 
-		${component.fully_hoisted}
-	`);
-	...
-	
-	if (has_definition) {
-		/** @type {import('estree').Node | import('estree').Node[]} */
-		const reactive_declarations = [];
+  const instance_javascript = component.extract_javascript(component.ast.instance);
+  ...
+  const definition = has_definition
+    ? component.alias('instance')
+    : { type: 'Literal', value: null };
 
-		/** @type {import('estree').Node[]} */
-		const fixed_reactive_declarations = []; // not really 'reactive' but whatever
-		component.reactive_declarations.forEach((d) => {
-			const dependencies = Array.from(d.dependencies);
-			const uses_rest_or_props = !!dependencies.find((n) => n === '$$props' || n === '$$restProps');
-			const writable = dependencies.filter((n) => {
-				const variable = component.var_lookup.get(n);
-				return variable && (variable.export_name || variable.mutated || variable.reassigned);
-			});
-			const condition =
-				!uses_rest_or_props && writable.length > 0 && renderer.dirty(writable, true);
-			let statement = d.node; // TODO remove label (use d.node.body) if it's not referenced
-			if (condition)
-				statement = /** @type {import('estree').Statement} */ (
-					b`if (${condition}) { ${statement} }`[0]
-				);
-			if (condition || uses_rest_or_props) {
-				reactive_declarations.push(statement);
-			} else {
-				fixed_reactive_declarations.push(statement);
+  	if (has_create_fragment) {
+		console.log('svelte block', block)
+		body.push(b`
+			function create_fragment(#ctx) {
+				${block.get_contents()}
 			}
-		});
-
+		`);
+	}
+	...
+	const instance_javascript = component.extract_javascript(component.ast.instance);
+	const has_definition =
+		component.compile_options.dev ||
+		(instance_javascript && instance_javascript.length > 0) ||
+		filtered_props.length > 0 ||
+		uses_props ||
+		component.partly_hoisted.length > 0 ||
+		renderer.initial_context.length > 0 ||
+		component.reactive_declarations.length > 0 ||
+		capture_state ||
+		inject_state;
+	const definition = has_definition
+		? component.alias('instance')
+		: { type: 'Literal', value: null };
+	...
+	if (has_definition) {
 		...
-
-		const return_value = {
-			type: 'ArrayExpression',
-			elements: renderer.initial_context.map(
-				(member) =>
-					/** @type {import('estree').Expression} */ ({
-						type: 'Identifier',
-						name: member.name
-					})
-			)
-		};
+		
 		body.push(b`
 			function ${definition}(${args}) {
-				${injected.map((name) => b`let ${name};`)}
-
 				...
-
-				${instance_javascript}
-
-				...
-
-				${
-					reactive_declarations.length > 0 &&
-					b`
-				$$self.$$.update = () => {
-					${reactive_declarations}
-				};
-				`
-				}
-
-				...
-
-				return ${return_value};
 			}
 		`);
 	}
@@ -991,6 +937,129 @@ export default function dom(component, options) {
 TODO:这个文件中定义了一个Renderer类，这个类包含了一系列的方法，用于生成各种DOM操作的代码，例如创建元素、设置属性、添加事件监听器等。这个类还包含了一些辅助方法，用于处理Svelte特有的特性，例如条件渲染、列表渲染等。
 
 当编译一个Svelte组件时，Svelte编译器会创建一个Renderer实例，然后调用这个实例的方法生成对应的DOM操作代码。这些代码最终会被包含在编译后的JavaScript文件中，用于在浏览器中渲染和更新Svelte组件。
+
+这里笔者删除了大量细节逻辑，我们关注其中几个部分即可：
+```javascript
+this.replace(invalidate(renderer, scope, node, names, execution_context === null));
+```
+我们从REPL上看一下一个代码例子的编译后结果：
+![alt text](image-10.png)
+很明显，`this.replace(invalidate)`的作用就是将我们的赋值语句进行`$$invalidate`的替换。
+
+```javascript
+if (has_create_fragment) {
+  body.push(b`
+    function create_fragment(#ctx) {
+      ${block.get_contents()}
+    }
+  `);
+}
+```
+这部分则是处理以下片段，`block.get_contents()`我们在后面讲Block时进行说明：
+![alt text](image-11.png)
+
+```javascript
+const definition = has_definition
+  ? component.alias('instance')
+  : { type: 'Literal', value: null };
+...
+if (has_definition) {
+  ...
+  
+  body.push(b`
+    function ${definition}(${args}) {
+      ...
+    }
+  `);
+}
+```
+这一部分则对应了`instance`片段：
+![alt text](image-12.png)
+我们可以在源码中把`definition`这个变量打印出来看下：
+![alt text](image-13.png)
+
+```javascript
+const superclass = {
+  type: 'Identifier',
+  name: options.dev ? '@SvelteComponentDev' : '@SvelteComponent'
+};
+...
+const declaration = /** @type {import('estree').ClassDeclaration} */ (
+  b`
+  class ${name} extends ${superclass} {
+    constructor(options) {
+      super(${options.dev && 'options'});
+      @init(this, options, ${definition}, ${
+    has_create_fragment ? 'create_fragment' : 'null'
+  }, ${not_equal}, ${prop_indexes}, ${optional_parameters});
+      ${
+        options.dev &&
+        b`@dispatch_dev("SvelteRegisterComponent", { component: this, tagName: "${name.name}", options, id: create_fragment.name });`
+      }
+    }
+  }
+`[0]
+);
+```
+这部分很明显则对应了以下片段：
+![alt text](image-14.png)
+
+
+#### invalidate
+```javascript
+export function renderer_invalidate(renderer, name, value, main_execution_context = false) {
+	const variable = renderer.component.var_lookup.get(name);
+	if (variable && variable.subscribable && (variable.reassigned || variable.export_name)) {
+		if (main_execution_context) {
+			return x`${`$$subscribe_${name}`}(${value || name})`;
+		} else {
+			const member = renderer.context_lookup.get(name);
+			return x`${`$$subscribe_${name}`}($$invalidate(${member.index}, ${value || name}))`;
+		}
+	}
+	if (name[0] === '$' && name[1] !== '$') {
+		return x`${name.slice(1)}.set(${value || name})`;
+	}
+	if (
+		variable &&
+		(variable.module ||
+			(!variable.referenced &&
+				!variable.is_reactive_dependency &&
+				!variable.export_name &&
+				!name.startsWith('$$')))
+	) {
+		return value || name;
+	}
+	if (value) {
+		if (main_execution_context) {
+			return x`${value}`;
+		} else {
+			const member = renderer.context_lookup.get(name);
+			return x`$$invalidate(${member.index}, ${value})`;
+		}
+	}
+	if (main_execution_context) return;
+	// if this is a reactive declaration, invalidate dependencies recursively
+	const deps = new Set([name]);
+	deps.forEach((name) => {
+		const reactive_declarations = renderer.component.reactive_declarations.filter((x) =>
+			x.assignees.has(name)
+		);
+		reactive_declarations.forEach((declaration) => {
+			declaration.dependencies.forEach((name) => {
+				deps.add(name);
+			});
+		});
+	});
+	// TODO ideally globals etc wouldn't be here in the first place
+	const filtered = Array.from(deps).filter((n) => renderer.context_lookup.has(n));
+	if (!filtered.length) return null;
+	return filtered
+		.map((n) => x`$$invalidate(${renderer.context_lookup.get(n).index}, ${n})`)
+		.reduce((lhs, rhs) => x`${lhs}, ${rhs}`);
+}
+```
+
 
 #### Renderer
 
@@ -1371,7 +1440,7 @@ export default class FragmentWrapper {
 ```javascript
 this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
 ```
-调用各自的render方法
+调用各自的render方法, TODO 演示一些
 
 ### generate
 
@@ -1471,6 +1540,7 @@ export default function create_module(
 	);
 }
 ```
+`create_module`内部调用了`esm`方法。
 
 ```javascript
 function esm(
@@ -1503,47 +1573,10 @@ function esm(
 	`;
 }
 ```
+我们可以把`program.body`打印出来看下：
+![alt text](image-15.png)  
+可以看到，到这一步，所有的代码片段已经整理好，之后调用`code-red`的`print`方法对编译好的节点进行整合输出。
 
-#### print
-```javascript
-export function print(node, opts = {}) {
-	if (Array.isArray(node)) {
-		return print(
-			{
-				type: 'Program',
-				body: node,
-				sourceType: 'module'
-			},
-			opts
-		);
-	}
-
-	const {
-		getName = /** @param {string} x */ (x) => {
-			throw new Error(`Unhandled sigil @${x}`);
-		}
-	} = opts;
-
-	let { map: scope_map, scope } = perisopic.analyze(node);
-	const deconflicted = new WeakMap();
-
-	const chunks = handle(node, {
-		indent: '',
-		getName,
-		scope,
-		scope_map,
-		deconflicted,
-		comments: []
-	});
-
-	...
-
-	return {
-		code,
-		map
-	};
-}
-```
 
 ## 小结
 
