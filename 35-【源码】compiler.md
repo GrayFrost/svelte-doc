@@ -1423,11 +1423,6 @@ export default class FragmentWrapper {
 		...
 	}
 
-	/**
-	 * @param {import('../Block.js').default} block
-	 * @param {import('estree').Identifier} parent_node
-	 * @param {import('estree').Identifier} parent_nodes
-	 */
 	render(block, parent_node, parent_nodes) {
 		for (let i = 0; i < this.nodes.length; i += 1) {
 			this.nodes[i].render(block, parent_node, parent_nodes);
@@ -1509,6 +1504,7 @@ generate(result) {
   };
 }
 ```
+整体逻辑就是把`program`变量进行`create_module`的模块化输出准备，然后调用`print`把完整的js文件内容输出。
 
 #### create_module
 ```javascript
@@ -1575,9 +1571,13 @@ function esm(
 ```
 我们可以把`program.body`打印出来看下：
 ![alt text](image-15.png)  
-可以看到，到这一步，所有的代码片段已经整理好，之后调用`code-red`的`print`方法对编译好的节点进行整合输出。
 
+可以看到，到这一步，所有的代码片段已经整理好，之后调用`code-red`的`print`方法对编译好的节点进行整合输出。
 
 ## 小结
 
 本章我们学习了：
+- `parse`如何把字符串模板内容解析成ast抽象语法树
+- `new Component`从ast中解析出html、css、js代码片段
+- `render_dom()`将分析好的html、css、js代码片段进行组装，切分成一个个代码块
+- `generate`将切分好的代码块进行整合输出
