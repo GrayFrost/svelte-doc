@@ -1051,7 +1051,7 @@ export function renderer_invalidate(renderer, name, value, main_execution_contex
 			});
 		});
 	});
-	// TODO ideally globals etc wouldn't be here in the first place
+
 	const filtered = Array.from(deps).filter((n) => renderer.context_lookup.has(n));
 	if (!filtered.length) return null;
 	return filtered
@@ -1096,7 +1096,7 @@ export default class Renderer {
 			true,
 			null
 		);
-		// TODO messy
+
 		this.blocks.forEach((block) => {
 			if (block instanceof Block) {
 				block.assign_variable_names();
@@ -1363,6 +1363,7 @@ export default class Block {
 	render_binding_groups() {}
 }
 ```
+从代码中我们可以知道，`Block`主要是为代码块添加生命周期，比如我们常见的c`create`、m`mount`、p`update`、d`destroy`等。
 
 ##### FragmentWrapper
 ```javascript
