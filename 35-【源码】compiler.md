@@ -789,70 +789,70 @@ const result =
 
 ```javascript
 export default function dom(component, options) {
-	const { name } = component;
-	const renderer = new Renderer(component, options);
-	const { block } = renderer;
-	block.has_outro_method = true;
-	...
+  const { name } = component;
+  const renderer = new Renderer(component, options);
+  const { block } = renderer;
+  block.has_outro_method = true;
+  ...
 
-	const blocks = renderer.blocks.slice().reverse();
-	push_array(
-		body,
-		blocks.map((block) => {
-			if (/** @type {import('./Block.js').default} */ (block).render)
-				return /** @type {import('./Block.js').default} */ (block).render();
-			return block;
-		})
-	);
+  const blocks = renderer.blocks.slice().reverse();
+  push_array(
+    body,
+    blocks.map((block) => {
+      if (/** @type {import('./Block.js').default} */ (block).render)
+        return /** @type {import('./Block.js').default} */ (block).render();
+      return block;
+    })
+  );
 
-	...
+  ...
 
-	const rest = uses_rest
-		? b`
-		const ${omit_props_names.name} = [${props.map((prop) => `"${prop.export_name}"`).join(',')}];
-		let $$restProps = ${compute_rest};
-	`
-		: null;
-	...
-	
-	// instrument assignments
-	if (component.ast.instance) {
-		let scope = component.instance_scope;
-		const map = component.instance_scope_map;
+  const rest = uses_rest
+    ? b`
+    const ${omit_props_names.name} = [${props.map((prop) => `"${prop.export_name}"`).join(',')}];
+    let $$restProps = ${compute_rest};
+  `
+    : null;
+  ...
+  
+  // instrument assignments
+  if (component.ast.instance) {
+    let scope = component.instance_scope;
+    const map = component.instance_scope_map;
 
-		/** @type {import('estree').Node | null} */
-		let execution_context = null;
-		walk(component.ast.instance.content, {
-			enter(node) {
-				...
-			},
-			leave(node) {
-				if (map.has(node)) {
-					scope = scope.parent;
-				}
-				if (execution_context === node) {
-					execution_context = null;
-				}
-				if (node.type === 'AssignmentExpression' || node.type === 'UpdateExpression') {
-					const assignee = node.type === 'AssignmentExpression' ? node.left : node.argument;
-					const names = new Set(extract_names(/** @type {import('estree').Node} */ (assignee)));
-					this.replace(invalidate(renderer, scope, node, names, execution_context === null));
-				}
-			}
-		});
-		...
-	}
+    /** @type {import('estree').Node | null} */
+    let execution_context = null;
+    walk(component.ast.instance.content, {
+      enter(node) {
+        ...
+      },
+      leave(node) {
+        if (map.has(node)) {
+          scope = scope.parent;
+        }
+        if (execution_context === node) {
+          execution_context = null;
+        }
+        if (node.type === 'AssignmentExpression' || node.type === 'UpdateExpression') {
+          const assignee = node.type === 'AssignmentExpression' ? node.left : node.argument;
+          const names = new Set(extract_names(/** @type {import('estree').Node} */ (assignee)));
+          this.replace(invalidate(renderer, scope, node, names, execution_context === null));
+        }
+      }
+    });
+    ...
+  }
 
-	...
+  ...
 
-	const has_create_fragment = component.compile_options.dev || block.has_content();
-	if (has_create_fragment) {
-		body.push(b`
-			function create_fragment(#ctx) {
-				${block.get_contents()}
-			}
-		`);
-	}
+  const has_create_fragment = component.compile_options.dev || block.has_content();
+  if (has_create_fragment) {
+    body.push(b`
+      function create_fragment(#ctx) {
+        ${block.get_contents()}
+      }
+    `);
+  }
 
   const instance_javascript = component.extract_javascript(component.ast.instance);
   ...
@@ -860,69 +860,69 @@ export default function dom(component, options) {
     ? component.alias('instance')
     : { type: 'Literal', value: null };
 
-  	if (has_create_fragment) {
-		console.log('svelte block', block)
-		body.push(b`
-			function create_fragment(#ctx) {
-				${block.get_contents()}
-			}
-		`);
-	}
-	...
-	const instance_javascript = component.extract_javascript(component.ast.instance);
-	const has_definition =
-		component.compile_options.dev ||
-		(instance_javascript && instance_javascript.length > 0) ||
-		filtered_props.length > 0 ||
-		uses_props ||
-		component.partly_hoisted.length > 0 ||
-		renderer.initial_context.length > 0 ||
-		component.reactive_declarations.length > 0 ||
-		capture_state ||
-		inject_state;
-	const definition = has_definition
-		? component.alias('instance')
-		: { type: 'Literal', value: null };
-	...
-	if (has_definition) {
-		...
-		
-		body.push(b`
-			function ${definition}(${args}) {
-				...
-			}
-		`);
-	}
-
-	...
-
-	const superclass = {
-		type: 'Identifier',
-		name: options.dev ? '@SvelteComponentDev' : '@SvelteComponent'
-	};
-	...
-	const declaration = /** @type {import('estree').ClassDeclaration} */ (
-		b`
-		class ${name} extends ${superclass} {
-			constructor(options) {
-				super(${options.dev && 'options'});
-				@init(this, options, ${definition}, ${
-			has_create_fragment ? 'create_fragment' : 'null'
-		}, ${not_equal}, ${prop_indexes}, ${optional_parameters});
-				${
-					options.dev &&
-					b`@dispatch_dev("SvelteRegisterComponent", { component: this, tagName: "${name.name}", options, id: create_fragment.name });`
-				}
-			}
-		}
-	`[0]
-	);
-	push_array(declaration.body.body, accessors);
-	body.push(/** @type {any} */ (declaration));
+    if (has_create_fragment) {
+    console.log('svelte block', block)
+    body.push(b`
+      function create_fragment(#ctx) {
+        ${block.get_contents()}
+      }
+    `);
+  }
+  ...
+  const instance_javascript = component.extract_javascript(component.ast.instance);
+  const has_definition =
+    component.compile_options.dev ||
+    (instance_javascript && instance_javascript.length > 0) ||
+    filtered_props.length > 0 ||
+    uses_props ||
+    component.partly_hoisted.length > 0 ||
+    renderer.initial_context.length > 0 ||
+    component.reactive_declarations.length > 0 ||
+    capture_state ||
+    inject_state;
+  const definition = has_definition
+    ? component.alias('instance')
+    : { type: 'Literal', value: null };
+  ...
+  if (has_definition) {
+    ...
+    
+    body.push(b`
+      function ${definition}(${args}) {
+        ...
+      }
+    `);
+  }
 
   ...
 
-	return { js: flatten(body), css };
+  const superclass = {
+    type: 'Identifier',
+    name: options.dev ? '@SvelteComponentDev' : '@SvelteComponent'
+  };
+  ...
+  const declaration = /** @type {import('estree').ClassDeclaration} */ (
+    b`
+    class ${name} extends ${superclass} {
+      constructor(options) {
+        super(${options.dev && 'options'});
+        @init(this, options, ${definition}, ${
+      has_create_fragment ? 'create_fragment' : 'null'
+    }, ${not_equal}, ${prop_indexes}, ${optional_parameters});
+        ${
+          options.dev &&
+          b`@dispatch_dev("SvelteRegisterComponent", { component: this, tagName: "${name.name}", options, id: create_fragment.name });`
+        }
+      }
+    }
+  `[0]
+  );
+  push_array(declaration.body.body, accessors);
+  body.push(/** @type {any} */ (declaration));
+
+  ...
+
+  return { js: flatten(body), css };
 }
 ```
 
@@ -1006,99 +1006,99 @@ import { renderer_invalidate } from './invalidate.js';
 
 export default class Renderer {
 
-	...
+  ...
 
-	constructor(component, options) {
-		this.component = component;
-		...
-		// main block
-		this.block = new Block({
-			renderer: this,
-			name: null,
-			type: 'component',
-			key: null,
-			bindings: new Map(),
-			dependencies: new Set()
-		});
-		this.block.has_update_method = true;
-		this.fragment = new FragmentWrapper(
-			this,
-			this.block,
-			component.fragment.children,
-			null,
-			true,
-			null
-		);
+  constructor(component, options) {
+    this.component = component;
+    ...
+    // main block
+    this.block = new Block({
+      renderer: this,
+      name: null,
+      type: 'component',
+      key: null,
+      bindings: new Map(),
+      dependencies: new Set()
+    });
+    this.block.has_update_method = true;
+    this.fragment = new FragmentWrapper(
+      this,
+      this.block,
+      component.fragment.children,
+      null,
+      true,
+      null
+    );
 
-		this.blocks.forEach((block) => {
-			if (block instanceof Block) {
-				block.assign_variable_names();
-			}
-		});
-		this.block.assign_variable_names();
-		this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
-		
-		...
-	}
-
-	...
-
-	invalidate(name, value, main_execution_context = false) {
-		return renderer_invalidate(this, name, value, main_execution_context);
-	}
-
-	dirty(names, is_reactive_declaration = false) {
-		const renderer = this;
-		const dirty = /** @type {| import('estree').Identifier
-                    | import('estree').MemberExpression} */ (
-			is_reactive_declaration ? x`$$self.$$.dirty` : x`#dirty`
-		);
-		const get_bitmask = () => {
-			/** @type {BitMasks} */
-			const bitmask = [];
-			names.forEach((name) => {
-				const member = renderer.context_lookup.get(name);
-				if (!member) return;
-				if (member.index.value === -1) {
-					throw new Error('unset index');
-				}
-				const value = /** @type {number} */ (member.index.value);
-				const i = (value / 31) | 0;
-				const n = 1 << value % 31;
-				if (!bitmask[i]) bitmask[i] = { n: 0, names: [] };
-				bitmask[i].n |= n;
-				bitmask[i].names.push(name);
-			});
-			return bitmask;
-		};
-		return ({
-			type: 'ParenthesizedExpression',
-			get expression() {
-				const bitmask = get_bitmask();
-				if (!bitmask.length) {
-					return /** @type {import('estree').BinaryExpression} */ (
-						x`${dirty} & /*${names.join(', ')}*/ 0`
-					);
-				}
-				if (renderer.context_overflow) {
-					return bitmask
-						.map((b, i) => ({ b, i }))
-						.filter(({ b }) => b)
-						.map(({ b, i }) => x`${dirty}[${i}] & /*${b.names.join(', ')}*/ ${b.n}`)
-						.reduce((lhs, rhs) => x`${lhs} | ${rhs}`);
-				}
-				return /** @type {import('estree').BinaryExpression} */ (
-					x`${dirty} & /*${names.join(', ')}*/ ${bitmask[0].n}`
-				);
-			}
-		});
-	}
+    this.blocks.forEach((block) => {
+      if (block instanceof Block) {
+        block.assign_variable_names();
+      }
+    });
+    this.block.assign_variable_names();
+    this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
+    
+    ...
+  }
 
   ...
 
-	remove_block(block) {
-		this.blocks.splice(this.blocks.indexOf(block), 1);
-	}
+  invalidate(name, value, main_execution_context = false) {
+    return renderer_invalidate(this, name, value, main_execution_context);
+  }
+
+  dirty(names, is_reactive_declaration = false) {
+    const renderer = this;
+    const dirty = /** @type {| import('estree').Identifier
+                    | import('estree').MemberExpression} */ (
+      is_reactive_declaration ? x`$$self.$$.dirty` : x`#dirty`
+    );
+    const get_bitmask = () => {
+      /** @type {BitMasks} */
+      const bitmask = [];
+      names.forEach((name) => {
+        const member = renderer.context_lookup.get(name);
+        if (!member) return;
+        if (member.index.value === -1) {
+          throw new Error('unset index');
+        }
+        const value = /** @type {number} */ (member.index.value);
+        const i = (value / 31) | 0;
+        const n = 1 << value % 31;
+        if (!bitmask[i]) bitmask[i] = { n: 0, names: [] };
+        bitmask[i].n |= n;
+        bitmask[i].names.push(name);
+      });
+      return bitmask;
+    };
+    return ({
+      type: 'ParenthesizedExpression',
+      get expression() {
+        const bitmask = get_bitmask();
+        if (!bitmask.length) {
+          return /** @type {import('estree').BinaryExpression} */ (
+            x`${dirty} & /*${names.join(', ')}*/ 0`
+          );
+        }
+        if (renderer.context_overflow) {
+          return bitmask
+            .map((b, i) => ({ b, i }))
+            .filter(({ b }) => b)
+            .map(({ b, i }) => x`${dirty}[${i}] & /*${b.names.join(', ')}*/ ${b.n}`)
+            .reduce((lhs, rhs) => x`${lhs} | ${rhs}`);
+        }
+        return /** @type {import('estree').BinaryExpression} */ (
+          x`${dirty} & /*${names.join(', ')}*/ ${bitmask[0].n}`
+        );
+      }
+    });
+  }
+
+  ...
+
+  remove_block(block) {
+    this.blocks.splice(this.blocks.indexOf(block), 1);
+  }
 }
 
 ```
@@ -1113,185 +1113,185 @@ import { flatten } from '../../utils/flatten.js';
 export default class Block {
   ...
 
-	/** @param {BlockOptions} options */
-	constructor(options) {
-		...
-		this.chunks = {
-			declarations: [],
-			init: [],
-			create: [],
-			claim: [],
-			hydrate: [],
-			mount: [],
-			measure: [],
-			restore_measurements: [],
-			fix: [],
-			animate: [],
-			intro: [],
-			update: [],
-			outro: [],
-			destroy: []
-		};
-		...
-	}
+  /** @param {BlockOptions} options */
+  constructor(options) {
+    ...
+    this.chunks = {
+      declarations: [],
+      init: [],
+      create: [],
+      claim: [],
+      hydrate: [],
+      mount: [],
+      measure: [],
+      restore_measurements: [],
+      fix: [],
+      animate: [],
+      intro: [],
+      update: [],
+      outro: [],
+      destroy: []
+    };
+    ...
+  }
 
-	assign_variable_names() {}
+  assign_variable_names() {}
 
-	...
+  ...
 
-	add_element(id, render_statement, claim_statement, parent_node, no_detach) {
-		this.add_variable(id);
-		this.chunks.create.push(b`${id} = ${render_statement};`);
-		if (this.renderer.options.hydratable) {
-			this.chunks.claim.push(b`${id} = ${claim_statement || render_statement};`);
-		}
-		if (parent_node) {
-			this.chunks.mount.push(b`@append(${parent_node}, ${id});`);
-			if (is_head(parent_node) && !no_detach) this.chunks.destroy.push(b`@detach(${id});`);
-		} else {
-			this.chunks.mount.push(b`@insert(#target, ${id}, #anchor);`);
-			if (!no_detach) this.chunks.destroy.push(b`if (detaching) @detach(${id});`);
-		}
-	}
+  add_element(id, render_statement, claim_statement, parent_node, no_detach) {
+    this.add_variable(id);
+    this.chunks.create.push(b`${id} = ${render_statement};`);
+    if (this.renderer.options.hydratable) {
+      this.chunks.claim.push(b`${id} = ${claim_statement || render_statement};`);
+    }
+    if (parent_node) {
+      this.chunks.mount.push(b`@append(${parent_node}, ${id});`);
+      if (is_head(parent_node) && !no_detach) this.chunks.destroy.push(b`@detach(${id});`);
+    } else {
+      this.chunks.mount.push(b`@insert(#target, ${id}, #anchor);`);
+      if (!no_detach) this.chunks.destroy.push(b`if (detaching) @detach(${id});`);
+    }
+  }
 
-	...
+  ...
 
-	/** @param {any} [key] */
-	get_contents(key) {
-		...
-		/** @type {Record<string, any>} */
-		const properties = {};
-		const noop = x`@noop`;
-		properties.key = key;
-		if (this.first) {
-			properties.first = x`null`;
-			this.chunks.hydrate.push(b`this.first = ${this.first};`);
-		}
-		if (this.chunks.create.length === 0 && this.chunks.hydrate.length === 0) {
-			properties.create = noop;
-		} else {
-			const hydrate =
-				this.chunks.hydrate.length > 0 &&
-				(this.renderer.options.hydratable ? b`this.h();` : this.chunks.hydrate);
-			properties.create = x`function #create() {
-				${this.chunks.create}
-				${hydrate}
-			}`;
-		}
-		...
-		if (this.chunks.mount.length === 0) {
-			properties.mount = noop;
-		} else if (this.event_listeners.length === 0) {
-			properties.mount = x`function #mount(#target, #anchor) {
-				${this.chunks.mount}
-			}`;
-		} else {
-			properties.mount = x`function #mount(#target, #anchor) {
-				${this.chunks.mount}
-			}`;
-		}
-		...
-		if (this.has_animation) {
-			...
-		}
-		if (this.has_intro_method || this.has_outro_method) {
-			...
-		}
-		if (this.chunks.destroy.length === 0) {
-			properties.destroy = noop;
-		} else {
-			const dispose_elements = [];
-			// Coalesce if blocks with the same condition
-			const others = flatten(this.chunks.destroy).filter(
-				/** @param {import('estree').Node} node */
-				(node) => {
-					if (
-						node.type === 'IfStatement' &&
-						node.test.type === 'Identifier' &&
-						node.test.name === 'detaching'
-					) {
-						dispose_elements.push(node.consequent);
-						return false;
-					} else {
-						return true;
-					}
-				}
-			);
+  /** @param {any} [key] */
+  get_contents(key) {
+    ...
+    /** @type {Record<string, any>} */
+    const properties = {};
+    const noop = x`@noop`;
+    properties.key = key;
+    if (this.first) {
+      properties.first = x`null`;
+      this.chunks.hydrate.push(b`this.first = ${this.first};`);
+    }
+    if (this.chunks.create.length === 0 && this.chunks.hydrate.length === 0) {
+      properties.create = noop;
+    } else {
+      const hydrate =
+        this.chunks.hydrate.length > 0 &&
+        (this.renderer.options.hydratable ? b`this.h();` : this.chunks.hydrate);
+      properties.create = x`function #create() {
+        ${this.chunks.create}
+        ${hydrate}
+      }`;
+    }
+    ...
+    if (this.chunks.mount.length === 0) {
+      properties.mount = noop;
+    } else if (this.event_listeners.length === 0) {
+      properties.mount = x`function #mount(#target, #anchor) {
+        ${this.chunks.mount}
+      }`;
+    } else {
+      properties.mount = x`function #mount(#target, #anchor) {
+        ${this.chunks.mount}
+      }`;
+    }
+    ...
+    if (this.has_animation) {
+      ...
+    }
+    if (this.has_intro_method || this.has_outro_method) {
+      ...
+    }
+    if (this.chunks.destroy.length === 0) {
+      properties.destroy = noop;
+    } else {
+      const dispose_elements = [];
+      // Coalesce if blocks with the same condition
+      const others = flatten(this.chunks.destroy).filter(
+        /** @param {import('estree').Node} node */
+        (node) => {
+          if (
+            node.type === 'IfStatement' &&
+            node.test.type === 'Identifier' &&
+            node.test.name === 'detaching'
+          ) {
+            dispose_elements.push(node.consequent);
+            return false;
+          } else {
+            return true;
+          }
+        }
+      );
 
-			properties.destroy = x`function #destroy(detaching) {
-				${dispose_elements.length ? b`if (detaching) { ${dispose_elements} }` : null}
-				${others}
-			}`;
-		}
-		...
+      properties.destroy = x`function #destroy(detaching) {
+        ${dispose_elements.length ? b`if (detaching) { ${dispose_elements} }` : null}
+        ${others}
+      }`;
+    }
+    ...
 
-		/** @type {any} */
-		const return_value = x`{
-			key: ${properties.key},
-			first: ${properties.first},
-			c: ${properties.create},
-			l: ${properties.claim},
-			h: ${properties.hydrate},
-			m: ${properties.mount},
-			p: ${properties.update},
-			r: ${properties.measure},
-			s: ${properties.restore_measurements},
-			f: ${properties.fix},
-			a: ${properties.animate},
-			i: ${properties.intro},
-			o: ${properties.outro},
-			d: ${properties.destroy}
-		}`;
-		const block = dev && this.get_unique_name('block');
-		const body = b`
-			${this.chunks.declarations}
+    /** @type {any} */
+    const return_value = x`{
+      key: ${properties.key},
+      first: ${properties.first},
+      c: ${properties.create},
+      l: ${properties.claim},
+      h: ${properties.hydrate},
+      m: ${properties.mount},
+      p: ${properties.update},
+      r: ${properties.measure},
+      s: ${properties.restore_measurements},
+      f: ${properties.fix},
+      a: ${properties.animate},
+      i: ${properties.intro},
+      o: ${properties.outro},
+      d: ${properties.destroy}
+    }`;
+    const block = dev && this.get_unique_name('block');
+    const body = b`
+      ${this.chunks.declarations}
 
-			${Array.from(this.variables.values()).map(({ id, init }) => {
-				return init ? b`let ${id} = ${init}` : b`let ${id}`;
-			})}
+      ${Array.from(this.variables.values()).map(({ id, init }) => {
+        return init ? b`let ${id} = ${init}` : b`let ${id}`;
+      })}
 
-			${this.chunks.init}
+      ${this.chunks.init}
 
-			${
-				dev
-					? b`
-					const ${block} = ${return_value};
-					@dispatch_dev("SvelteRegisterBlock", {
-						block: ${block},
-						id: ${this.name || 'create_fragment'}.name,
-						type: "${this.type}",
-						source: "${this.comment ? this.comment.replace(regex_double_quotes, '\\"') : ''}",
-						ctx: #ctx
-					});
-					return ${block};`
-					: b`
-					return ${return_value};`
-			}
-		`;
-		return body;
-	}
+      ${
+        dev
+          ? b`
+          const ${block} = ${return_value};
+          @dispatch_dev("SvelteRegisterBlock", {
+            block: ${block},
+            id: ${this.name || 'create_fragment'}.name,
+            type: "${this.type}",
+            source: "${this.comment ? this.comment.replace(regex_double_quotes, '\\"') : ''}",
+            ctx: #ctx
+          });
+          return ${block};`
+          : b`
+          return ${return_value};`
+      }
+    `;
+    return body;
+  }
 
-	/** @returns {boolean} */
-	has_content() {}
+  /** @returns {boolean} */
+  has_content() {}
 
-	render() {
-		const key = this.key && this.get_unique_name('key');
+  render() {
+    const key = this.key && this.get_unique_name('key');
 
-		/** @type {any[]} */
-		const args = [x`#ctx`];
-		if (key) args.unshift(key);
-		const fn = b`function ${this.name}(${args}) {
-			${this.get_contents(key)}
-		}`;
-		return this.comment
-			? b`
-				// ${this.comment}
-				${fn}`
-			: fn;
-	}
+    /** @type {any[]} */
+    const args = [x`#ctx`];
+    if (key) args.unshift(key);
+    const fn = b`function ${this.name}(${args}) {
+      ${this.get_contents(key)}
+    }`;
+    return this.comment
+      ? b`
+        // ${this.comment}
+        ${fn}`
+      : fn;
+  }
 
-	render_listeners(chunk = '') {}
-	render_binding_groups() {}
+  render_listeners(chunk = '') {}
+  render_binding_groups() {}
 }
 ```
 从代码中我们可以知道，`Block`主要是为代码块添加生命周期，比如我们常见的c`create`、m`mount`、p`update`、d`destroy`等。
@@ -1300,66 +1300,66 @@ export default class Block {
 ```javascript
 ...
 const wrappers = {
-	AwaitBlock,
-	Body,
-	Comment,
-	DebugTag,
-	Document,
-	EachBlock,
-	Element,
-	Head,
-	IfBlock,
-	InlineComponent,
-	KeyBlock,
-	MustacheTag,
-	Options: null,
-	RawMustacheTag,
-	Slot,
-	SlotTemplate,
-	Text,
-	Title,
-	Window
+  AwaitBlock,
+  Body,
+  Comment,
+  DebugTag,
+  Document,
+  EachBlock,
+  Element,
+  Head,
+  IfBlock,
+  InlineComponent,
+  KeyBlock,
+  MustacheTag,
+  Options: null,
+  RawMustacheTag,
+  Slot,
+  SlotTemplate,
+  Text,
+  Title,
+  Window
 };
 
 ...
 
 export default class FragmentWrapper {
-	nodes;
-	constructor(renderer, block, nodes, parent, strip_whitespace, next_sibling) {
-		this.nodes = [];
+  nodes;
+  constructor(renderer, block, nodes, parent, strip_whitespace, next_sibling) {
+    this.nodes = [];
     ...
-		while (i--) {
-			const child = nodes[i];
-			...
-			if (child.type === 'Window') {
-				window_wrapper = new Window(renderer, block, parent, child);
-				continue;
-			}
-			if (child.type === 'Text') {
-				...
-			} else {
-				const Wrapper = wrappers[child.type];
-				if (!Wrapper || (child.type === 'Comment' && !renderer.options.preserveComments)) continue;
-				const wrapper = new Wrapper(
-					renderer,
-					block,
-					parent,
-					child,
-					strip_whitespace,
-					last_child || next_sibling
-				);
-				this.nodes.unshift(wrapper);
-				link(last_child, (last_child = wrapper));
-			}
-		}
-		...
-	}
+    while (i--) {
+      const child = nodes[i];
+      ...
+      if (child.type === 'Window') {
+        window_wrapper = new Window(renderer, block, parent, child);
+        continue;
+      }
+      if (child.type === 'Text') {
+        ...
+      } else {
+        const Wrapper = wrappers[child.type];
+        if (!Wrapper || (child.type === 'Comment' && !renderer.options.preserveComments)) continue;
+        const wrapper = new Wrapper(
+          renderer,
+          block,
+          parent,
+          child,
+          strip_whitespace,
+          last_child || next_sibling
+        );
+        this.nodes.unshift(wrapper);
+        link(last_child, (last_child = wrapper));
+      }
+    }
+    ...
+  }
 
-	render(block, parent_node, parent_nodes) {
-		for (let i = 0; i < this.nodes.length; i += 1) {
-			this.nodes[i].render(block, parent_node, parent_nodes);
-		}
-	}
+  render(block, parent_node, parent_nodes) {
+    for (let i = 0; i < this.nodes.length; i += 1) {
+      this.nodes[i].render(block, parent_node, parent_nodes);
+    }
+  }
 }
 ```
 `FragmentWrapper`通过`child.type`来调用对应类型的Wrapper，每个Wrapper内部都实现了自己的render方法。
@@ -1369,7 +1369,7 @@ export default class FragmentWrapper {
 在`packages/svelte/src/compiler/compile/Component.js`中：
 ```diff
   this.fragment = new Fragment(this, ast.html);
-+	console.log('svelte new Fragment in Component', this.fragment);
++  console.log('svelte new Fragment in Component', this.fragment);
 ```
 和在`packages/svelte/src/compiler/compile/render_dom/Renderer.js`中：
 ```diff
@@ -1398,49 +1398,49 @@ import Wrapper from './shared/Wrapper.js';
 import { x } from 'code-red';
 
 export default class TextWrapper extends Wrapper {
-	_data;
-	skip;
-	var;
+  _data;
+  skip;
+  var;
 
-	constructor(renderer, block, parent, node, data) {
-		super(renderer, block, parent, node);
-		this.skip = this.node.should_skip();
-		this._data = data;
-		this.var = /** @type {unknown} */ /** @type {import('estree').Identifier} */ (
-			this.skip ? null : x`t`
-		);
-	}
-	use_space() {
-		return this.node.use_space();
-	}
-	set data(value) {
-		this.node.data = this._data = value;
-	}
-	get data() {
-		return this._data;
-	}
+  constructor(renderer, block, parent, node, data) {
+    super(renderer, block, parent, node);
+    this.skip = this.node.should_skip();
+    this._data = data;
+    this.var = /** @type {unknown} */ /** @type {import('estree').Identifier} */ (
+      this.skip ? null : x`t`
+    );
+  }
+  use_space() {
+    return this.node.use_space();
+  }
+  set data(value) {
+    this.node.data = this._data = value;
+  }
+  get data() {
+    return this._data;
+  }
 
-	render(block, parent_node, parent_nodes) {
-		if (this.skip) return;
-		const use_space = this.use_space();
-		const string_literal = {
-			type: 'Literal',
-			value: this.data,
-			loc: {
-				start: this.renderer.locate(this.node.start),
-				end: this.renderer.locate(this.node.end)
-			}
-		};
-		block.add_element(
-			this.var,
-			use_space ? x`@space()` : x`@text(${string_literal})`,
-			parent_nodes &&
-				(use_space
-					? x`@claim_space(${parent_nodes})`
-					: x`@claim_text(${parent_nodes}, ${string_literal})`),
-			/** @type {import('estree').Identifier} */ (parent_node)
-		);
-	}
+  render(block, parent_node, parent_nodes) {
+    if (this.skip) return;
+    const use_space = this.use_space();
+    const string_literal = {
+      type: 'Literal',
+      value: this.data,
+      loc: {
+        start: this.renderer.locate(this.node.start),
+        end: this.renderer.locate(this.node.end)
+      }
+    };
+    block.add_element(
+      this.var,
+      use_space ? x`@space()` : x`@text(${string_literal})`,
+      parent_nodes &&
+        (use_space
+          ? x`@claim_space(${parent_nodes})`
+          : x`@claim_text(${parent_nodes}, ${string_literal})`),
+      /** @type {import('estree').Identifier} */ (parent_node)
+    );
+  }
 }
 ```
 Wrapper内部的render是对已经添加了生命周期处理的block对象进行二次处理。
@@ -1517,64 +1517,64 @@ generate(result) {
 #### create_module
 ```javascript
 export default function create_module(
-	program,
-	name,
-	banner,
-	svelte_path = 'svelte',
-	helpers,
-	globals,
-	imports,
-	module_exports,
-	exports_from
+  program,
+  name,
+  banner,
+  svelte_path = 'svelte',
+  helpers,
+  globals,
+  imports,
+  module_exports,
+  exports_from
 ) {
-	const internal_path = `${svelte_path}/internal`;
-	helpers.sort((a, b) => (a.name < b.name ? -1 : 1));
-	globals.sort((a, b) => (a.name < b.name ? -1 : 1));
-	return esm(
-		program,
-		name,
-		banner,
-		svelte_path,
-		internal_path,
-		helpers,
-		globals,
-		imports,
-		module_exports,
-		exports_from
-	);
+  const internal_path = `${svelte_path}/internal`;
+  helpers.sort((a, b) => (a.name < b.name ? -1 : 1));
+  globals.sort((a, b) => (a.name < b.name ? -1 : 1));
+  return esm(
+    program,
+    name,
+    banner,
+    svelte_path,
+    internal_path,
+    helpers,
+    globals,
+    imports,
+    module_exports,
+    exports_from
+  );
 }
 ```
 `create_module`内部调用了`esm`方法。
 
 ```javascript
 function esm(
-	program,
-	name,
-	banner,
-	svelte_path,
-	internal_path,
-	helpers,
-	globals,
-	imports,
-	module_exports,
-	exports_from
+  program,
+  name,
+  banner,
+  svelte_path,
+  internal_path,
+  helpers,
+  globals,
+  imports,
+  module_exports,
+  exports_from
 ) {
   
-	...
+  ...
 
-	program.body = b`
-		/* ${banner} */
+  program.body = b`
+    /* ${banner} */
 
-		${import_declaration}
-		${internal_globals}
-		${imports}
-		${exports_from}
+    ${import_declaration}
+    ${internal_globals}
+    ${imports}
+    ${exports_from}
 
-		${program.body}
+    ${program.body}
 
-		export default ${name};
-		${exports}
-	`;
+    export default ${name};
+    ${exports}
+  `;
 }
 ```
 我们可以把`program.body`打印出来看下：
