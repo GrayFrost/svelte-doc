@@ -1,5 +1,5 @@
 经过了前两章的铺垫，我们正式开始对源码进行解读。到笔者目前写文章时，Svelte的最新版本是4.2.12。  
-![](./img/35-1.png)
+![](./img/35-16.png)
 
 我们要想在`webpack`或`vite`中使用`Svelte`，必须安装`svelte-loader`或`vite-plugin-svelte`，它们的重要性不言而喻。
 
@@ -30,7 +30,7 @@ compiled = svelte.compile(finalCode, finalCompileOptions);
 ```bash
 git clone git@github.com:sveltejs/svelte.git
 ```
-![](./img/35-2.png)
+![](./img/35-17.png)
 
 ## preprocess
 
@@ -101,11 +101,11 @@ export default function compile(source, options = {}) {
 count:{count}
 ```
 我们分别把`ast`、`component`、`result`这几个变量打印出来看下：
-![alt text](image-2.png)
+![alt text](./img/35-1.png)
 
-![alt text](image-3.png)
+![alt text](./img/35-2.png)
 
-![alt text](image-4.png)
+![alt text](./img/35-3.png)
 
 ### parse
 
@@ -134,7 +134,7 @@ export default function parse(template, options = {}) {
 逻辑都封装在`Parser`类中，经过`Parser`处理后，返回带有`html`、`css`、`instance`、`module`属性值的对象。`html`和`css`容易理解，而`instance`存储的是正常的`script`内容，`module`存储的则是`<script context="module"></script>`内的js内容。
 
 我们在REPL中可以看到，AST的输出结构正是上述的返回对象。
-![](./img/35-3.png)
+![](./img/35-18.png)
 
 #### Parser
 
@@ -572,7 +572,7 @@ export default function text(parser) {
 
 `const ast = parse(source, options);`的流程解析到此，回到`compile`。
 
-![alt text](image-5.png)
+![alt text](./img/35-4.png)
 
 ### Component
 
@@ -752,11 +752,11 @@ function get_constructor(type) {
 ```
 
 我们把`this.fragment`打印出来看下：
-![alt text](image-6.png)  
+![alt text](./img/35-5.png)  
 `children`属性中，就是经过各种各种node类型实例化后的对象。
 
 我们拿数组中一个子元素来看：
-![alt text](image-7.png)
+![alt text](./img/35-6.png)
 里面的`component`属性其实就是在`this.fragment = new Fragment(this, ast.html);`时传递的`this`。
 
 #### walk_instance_js_post_template
@@ -773,7 +773,7 @@ walk_instance_js_post_template() {
 `walk_instance_js_pre_template`是在html模板处理前对`ast.instance`实例进行解析，而`walk_instance_js_post_template`是在处理模板之后解析`ast.instance`。因为处理了html模板之后，模板文件中存在和变量相关的内容，比如在`{}`中渲染变量，在事件绑定中绑定变量等。
 
 我们看下`const component = new Component();`得到的数据：
-![alt text](image-8.png)
+![alt text](./img/35-7.png)
 
 ### render_dom
 解析完`new Component()`，我们继续执行下一步：
@@ -933,7 +933,7 @@ export default function dom(component, options) {
 this.replace(invalidate(renderer, scope, node, names, execution_context === null));
 ```
 我们从REPL上看一下一个代码例子的编译后结果：
-![alt text](image-10.png)
+![alt text](./img/35-8.png)
 很明显，`this.replace(invalidate)`的作用就是将我们的赋值语句进行`$$invalidate`的替换。
 
 ```javascript
@@ -946,7 +946,7 @@ if (has_create_fragment) {
 }
 ```
 这部分则是处理以下片段，`block.get_contents()`我们在后面讲Block时进行说明：
-![alt text](image-11.png)
+![alt text](./img/35-9.png)
 
 ```javascript
 const definition = has_definition
@@ -964,9 +964,9 @@ if (has_definition) {
 }
 ```
 这一部分则对应了`instance`片段：
-![alt text](image-12.png)
+![alt text](./img/35-10.png)
 我们可以在源码中把`definition`这个变量打印出来看下：
-![alt text](image-13.png)
+![alt text](./img/35-11.png)
 
 ```javascript
 const superclass = {
@@ -992,7 +992,7 @@ const declaration = /** @type {import('estree').ClassDeclaration} */ (
 );
 ```
 这部分很明显则对应了以下片段：
-![alt text](image-14.png)
+![alt text](./img/35-12.png)
 
 #### Renderer
 
@@ -1384,7 +1384,7 @@ export default class FragmentWrapper {
 + console.log('svelte new FragmentWrapper in Renderer', this.fragment);
 ```
 
-![alt text](image-16.png)
+![alt text](./img/35-13.png)
 
 ##### render
 前面说到每个Wrapper都会实现自己的`render`方法，之后便是调用各自的`render`。
@@ -1448,7 +1448,7 @@ Wrapper内部的render是对已经添加了生命周期处理的block对象进�
 ### generate
 
 来到最后一步，首先看下result的大致结构：
-![alt text](image-1.png)
+![alt text](./img/35-14.png)
 
 `genetate`隶属于`Component`中的一个方法。
 
@@ -1578,7 +1578,7 @@ function esm(
 }
 ```
 我们可以把`program.body`打印出来看下：
-![alt text](image-15.png)  
+![alt text](./img/35-15.png)  
 
 可以看到，到这一步，所有的代码片段已经整理好，之后调用`code-red`的`print`方法对编译好的节点进行整合输出。
 
