@@ -770,17 +770,9 @@ walk_instance_js_post_template() {
   this.check_if_tags_content_dynamic();
 }
 ```
-`walk_instance_js_post_template`在处理外模板之后解析`ast.instance`。该方法用于处理一些额外工作，比如移除不需要的节点，处理导入和导出等TODO
-    
+`walk_instance_js_pre_template`是在html模板处理前对`ast.instance`实例进行解析，而`walk_instance_js_post_template`是在处理模板之后解析`ast.instance`。因为处理了html模板之后，模板文件中存在和变量相关的内容，比如在`{}`中渲染变量，在事件绑定中绑定变量等。
 
-总的来说，`walk_instance_js_post_template()`函数的主要任务是在模板解析之后处理实例脚本，包括后处理AST，提升声明，提取响应式声明，以及检查标签的动态内容
-
-TODO:walk_instance_js_pre_template函数在模板解析之前被调用，主要用于处理组件实例的script标签中的代码。这个函数会遍历script标签中的所有语句，对其中的变量声明、函数声明等进行处理，以便在后续的编译过程中使用。
-
-walk_instance_js_post_template函数在模板解析之后被调用，主要用于处理组件实例的script标签中的代码与模板之间的关系。这个函数会遍历script标签中的所有语句，对其中与模板相关的部分进行处理，例如更新模板中引用的变量的值，处理模板中的事件处理函数等。
-
-总的来说，这两个函数的主要区别在于它们被调用的时间和处理的内容。walk_instance_js_pre_template主要处理script标签中的代码本身，而walk_instance_js_post_template主要处理script标签中的代码与模板之间的关系。
-
+我们看下`const component = new Component();`得到的数据：
 ![alt text](image-8.png)
 
 ### render_dom
@@ -934,9 +926,7 @@ export default function dom(component, options) {
 }
 ```
 
-TODO:这个文件中定义了一个Renderer类，这个类包含了一系列的方法，用于生成各种DOM操作的代码，例如创建元素、设置属性、添加事件监听器等。这个类还包含了一些辅助方法，用于处理Svelte特有的特性，例如条件渲染、列表渲染等。
-
-当编译一个Svelte组件时，Svelte编译器会创建一个Renderer实例，然后调用这个实例的方法生成对应的DOM操作代码。这些代码最终会被包含在编译后的JavaScript文件中，用于在浏览器中渲染和更新Svelte组件。
+`Renderer`实例中包含了一系列用于生成各种DOM操作的代码，这些代码最终会通过`component.generate`包含在一个js文件中。
 
 这里笔者删除了大量细节逻辑，我们关注其中几个部分即可：
 ```javascript
@@ -1003,63 +993,6 @@ const declaration = /** @type {import('estree').ClassDeclaration} */ (
 ```
 这部分很明显则对应了以下片段：
 ![alt text](image-14.png)
-
-
-#### invalidate
-```javascript
-export function renderer_invalidate(renderer, name, value, main_execution_context = false) {
-	const variable = renderer.component.var_lookup.get(name);
-	if (variable && variable.subscribable && (variable.reassigned || variable.export_name)) {
-		if (main_execution_context) {
-			return x`${`$$subscribe_${name}`}(${value || name})`;
-		} else {
-			const member = renderer.context_lookup.get(name);
-			return x`${`$$subscribe_${name}`}($$invalidate(${member.index}, ${value || name}))`;
-		}
-	}
-	if (name[0] === '$' && name[1] !== '$') {
-		return x`${name.slice(1)}.set(${value || name})`;
-	}
-	if (
-		variable &&
-		(variable.module ||
-			(!variable.referenced &&
-				!variable.is_reactive_dependency &&
-				!variable.export_name &&
-				!name.startsWith('$$')))
-	) {
-		return value || name;
-	}
-	if (value) {
-		if (main_execution_context) {
-			return x`${value}`;
-		} else {
-			const member = renderer.context_lookup.get(name);
-			return x`$$invalidate(${member.index}, ${value})`;
-		}
-	}
-	if (main_execution_context) return;
-	// if this is a reactive declaration, invalidate dependencies recursively
-	const deps = new Set([name]);
-	deps.forEach((name) => {
-		const reactive_declarations = renderer.component.reactive_declarations.filter((x) =>
-			x.assignees.has(name)
-		);
-		reactive_declarations.forEach((declaration) => {
-			declaration.dependencies.forEach((name) => {
-				deps.add(name);
-			});
-		});
-	});
-
-	const filtered = Array.from(deps).filter((n) => renderer.context_lookup.has(n));
-	if (!filtered.length) return null;
-	return filtered
-		.map((n) => x`$$invalidate(${renderer.context_lookup.get(n).index}, ${n})`)
-		.reduce((lhs, rhs) => x`${lhs}, ${rhs}`);
-}
-```
-
 
 #### Renderer
 
@@ -1169,8 +1102,6 @@ export default class Renderer {
 }
 
 ```
-
-TODO: 对原来在`new Component()`中生成的fragment进行包裹，这里的fragment属性经过包裹后，和原来的fragment已经不同。
 
 ##### Block
 ```javascript
@@ -1431,19 +1362,95 @@ export default class FragmentWrapper {
 	}
 }
 ```
+`FragmentWrapper`通过`child.type`来调用对应类型的Wrapper，每个Wrapper内部都实现了自己的render方法。
+
+通过`this.fragment = new FragmentWrapper()`得到的fragment和原来在`new Component()`中生成的fragment并不相同，注意区分，我们可以把两者打印出来比较一下：
+
+在`packages/svelte/src/compiler/compile/Component.js`中：
+```diff
+  this.fragment = new Fragment(this, ast.html);
++	console.log('svelte new Fragment in Component', this.fragment);
+```
+和在`packages/svelte/src/compiler/compile/render_dom/Renderer.js`中：
+```diff
+  this.fragment = new FragmentWrapper(
+    this,
+    this.block,
+    component.fragment.children,
+    null,
+    true,
+    null
+  );
++ console.log('svelte new FragmentWrapper in Renderer', this.fragment);
+```
+
+![alt text](image-16.png)
 
 ##### render
+前面说到每个Wrapper都会实现自己的`render`方法，之后便是调用各自的`render`。
 ```javascript
 this.fragment.render(this.block, null, /** @type {import('estree').Identifier} */ (x`#nodes`));
 ```
-调用各自的render方法, TODO 演示一些
+
+比如`Text`的Wrapper：
+```javascript
+import Wrapper from './shared/Wrapper.js';
+import { x } from 'code-red';
+
+export default class TextWrapper extends Wrapper {
+	_data;
+	skip;
+	var;
+
+	constructor(renderer, block, parent, node, data) {
+		super(renderer, block, parent, node);
+		this.skip = this.node.should_skip();
+		this._data = data;
+		this.var = /** @type {unknown} */ /** @type {import('estree').Identifier} */ (
+			this.skip ? null : x`t`
+		);
+	}
+	use_space() {
+		return this.node.use_space();
+	}
+	set data(value) {
+		this.node.data = this._data = value;
+	}
+	get data() {
+		return this._data;
+	}
+
+	render(block, parent_node, parent_nodes) {
+		if (this.skip) return;
+		const use_space = this.use_space();
+		const string_literal = {
+			type: 'Literal',
+			value: this.data,
+			loc: {
+				start: this.renderer.locate(this.node.start),
+				end: this.renderer.locate(this.node.end)
+			}
+		};
+		block.add_element(
+			this.var,
+			use_space ? x`@space()` : x`@text(${string_literal})`,
+			parent_nodes &&
+				(use_space
+					? x`@claim_space(${parent_nodes})`
+					: x`@claim_text(${parent_nodes}, ${string_literal})`),
+			/** @type {import('estree').Identifier} */ (parent_node)
+		);
+	}
+}
+```
+Wrapper内部的render是对已经添加了生命周期处理的block对象进行二次处理。
 
 ### generate
 
-首先看下result的大致结构：
+来到最后一步，首先看下result的大致结构：
 ![alt text](image-1.png)
 
-隶属于`Component`中的一个方法。
+`genetate`隶属于`Component`中的一个方法。
 
 ```javascript
 generate(result) {

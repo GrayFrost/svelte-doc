@@ -457,3 +457,5 @@ Svelte的Context传值同样不支持响应性，要想使传递的值具有响�
 - DOM引用
 - 样式处理
 - 跨组件传值
+
+笔者在[rvs](https://github.com/GrayFrost/rvs)项目中，完整地对以上各类对比进行了代码实现，感兴趣的读者可自行探究。

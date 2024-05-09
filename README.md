@@ -49,7 +49,7 @@
 ## 源码
 - [x] 库
 - [x] 位运算
-- [ ] compiler
+- [x] compiler
 - [x] runtime
 - [x] 流程
 
