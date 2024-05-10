@@ -757,6 +757,7 @@ function get_constructor(type) {
 
 我们拿数组中一个子元素来看：
 ![alt text](./img/35-6.png)
+
 里面的`component`属性其实就是在`this.fragment = new Fragment(this, ast.html);`时传递的`this`。
 
 #### walk_instance_js_post_template
