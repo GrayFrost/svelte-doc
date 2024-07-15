@@ -4,48 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "c03328002681a5df",
-        "type": "tabs",
-        "dimension": 78.1305114638448,
-        "children": [
-          {
-            "id": "be12e122780d4da8",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "35-【源码】compiler.md"
-              }
-            }
-          },
-          {
-            "id": "fc69782002505dca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "35-【源码】compiler.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
         "id": "abe5287cabdfa8aa",
         "type": "tabs",
-        "dimension": 21.869488536155202,
         "children": [
           {
             "id": "2782e9cf913b98f5",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "35-【源码】compiler.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -114,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "35-【源码】compiler.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "35-【源码】compiler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -153,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "35-【源码】compiler.md"
-              }
+              "state": {}
             }
           },
           {
@@ -185,8 +148,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fc69782002505dca",
+  "active": "2782e9cf913b98f5",
   "lastOpenFiles": [
+    "35-【源码】compiler.md",
     "37-【源码】流程.md",
     "09-【入门】节点引用.md",
     "img/33-25.png",
@@ -220,7 +184,6 @@
     "01-【入门】背景.md",
     "05-【入门】生命周期.md",
     "bak/Svelte.mindnode",
-    "35-【源码】compiler.md",
     "19-【实战】Alert组件之简单传值.md",
     "20-【实战】Alert组件之slot交互.md",
     "未命名",
