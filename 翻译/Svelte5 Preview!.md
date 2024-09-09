@@ -1,10 +1,10 @@
-# Svelte5 抢先看！
+# Svelte5 Preview
 
 
 ![Svelte 5](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/948e70dc97ef4fa0a20b91af52a3361c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1280&h=720&s=32329&e=png&b=ff3c00)
 
 
-## 安装
+## Installation
 
 ```bash
 npm create svelte@latest svelte-5
@@ -99,9 +99,9 @@ const person = new Person();
 ![$state in class](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b9f06be79bb42c29a802f412fd12b7f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=51374&e=gif&f=20&b=fefefe)
 
 
-对比之前的数据声明，多了`$state`。但使用了`$state`声明的数组和对象，不再像Svelte4那样，需要使用一些小技巧来赋值更新。
+Compared with the data declaration in Svelte 4, there is an additional `$state`. However, for arrays and objects declared with `$state`, unlike in Svelte 4, there is no longer a need to use some tricks for assignment and update.
 
-在Svelte 5中，数组的更新就和在js操作中一般。
+In Svelte 5, updating arrays is just like in normal JavaScript operations.
 
 ```html
 <script>
@@ -125,7 +125,7 @@ const onSub = () => {
 
 ![$state array](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f516f92c1e6042d68052712cd22d5026~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=55210&e=gif&f=33&b=fefefe)
 
-对象演示：
+Object：
 ```html
 <script>
 const obj = $state({
@@ -165,26 +165,25 @@ const update2 = () => {
 数组：{arr.join(',')}
 ```
 
-使用了`$state.frozen`声明后的数组，无法直接操作数组。vscode会给出提示：
+After an array is declared with `$state.frozen`, the array cannot be directly manipulated. VSCode will give a prompt:
 ![error](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/138c58c828f64b48afe1038332f0ff24~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1634&h=862&s=126979&e=png&b=212121)
 
-在浏览器中点击第一个更新，也会报错：
+Clicking on the first button to update in the browser will also result in an error:
 ![error2](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42117563860141c1a2364da0e2bd98f7~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2148&h=240&s=82439&e=png&b=fdf8f8)
 
-当我们调用update2时，数组能正常更新。
+When we call update2 function, array can be updated normally.
 
-看下官网的一个提示：
-
+Let's see a tip:
 > Objects and arrays passed to `$state.frozen` will be shallowly frozen using `Object.freeze()`. If you don't want this, pass in a clone of the object or array instead.
 
 
 ```html
 <script>
 let arr = $state.frozen([{
-        obj: {
-                name: 'bob',
-                age: 18
-        }
+  obj: {
+    name: 'bob',
+    age: 18
+  }
 }]);
 let arr2 = $state.frozen([{name: 'carter', age: 19}]);
 
@@ -199,13 +198,14 @@ arr3[0] = 'svelte';
 {JSON.stringify(arr2)}
 {JSON.stringify(arr3)}
 ```
-在上面这个例子中，`arr3[0] = 'svelte';`会直接报错，剩下两个赋值则不会。把报错赋值的语句去掉，我们可以看到：
+
+In the above example, `arr3[0] = 'svelte';` will directly result in an error, while the remaining two assignments will not. Remove the statement that causes the error in assignment, and we can see:
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1bb7b33b06444d38ae6f6628c3cff947~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1194&h=172&s=18185&e=png&b=fefefe)
 
 ### `$derived`
 
-`$derived`接收一个参数，这个参数是一个没有副作用的表达式。
+`$derived` receives a parameter. This parameter is an expression without side effects.
 
 ```html
 <script>
@@ -225,13 +225,13 @@ double: {double}
 
 ![$derived](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ae620629ce24b36bde38e76bed6336d~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=49410&e=gif&f=22&b=fefefe)
 
-我们可以传`count * 2`，但是不能传`count++`。
+We can pass `count * 2`, but we cannot pass `count++`.
 
-在Svelte4中，我们要声明一个派生属性，需在`$: `里进行。
+In Svelte 4, if we want to declare a derived property, we need to do it within `$: `.
 
 ### `$derived.by`
 
-`$derived.by`接收一个函数。
+`$derived.by` receives a function as parameter。
 
 ```html
 <script>
@@ -255,9 +255,9 @@ total: {total}
 
 > runs when the component is mounted, and again whenever `count` or `doubled` change,after the DOM has been updated.
 
-因此，`$effect`相当于`$: {}`和`onMount`、`afterUpdate`的结合体。笔者对此改动表示热烈欢迎，因为本人始终觉得在有些框架中，一个组件对外提供一大串又臭又长的生命周期，着实加大了开发者的心智负担。
+Therefore, `$effect` is equivalent to a combination of `$: {}` and `onMount`, `afterUpdate`. I warmly welcomes this change because I always feel that in some frameworks, a component provides a long list of cumbersome life cycles to the outside world, which indeed increases the mental burden on developers.
 
-在Svelte 4中：
+In Svelte 4:
 ```html
 <script>
   import { afterUpdate } from 'svelte';
@@ -276,7 +276,7 @@ width: <input type="number" bind:value={width} />
 
 ![afterUpdate](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13691ba49d694525b2ab13bc0381fe06~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=89493&e=gif&f=31&b=fefefe)
 
-在Svelte 5中，使用`$effect`rune：
+In Svelte 5, use `$effect`rune：
 ```html
 <script>
   let width = $state(10);
@@ -293,9 +293,9 @@ width: <input type="number" bind:value={width} />
 
 ### `$effect.pre`
 
-用于替代`beforeUpdate`生命周期。
+To replace `beforeUpdate` lifecycle。
 
-我们看个Svelte 4的例子：
+Let's see an example of Svelte 4：
 ```html
 <script>
   import { beforeUpdate, afterUpdate } from 'svelte';
@@ -322,7 +322,7 @@ width: <input type="number" bind:value={width} />
 
 ![test41.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06690b34d9d54e26ad65def62673c490~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=125313&e=gif&f=51&b=fefefe)
 
-在Svelte 5中：
+In Svelte 5：
 ```html
 <script>
   let width = $state(10);
@@ -348,11 +348,11 @@ width: <input type="number" bind:value={width} />
 
 ![$effect.pre](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45861f12f9f741f0bf60f5322628be80~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=191798&e=gif&f=55&b=fefefe)
 
-在这里之所以要把width也一起打印出来，是因为`$effect`和`$effect.pre`的后续执行需要依赖width。
+The reason why width is also printed here is that the subsequent execution of `$effect` and `$effect.pre` depends on width.
 
 ### `$effect.active`
 
-官网给出的说明是用于判断是否在一个effect中或是否在template中。
+It is used to determine whether it is in an effect or in a template.
 
 ```html
 <script>
@@ -383,10 +383,11 @@ in template:{console.log('isActive in template', $effect.active())}
 
 ![$effect.active](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8022402c88cd41c0a52f1b31f42a7fa1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=293843&e=gif&f=106&b=fefefe)
 
-经过试验，在`$effect`、`$effect.pre`和template中能够正常判断。我们尝试在`$derived.by`中使用，可是打印结果提醒我们`$effect.active`在其中并不适用。
+After testing, it can be judged normally in `$effect`, `$effect.pre` and template. We tried to use it in `$derived.by`, but the printed result reminds us that `$effect.active` is not applicable in it.
 
 ### `$effect.root`
-使用`#effect.root`，我们可以手动地控制`$effect`的生效与否。
+Using `#effect.root`, we can manually control whether `$effect` takes effect.
+
 ```html
 <script>
 let count = $state(0);
@@ -408,13 +409,13 @@ const offEffect = $effect.root(() => {
 
 ![$effect.root](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6761dfa9d000401696f0cd3235f666b5~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=897&h=532&s=76217&e=gif&f=40&b=fdfdfd)
 
-如果不调用`$effect.root`的返回函数，依旧正常追踪依赖更新。当我们执行了返回函数后，可以看到`$effect`不再执行。
+If the return function of `$effect.root` is not called, the dependency update is still tracked normally. When we execute the return function, we can see that `$effect` is no longer executed.
 
 ### `$props`
 
-很明显，用来接收props的Rune。
+Obviously, the Rune is used to receive props.
 
-Svelte 4中：
+In Svelte 4:
 ```html
 <script>
   export let value;
@@ -423,7 +424,7 @@ Svelte 4中：
 子组件：{value}
 ```
 
-Svelte 5中：
+In Svelte5:
 ```html
 <script>
   let { value } = $props();
@@ -433,11 +434,12 @@ Svelte 5中：
 ```
 
 ### `$inspect`
-当状态更新时，会打印相关信息。
+
+When state updates, will print out some information.
 ```html
 <script>
     let count = $state(0);
-    $inspect(count); // 当count变化时console.log出来
+    $inspect(count); // console.log something when count changes
 </script>
 
 <button onclick={() => count++}>add count</button>
@@ -447,7 +449,7 @@ Svelte 5中：
 
 ## Snippets
 
-俗称片段。使用Snippets可以进行内容复用。
+Using Snippets can reuse html fragment content.
 
 ```html
 <script>
@@ -475,17 +477,18 @@ Svelte 5中：
 {/each}
 ```
 
-使用`{#snippet snippetName()}...{/snippet}`来定义我们要复用的片段；
-使用`{@render snippetName()}`来复用定义好的片段。
+Use`{#snippet snippetName()}...{/snippet}` to define common logic fragment；
+Use`{@render snippetName()}` to reuse fragment。
 
 ![snippet](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06791dfff51e49658e67de51ff86d85a~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1008&h=326&s=28573&e=png&b=ffffff)
 
 
-### 传递给组件
+### Snippet as a prop
 
-能够把片段当成一个属性传递给组件。
+Snippets can be passed to a component as a property.
 
-我们定义一个组件，可以接受header和footer片段参数：
+We define a component that can accept header and footer snippet parameters.
+
 ```html
 <script>
   let { header, footer } = $props();
@@ -498,7 +501,7 @@ Svelte 5中：
 </div>
 ```
 
-将我们定义好的片段传递给组件：
+Pass the defined snippets to the component:
 ```html
 <script>
     import Svelte5 from './Svelte5.svelte';
@@ -518,11 +521,11 @@ Svelte 5中：
 ![snippet传递](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3b1239f7bcc4478bbb5126bfff3c9ff2~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1450&h=238&s=24060&e=png&b=ffffff)
 
 
-## 事件
+## Event
 
-### 事件监听
+### Event Listener
 
-在演示Runes和Snippets时，笔者在使用到数据绑定时，仍旧使用的是Svelte4`on:eventname`的形式。其实在Svelte5中，关于方法的使用也有更新：从原来`on:eventname`的形式转变为`oneventname`的形式。
+When demonstrating Runes and Snippets, when I used data binding, I still used the form of Svelte 4 `on:eventname`. In fact, in Svelte 5, the use of methods has also been updated: from the original form of `on:eventname` to the form of `oneventname`.
 
 ```diff
 <script>
@@ -535,9 +538,9 @@ Svelte 5中：
 + <button onclick={onClick}>click</button>
 ```
 
-### 组件事件
+### Event in component
 
-使用`$props()`来接收方法。终于不用再使用难用的`createEventDispatcher`了。
+Use `$props()` to receive methods. Finally, there is no need to use the cumbersome `createEventDispatcher` anymore.
 
 ```html
 <script>
@@ -566,7 +569,7 @@ const onClick2 = (value) => {
 
 ![function](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/571546dc203e4a919f5d1ccf8c035fc1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=61732&e=gif&f=27&b=fefefe)
 
-除了接收方法，我们还能接收插槽内容。没错，在Svelte5中，插槽的使用转而投向了jsx的写法，通过`let { children } = $props()`来接收插槽内容。
+In addition to receiving methods, we can also receive slot content. That's right. In Svelte 5, the use of slots has turned to the writing method of jsx. Slot content is received through `let { children } = $props()`.
 
 ```html
 <script>
@@ -590,45 +593,45 @@ const onClick2 = (value) => {
 </Svelte5>
 ```
 
-这里的`{@render ...}`和后面介绍的Snippets有关。
+The `{@render...}` here is related to the Snippets introduced later.
 
-### 事件修饰符
+### Event modifiers
 
-Svelte4的事件修饰符如下：
+Event modifiers in Svelte 4:
 
 ```html
 <button on:click|once|preventDefault={handler}>...</button>
 ```
 
-像once、preventDefault、stopPropagation等需要自己手动实现：
+Event modifiers like once, preventDefault, stopPropagation, etc. they need to be implemented manually.
 
 ```html
 <script>
 function once(fn) {
-    return function (event) {
-        if (fn) fn.call(this, event);
-        fn = null;
-    };
+  return function (event) {
+    if (fn) fn.call(this, event);
+    fn = null;
+  };
 }
 
 function preventDefault(fn) {
-    return function (event) {
-        event.preventDefault();
-        fn.call(this, event);
-    };
+  return function (event) {
+    event.preventDefault();
+    fn.call(this, event);
+  };
 }
 </script>
 
 <button onclick={once(preventDefault(handler))}>...</button>
 ```
 
-而`capture`、`passive`、`nonpassive`等，Svelte5仍提供了对应的事件修饰符：
+As for `capture`, `passive`, `nonpassive`, etc., Svelte 5 still provides corresponding event modifiers.
 ```html
 <button onclickcapture={...}>...</button>
 ```
-说实话，不太美观。
+To be honest, it's not very beautiful.
 
-## 方法
+## Function
 
 ### untrack
 
@@ -649,18 +652,18 @@ height: <input type="number" bind:value={height} />
 
 ![不追踪依赖](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/151cdc1c4f7849659941d29f03e0f4d0~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=128426&e=gif&f=31&b=fefefe)
 
-如果我们只想在width执行时输出console，那就需要不追踪height的依赖。
+If we only want to output to the console when width is executed, then we need to not track the dependency of height.
 
 ```html
 <script>
-    import { untrack } from 'svelte';
+  import { untrack } from 'svelte';
 
-    let width = $state(10);
-    let height = $state(10);
+  let width = $state(10);
+  let height = $state(10);
 
-    $effect(() => {
-        console.log('width or height change', width, untrack(() => height));
-    });
+  $effect(() => {
+      console.log('width or height change', width, untrack(() => height));
+  });
 </script>
 
 width: <input type="number" bind:value={width} />, 
@@ -671,9 +674,9 @@ height: <input type="number" bind:value={height} />
 
 ### unstate
 
-把使用`$state()`生成的响应式数据（对象或数组）变成非响应式的。
+Turn the reactive data (object or array) generated by using `$state()` into non-reactive data.
 
-演示一个Svelte 4的例子：
+In Svelte 4:
 ```html
 <script>
   // svelte 4
@@ -691,9 +694,9 @@ height: <input type="number" bind:value={height} />
 <button on:click={onUpdate}>update</button><br />
 obj: {obj.name}<br />
 ```
-额外话题：如果我们需要`$:`生效，需要`$: console.log(obj.name)`而不是`$: console.log(obj)`。
+Additional topic: If we need `$:` to take effect, we need `$: console.log(obj.name)` instead of `$: console.log(obj)`.
 
-演示一下unstate的功能：
+Example of unstate function:
 ```html
 <script>
   // svelte 5
@@ -725,11 +728,12 @@ _obj: {_obj.name}
 ```
 
 ![unstate](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d42626638ce4e8284c30ef32bc2f6fa~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1169&h=722&s=163877&e=gif&f=72&b=fdfdfd)
-使用了unstate的数组在赋值后，`$effect`不会追踪这部分非响应式数据。
+
+After assigning a value to an array that uses unstate, `$effect` will not track this part of non-reactive data.
 
 ### mount
 
-Svelte 4中挂载App：
+mount App in Svelte 4:
 ```javascript
 import App from './App.svelte'
 
@@ -741,7 +745,7 @@ export default app
 ```
 
 
-Svelte 5中挂载App：
+mount App in Svelte 5:
 ```javascript
 import { mount } from 'svelte';
 import App from './App.svelte';
@@ -754,7 +758,7 @@ const app = mount(App, {
 
 ### hydrate
 
-SSR使用。
+Use in SSR.
 
 ```javascript
 import { hydrate } from 'svelte';
@@ -768,24 +772,24 @@ const app = hydrate(App, {
 
 ### render
 
-服务端渲染时使用。接收一个Component并返回一个带有html和head参数的对象。
+Used when server-side rendering. Receives a Component and returns an object with html and head parameters.
 
 ```javascript
 import { render } from 'svelte/server';
 import App from './App.svelte';
 
 const result = render(App, {	
-    props: { some: 'property' }
+  props: { some: 'property' }
 });
 ```
 
-## 总结
+## Summary
 
-Svelte 5移除了`onMount`、`beforeUpdate`、`afterUpdate`等生命周期，移除了`createDispatcher`，将组件的方法通过`$props`来传递，让我们不用再关注`CustomEvent.detail`等细节，很明显降低了学习的曲线。同时引入了Runes的概念，对数据状态能够进行更为颗粒度的控制，引入了Snippets，可以对页面内容进行Element层级的复用。
+Svelte 5 removes life cycles such as `onMount`, `beforeUpdate`, `afterUpdate`, etc., and removes `createDispatcher`. The methods of components are passed through `$props`, so that we no longer need to pay attention to details such as `CustomEvent.detail`, which obviously reduces the learning curve. At the same time, the concept of Runes is introduced, which can control the data state with a more granular degree. Snippets are introduced, which can reuse page content at the Element level.
 
-文章只介绍了较为关键的特性，更多细节内容，还请感兴趣的读者们去官网深度探索。
+The article only introduces the more critical features. For more detailed content, interested readers are invited to explore in depth on the official website.
 
-## 参考
+## Reference
 
 *   [svelte-5-preview](https://svelte-5-preview.vercel.app/docs/introduction)
 *   [runes](https://svelte.dev/blog/runes)
